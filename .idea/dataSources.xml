@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="studeasy@database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com" uuid="8908cc88-82a0-4e80-bbac-ef2506d28a43">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com:3306/studeasy</jdbc-url>
+    </data-source>
+  </component>
+</project>

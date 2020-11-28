@@ -6,10 +6,11 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
 
+    @FXML
+    private TextField textF;
+
     public void onButtonPress(ActionEvent av){
         System.out.println(av);
         System.out.println(textF.getText());
     }
-    @FXML
-    private TextField textF;
 }

@@ -24,7 +24,7 @@ public class LoginView extends Parent{
      */
     private Parent load() throws IOException {
         FXMLLoader loader=new FXMLLoader();
-        Parent p= loader.load(LoginView.class.getClassLoader().getResourceAsStream("Views/login.fxml"));
+        Parent p= loader.load(LoginView.class.getClassLoader().getResource("Views/login.fxml"));
         return p;
     }
 }

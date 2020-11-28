@@ -21,7 +21,6 @@ public class main extends Application {
     public void start(Stage stage) throws IOException{
         stage.setTitle("Stud'Easy");
         stage.centerOnScreen();
-        stage.setMaximized(true);
         stage.setResizable(false);
         stage.setScene(new Scene(new LoginView()));
         stage.show();

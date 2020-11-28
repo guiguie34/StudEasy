@@ -1,11 +1,10 @@
 package com.github.studeasy.launcher;
 
-import com.github.studeasy.gui.views.LoginView;
+import com.github.studeasy.gui.views.FXMLLoaderView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-
 
 /**
  *
@@ -22,7 +21,7 @@ public class main extends Application {
         stage.setTitle("Stud'Easy");
         stage.centerOnScreen();
         stage.setResizable(false);
-        stage.setScene(new Scene(new LoginView()));
+        stage.setScene(new Scene(FXMLLoaderView.load("Views/login.fxml")));
         stage.show();
     }
 

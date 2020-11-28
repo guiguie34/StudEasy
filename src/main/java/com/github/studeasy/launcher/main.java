@@ -1,27 +1,37 @@
 package com.github.studeasy.launcher;
 
+import com.github.studeasy.gui.views.LoginView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 
+/**
+ *
+ */
 public class main extends Application {
 
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader loader=new FXMLLoader();
-        Parent p= loader.load(main.class.getClassLoader().getResourceAsStream("Views/login.fxml"));
-        stage.setScene(new Scene(p));
+    public void start(Stage stage) throws IOException{
+        stage.setTitle("Stud'Easy");
+        stage.centerOnScreen();
+        stage.setMaximized(true);
+        stage.setResizable(false);
+        stage.setScene(new Scene(new LoginView()));
         stage.show();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
-
 }

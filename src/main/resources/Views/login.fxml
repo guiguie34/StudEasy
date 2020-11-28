@@ -95,7 +95,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Button id="positiveButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" text="Register">
+                  <Button id="positiveButton" mnemonicParsing="false" onAction="#loadRegister" prefHeight="31.0" prefWidth="84.0" text="Register">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

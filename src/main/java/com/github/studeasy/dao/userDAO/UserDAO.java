@@ -1,7 +1,7 @@
 package com.github.studeasy.dao.userDAO;
 
-import com.github.studeasy.dao.DAO;
+import com.github.studeasy.logic.common.User;
 
 public interface UserDAO {
-    void searchUser(String email, String password);
+    User loginUser(String email, String password) throws Exception;
 }

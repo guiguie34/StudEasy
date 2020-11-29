@@ -9,16 +9,18 @@ import com.github.studeasy.logic.facades.AbstractFacade;
 public class FacadeUser extends AbstractFacade {
 
     protected DAO dao;
+    private Session sessionUser;
 
     public FacadeUser() {
         super();
         this.dao = factory.createUserDAO();
+        sessionUser= null;
     }
 
     public void login(String email, String password){
 
         User u= null;
-        Session sessionUser =null;
+
         try {
             u = ((MySQLUserDAO)dao).loginUser(email,password);
             sessionUser = Session.getInstance();
@@ -27,6 +29,19 @@ public class FacadeUser extends AbstractFacade {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public boolean isAdmin(){
+        sessionUser = Session.getInstance();
+        return (sessionUser.getCurrentUser().getRole() == 0);
+    }
 
+    public boolean isStudent(){
+        sessionUser = Session.getInstance();
+        return (sessionUser.getCurrentUser().getRole() == 1);
+    }
+
+    public boolean isPartner(){
+        sessionUser = Session.getInstance();
+        return (sessionUser.getCurrentUser().getRole() == 2);
     }
 }

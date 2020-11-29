@@ -1,6 +1,8 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.views.FXMLLoaderView;
+import com.github.studeasy.logic.common.Session;
+import com.github.studeasy.logic.common.SessionI;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -8,6 +10,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public abstract class AbstractRouter {
+
+    protected SessionI session;
+
+    public AbstractRouter(){
+        this.session = Session.getInstance();
+    }
 
     /**
      *

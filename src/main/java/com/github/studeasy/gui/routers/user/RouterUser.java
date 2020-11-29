@@ -10,15 +10,33 @@ public class RouterUser extends AbstractRouter {
     public void register(ActionEvent event) throws IOException {
         changeView("Views/register.fxml",event);
     }
-    public void homeStudent(ActionEvent event) throws IOException{
+
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+    public void login(ActionEvent event) throws  IOException {
+        if(session.isStudent()){
+            homeStudent(event);
+        }
+        else if(session.isAdmin()){
+            homeAdmin(event);
+        }
+        else if(session.isPartner()){
+            homePartner(event);
+        }
+    }
+
+    private void homeStudent(ActionEvent event) throws IOException{
         changeView("Views/homeStudent.fxml",event);
     }
 
-    public void homePartner(ActionEvent event) throws IOException{
+    private void homePartner(ActionEvent event) throws IOException{
         changeView("Views/homePartner.fxml",event);
     }
 
-    public void homeAdmin(ActionEvent event) throws IOException{
+    private void homeAdmin(ActionEvent event) throws IOException{
         changeView("Views/homeAdmin.fxml",event);
     }
 }

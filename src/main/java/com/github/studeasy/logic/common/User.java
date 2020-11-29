@@ -114,7 +114,7 @@ public class User {
 	 */
 	public int getRole() {
 		// TODO implement here
-		return 0;
+		return this.role;
 	}
 
 	/**

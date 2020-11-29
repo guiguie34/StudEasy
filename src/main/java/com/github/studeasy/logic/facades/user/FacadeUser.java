@@ -30,18 +30,4 @@ public class FacadeUser extends AbstractFacade {
             e.printStackTrace();
         }
     }
-    public boolean isAdmin(){
-        sessionUser = Session.getInstance();
-        return (sessionUser.getCurrentUser().getRole() == 0);
-    }
-
-    public boolean isStudent(){
-        sessionUser = Session.getInstance();
-        return (sessionUser.getCurrentUser().getRole() == 1);
-    }
-
-    public boolean isPartner(){
-        sessionUser = Session.getInstance();
-        return (sessionUser.getCurrentUser().getRole() == 2);
-    }
 }

@@ -22,21 +22,13 @@ public class LoginController extends AbstractController {
         super(new RouterUser(),new FacadeUser());
     }
 
-    public void login(ActionEvent av) throws IOException {
+    public void login(ActionEvent event) throws IOException {
         String email = emailTF.getText();
         String password = passwordTF.getText();
-        ((FacadeUser) facade).login(email,password);
 
-        if(((FacadeUser) facade).isStudent()){
-            ((RouterUser) router).homeStudent(av);
-        }
-        else if(((FacadeUser) facade).isAdmin()){
-            ((RouterUser) router).homeAdmin(av);
-        }
-        else if (((FacadeUser) facade).isPartner()){
-            ((RouterUser) router).homePartner(av);
-        }
-
+        // Surrounded by a try catch, in case wrong auth
+        ((FacadeUser) facade).login(email, password);
+        ((RouterUser) router).login(event);
     }
 
     public void loadRegister(ActionEvent event) throws IOException {

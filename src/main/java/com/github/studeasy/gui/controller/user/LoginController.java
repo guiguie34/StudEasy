@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.user;
 import com.github.studeasy.gui.controller.AbstractController;
 import com.github.studeasy.gui.routers.user.RouterUser;
 import com.github.studeasy.logic.facades.user.FacadeUser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -40,5 +41,17 @@ public class LoginController extends AbstractController {
 
     public void loadRegister(ActionEvent event) throws IOException {
         ((RouterUser) router).register(event);
+    }
+
+    /**
+     * Called when the user presses the "exit" button
+     * Shut down the application
+     * @param event, the action trigerring this method
+     */
+    public void exit(ActionEvent event) {
+        // Shut down the JVM
+        Platform.exit();
+        // Terminate the application
+        System.exit(0);
     }
 }

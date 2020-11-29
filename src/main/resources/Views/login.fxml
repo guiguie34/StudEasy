@@ -75,7 +75,7 @@
             </AnchorPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Button id="negativeButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" text="Exit">
+                  <Button id="negativeButton" mnemonicParsing="false" onAction="#exit" prefHeight="31.0" prefWidth="84.0" text="Exit">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

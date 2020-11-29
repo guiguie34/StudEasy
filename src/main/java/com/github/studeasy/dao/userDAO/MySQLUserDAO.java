@@ -1,6 +1,7 @@
 package com.github.studeasy.dao.userDAO;
 
 import com.github.studeasy.dao.DAO;
+import com.github.studeasy.dao.exceptions.BadPasswordException;
 import com.github.studeasy.logic.common.Student;
 import com.github.studeasy.logic.common.User;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 
 public class MySQLUserDAO extends DAO implements UserDAO{
     @Override
-    public User loginUser(String email, String password) throws Exception{
+    public User loginUser(String email, String password) throws Exception, BadPasswordException {
         User currentUser=null;
         try {
             PreparedStatement preparedStatement;
@@ -21,7 +22,7 @@ public class MySQLUserDAO extends DAO implements UserDAO{
             resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
 
-                throw new Exception("Mauvaise combinaison");
+                throw new BadPasswordException("Mauvaise combinaison");
             } else {
                 System.out.println("Good id");
                 if(resultSet.getInt(4)==0){//Admin

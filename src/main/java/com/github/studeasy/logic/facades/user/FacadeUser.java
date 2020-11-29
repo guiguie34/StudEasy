@@ -1,6 +1,7 @@
 package com.github.studeasy.logic.facades.user;
 
 import com.github.studeasy.dao.DAO;
+import com.github.studeasy.dao.exceptions.BadPasswordException;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
@@ -17,17 +18,14 @@ public class FacadeUser extends AbstractFacade {
         sessionUser= null;
     }
 
-    public void login(String email, String password){
+    public void login(String email, String password) throws Exception {
 
-        User u= null;
+        User u = null;
 
-        try {
-            u = ((MySQLUserDAO)dao).loginUser(email,password);
-            sessionUser = Session.getInstance();
-            sessionUser.setCurrentUser(u);
-            System.out.println(u.getEmailAdress());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        u = ((MySQLUserDAO) dao).loginUser(email, password);
+        sessionUser = Session.getInstance();
+        sessionUser.setCurrentUser(u);
+        System.out.println(u.getEmailAdress());
+
     }
 }

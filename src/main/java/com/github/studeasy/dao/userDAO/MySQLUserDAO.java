@@ -8,7 +8,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The user DAO using a MySQL database
+ * Contains all the methods accessing user related data
+ */
 public class MySQLUserDAO extends DAO implements UserDAO{
+
+    /**
+     * Method asking the database if a user with those credentials exist,
+     * and returning him if he exists
+     * @param email, the email to check
+     * @param password, the password to check
+     * @return the user corresponding
+     * @throws Exception if the user doesn't exist in the database
+     */
     @Override
     public User loginUser(String email, String password) throws Exception, BadPasswordException {
         User currentUser=null;

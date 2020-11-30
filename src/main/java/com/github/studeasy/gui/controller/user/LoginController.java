@@ -1,6 +1,6 @@
 package com.github.studeasy.gui.controller.user;
 
-import com.github.studeasy.dao.exceptions.BadPasswordException;
+import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.gui.controller.AbstractController;
 import com.github.studeasy.gui.routers.user.RouterUser;
 import com.github.studeasy.logic.facades.user.FacadeUser;
@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
@@ -40,7 +39,7 @@ public class LoginController extends AbstractController {
             ((FacadeUser) facade).login(email, password);
             ((RouterUser) router).login(event);
         }
-        catch(BadPasswordException e){
+        catch(BadCredentialsException e){
             loginFailLabel.setAlignment(Pos.CENTER);
             loginFailLabel.setTextFill(Paint.valueOf("red"));
             loginFailLabel.setText("Bad credentials, please retry");

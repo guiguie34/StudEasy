@@ -1,6 +1,7 @@
 package com.github.studeasy.logic.facades.user;
 
 import com.github.studeasy.dao.DAO;
+import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
@@ -22,10 +23,14 @@ public class FacadeUser extends AbstractFacade {
         User u;
 
         u = ((MySQLUserDAO) dao).searchUser(email, password);
-
-        sessionUser = Session.getInstance();
-        sessionUser.setCurrentUser(u);
-        System.out.println(u.getEmailAdress());
+        if(u.getPassword().equals(password)) { //change with hash password comparison
+            sessionUser = Session.getInstance();
+            sessionUser.setCurrentUser(u);
+            System.out.println(u.getEmailAdress());
+        }
+        else{
+            throw new BadCredentialsException("Bad Password");
+        }
 
     }
 }

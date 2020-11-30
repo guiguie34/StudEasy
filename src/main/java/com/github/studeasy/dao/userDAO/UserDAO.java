@@ -15,5 +15,5 @@ public interface UserDAO {
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */
-    User loginUser(String email, String password) throws Exception;
+    User searchUser(String email, String password) throws Exception;
 }

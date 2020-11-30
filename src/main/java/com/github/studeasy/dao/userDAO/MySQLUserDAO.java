@@ -22,8 +22,7 @@ public class MySQLUserDAO extends DAO implements UserDAO{
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */
-    @Override
-    public User loginUser(String email, String password) throws Exception, BadPasswordException {
+    public User searchUser(String email, String password) throws Exception{
         User currentUser=null;
         try {
             PreparedStatement preparedStatement;

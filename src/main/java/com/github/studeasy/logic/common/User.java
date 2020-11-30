@@ -49,79 +49,44 @@ public class User {
 	public User(){
 
 	}
-	/**
-	 * @return
-	 */
+
 	public String getLastname() {
-		// TODO implement here
-		return "";
+		return lastname;
 	}
 
-	/**
-	 * @param l
-	 */
-	public void setLastname(String l) {
-		// TODO implement here
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getFirstname() {
-		// TODO implement here
-		return "";
+		return firstname;
 	}
 
-	/**
-	 * @param f
-	 */
-	public void setFirstname(String f) {
-		// TODO implement here
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getEmailAdress() {
-		// TODO implement here
-		return this.emailAdress;
+		return emailAdress;
 	}
 
-	/**
-	 * @param e
-	 */
-	public void setEmailAdress(String e) {
-		// TODO implement here
+	public void setEmailAdress(String emailAdress) {
+		this.emailAdress = emailAdress;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getPassword() {
-		// TODO implement here
-		return "";
+		return password;
 	}
 
-	/**
-	 * @param p
-	 */
-	public void setPassword(String p) {
-		// TODO implement here
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getRole() {
-		// TODO implement here
-		return this.role;
+		return role;
 	}
 
-	/**
-	 * @param r
-	 */
-	public void setRole(int r) {
-		// TODO implement here
+	public void setRole(int role) {
+		this.role = role;
 	}
-
 }

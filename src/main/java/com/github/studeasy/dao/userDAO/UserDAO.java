@@ -8,12 +8,11 @@ import com.github.studeasy.logic.common.User;
  */
 public interface UserDAO {
     /**
-     * Method asking the database if a user with those credentials exist,
+     * Method asking the database if a user with this mail exist,
      * and returning him if he exists
      * @param email, the email to check
-     * @param password, the password to check
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */
-    User searchUser(String email, String password) throws Exception;
+    User searchUser(String email) throws Exception;
 }

@@ -7,14 +7,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- *
+ * The main class, launching the application
  */
 public class main extends Application {
 
     /**
-     *
-     * @param stage
-     * @throws IOException
+     * Method coming from the parent class Application
+     * Used to start the application and display the login
+     * @param stage, the container of the view
+     * @throws IOException if an error occurs
      */
     @Override
     public void start(Stage stage) throws IOException{
@@ -26,8 +27,8 @@ public class main extends Application {
     }
 
     /**
-     *
-     * @param args
+     * Main method called when we launch the app, it calls the start method
+     * @param args, the command line arguments
      */
     public static void main(String[] args) {
         launch(args);

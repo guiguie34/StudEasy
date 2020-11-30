@@ -2,6 +2,11 @@
     -fx-background-radius: 5,4,3,5;
     -fx-background-insets: 0,1,2,0;
     -fx-text-fill: linear-gradient(white, #F1F1F1);
+    -fx-font-weight: bold;
+}
+
+.button:hover{
+    -fx-font-size: 140%;
 }
 
 #neutralButton {

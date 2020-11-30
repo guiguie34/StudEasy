@@ -22,7 +22,7 @@ public class FacadeUser extends AbstractFacade {
 
         User u;
 
-        u = ((MySQLUserDAO) dao).searchUser(email, password);
+        u = ((MySQLUserDAO) dao).searchUser(email);
         if(u.getPassword().equals(password)) { //change with hash password comparison
             sessionUser = Session.getInstance();
             sessionUser.setCurrentUser(u);

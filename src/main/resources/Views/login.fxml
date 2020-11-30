@@ -20,9 +20,9 @@
    <children>
       <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.800048828125" minWidth="10.0" prefWidth="331.800048828125" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="619.0" minWidth="10.0" prefWidth="550.399951171875" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.4000244140625" minWidth="10.0" prefWidth="234.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="331.800048828125" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="619.0" minWidth="10.0" prefWidth="550.399951171875" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="331.800048828125" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="280.2666534423828" minHeight="10.0" prefHeight="126.6666473388672" vgrow="SOMETIMES" />
@@ -32,7 +32,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                  <ImageView fitHeight="186.0" fitWidth="195.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="210.0" fitWidth="199.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/logo.png" />
                      </image>
@@ -41,37 +41,37 @@
             </VBox>
             <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="37.0" prefHeight="53.0" prefWidth="427.0" text="Welcome to Stud'Easy !" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="37.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="27.0" prefHeight="40.0" prefWidth="573.0" text="Welcome to Stud'Easy !" AnchorPane.bottomAnchor="345.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                      <font>
-                        <Font name="Arial Bold" size="41.0" />
+                        <Font name="Arial Bold" size="42.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="emailTF" layoutX="232.0" layoutY="162.0" onAction="#login" prefHeight="32.0" prefWidth="229.0" promptText="Email Address ...">
+                  <TextField fx:id="emailTF" layoutX="195.0" layoutY="168.0" onAction="#login" prefHeight="32.0" prefWidth="265.0" promptText="Email Address ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="60.0" fitWidth="40.0" layoutX="148.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/login/email.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="46.0" fitWidth="39.0" layoutX="149.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/login/password.png" />
-                     </image>
-                  </ImageView>
-                  <Button id="neutralButton" layoutX="238.0" layoutY="301.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="130.0" text="Login" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <PasswordField fx:id="passwordTF" layoutX="232.0" layoutY="218.0" onAction="#login" prefHeight="32.0" prefWidth="229.0" promptText="Password ...">
+                  <PasswordField fx:id="passwordTF" layoutX="195.0" layoutY="224.0" onAction="#login" prefHeight="32.0" prefWidth="266.0" promptText="Password ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </PasswordField>
-                  <Label fx:id="loginFailLabel" layoutX="154.0" layoutY="109.0" prefHeight="14.0" prefWidth="308.0">
+                  <ImageView fitHeight="60.0" fitWidth="40.0" layoutX="111.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/login/email.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="39.0" layoutX="112.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/login/password.png" />
+                     </image>
+                  </ImageView>
+                  <Button id="neutralButton" layoutX="238.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="130.0" text="Login" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="loginFailLabel" layoutX="132.0" layoutY="111.0" prefHeight="14.0" prefWidth="308.0">
                      <font>
                         <Font size="15.0" />
                      </font>

@@ -40,7 +40,7 @@ public class MySQLConnectionUtil implements ConnectionUtilI{
      * Create the unique connection to the database
      */
     private static class createConn{
-        public static final MySQLConnectionUtil instance= new MySQLConnectionUtil();
+        static final MySQLConnectionUtil instance= new MySQLConnectionUtil();
     }
 
     /**
@@ -57,5 +57,5 @@ public class MySQLConnectionUtil implements ConnectionUtilI{
      */
     public Connection getDb(){
         return db;
-    };
+    }
 }

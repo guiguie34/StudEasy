@@ -8,7 +8,7 @@ public class MySQLFactory implements FactoryI{
     private MySQLFactory(){}
 
     private static class createMySQLFactory{
-        private static final MySQLFactory INSTANCE = new MySQLFactory();
+        static final MySQLFactory INSTANCE = new MySQLFactory();
     }
 
     public static MySQLFactory getInstance(){

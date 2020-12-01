@@ -6,7 +6,7 @@ import com.github.studeasy.logic.common.User;
  * Interface for the User DAO
  * Contains the methods needed by the User DAO
  */
-public interface UserDAO {
+public abstract class UserDAO {
     /**
      * Method asking the database if a user with this mail exist,
      * and returning him if he exists
@@ -14,5 +14,5 @@ public interface UserDAO {
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */
-    User searchUser(String email) throws Exception;
+    public abstract User searchUser(String email) throws Exception;
 }

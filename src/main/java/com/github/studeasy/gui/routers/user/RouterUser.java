@@ -25,6 +25,7 @@ public class RouterUser extends AbstractRouter {
      * @throws IOException
      */
     public void login(ActionEvent event) throws  IOException {
+        System.out.println("COUCOU");
         if(session.isStudent()){
             homeStudent(event);
         }

@@ -12,16 +12,7 @@ import java.sql.Connection;
  */
 public abstract class DAO {
 
-    /**
-     * The connection to the database
-     */
-    protected Connection db;
 
-    /**
-     * Instantiate the connection db
-     */
-    public DAO() {
-        ConnectionUtilI connection = MySQLConnectionUtil.getInstance();
-        this.db = connection.getDb();
-    }
+
+
 }

@@ -1,23 +1,36 @@
 package com.github.studeasy.gui.controller.user;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
-import com.github.studeasy.gui.controller.AbstractController;
+import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.user.RouterUser;
 import com.github.studeasy.logic.facades.user.FacadeUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * The controller for the login view
  */
-public class LoginController extends AbstractController {
+public class LoginController implements Initializable {
+
+    /**
+     * The router used by the controller
+     */
+    protected AbstractRouter router;
+    /**
+     /**
+     * The facade used by the controller
+     */
+    protected FacadeUser facade;
 
     /**
      * The field to enter the email
@@ -42,7 +55,8 @@ public class LoginController extends AbstractController {
      * a router and a facade used for users
      */
     public LoginController(){
-        super(new RouterUser(),FacadeUser.getInstance());
+        this.router = new RouterUser();
+        this.facade = FacadeUser.getInstance();
     }
 
     /**
@@ -59,7 +73,7 @@ public class LoginController extends AbstractController {
         // Surrounded by a try catch, in case a wrong auth occurs
         try {
             // We ask the facade to check
-            ((FacadeUser) facade).login(email, password);
+            facade.login(email, password);
             // If it's alright, we're redirected to the right page by the router
             ((RouterUser) router).login(event);
         }
@@ -93,4 +107,14 @@ public class LoginController extends AbstractController {
         // Terminates the application
         System.exit(0);
     }
+
+    /**
+     * Function from the interface Initializable
+     * Make changes to the controller and its view before
+     * the view appears on the client side
+     * @param location
+     * @param resources
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {}
 }

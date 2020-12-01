@@ -1,9 +1,13 @@
 package com.github.studeasy.dao.userDAO;
 
 import com.github.studeasy.dao.DAO;
+import com.github.studeasy.dao.db.ConnectionUtilI;
+import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.logic.common.Student;
 import com.github.studeasy.logic.common.User;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +16,20 @@ import java.sql.SQLException;
  * The user DAO using a MySQL database
  * Contains all the methods accessing user related data
  */
-public class MySQLUserDAO extends DAO implements UserDAO{
+public class MySQLUserDAO extends UserDAO{
+
+    /**
+     * The connection to the database
+     */
+    protected Connection db;
+
+    /**
+     * Instantiate the connection db
+     */
+    public MySQLUserDAO() {
+        ConnectionUtilI connection = MySQLConnectionUtil.getInstance();
+        this.db = connection.getDb();
+    }
 
     /**
      * Method asking the database if a user with this mail exist,

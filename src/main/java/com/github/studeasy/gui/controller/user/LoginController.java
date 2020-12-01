@@ -42,7 +42,7 @@ public class LoginController extends AbstractController {
      * a router and a facade used for users
      */
     public LoginController(){
-        super(new RouterUser(),new FacadeUser());
+        super(new RouterUser(),FacadeUser.getInstance());
     }
 
     /**

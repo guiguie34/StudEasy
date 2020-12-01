@@ -12,10 +12,18 @@ public class FacadeUser extends AbstractFacade {
     protected DAO dao;
     private Session sessionUser;
 
-    public FacadeUser() {
+    private FacadeUser() {
         super();
         this.dao = factory.createUserDAO();
         sessionUser= null;
+    }
+    private static class createFacadeUser {
+        static final FacadeUser INSTANCE = new FacadeUser();
+    }
+
+
+    public static FacadeUser getInstance(){
+        return createFacadeUser.INSTANCE;
     }
 
     public void login(String email, String password) throws Exception {

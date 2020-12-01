@@ -17,6 +17,7 @@ public class FacadeUser extends AbstractFacade {
         this.dao = factory.createUserDAO();
         sessionUser= null;
     }
+
     private static class createFacadeUser {
         static final FacadeUser INSTANCE = new FacadeUser();
     }

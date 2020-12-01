@@ -8,7 +8,7 @@ public abstract class AbstractFacade {
     protected FactoryI factory;
 
     public AbstractFacade() {
-        this.factory = new MySQLFactory();
+        this.factory = MySQLFactory.getInstance();
     }
 
 

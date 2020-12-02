@@ -24,7 +24,7 @@ mainClassName= "com.github.studeasy.launcher.main"
 
 javadoc {
     source = sourceSets.main.allJava
-    classpath = configurations.compile
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 dependencies {

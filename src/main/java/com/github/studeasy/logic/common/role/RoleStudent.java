@@ -37,7 +37,6 @@ public class RoleStudent extends Role{
         this.pseudo = pseudo;
         this.services = new ArrayList<Service>();
         this.servicesbuy = new ArrayList<CommandOfService>();
-
     }
 
     public int getPoints() {

@@ -21,7 +21,7 @@ public class MySQLFactory extends Factory {
     }
 
     /**
-     * Static methode which return the instance of the MySQLFactory
+     * Static method which returns the instance of the MySQLFactory
      * @return the instance of MySQLFactory
      */
     public static MySQLFactory getInstance(){
@@ -34,6 +34,6 @@ public class MySQLFactory extends Factory {
      */
     @Override
     public UserDAO createUserDAO() {
-        return new MySQLUserDAO();
+        return MySQLUserDAO.getInstance();
     }
 }

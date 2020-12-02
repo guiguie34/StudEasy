@@ -1,5 +1,7 @@
 package com.github.studeasy.logic.common;
 
+import com.github.studeasy.logic.common.role.*;
+
 public class Session implements SessionI {
 
     private User currentUser;
@@ -21,14 +23,14 @@ public class Session implements SessionI {
     }
 
     public boolean isAdmin(){
-        return (currentUser.getRole() == 0);
+        return (currentUser.getRole() instanceof RoleAdmin);
     }
 
     public boolean isStudent(){
-        return (currentUser.getRole() == 1);
+        return (currentUser.getRole() instanceof RoleStudent);
     }
 
     public boolean isPartner(){
-        return (currentUser.getRole() == 2);
+        return (currentUser.getRole() instanceof RolePartner);
     }
 }

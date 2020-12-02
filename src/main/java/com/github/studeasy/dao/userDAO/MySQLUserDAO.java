@@ -3,7 +3,6 @@ package com.github.studeasy.dao.userDAO;
 import com.github.studeasy.dao.db.ConnectionUtilI;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
-import com.github.studeasy.logic.common.Student;
 import com.github.studeasy.logic.common.User;
 
 import java.sql.Connection;
@@ -55,18 +54,7 @@ public class MySQLUserDAO extends UserDAO{
                 throw new BadCredentialsException("No user found");
             } else {
                 // We create a user according to his role
-                if(resultSet.getInt(4)==0){
-                    // Admin role
-                    currentUser = new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4));
-                }
-                else if(resultSet.getInt(4)==1){
-                    // Student role
-                    currentUser= new Student(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(7));
-                }
-                else{
-                    // Partner role
-                    throw new Exception("Type de compte pas encore implementé");
-                }
+                currentUser= new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7));
             }
         }
         catch(SQLException e){

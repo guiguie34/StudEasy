@@ -1,5 +1,10 @@
 package com.github.studeasy.logic.common;
 
+import com.github.studeasy.logic.common.role.Role;
+import com.github.studeasy.logic.common.role.RoleAdmin;
+import com.github.studeasy.logic.common.role.RolePartner;
+import com.github.studeasy.logic.common.role.RoleStudent;
+
 import java.util.*;
 
 /**
@@ -32,19 +37,22 @@ public class User {
 	/**
 	 * 
 	 */
-	private int role;
+	private Role role;
 
 
 	/**
 	 * Default constructor
 	 */
-	public User(String lastName,String firstName,String emailAddress,String password,int role) {
+	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo) {
 		this.lastname=lastName;
 		this.firstname=firstName;
 		this.emailAdress=emailAddress;
 		this.password= password;
-		this.role= role;
-
+		switch (role) {
+			case 0 -> this.role = new RoleAdmin();
+			case 1 -> this.role = new RoleStudent(pseudo);
+			case 2 -> this.role = new RolePartner(company);
+		}
 	}
 	public User(){
 
@@ -82,11 +90,11 @@ public class User {
 		this.password = password;
 	}
 
-	public int getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }

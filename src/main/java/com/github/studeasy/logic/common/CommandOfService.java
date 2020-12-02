@@ -27,12 +27,12 @@ public class CommandOfService {
 	/**
 	 * 
 	 */
-	public Student requester;
+	public User requester;
 
 	/**
 	 * 
 	 */
-	public Service service;
+	public User service;
 
 	/**
 	 * @return

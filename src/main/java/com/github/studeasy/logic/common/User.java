@@ -15,30 +15,32 @@ public class User {
 
 
 	/**
-	 * 
+	 * Lastname of the user
 	 */
 	private String lastname;
 
 	/**
-	 * 
+	 * First name of the user
 	 */
 	private String firstname;
 
 	/**
-	 * 
+	 * Email of the user
 	 */
 	private String emailAdress;
 
 	/**
-	 * 
+	 * Password of the user
 	 */
 	private String password;
 
 	/**
-	 * 
+	 * Role of the user (Admin/Student/partner)
 	 */
 	private Role role;
-
+	/**
+	 * Notifications of the user
+	 */
 	private List<Notification> notifications;
 
 

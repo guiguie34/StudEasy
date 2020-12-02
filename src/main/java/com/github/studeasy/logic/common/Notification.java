@@ -7,9 +7,21 @@ import java.util.*;
  */
 public class Notification {
 
+	/**
+	 * Title of the notification
+	 */
 	private String title;
+	/**
+	 * Description of the notification
+	 */
 	private String description;
+	/**
+	 * Boolean that indicates if the notification as been read
+	 */
 	private boolean read;
+	/**
+	 * Reference to the user who has created the notification
+	 */
 	private User user;
 
 	public Notification(String title, String description, boolean read, User user) {

@@ -7,14 +7,49 @@ import java.util.*;
  */
 public class Service {
 
+	/**
+	 * Title of the service
+	 */
 	private String title;
+	/**
+	 * Description of the service
+	 */
 	private String description;
-	private double cost;
+	/**
+	 * Cost of the service
+	 */
+	private int cost;
+	/**
+	 * Describe the type of the service (Service proposed/asked)
+	 */
 	private String typeService;
+	/**
+	 * Reference to the user who has created the service
+	 */
 	private User owner;
+	/**
+	 * Describe the category of the service (example: Tutoring...)
+	 */
 	private CategoryTag category;
+	/**
+	 * Describe the status of the service (pending/validated)
+	 */
 	private String status;
+	/**
+	 * Reference to the orders containing this service
+	 */
 	private List<CommandOfService> services;
+
+	public Service(String title, String description, int cost, String typeService, User owner, CategoryTag category, String status) {
+		this.title = title;
+		this.description = description;
+		this.cost = cost;
+		this.typeService = typeService;
+		this.owner = owner;
+		this.category = category;
+		this.status = status;
+		this.services = new ArrayList<>();
+	}
 
 	public String getTitle() {
 		return title;
@@ -32,11 +67,11 @@ public class Service {
 		this.description = description;
 	}
 
-	public double getCost() {
+	public int getCost() {
 		return cost;
 	}
 
-	public void setCost(double cost) {
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
 
@@ -72,16 +107,7 @@ public class Service {
 		this.status = status;
 	}
 
-	public Service(String title, String description, double cost, String typeService, User owner, CategoryTag category, String status) {
-		this.title = title;
-		this.description = description;
-		this.cost = cost;
-		this.typeService = typeService;
-		this.owner = owner;
-		this.category = category;
-		this.status = status;
-		this.services = new ArrayList<CommandOfService>();
-	}
+
 
 	public List<CommandOfService> getServices() {
 		return services;

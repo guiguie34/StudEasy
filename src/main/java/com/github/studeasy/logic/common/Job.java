@@ -10,17 +10,38 @@ public class Job {
 	/**
 	 * Title of the job
 	 */
-	 private String title;
+	private String title;
 	/**
-	 * localisation of the job. (example: if the job
+	 * localisation of the job.
 	 */
 	private String localisation;
-	 private String role;
-	 private String start;
+	/**
+	 * describe the role of the person who will want to do the job
+	 */
+	private String role;
+	/**
+	 * Describe when the job will start (example: next week, next month, or more precisely 12/08/2021)
+	 */
+	private String start;
+	/**
+	 * Describe the duration of the job
+	 */
 	 private String duration;
-	 private String description;
+	/**
+	 * Description of the job
+	 */
+	private String description;
+	/**
+	 * Mail of the creator of the job
+	 */
 	 private String contactMail;
-	 private String contactPhone;
+	/**
+	 * Phone number of the creator of the job
+	 */
+	private String contactPhone;
+	/**
+	 * References to the user who created the job
+	 */
 	 private User owner;
 
 

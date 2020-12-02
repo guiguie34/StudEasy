@@ -7,18 +7,47 @@ import java.util.*;
  */
 public class Coupon {
 
+	/**
+	 * Title of the coupon
+	 */
 	private String title;
-	private String description;
-	private double value;
-	private int quantity;
-	private User owner; //Partner
 
-	public Coupon(String title, String description, double value, int quantity, User owner) {
+	/**
+	 * Short description for the coupon
+	 */
+	private String description;
+
+
+	/**
+	 * Value of the coupon in the partner store (in €)
+	 */
+	private double value;
+
+	/**
+	 * Cost of the coupon
+	 */
+	private int cost;
+
+
+	/**
+	 * Quantity available the current coupon
+	 */
+	private int quantity;
+
+	/**
+	 * Partner to which belongs the coupon
+	 */
+	private User owner;
+
+
+
+	public Coupon(String title, String description, double value, int cost, int quantity, User owner) {
 		this.title = title;
 		this.description = description;
 		this.value = value;
 		this.quantity = quantity;
 		this.owner = owner;
+		this.cost= cost;
 	}
 
 	public String getTitle() {
@@ -59,5 +88,13 @@ public class Coupon {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 }

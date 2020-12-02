@@ -8,13 +8,13 @@ import java.util.*;
 public class CategoryTag {
 
 	/**
-	 *
+	 * Name of the category
 	 */
 	private String name;
 
 
 	/**
-	 *
+	 * Short description of the category
 	 */
 	private String description;
 

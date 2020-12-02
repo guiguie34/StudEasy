@@ -10,12 +10,28 @@ import java.util.List;
  * Partner Role
  */
 public class RoleStudent extends Role{
+
+    /**
+     * Pseudo of the student
+     */
     private String pseudo;
+
+    /**
+     * Sum of point available for the student
+     */
     private int points;
+
+    /**
+     * List of services provided by the student
+     */
     private List<Service> services;
+
+    /**
+     * List of services bought by the student
+     */
     private List<CommandOfService> servicesbuy;
 
-    public RoleStudent(String pseudo,int points) {
+    public RoleStudent(String pseudo, int points) {
         super();
         this.points=points;
         this.pseudo = pseudo;

@@ -7,14 +7,33 @@ import java.util.*;
  */
 public class Feedback {
 
+	/**
+	 * Title of the feedback
+	 */
 	private String title;
+
+	/**
+	 * Rate provided by the owner of the command (between 0 and 5)
+	 */
 	private int rate;
+
+	/**
+	 * Short comment about the service
+	 */
 	private String comment;
 
-	public Feedback(String title, int rate, String comment) {
+	/**
+	 * Service related to the feedback
+	 */
+	private CommandOfService service;
+
+
+
+	public Feedback(String title, int rate, String comment, CommandOfService service) {
 		this.title = title;
 		this.rate = rate;
 		this.comment = comment;
+		this.service=service;
 	}
 
 	public String getTitle() {
@@ -39,5 +58,13 @@ public class Feedback {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public CommandOfService getService() {
+		return service;
+	}
+
+	public void setService(CommandOfService service) {
+		this.service = service;
 	}
 }

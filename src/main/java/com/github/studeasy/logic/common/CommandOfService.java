@@ -7,10 +7,29 @@ import java.util.*;
  */
 public class CommandOfService {
 
+	/**
+	 * Feedback related to the command
+	 */
 	private Feedback feedback;
+
+	/**
+	 * User who commands the service
+	 */
 	private User owner;
+
+	/**
+	 * Service associated to the command
+	 */
 	private Service service;
+
+	/**
+	 * Status of the command (Pending,Validated,Declined)
+	 */
 	private String status;
+
+	/**
+	 * Date of the creation of the command
+	 */
 	private Date creationDate;
 
 

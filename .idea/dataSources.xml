@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com:3306/studeasy</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="jdbc:mysql://database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com :3306/studeasy" uuid="b3af2cb7-0e72-48c2-9dbb-aa24b7d5cc6c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com :3306/studeasy</jdbc-url>
+    </data-source>
   </component>
 </project>

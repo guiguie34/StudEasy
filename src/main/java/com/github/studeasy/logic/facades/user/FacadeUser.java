@@ -1,8 +1,6 @@
 package com.github.studeasy.logic.facades.user;
 
-import com.github.studeasy.dao.DAO;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
-import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;

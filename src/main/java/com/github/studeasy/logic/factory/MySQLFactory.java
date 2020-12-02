@@ -1,6 +1,5 @@
 package com.github.studeasy.logic.factory;
 
-import com.github.studeasy.dao.DAO;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 

@@ -1,6 +1,5 @@
 package com.github.studeasy.dao.userDAO;
 
-import com.github.studeasy.dao.DAO;
 import com.github.studeasy.dao.db.ConnectionUtilI;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;

@@ -3,13 +3,18 @@ package com.github.studeasy.logic.common;
 import java.util.*;
 
 /**
- *
+ *Describe the job class
  */
 public class Job {
 
-
+	/**
+	 * Title of the job
+	 */
 	 private String title;
-	 private String localisation;
+	/**
+	 * localisation of the job. (example: if the job
+	 */
+	private String localisation;
 	 private String role;
 	 private String start;
 	 private String duration;

@@ -46,14 +46,14 @@ public class User {
 	/**
 	 * Default constructor
 	 */
-	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo) {
+	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points) {
 		this.lastname=lastName;
 		this.firstname=firstName;
 		this.emailAdress=emailAddress;
 		this.password= password;
 		switch (role) {
 			case 0 -> this.role = new RoleAdmin();
-			case 1 -> this.role = new RoleStudent(pseudo);
+			case 1 -> this.role = new RoleStudent(pseudo,points);
 			case 2 -> this.role = new RolePartner(company);
 		}
 	}

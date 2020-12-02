@@ -11,15 +11,25 @@ import java.util.List;
  */
 public class RoleStudent extends Role{
     private String pseudo;
+    private int points;
     private List<Service> services;
     private List<CommandOfService> servicesbuy;
 
-    public RoleStudent(String pseudo) {
+    public RoleStudent(String pseudo,int points) {
         super();
+        this.points=points;
         this.pseudo = pseudo;
         this.services = new ArrayList<Service>();
         this.servicesbuy = new ArrayList<CommandOfService>();
 
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getPseudo() {

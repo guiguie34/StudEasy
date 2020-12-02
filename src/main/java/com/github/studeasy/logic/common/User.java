@@ -8,11 +8,9 @@ import com.github.studeasy.logic.common.role.RoleStudent;
 import java.util.*;
 
 /**
- * 
+ * Class describing a user
  */
 public class User {
-
-
 
 	/**
 	 * Lastname of the user
@@ -43,8 +41,6 @@ public class User {
 	 */
 	private List<Notification> notifications;
 
-
-
 	/**
 	 * Default constructor
 	 */
@@ -58,9 +54,6 @@ public class User {
 			case 1 -> this.role = new RoleStudent(pseudo,points);
 			case 2 -> this.role = new RolePartner(company);
 		}
-	}
-	public User(){
-
 	}
 
 	public String getLastname() {

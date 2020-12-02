@@ -14,7 +14,7 @@ public class main extends Application {
     /**
      * Method coming from the parent class Application
      * Used to start the application and display the login
-     * @param stage, the container of the view
+     * @param stage the container of the view
      * @throws IOException if an error occurs
      */
     @Override
@@ -28,7 +28,7 @@ public class main extends Application {
 
     /**
      * Main method called when we launch the app, it calls the start method
-     * @param args, the command line arguments
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);

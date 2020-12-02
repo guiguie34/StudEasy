@@ -12,30 +12,57 @@ public class Session implements SessionI {
      */
     private User currentUser;
 
+    /**
+     * Lazy holder containing the unique session
+     */
     public static class loadSession{
         public static final Session instance= new Session();
     }
 
+    /**
+     * Get the unique session in the lazy holder
+     * @return the session
+     */
     public static Session getInstance(){
         return Session.loadSession.instance;
     }
 
+    /**
+     * Get the current user in the session
+     * @return the current user
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Used to change the current User
+     * @param currentUser the new User
+     */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * Check if the current user is an admin
+     * @return true if it's an admin, false otherwise
+     */
     public boolean isAdmin(){
         return (currentUser.getRole() instanceof RoleAdmin);
     }
 
+    /**
+     * Check if the current user is a studebt
+     * @return true if it's a student, false otherwise
+     */
     public boolean isStudent(){
         return (currentUser.getRole() instanceof RoleStudent);
     }
 
+    /**
+     * Check if the current user is a partner
+     * @return true if it's a partner, false otherwise
+     */
     public boolean isPartner(){
         return (currentUser.getRole() instanceof RolePartner);
     }

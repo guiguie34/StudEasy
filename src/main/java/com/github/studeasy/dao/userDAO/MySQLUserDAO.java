@@ -31,7 +31,7 @@ public class MySQLUserDAO extends UserDAO{
     /**
      * Method asking the database if a user with this mail exist,
      * and returning him if he exists
-     * @param email, the email to check
+     * @param email the email to check
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */

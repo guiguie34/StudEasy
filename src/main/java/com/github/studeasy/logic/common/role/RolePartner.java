@@ -26,7 +26,6 @@ public class RolePartner extends Role{
      */
     private List<Coupon> coupons;
 
-
     public RolePartner(String company) {
         super();
         this.company = company;

@@ -1,9 +1,7 @@
 package com.github.studeasy.logic.common;
 
-import java.util.*;
-
 /**
- * 
+ * Class describing a coupon
  */
 public class Coupon {
 
@@ -17,7 +15,6 @@ public class Coupon {
 	 */
 	private String description;
 
-
 	/**
 	 * Value of the coupon in the partner store (in €)
 	 */
@@ -28,7 +25,6 @@ public class Coupon {
 	 */
 	private int cost;
 
-
 	/**
 	 * Quantity available the current coupon
 	 */
@@ -38,8 +34,6 @@ public class Coupon {
 	 * Partner to which belongs the coupon
 	 */
 	private User owner;
-
-
 
 	public Coupon(String title, String description, double value, int cost, int quantity, User owner) {
 		this.title = title;

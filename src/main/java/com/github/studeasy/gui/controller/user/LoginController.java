@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
      * Triggered when the user pushed the login button
      * Log the user into the app if its credentials are correct and then
      * redirect him, or indicates him its credentials are wrong.
-     * @param event, the event triggered
+     * @param event the event triggered
      */
     public void login(ActionEvent event){
         // We retrieve the user inputs
@@ -89,8 +89,8 @@ public class LoginController implements Initializable {
 
     /**
      * Triggered when the user wants to go to the register page
-     * @param event, the event triggered
-     * @throws IOException, if an error occurs
+     * @param event the event triggered
+     * @throws IOException if an error occurs
      */
     public void loadRegister(ActionEvent event) throws IOException {
         ROUTER.changeView(UserRouter.REGISTER_FXML_PATH,event);
@@ -99,7 +99,7 @@ public class LoginController implements Initializable {
     /**
      * Called when the user presses the "exit" button
      * Shut down the application
-     * @param event, the action trigerring this method
+     * @param event the action trigerring this method
      */
     public void exit(ActionEvent event) {
         // Shuts down the JVM

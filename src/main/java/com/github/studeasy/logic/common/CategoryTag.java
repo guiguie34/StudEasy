@@ -1,9 +1,7 @@
 package com.github.studeasy.logic.common;
 
-import java.util.*;
-
 /**
- * 
+ * Class describing a category tag
  */
 public class CategoryTag {
 
@@ -11,7 +9,6 @@ public class CategoryTag {
 	 * Name of the category
 	 */
 	private String name;
-
 
 	/**
 	 * Short description of the category

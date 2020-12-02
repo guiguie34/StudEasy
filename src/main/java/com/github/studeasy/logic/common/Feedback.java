@@ -1,9 +1,7 @@
 package com.github.studeasy.logic.common;
 
-import java.util.*;
-
 /**
- * 
+ * Class describing a feedback
  */
 public class Feedback {
 
@@ -26,8 +24,6 @@ public class Feedback {
 	 * Service related to the feedback
 	 */
 	private CommandOfService service;
-
-
 
 	public Feedback(String title, int rate, String comment, CommandOfService service) {
 		this.title = title;

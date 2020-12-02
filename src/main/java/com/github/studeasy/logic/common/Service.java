@@ -3,7 +3,7 @@ package com.github.studeasy.logic.common;
 import java.util.*;
 
 /**
- * 
+ * Class describing a service
  */
 public class Service {
 
@@ -11,30 +11,37 @@ public class Service {
 	 * Title of the service
 	 */
 	private String title;
+
 	/**
 	 * Description of the service
 	 */
 	private String description;
+
 	/**
 	 * Cost of the service
 	 */
 	private int cost;
+
 	/**
 	 * Describe the type of the service (Service proposed/asked)
 	 */
 	private String typeService;
+
 	/**
 	 * Reference to the user who has created the service
 	 */
 	private User owner;
+
 	/**
 	 * Describe the category of the service (example: Tutoring...)
 	 */
 	private CategoryTag category;
+
 	/**
 	 * Describe the status of the service (pending/validated)
 	 */
 	private String status;
+
 	/**
 	 * Reference to the orders containing this service
 	 */
@@ -106,8 +113,6 @@ public class Service {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
 
 	public List<CommandOfService> getServices() {
 		return services;

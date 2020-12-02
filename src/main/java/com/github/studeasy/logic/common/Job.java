@@ -1,9 +1,7 @@
 package com.github.studeasy.logic.common;
 
-import java.util.*;
-
 /**
- *Describe the job class
+ * Class describing the job class
  */
 public class Job {
 
@@ -11,39 +9,46 @@ public class Job {
 	 * Title of the job
 	 */
 	private String title;
+
 	/**
 	 * localisation of the job.
 	 */
 	private String localisation;
+
 	/**
 	 * describe the role of the person who will want to do the job
 	 */
 	private String role;
+
 	/**
 	 * Describe when the job will start (example: next week, next month, or more precisely 12/08/2021)
 	 */
 	private String start;
+
 	/**
 	 * Describe the duration of the job
 	 */
 	 private String duration;
+
 	/**
 	 * Description of the job
 	 */
 	private String description;
+
 	/**
 	 * Mail of the creator of the job
 	 */
 	 private String contactMail;
+
 	/**
 	 * Phone number of the creator of the job
 	 */
 	private String contactPhone;
+
 	/**
 	 * References to the user who created the job
 	 */
 	 private User owner;
-
 
 	public Job(String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner) {
 		this.title = title;
@@ -127,5 +132,4 @@ public class Job {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-
 }

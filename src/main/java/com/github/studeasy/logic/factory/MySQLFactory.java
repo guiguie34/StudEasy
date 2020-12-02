@@ -4,7 +4,7 @@ import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
 /**
- *
+ * The factory for MySQL DAOs
  */
 public class MySQLFactory extends Factory {
 
@@ -14,7 +14,7 @@ public class MySQLFactory extends Factory {
     private MySQLFactory(){}
 
     /**
-     * Static class which contains the objet MySQLFactory
+     * Lazy holder which contains the objet MySQLFactory
      */
     private static class createMySQLFactory{
         static final MySQLFactory INSTANCE = new MySQLFactory();
@@ -29,7 +29,7 @@ public class MySQLFactory extends Factory {
     }
 
     /**
-     * Override methode createUserDAO which will create a MySQLUserDAO
+     * Method which will create a MySQLUserDAO
      * @return the MySQLUserDAO
      */
     @Override

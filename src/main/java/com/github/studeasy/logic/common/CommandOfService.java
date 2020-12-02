@@ -3,7 +3,7 @@ package com.github.studeasy.logic.common;
 import java.util.*;
 
 /**
- * 
+ * Class describing a command of service
  */
 public class CommandOfService {
 
@@ -31,7 +31,6 @@ public class CommandOfService {
 	 * Date of the creation of the command
 	 */
 	private Date creationDate;
-
 
 	public CommandOfService(Feedback feedback, User owner, Service service, String status, Date creationDate) {
 		this.feedback = feedback;
@@ -80,7 +79,4 @@ public class CommandOfService {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
-
-
 }

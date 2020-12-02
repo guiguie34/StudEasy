@@ -33,17 +33,25 @@ public class UserRouter extends AbstractRouter {
     }
 
     /**
-     * Those are the different names of our views
-     * Login Use case views
+     * Path to the register view
      */
     public final static String REGISTER_FXML_PATH = "Views/register.fxml";
+    /**
+     * Path to the home student view
+     */
     private final static String HOME_STUDENT_FXML_PATH ="Views/homeStudent.fxml";
+    /**
+     * Path to the home admin view
+     */
     private final static String HOME_ADMIN_FXML_PATH = "Views/homeAdmin.fxml";
+    /**
+     * Path to the home partner view
+     */
     private final static String HOME_PARTNER_FXML_PATH = "Views/homePartner.fxml";
 
     /**
      * Function loading the appropriate view for the connecting user
-     * @param event, the action trigerring this method
+     * @param event the action trigerring this method
      * @throws IOException
      */
     public void login(ActionEvent event) throws  IOException {

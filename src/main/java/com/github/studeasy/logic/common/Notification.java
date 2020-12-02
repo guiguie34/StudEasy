@@ -1,9 +1,7 @@
 package com.github.studeasy.logic.common;
 
-import java.util.*;
-
 /**
- * 
+ * Class describing a notification
  */
 public class Notification {
 
@@ -11,14 +9,17 @@ public class Notification {
 	 * Title of the notification
 	 */
 	private String title;
+
 	/**
 	 * Description of the notification
 	 */
 	private String description;
+
 	/**
 	 * Boolean that indicates if the notification as been read
 	 */
 	private boolean read;
+
 	/**
 	 * Reference to the user who has created the notification
 	 */

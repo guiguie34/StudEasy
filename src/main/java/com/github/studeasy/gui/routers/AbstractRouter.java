@@ -38,7 +38,7 @@ public abstract class AbstractRouter {
 
     /**
      * Allows to change the view (the fxml file to display)
-     * @param pathFXML, the path indicating where is the fxml
+     * @param pathFXML the path indicating where is the fxml
      * @return the Parent with the FXML loaded
      * @throws IOException if an error occurs while loading the fxml
      */
@@ -51,8 +51,8 @@ public abstract class AbstractRouter {
     /**
      * This method is used to change the view properly, it displays the new
      * fxml file
-     * @param pathFXML, the path to the fxml file
-     * @param event, the action trigerring the change of view
+     * @param pathFXML the path to the fxml file
+     * @param event the action trigerring the change of view
      * @throws IOException if an error occurs
      */
     public void changeView(String pathFXML, ActionEvent event) throws IOException {
@@ -69,8 +69,8 @@ public abstract class AbstractRouter {
 
     /**
      * Triggered when a user tries to access a restricted view for admin
-     * @param pathFXML, the path to the fxml file
-     * @param event, the action trigerring the change of view
+     * @param pathFXML the path to the fxml file
+     * @param event the action trigerring the change of view
      * @throws IOException if an error occurs
      */
     public void adminRestricted(String pathFXML,ActionEvent event) throws IOException {
@@ -81,8 +81,8 @@ public abstract class AbstractRouter {
 
     /**
      * Triggered when a user tries to access a restricted view for student
-     * @param pathFXML, the path to the fxml file
-     * @param event, the action trigerring the change of view
+     * @param pathFXML the path to the fxml file
+     * @param event the action trigerring the change of view
      * @throws IOException if an error occurs
      */
     public void studentRestricted(String pathFXML,ActionEvent event) throws IOException {
@@ -93,8 +93,8 @@ public abstract class AbstractRouter {
 
     /**
      * Triggered when a user tries to access a restricted view for partner
-     * @param pathFXML, the path to the fxml file
-     * @param event, the action trigerring the change of view
+     * @param pathFXML the path to the fxml file
+     * @param event the action trigerring the change of view
      * @throws IOException if an error occurs
      */
     public void partnerRestricted(String pathFXML,ActionEvent event) throws IOException {

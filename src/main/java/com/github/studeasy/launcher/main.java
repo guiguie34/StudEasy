@@ -1,6 +1,6 @@
 package com.github.studeasy.launcher;
 
-import com.github.studeasy.gui.views.FXMLLoaderView;
+import com.github.studeasy.gui.routers.AbstractRouter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,7 +22,7 @@ public class main extends Application {
         stage.setTitle("Stud'Easy");
         stage.centerOnScreen();
         stage.setResizable(false);
-        stage.setScene(new Scene(FXMLLoaderView.load("Views/login.fxml")));
+        stage.setScene(new Scene(AbstractRouter.load(AbstractRouter.LOGIN_FXML_PATH)));
         stage.show();
     }
 

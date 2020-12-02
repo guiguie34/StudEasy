@@ -2,7 +2,7 @@ package com.github.studeasy.gui.controller.user;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.user.RouterUser;
+import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.user.FacadeUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
      * a router and a facade used for users
      */
     public LoginController(){
-        this.router = new RouterUser();
+        this.router = UserRouter.getInstance();
         this.facade = FacadeUser.getInstance();
     }
 
@@ -69,13 +69,12 @@ public class LoginController implements Initializable {
         // We retrieve the user inputs
         String email = emailTF.getText();
         String password = passwordTF.getText();
-
         // Surrounded by a try catch, in case a wrong auth occurs
         try {
             // We ask the facade to check
             facade.login(email, password);
             // If it's alright, we're redirected to the right page by the router
-            ((RouterUser) router).login(event);
+            ((UserRouter)router).login(event);
         }
         catch(BadCredentialsException e){
             // Wrong credentials, we show the user
@@ -93,7 +92,7 @@ public class LoginController implements Initializable {
      * @throws IOException, if an error occurs
      */
     public void loadRegister(ActionEvent event) throws IOException {
-        ((RouterUser) router).register(event);
+        router.changeView(UserRouter.REGISTER_FXML_PATH,event);
     }
 
     /**

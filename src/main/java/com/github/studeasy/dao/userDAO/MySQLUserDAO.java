@@ -1,6 +1,5 @@
 package com.github.studeasy.dao.userDAO;
 
-import com.github.studeasy.dao.db.ConnectionUtilI;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.logic.common.User;
@@ -19,14 +18,14 @@ public class MySQLUserDAO extends UserDAO{
     /**
      * The connection to the database
      */
-    protected Connection db;
+    private final Connection DB;
 
     /**
      * Instantiate the connection db
      */
     public MySQLUserDAO() {
-        ConnectionUtilI connection = MySQLConnectionUtil.getInstance();
-        this.db = connection.getDb();
+        MySQLConnectionUtil connection = MySQLConnectionUtil.getInstance();
+        this.DB = connection.getDb();
     }
 
     /**
@@ -44,7 +43,7 @@ public class MySQLUserDAO extends UserDAO{
             // Will contain the result of the query
             ResultSet resultSet;
             String request = "SELECT * FROM user WHERE emailAddress = ?";
-            preparedStatement = db.prepareStatement(request);
+            preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, email);
             // We execute the query
             resultSet = preparedStatement.executeQuery();

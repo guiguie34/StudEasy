@@ -31,6 +31,7 @@ public class UserRouter extends AbstractRouter {
     public static UserRouter getInstance(){
         return UserRouter.loadRouter.instance;
     }
+
     /**
      * Those are the different names of our views
      * Login Use case views

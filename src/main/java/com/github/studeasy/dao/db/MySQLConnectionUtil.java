@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * Class singleton, creating a connection to our MySQL database
  */
-public class MySQLConnectionUtil implements ConnectionUtilI{
+public class MySQLConnectionUtil{
 
     /**
      * The connection to the database
@@ -37,7 +37,7 @@ public class MySQLConnectionUtil implements ConnectionUtilI{
     }
 
     /**
-     * Create the unique connection to the database
+     * Lazy holder, create the unique connection to the database
      */
     private static class createConn{
         static final MySQLConnectionUtil instance= new MySQLConnectionUtil();

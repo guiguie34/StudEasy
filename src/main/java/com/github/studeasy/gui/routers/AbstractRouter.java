@@ -22,13 +22,13 @@ public abstract class AbstractRouter {
      * The session containing the current user using the app
      * With the interface, we can only access methods to read it
      */
-    protected SessionI session;
+    protected final SessionI SESSION;
 
     /**
      * Instantiate the session
      */
     public AbstractRouter(){
-        this.session = Session.getInstance();
+        this.SESSION = Session.getInstance();
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void adminRestricted(String pathFXML,ActionEvent event) throws IOException {
-        if(session.isAdmin()){
+        if(SESSION.isAdmin()){
             changeView(pathFXML,event);
         }
     }
@@ -86,7 +86,7 @@ public abstract class AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void studentRestricted(String pathFXML,ActionEvent event) throws IOException {
-        if (session.isStudent()) {
+        if (SESSION.isStudent()) {
             changeView(pathFXML, event);
         }
     }
@@ -98,7 +98,7 @@ public abstract class AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void partnerRestricted(String pathFXML,ActionEvent event) throws IOException {
-        if (session.isPartner()) {
+        if (SESSION.isPartner()) {
             changeView(pathFXML, event);
         }
     }

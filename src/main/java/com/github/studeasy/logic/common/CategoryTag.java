@@ -8,50 +8,34 @@ import java.util.*;
 public class CategoryTag {
 
 	/**
-	 * Default constructor
-	 */
-	public CategoryTag() {
-	}
-
-	/**
-	 * 
+	 *
 	 */
 	private String name;
 
+
 	/**
-	 * 
+	 *
 	 */
 	private String description;
 
+	public CategoryTag(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
 
-	/**
-	 * @return
-	 */
 	public String getName() {
-		// TODO implement here
-		return "";
+		return name;
 	}
 
-	/**
-	 * @param n
-	 */
-	public void setName(String n) {
-		// TODO implement here
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDescription() {
-		// TODO implement here
-		return "";
+		return description;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setDescription(String d) {
-		// TODO implement here
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
 }

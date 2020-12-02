@@ -7,110 +7,57 @@ import java.util.*;
  */
 public class Coupon {
 
-	/**
-	 * Default constructor
-	 */
-	public Coupon() {
-	}
-
-	/**
-	 * 
-	 */
 	private String title;
-
-	/**
-	 * 
-	 */
 	private String description;
-
-	/**
-	 * 
-	 */
 	private double value;
-
-	/**
-	 * 
-	 */
 	private int quantity;
+	private User owner; //Partner
 
-	/**
-	 * 
-	 */
-	public Partner partner;
+	public Coupon(String title, String description, double value, int quantity, User owner) {
+		this.title = title;
+		this.description = description;
+		this.value = value;
+		this.quantity = quantity;
+		this.owner = owner;
+	}
 
-	/**
-	 * @return
-	 */
 	public String getTitle() {
-		// TODO implement here
-		return "";
+		return title;
 	}
 
-	/**
-	 * @param t
-	 */
-	public void setTitle(String t) {
-		// TODO implement here
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDescription() {
-		// TODO implement here
-		return "";
+		return description;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setDescription(String d) {
-		// TODO implement here
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	/**
-	 * @return
-	 */
 	public double getValue() {
-		// TODO implement here
-		return 0.0d;
+		return value;
 	}
 
-	/**
-	 * @param v
-	 */
-	public void setValue(double v) {
-		// TODO implement here
+	public void setValue(double value) {
+		this.value = value;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getQuantity() {
-		// TODO implement here
-		return 0;
+		return quantity;
 	}
 
-	/**
-	 * @param q
-	 */
-	public void setQuantity(int q) {
-		// TODO implement here
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
-	/**
-	 * @return
-	 */
-	public Partner getPartner() {
-		// TODO implement here
-		return null;
+	public User getOwner() {
+		return owner;
 	}
 
-	/**
-	 * @param p
-	 */
-	public void setPartner(Partner p) {
-		// TODO implement here
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
-
 }

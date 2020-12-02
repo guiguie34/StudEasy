@@ -39,6 +39,9 @@ public class User {
 	 */
 	private Role role;
 
+	private List<Notification> notifications;
+
+
 
 	/**
 	 * Default constructor

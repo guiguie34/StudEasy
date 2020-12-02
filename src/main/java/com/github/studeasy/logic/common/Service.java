@@ -7,146 +7,87 @@ import java.util.*;
  */
 public class Service {
 
-	/**
-	 * Default constructor
-	 */
-	public Service() {
-	}
-
-	/**
-	 * 
-	 */
 	private String title;
-
-	/**
-	 * 
-	 */
 	private String description;
-
-	/**
-	 * 
-	 */
 	private double cost;
+	private String typeService;
+	private User owner;
+	private CategoryTag category;
+	private String status;
+	private List<CommandOfService> services;
 
-	/**
-	 * 
-	 */
-	public Status status;
-
-
-	/**
-	 * 
-	 */
-	public CategoryTag category;
-
-	/**
-	 * 
-	 */
-	public TypeService typeService;
-
-	/**
-	 * @return
-	 */
 	public String getTitle() {
-		// TODO implement here
-		return "";
+		return title;
 	}
 
-	/**
-	 * @param t
-	 */
-	public void setTitle(String t) {
-		// TODO implement here
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDescription() {
-		// TODO implement here
-		return "";
+		return description;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setDescription(String d) {
-		// TODO implement here
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	/**
-	 * @return
-	 */
 	public double getCost() {
-		// TODO implement here
-		return 0.0d;
+		return cost;
 	}
 
-	/**
-	 * @param c
-	 */
-	public void setCost(double c) {
-		// TODO implement here
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
-	/**
-	 * @return
-	 */
-	public Status getStatus() {
-		// TODO implement here
-		return null;
+	public String getTypeService() {
+		return typeService;
 	}
 
-	/**
-	 * @param s
-	 */
-	public void setStatus(Status s) {
-		// TODO implement here
+	public void setTypeService(String typeService) {
+		this.typeService = typeService;
 	}
 
-	/**
-	 * @return
-	 */
-	public TypeService getTypeService() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @param t
-	 */
-	public void setTypeService(TypeService t) {
-		// TODO implement here
-	}
-
-	/**
-	 * @return
-	 */
-	public CategoryTag getCategory() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @param c
-	 */
-	public void setCategory(CategoryTag c) {
-		// TODO implement here
-	}
-
-	/**
-	 * @return
-	 */
 	public User getOwner() {
-		// TODO implement here
-		return null;
+		return owner;
 	}
 
-	/**
-	 * @param o
-	 */
-	public void setOwner(User o) {
-		// TODO implement here
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
+	public CategoryTag getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryTag category) {
+		this.category = category;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Service(String title, String description, double cost, String typeService, User owner, CategoryTag category, String status) {
+		this.title = title;
+		this.description = description;
+		this.cost = cost;
+		this.typeService = typeService;
+		this.owner = owner;
+		this.category = category;
+		this.status = status;
+		this.services = new ArrayList<CommandOfService>();
+	}
+
+	public List<CommandOfService> getServices() {
+		return services;
+	}
+
+	public void setServices(List<CommandOfService> services) {
+		this.services = services;
+	}
 }

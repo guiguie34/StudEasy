@@ -3,181 +3,103 @@ package com.github.studeasy.logic.common;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class Job {
 
-	/**
-	 * Default constructor
-	 */
-	public Job() {
+
+	 private String title;
+	 private String localisation;
+	 private String role;
+	 private String start;
+	 private String duration;
+	 private String description;
+	 private String contactMail;
+	 private String contactPhone;
+	 private User owner;
+
+
+	public Job(String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner) {
+		this.title = title;
+		this.localisation = localisation;
+		this.role = role;
+		this.start = start;
+		this.duration = duration;
+		this.description = description;
+		this.contactMail = contactMail;
+		this.contactPhone = contactPhone;
+		this.owner = owner;
 	}
 
-	/**
-	 * 
-	 */
-	private String title;
-
-	/**
-	 * 
-	 */
-	private String localisation;
-
-	/**
-	 * 
-	 */
-	private String role;
-
-	/**
-	 * 
-	 */
-	private String start;
-
-	/**
-	 * 
-	 */
-	private String duration;
-
-	/**
-	 * 
-	 */
-	private String description;
-
-	/**
-	 * 
-	 */
-	private String contactMail;
-
-	/**
-	 * 
-	 */
-	private String contactPhone;
-
-	/**
-	 * 
-	 */
-	public Partner recruiter;
-
-	/**
-	 * @return
-	 */
 	public String getTitle() {
-		// TODO implement here
-		return "";
+		return title;
 	}
 
-	/**
-	 * @param t
-	 */
-	public void setTitle(String t) {
-		// TODO implement here
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getLocalisation() {
-		// TODO implement here
-		return "";
+		return localisation;
 	}
 
-	/**
-	 * @param l
-	 */
-	public void setLocalisation(String l) {
-		// TODO implement here
+	public void setLocalisation(String localisation) {
+		this.localisation = localisation;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getRole() {
-		// TODO implement here
-		return "";
+		return role;
 	}
 
-	/**
-	 * @param r
-	 */
-	public void setRole(String r) {
-		// TODO implement here
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getStart() {
-		// TODO implement here
-		return "";
+		return start;
 	}
 
-	/**
-	 * @param s
-	 */
-	public void setStart(String s) {
-		// TODO implement here
+	public void setStart(String start) {
+		this.start = start;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDuration() {
-		// TODO implement here
-		return "";
+		return duration;
 	}
 
-	/**
-	 * @param d 
-	 * @return
-	 */
-	public String setDuration(String d) {
-		// TODO implement here
-		return "";
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDescription() {
-		// TODO implement here
-		return "";
+		return description;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setDescription(String d) {
-		// TODO implement here
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getContactMail() {
-		// TODO implement here
-		return "";
+		return contactMail;
 	}
 
-	/**
-	 * @param c
-	 */
-	public void setContactMail(String c) {
-		// TODO implement here
+	public void setContactMail(String contactMail) {
+		this.contactMail = contactMail;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getContactPhone() {
-		// TODO implement here
-		return "";
+		return contactPhone;
 	}
 
-	/**
-	 * @param c
-	 */
-	public void setContactPhone(String c) {
-		// TODO implement here
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
+	}
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 }

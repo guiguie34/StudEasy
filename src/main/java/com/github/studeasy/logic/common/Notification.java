@@ -7,90 +7,47 @@ import java.util.*;
  */
 public class Notification {
 
-	/**
-	 * Default constructor
-	 */
-	public Notification() {
-	}
-
-	/**
-	 * 
-	 */
 	private String title;
-
-	/**
-	 * 
-	 */
 	private String description;
-
-	/**
-	 * 
-	 */
 	private boolean read;
+	private User user;
 
-	/**
-	 * 
-	 */
-	public User user;
+	public Notification(String title, String description, boolean read, User user) {
+		this.title = title;
+		this.description = description;
+		this.read = read;
+		this.user = user;
+	}
 
-	/**
-	 * @return
-	 */
 	public String getTitle() {
-		// TODO implement here
-		return "";
+		return title;
 	}
 
-	/**
-	 * @param t
-	 */
-	public void setTitle(String t) {
-		// TODO implement here
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getDescription() {
-		// TODO implement here
-		return "";
+		return description;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setDescription(String d) {
-		// TODO implement here
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	/**
-	 * @return
-	 */
-	public boolean getRead() {
-		// TODO implement here
-		return false;
+	public boolean isRead() {
+		return read;
 	}
 
-	/**
-	 * @param r
-	 */
-	public void setRead(boolean r) {
-		// TODO implement here
+	public void setRead(boolean read) {
+		this.read = read;
 	}
 
-	/**
-	 * @return
-	 */
 	public User getUser() {
-		// TODO implement here
-		return null;
+		return user;
 	}
 
-	/**
-	 * @param u
-	 */
-	public void setUser(User u) {
-		// TODO implement here
+	public void setUser(User user) {
+		this.user = user;
 	}
-
 }

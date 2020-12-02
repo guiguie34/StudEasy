@@ -7,91 +7,61 @@ import java.util.*;
  */
 public class CommandOfService {
 
-	/**
-	 * Default constructor
-	 */
-	public CommandOfService() {
-	}
-
-	/**
-	 * 
-	 */
+	private Feedback feedback;
+	private User owner;
+	private Service service;
+	private String status;
 	private Date creationDate;
 
-	/**
-	 * 
-	 */
-	public Status transactionStatus;
 
-
-	/**
-	 * 
-	 */
-	public User requester;
-
-	/**
-	 * 
-	 */
-	public User service;
-
-	/**
-	 * @return
-	 */
-	public Date getCreationDate() {
-		// TODO implement here
-		return null;
+	public CommandOfService(Feedback feedback, User owner, Service service, String status, Date creationDate) {
+		this.feedback = feedback;
+		this.owner = owner;
+		this.service = service;
+		this.status = status;
+		this.creationDate = creationDate;
 	}
 
-	/**
-	 * @param d
-	 */
-	public void setCreationDate(Date d) {
-		// TODO implement here
+	public Feedback getFeedback() {
+		return feedback;
 	}
 
-	/**
-	 * @return
-	 */
-	public Status getTransactionStatus() {
-		// TODO implement here
-		return null;
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 
-	/**
-	 * @param s
-	 */
-	public void setTransactionStatus(Status s) {
-		// TODO implement here
-	}
-
-	/**
-	 * @return
-	 */
-	public Service getService() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @param s
-	 */
-	public void setService(Service s) {
-		// TODO implement here
-	}
-
-	/**
-	 * @return
-	 */
 	public User getOwner() {
-		// TODO implement here
-		return null;
+		return owner;
 	}
 
-	/**
-	 * @param o
-	 */
-	public void setOwner(User o) {
-		// TODO implement here
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+
 
 }

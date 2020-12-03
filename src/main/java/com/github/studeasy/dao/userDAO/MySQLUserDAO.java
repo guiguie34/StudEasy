@@ -25,7 +25,7 @@ public class MySQLUserDAO extends UserDAO{
      * Instantiate the connection db
      */
     private MySQLUserDAO() {
-        MySQLConnectionUtil connection = MySQLConnectionUtil.getInstance();
+        MySQLFactory connection = MySQLFactory.getInstance();
         this.DB = connection.getDb();
     }
 

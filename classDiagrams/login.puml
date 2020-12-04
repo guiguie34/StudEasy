@@ -13,12 +13,12 @@ package launcher{
     Application <|-- Main
 }
 
-class Initializable
+interface Initializable
 
 package GUI{
 
     abstract class AbstractRouter{
-        + LOGIN_FXML_PATH : String = "Views/login.fxml"
+        + {static} LOGIN_FXML_PATH : String = "Views/login.fxml"
         + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
@@ -37,15 +37,15 @@ package GUI{
         }
 
     class UserRouter{
-        + REGISTER_FXML_PATH : String = "Views/register.fxml"
-        + HOME_STUDENT_FXML_PATH : String = "Views/homeStudent.fxml"
-        + HOME_ADMIN_FXML_PATH : String = "Views/homeAdmin.fxml"
-        + HOME_PARTNER_FXML_PATH : String = "Views/homePartner.fxml"
+        + {static} REGISTER_FXML_PATH : String = "Views/register.fxml"
+        + {static} HOME_STUDENT_FXML_PATH : String = "Views/homeStudent.fxml"
+        + {static} HOME_ADMIN_FXML_PATH : String = "Views/homeAdmin.fxml"
+        + {static} HOME_PARTNER_FXML_PATH : String = "Views/homePartner.fxml"
         + {static} getInstance() : UserRouter
         + login(ActionEvent event )
     }
 
-    Initializable <|-down- LoginController
+    Initializable <|.down. LoginController : implements
     AbstractRouter <.. Main : creates
     LoginController <-- AbstractRouter
     AbstractRouter <.left. LoginController : creates
@@ -68,7 +68,7 @@ package BusinessLogic{
         + isPartner() : boolean
     }
 
-    class SessionI{
+    interface SessionI{
         + isStudent(): boolean
         + isAdmin() : boolean
         + isPartner() : boolean
@@ -141,7 +141,7 @@ package BusinessLogic{
     Role <|--up Partner
     Role <-- User
     User <-- SessionUser
-    SessionI <|.. SessionUser
+    SessionI <|.. SessionUser : implements
     SessionI <-- AbstractRouter
     SessionUser <.. FacadeUser : creates
     Factory <.. FacadeUser : creates
@@ -168,10 +168,13 @@ package DAO{
     }
 
     UserDAO <|-up MySQLUserDAO
-
     UserDAO <-up- FacadeUser
 
+    MySQLUserDAO <.up. MySQLFactory : creates
     MySQLConnectionUtil <.up. MySQLFactory : creates
+
+
+
 }
 
 @enduml

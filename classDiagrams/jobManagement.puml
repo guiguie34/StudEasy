@@ -1,0 +1,165 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+
+    abstract class AbstractRouter{
+        + {static} load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+
+    class JobRouter{
+        + {static} ADD_UPDATE_JOB_FXML_PATH : String = "Views/jobs/addUpdateJob.fxml"
+        + {static} JOB_OFFERS_FXML_PATH : String = "Views/jobs/jobOffers.fxml"
+        + {static} SEE_JOB_OFFER_FXML_PATH : String = "Views/jobs/seeJobOffer.fxml"
+    }
+
+    class HomePartnerController{
+        - bienvenueL : Label
+        + addJobOffer(ActionEvent event)
+        + seeMyJobOffers(ActionEvent event)
+        + logout(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class HomeStudentController{
+        - bienvenueL : Label
+        - numberPoints : Label
+        + searchForJob(ActionEvent)
+        + logout(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class HomeAdminController{
+        - bienvenueL : Label
+        + manageJobOffers(ActionEvent event)
+        + logout(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class AddUpdateJobOfferController{
+        - labelPrintJob : Label
+        - jobTitleTF : TextField
+        - locationTF : TextField
+        - roleTypeTF : TextField
+        - dateStartJobDP : DatePicker
+        - lengthJobTF : TextField
+        - descriptionJobTA : TextArea
+        - contactInfoTA : TextArea
+        + addJobOffer(ActionEvent event)
+        + updateJobOffer(ActionEvent event)
+        + cancel(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class JobOffersController{
+        - jobOffersL : Label
+        - searchJobTF : TextField
+        - textsJob : Text[]
+        - logosStateJob : ImageView[]
+        + seeJobOffer(ActionEvent event)
+        + searchJob(ActionEvent event)
+        + cancel(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class SeeJobOfferController{
+        - titleJob : Label
+        - textJob : Text
+        - updateB : Button
+        - deleteB : Button
+        - validateB : Button
+        + searchJob(ActionEvent event)
+        + cancel(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+        AbstractRouter <|-right- JobRouter
+
+        AbstractRouter <-- HomePartnerController
+        AbstractRouter <-- HomeStudentController
+        AbstractRouter <-- HomeAdminController
+        AbstractRouter <-- AddUpdateJobOfferController
+        AbstractRouter <-- JobOffersController
+        AbstractRouter <-- SeeJobOfferController
+
+        HomePartnerController <.. AbstractRouter : creates
+        HomeStudentController <.. AbstractRouter : creates
+        HomeAdminController <.. AbstractRouter : creates
+        AddUpdateJobOfferController <.. AbstractRouter : creates
+        JobOffersController <.. AbstractRouter : creates
+        SeeJobOfferController <.. AbstractRouter : creates
+}
+
+package BusinessLogic{
+
+    class FacadeJob{
+        + {static} getInstance() : FacadeJob
+        + addJobOffer(String jobTitle, String location, String roleType,
+         Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + updateJobOffer(Job jobToUpdate)
+        + searchJob(String jobTitle) : Job
+        + seeJobOffer() : Job
+        + seeJobOffers() : Job
+        - seeAllJobOffers() : Job[]
+        - seeMyJobOffers() : Job[]
+        - seePendingJobOffers() : job[]
+    }
+
+    abstract class Factory{
+        + CreateJobDAO() : JobDAO
+    }
+
+    class MySQLFactory{
+        - db : Connection
+        + {static} getInstance() : MySQLFactory
+        + CreateJobDAO() : JobDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    AddUpdateJobOfferController --> FacadeJob
+    JobOffersController --> FacadeJob
+    SeeJobOfferController --> FacadeJob
+
+    FacadeJob ..> Factory  : creates
+    MySQLFactory -left-|> Factory
+}
+
+package DAO{
+
+    abstract class JobDAO{
++ addJobOffer(String jobTitle, String location, String roleType,
+         Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + updateJobOffer(Job jobToUpdate)
+        + searchJob(String jobTitle) : Job
+        + seeJobOffer() : Job
+        + seeAllJobOffers() : Job[]
+        + seeMyJobOffers() : Job[]
+        + seePendingJobOffers() : job[]
+    }
+
+    class MySQLJobDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLJobDAO
+        + addJobOffer(String jobTitle, String location, String roleType,
+         Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + updateJobOffer(Job jobToUpdate)
+        + searchJob(String jobTitle) : Job
+        + seeJobOffer() : Job
+        + seeAllJobOffers() : Job[]
+        + seeMyJobOffers() : Job[]
+        + seePendingJobOffers() : job[]
+    }
+
+    MySQLJobDAO -up-|> JobDAO
+    JobDAO <-right- FacadeJob
+
+    MySQLJobDAO <.right. MySQLFactory : creates
+}
+
+@enduml

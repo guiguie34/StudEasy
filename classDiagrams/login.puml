@@ -1,22 +1,31 @@
 @startuml
+skinparam classAttributeIconSize 0
+
 class Application
+
 package launcher{
+
     class Main{
         start(Stage stage)
-        main(String[] args)
+        {static} main(String[] args)
      }
+
     Application <|-- Main
 }
+
 class Initializable
+
 package GUI{
+
     abstract class AbstractRouter{
         + LOGIN_FXML_PATH : String = "Views/login.fxml"
-        + load(String pathFXML) : Parent
+        + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
         + studentRestricted(String pathFXML, ActionEvent event)
         + partnerRestricted(String pathFXML, ActionEvent event)
     }
+
     class LoginController{
             - emailTF : TextField
             - passwordTF : TextField
@@ -25,36 +34,33 @@ package GUI{
             + loadRegister(ActionEvent event)
             + exit(ActionEvent event)
             + initialize(URL location, RessourceBundle resources)
-
         }
+
     class UserRouter{
         + REGISTER_FXML_PATH : String = "Views/register.fxml"
         + HOME_STUDENT_FXML_PATH : String = "Views/homeStudent.fxml"
         + HOME_ADMIN_FXML_PATH : String = "Views/homeAdmin.fxml"
         + HOME_PARTNER_FXML_PATH : String = "Views/homePartner.fxml"
-        + getInstance() : UserRouter
+        + {static} getInstance() : UserRouter
         + login(ActionEvent event )
     }
 
-
     Initializable <|-down- LoginController
-    AbstractRouter <.. Main : create
+    AbstractRouter <.. Main : creates
     LoginController <-- AbstractRouter
     AbstractRouter <.left. LoginController : creates
     AbstractRouter <|-- UserRouter
-
-
-
 }
 
 package BusinessLogic{
+
     class FacadeUser{
         + login(email,password)
-        + getInstance() : FacadeUser
+        + {static} getInstance() : FacadeUser
     }
 
     class SessionUser{
-        + getInstance() : SessionUser
+        + {static} getInstance() : SessionUser
         + getCurrentUser() : User
         + setCurrentUser(User currentUser)
         + isStudent() : boolean
@@ -88,7 +94,9 @@ package BusinessLogic{
     }
 
     abstract class Role
+
     class Admin
+
     class Student{
         - pseudo : String
         - points : int
@@ -114,14 +122,15 @@ package BusinessLogic{
         + setJobs(Job[] jobs)
         + getCoupons() : Coupon[]
         + setCoupons(Coupon[] coupons)
-
     }
+
     abstract class Factory{
         + CreateUserDAO() : UserDAO
     }
+
     class MySQLFactory{
         - db : Connection
-        + getInstance() : MySQLFactory
+        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()
@@ -138,31 +147,31 @@ package BusinessLogic{
     Factory <.. FacadeUser : creates
     Factory <|-- MySQLFactory
     FacadeUser <-up- LoginController
-
-
-
-
 }
 
 package DAO{
+
     abstract class UserDAO{
         + searchUser(String email) : User
     }
+
     class MySQLUserDAO{
         - DB : Connection
         + searchUser(String email) : User
-        + getInstance() : MySQLUserDAO
+        + {static} getInstance() : MySQLUserDAO
     }
+
     class MySQLConnectionUtil{
         - db : Connection
         + getDb() : Connection
-        + getInstance() : MySQLConnectionUtil
+        + {static} getInstance() : MySQLConnectionUtil
     }
 
     UserDAO <|-up MySQLUserDAO
-    UserDAO <-up- FacadeUser
-    MySQLConnectionUtil <.up. MySQLFactory : creates
 
+    UserDAO <-up- FacadeUser
+
+    MySQLConnectionUtil <.up. MySQLFactory : creates
 }
 
 @enduml

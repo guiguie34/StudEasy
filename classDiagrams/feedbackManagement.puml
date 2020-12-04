@@ -1,0 +1,93 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+    abstract class AbstractRouter{
+        + {static} load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+
+    class FeedbackRouter{
+        + {static} ADD_FEEDBACK_JOB_FXML_PATH : String = "Views/feedbacks/addFeedback.fxml"
+        + {static} SEE_FEEDBACKS_FXML_PATH : String = "Views/feedbacks/seeFeedbacksService.fxml"
+        + {static} getInstance() : FeedbackRouter
+
+    }
+
+    class leaveFeedbacksController{
+        - serviceBoughtL : Label
+        - titleFeedbackT : TextField
+        - markS : Spinner
+        - comment : TextArea
+        + submitFeedback(ActionEvent event)
+        + cancel(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class seeFeedbacksServiceController{
+        - serviceL : Label
+        - textsService : Text[]
+        + cancel(ActionEvent event)
+        + delete(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    FeedbackRouter -right-|> AbstractRouter
+
+    leaveFeedbacksController <-- AbstractRouter
+    seeFeedbacksServiceController <-- AbstractRouter
+
+    AbstractRouter <.. leaveFeedbacksController : creates
+    AbstractRouter <.. seeFeedbacksServiceController : creates
+}
+
+package BusinessLogic{
+    class FacadeFeedback{
+        + {static} getInstance() : FacadeFeedback
+        + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
+        + delete(Feedback feedbackToDelete)
+    }
+
+    abstract class Factory{
+        + CreateFeedbackDAO() : FeedbackDAO
+    }
+
+    class MySQLFactory{
+        - db : Connection
+        + {static} getInstance() : MySQLFactory
+        + CreateFeedbackDAO() : FeedbackDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+    leaveFeedbacksController --> FacadeFeedback
+    seeFeedbacksServiceController --> FacadeFeedback
+
+    FacadeFeedback ..> Factory  : creates
+    MySQLFactory -left-|> Factory
+}
+
+package DAO{
+    abstract class FeedbackDAO{
+        + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
+        + delete(Feedback feedbackToDelete)
+    }
+
+    class MySQLFeedbackDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLFeedbackDAO
+        + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
+        + delete(Feedback feedbackToDelete)
+    }
+
+    MySQLFeedbackDAO -up-|> FeedbackDAO
+    FeedbackDAO <-right- FacadeFeedback
+
+    MySQLFeedbackDAO <.right. MySQLFactory : creates
+
+}
+
+@enduml

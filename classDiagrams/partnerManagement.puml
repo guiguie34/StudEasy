@@ -2,7 +2,6 @@
 
 package GUI{
     abstract class AbstractRouter{
-        + LOGIN_FXML_PATH : String = "Views/login.fxml"
         + load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
@@ -95,6 +94,7 @@ package BusinessLogic{
 package DAO{
 
     abstract class PartnerDAO{
+        + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
         + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
@@ -104,6 +104,7 @@ package DAO{
     class MySQLPartnerDAO{
         - DB : Connection
         + {static} getInstance() : MySQLPartnerDAO
+        + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
         + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)

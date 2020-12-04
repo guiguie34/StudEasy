@@ -1,0 +1,177 @@
+@startuml
+
+package GUI{
+    abstract class AbstractRouter{
+        + load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+    class HomeAdminController{
+            - bienvenueL : Label
+            + manageServices(ActionEvent event)
+            + logout(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+    }
+    class HomeStudentController{
+            - bienvenueL : Label
+            + myServices(ActionEvent event)
+            + askedServices(ActionEvent event)
+            + proposedServices(ActionEvent event)
+            + proposeService(ActionEvent event)
+            + requestService(ActionEvent event)
+            + logout(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+    }
+    class ProposeAskServiceController{
+        - name : String
+        - category : String
+        - description : String
+        - cost : int
+
+        + submitProposeService(ActionEvent event)
+        + submitAskService(ActionEvent event)
+        + cancel(ActionEvent event)
+    }
+
+    class myServicesController{
+        - services : Service[]
+
+        + viewService()
+        + back(ActionEvent event)
+    }
+
+    class viewServiceController{
+        + acceptTransaction(ActionEvent event)
+        + declineTransaction(ActionEvent event)
+        + updateService(ActionEvent event)
+        + deleteService(ActionEvent event)
+        + back(ActionEvent event)
+    }
+
+    class allServicesController{
+        - services : Service[]
+
+        + seeAllServices(ActionEvent event)
+        + seeProposedServices(ActionEvent event)
+        + seeAskedServices(ActionEvent event)
+        + viewService(ActionEvent event)
+        + searchService(ActionEvent event)
+        + back(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+        + back(ActionEvent event)
+    }
+
+
+    class UserRouter{
+        + VIEW_SERVICE_FXML_PATH : String = "Views/view_service.fxml"
+        + PROPOSE_ASK_SERVICE_FXML_PATH : String = "Views/propose_ask_service.fxml"
+        + MY_SERVICES_FXML_PATH : String = "Views/propose_ask_service.fxml"
+        + ALL_SERVICES_FXML_PATH : String = "Views/all_services.fxml"
+        + getInstance() : UserRouter
+        + login(ActionEvent event )
+    }
+
+    AbstractRouter <|-right- UserRouter
+
+
+    AbstractRouter <-- HomeAdminController
+    AbstractRouter <-- HomeStudentController
+    AbstractRouter <-- allServicesController
+    AbstractRouter <-- viewServiceController
+    AbstractRouter <-- myServicesController
+    AbstractRouter <-- ProposeAskServiceController
+
+    allServicesController <.. AbstractRouter : creates
+    HomeAdminController <.. AbstractRouter : creates
+    HomeStudentController <.. AbstractRouter : creates
+    ProposeAskServiceController <.. AbstractRouter : creates
+    myServicesController <.. AbstractRouter : creates
+    viewServiceController <.. AbstractRouter : creates
+
+
+
+
+}
+package BusinessLogic{
+    class FacadeService{
+        + seeAllServices() : Service[]
+        + seeProposedServices() : Service[]
+        + seeAskedServices() : Service[]
+        + viewService() : Service
+        + searchService() : Service[]
+        + acceptTransaction()
+        + declineTransaction()
+        + updateService(String name,String category, String description, int cost)
+        + submitProposeService(String name,String category, String description, int cost)
+        + submitAskService(String name,String category, String description, int cost)
+        + deleteService()
+        + getInstance() : FacadeService
+    }
+
+    abstract class Factory{
+        + CreateUserDAO() : UserDAO
+    }
+    class MySQLFactory{
+        - db : Connection
+        + getInstance() : MySQLFactory
+        + CreateUserDAO() : UserDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    Factory <.. FacadeService : creates
+    Factory <|-left- MySQLFactory
+
+    FacadeService <-up- allServicesController
+    FacadeService <-up- viewServiceController
+    FacadeService <-up- myServicesController
+    FacadeService <-up- ProposeAskServiceController
+
+
+
+}
+
+package DAO{
+
+    abstract class ServiceDAO{
+        + seeAllServices() : Service[]
+        + seeProposedServices() : Service[]
+        + seeAskedServices() : Service[]
+        + viewService() : Service
+        + searchService() : Service[]
+        + acceptTransaction()
+        + declineTransaction()
+        + updateService(String name,String category, String description, int cost)
+        + submitProposeService(String name,String category, String description, int cost)
+        + submitAskService(String name,String category, String description, int cost)
+        + deleteService()
+    }
+
+    class MySQLServiceDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLPartnerDAO
+        + seeAllServices() : Service[]
+        + seeProposedServices() : Service[]
+        + seeAskedServices() : Service[]
+        + viewService() : Service
+        + searchService() : Service[]
+        + acceptTransaction()
+        + declineTransaction()
+        + updateService(String name,String category, String description, int cost)
+        + submitProposeService(String name,String category, String description, int cost)
+        + submitAskService(String name,String category, String description, int cost)
+        + deleteService()
+    }
+
+    MySQLServiceDAO --|> ServiceDAO
+    MySQLServiceDAO <.right. MySQLFactory : creates
+
+    ServiceDAO <-right- FacadeService
+}
+
+
+
+@enduml

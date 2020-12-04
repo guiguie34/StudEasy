@@ -1,0 +1,52 @@
+@startuml
+
+package BusinessLogic{
+    class FacadeUser{
+        - addPoints(int nbPoints)
+        - removePoints(int nbPoints)
+        + getInstance() : FacadeUser
+    }
+
+    abstract class Factory{
+        + CreateUserDAO() : UserDAO
+    }
+    class MySQLFactory{
+        - db : Connection
+        + getInstance() : MySQLFactory
+        + CreateUserDAO() : UserDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    Factory <.. FacadeUser : creates
+    Factory <|-up- MySQLFactory
+
+
+
+
+
+}
+
+package DAO{
+
+    abstract class UserDAO{
+        + addPoints(int nbPoints)
+        + removePoints(int nbPoints)
+    }
+
+    class MySQLUserDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLUserDAO
+        + addPoints(int nbPoints)
+        + removePoints(int nbPoints)
+
+    }
+
+    MySQLUserDAO --|> UserDAO
+    MySQLUserDAO <.right. MySQLFactory : creates
+
+    UserDAO <-right- FacadeUser
+}
+
+@enduml

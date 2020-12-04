@@ -15,6 +15,7 @@ package GUI{
         + {static} ADD_UPDATE_JOB_FXML_PATH : String = "Views/jobs/addUpdateJob.fxml"
         + {static} JOB_OFFERS_FXML_PATH : String = "Views/jobs/jobOffers.fxml"
         + {static} SEE_JOB_OFFER_FXML_PATH : String = "Views/jobs/seeJobOffer.fxml"
+        + {static} getInstance() : JobRouter
     }
 
     class HomePartnerController{
@@ -73,6 +74,9 @@ package GUI{
         - deleteB : Button
         - validateB : Button
         + searchJob(ActionEvent event)
+        + deleteJob(ActionEvent event)
+        + updateJob(ActionEvent event)
+        + validateJob(ActionEvent event)
         + cancel(ActionEvent event)
         + initialize(URL location, RessourceBundle resources)
     }
@@ -100,7 +104,10 @@ package BusinessLogic{
         + {static} getInstance() : FacadeJob
         + addJobOffer(String jobTitle, String location, String roleType,
          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
-        + updateJobOffer(Job jobToUpdate)
+        + deleteJob(Job jobToDelete)
+        + updateJob(Job jobToUpdateString, jobTitle, String location, String roleType,
+          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
         + seeJobOffer() : Job
         + seeJobOffers() : Job
@@ -133,9 +140,12 @@ package BusinessLogic{
 package DAO{
 
     abstract class JobDAO{
-+ addJobOffer(String jobTitle, String location, String roleType,
+        + addJobOffer(String jobTitle, String location, String roleType,
          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
-        + updateJobOffer(Job jobToUpdate)
+        + deleteJob(Job jobToDelete)
+        + updateJob(Job jobToUpdateString, jobTitle, String location, String roleType,
+          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
         + seeJobOffer() : Job
         + seeAllJobOffers() : Job[]
@@ -148,7 +158,10 @@ package DAO{
         + {static} getInstance() : MySQLJobDAO
         + addJobOffer(String jobTitle, String location, String roleType,
          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
-        + updateJobOffer(Job jobToUpdate)
+        + deleteJob(Job jobToDelete)
+        + updateJob(Job jobToUpdateString, jobTitle, String location, String roleType,
+          Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
+        + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
         + seeJobOffer() : Job
         + seeAllJobOffers() : Job[]

@@ -35,19 +35,19 @@ public class UserRouter extends AbstractRouter {
     /**
      * Path to the register view
      */
-    public final static String REGISTER_FXML_PATH = "Views/register.fxml";
+    public final static String REGISTER_FXML_PATH = "Views/users/register.fxml";
     /**
      * Path to the home student view
      */
-    private final static String HOME_STUDENT_FXML_PATH ="Views/homeStudent.fxml";
+    private final static String HOME_STUDENT_FXML_PATH = "Views/users/homeStudent.fxml";
     /**
      * Path to the home admin view
      */
-    private final static String HOME_ADMIN_FXML_PATH = "Views/homeAdmin.fxml";
+    private final static String HOME_ADMIN_FXML_PATH = "Views/users/homeAdmin.fxml";
     /**
      * Path to the home partner view
      */
-    private final static String HOME_PARTNER_FXML_PATH = "Views/homePartner.fxml";
+    private final static String HOME_PARTNER_FXML_PATH = "Views/users/homePartner.fxml";
 
     /**
      * Function loading the appropriate view for the connecting user

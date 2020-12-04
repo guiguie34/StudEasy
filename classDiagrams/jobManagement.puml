@@ -2,7 +2,6 @@
 skinparam classAttributeIconSize 0
 
 package GUI{
-
     abstract class AbstractRouter{
         + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
@@ -19,26 +18,16 @@ package GUI{
     }
 
     class HomePartnerController{
-        - bienvenueL : Label
         + addJobOffer(ActionEvent event)
         + seeMyJobOffers(ActionEvent event)
-        + logout(ActionEvent event)
-        + initialize(URL location, RessourceBundle resources)
     }
 
     class HomeStudentController{
-        - bienvenueL : Label
-        - numberPoints : Label
         + searchForJob(ActionEvent)
-        + logout(ActionEvent event)
-        + initialize(URL location, RessourceBundle resources)
     }
 
     class HomeAdminController{
-        - bienvenueL : Label
         + manageJobOffers(ActionEvent event)
-        + logout(ActionEvent event)
-        + initialize(URL location, RessourceBundle resources)
     }
 
     class AddUpdateJobOfferController{

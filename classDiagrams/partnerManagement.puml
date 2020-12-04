@@ -1,0 +1,122 @@
+@startuml
+
+package GUI{
+    abstract class AbstractRouter{
+        + LOGIN_FXML_PATH : String = "Views/login.fxml"
+        + load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+    class HomeAdminController{
+            - bienvenueL : Label
+            + managePartner(ActionEvent event)
+            + logout(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+        }
+    class PartnerManagementController{
+            + updatePartner(ActionEvent event)
+            + deletePartner(ActionEvent event)
+            + addNewPartner(ActionEvent event)
+            + seeAllPartners(ActionEvent event)
+            + searchPartner(ActionEvent event)
+            + back(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+
+    }
+    class AddUpdatePartnerController{
+            - lastname : String
+            - firstname : String
+            - emailAddress : String
+            - password : String
+            - company : String
+
+            + submitAddPartner(ActionEvent event)
+            + submitUpdatePartner(ActionEvent event)
+            + cancel(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+        }
+
+    class UserRouter{
+        + MANAGE_PARTNER_FXML_PATH : String = "Views/manage_partner.fxml"
+        + ADD_UPDATE_FXML_PATH : String = "Views/add_update_partner.fxml"
+        + getInstance() : UserRouter
+        + login(ActionEvent event )
+    }
+
+    AbstractRouter <|-right- UserRouter
+
+
+    AbstractRouter <- HomeAdminController
+    AbstractRouter <-- PartnerManagementController
+    AbstractRouter <-- AddUpdatePartnerController
+
+    PartnerManagementController <.. AbstractRouter : creates
+    HomeAdminController <. AbstractRouter : creates
+    AddUpdatePartnerController <.. AbstractRouter : creates
+
+
+
+
+}
+package BusinessLogic{
+    class FacadeUser{
+        + deleteUser()
+        + seeAllPartners()
+        + searchPartner(String searchKey)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + getInstance() : FacadeUser
+    }
+
+    abstract class Factory{
+        + CreateUserDAO() : UserDAO
+    }
+    class MySQLFactory{
+        - db : Connection
+        + getInstance() : MySQLFactory
+        + CreateUserDAO() : UserDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    Factory <.. FacadeUser : creates
+    Factory <|-left- MySQLFactory
+
+    FacadeUser <-- PartnerManagementController
+    FacadeUser <-- AddUpdatePartnerController
+
+
+
+}
+
+package DAO{
+
+    abstract class PartnerDAO{
+        + seeAllPartners() : User[]
+        + searchPartner(String searchKey) : User
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
+    }
+
+    class MySQLPartnerDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLPartnerDAO
+        + seeAllPartners() : User[]
+        + searchPartner(String searchKey) : User
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
+
+    }
+
+    MySQLPartnerDAO --|> PartnerDAO
+    MySQLPartnerDAO <.right. MySQLFactory : creates
+
+    PartnerDAO <-right- FacadeUser
+}
+
+
+
+@enduml

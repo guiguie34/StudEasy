@@ -18,7 +18,7 @@ interface Initializable
 package GUI{
 
     abstract class AbstractRouter{
-        + {static} LOGIN_FXML_PATH : String = "Views/login.fxml"
+        + {static} LOGIN_FXML_PATH : String = "views/login.fxml"
         + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
@@ -37,10 +37,10 @@ package GUI{
         }
 
     class UserRouter{
-        + {static} REGISTER_FXML_PATH : String = "Views/register.fxml"
-        + {static} HOME_STUDENT_FXML_PATH : String = "Views/homeStudent.fxml"
-        + {static} HOME_ADMIN_FXML_PATH : String = "Views/homeAdmin.fxml"
-        + {static} HOME_PARTNER_FXML_PATH : String = "Views/homePartner.fxml"
+        + {static} REGISTER_FXML_PATH : String = "views/user/register.fxml"
+        + {static} HOME_STUDENT_FXML_PATH : String = "views/user/homeStudent.fxml"
+        + {static} HOME_ADMIN_FXML_PATH : String = "views/user/homeAdmin.fxml"
+        + {static} HOME_PARTNER_FXML_PATH : String = "views/user/homePartner.fxml"
         + {static} getInstance() : UserRouter
         + login(ActionEvent event )
     }

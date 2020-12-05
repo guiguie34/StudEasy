@@ -11,8 +11,8 @@ package GUI{
     }
 
     class FeedbackRouter{
-        + {static} ADD_FEEDBACK_JOB_FXML_PATH : String = "Views/feedbacks/addFeedback.fxml"
-        + {static} SEE_FEEDBACKS_FXML_PATH : String = "Views/feedbacks/seeFeedbacksService.fxml"
+        + {static} ADD_FEEDBACK_JOB_FXML_PATH : String = "views/feedback/addFeedback.fxml"
+        + {static} SEE_FEEDBACKS_FXML_PATH : String = "views/feedback/seeFeedbacksService.fxml"
         + {static} getInstance() : FeedbackRouter
 
     }

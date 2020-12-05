@@ -1,4 +1,5 @@
 @startuml
+skinparam classAttributeIconSize 0
 
 package GUI{
     abstract class AbstractRouter{
@@ -38,8 +39,8 @@ package GUI{
         }
 
     class UserRouter{
-        + MANAGE_PARTNER_FXML_PATH : String = "Views/manage_partner.fxml"
-        + ADD_UPDATE_FXML_PATH : String = "Views/add_update_partner.fxml"
+        + MANAGE_PARTNER_FXML_PATH : String = "views/partner/manage_partner.fxml"
+        + ADD_UPDATE_FXML_PATH : String = "views/partner/add_update_partner.fxml"
         + getInstance() : UserRouter
         + login(ActionEvent event )
     }

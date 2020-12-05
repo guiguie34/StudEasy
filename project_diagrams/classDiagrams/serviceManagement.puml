@@ -1,4 +1,5 @@
 @startuml
+skinparam classAttributeIconSize 0
 
 package GUI{
     abstract class AbstractRouter{
@@ -65,10 +66,10 @@ package GUI{
 
 
     class UserRouter{
-        + VIEW_SERVICE_FXML_PATH : String = "Views/view_service.fxml"
-        + PROPOSE_ASK_SERVICE_FXML_PATH : String = "Views/propose_ask_service.fxml"
-        + MY_SERVICES_FXML_PATH : String = "Views/propose_ask_service.fxml"
-        + ALL_SERVICES_FXML_PATH : String = "Views/all_services.fxml"
+        + VIEW_SERVICE_FXML_PATH : String = "views/service/view_service.fxml"
+        + PROPOSE_ASK_SERVICE_FXML_PATH : String = "views/service/propose_ask_service.fxml"
+        + MY_SERVICES_FXML_PATH : String = "views/service/propose_ask_service.fxml"
+        + ALL_SERVICES_FXML_PATH : String = "views/service/all_services.fxml"
         + getInstance() : UserRouter
         + login(ActionEvent event )
     }

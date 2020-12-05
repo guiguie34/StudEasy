@@ -13,8 +13,8 @@ package GUI{
 
     class CouponRouter{
         + {static} ADD_UPDATE_COUPON_FXML_PATH : String = "Views/coupons/addUpdateCoupon.fxml"
-        + {static} COUPON_FXML_PATH : String = "Views/coupons/coupon.fxml"
-        + {static} SEE_COUPON_FXML_PATH : String = "Views/coupons/seeCoupon.fxml"
+        + {static} COUPON_FXML_PATH : String = "views/coupon/coupon.fxml"
+        + {static} SEE_COUPON_FXML_PATH : String = "views/coupon/seeCoupon.fxml"
         + {static} getInstance() : CouponRouter
     }
 

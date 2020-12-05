@@ -11,13 +11,13 @@ package GUI{
     }
 
     class UserRouter{
-        + {static} REGISTER_FXML_PATH : String = "Views/users/register.fxml"
-        + {static} HOME_STUDENT_FXML_PATH : String = "Views/users/homeStudent.fxml"
-        + {static} HOME_ADMIN_FXML_PATH : String = "Views/users/homeAdmin.fxml"
-        + {static} HOME_PARTNER_FXML_PATH : String = "Views/users/homePartner.fxml"
-        + {static} MY_PROFILE_FXML_PATH : String = "Views/users/myProfile.fxml"
-        + {static} SEARCH_USER_FXML_PATH : String = "Views/users/searchUser.fxml"
-        + {static} INFO_USER_FXML_PATH : String = "Views/users/infoUser.fxml"
+        + {static} REGISTER_FXML_PATH : String = "views/user/register.fxml"
+        + {static} HOME_STUDENT_FXML_PATH : String = "views/user/homeStudent.fxml"
+        + {static} HOME_ADMIN_FXML_PATH : String = "views/user/homeAdmin.fxml"
+        + {static} HOME_PARTNER_FXML_PATH : String = "views/user/homePartner.fxml"
+        + {static} MY_PROFILE_FXML_PATH : String = "views/user/myProfile.fxml"
+        + {static} SEARCH_USER_FXML_PATH : String = "views/user/searchUser.fxml"
+        + {static} INFO_USER_FXML_PATH : String = "views/user/infoUser.fxml"
         + {static} getInstance() : FeedbackRouter
     }
 

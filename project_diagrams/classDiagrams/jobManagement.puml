@@ -11,9 +11,9 @@ package GUI{
     }
 
     class JobRouter{
-        + {static} ADD_UPDATE_JOB_FXML_PATH : String = "Views/jobs/addUpdateJob.fxml"
-        + {static} JOB_OFFERS_FXML_PATH : String = "Views/jobs/jobOffers.fxml"
-        + {static} SEE_JOB_OFFER_FXML_PATH : String = "Views/jobs/seeJobOffer.fxml"
+        + {static} ADD_UPDATE_JOB_FXML_PATH : String = "views/job/addUpdateJob.fxml"
+        + {static} JOB_OFFERS_FXML_PATH : String = "views/job/jobOffers.fxml"
+        + {static} SEE_JOB_OFFER_FXML_PATH : String = "views/job/seeJobOffer.fxml"
         + {static} getInstance() : JobRouter
     }
 

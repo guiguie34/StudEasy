@@ -53,7 +53,6 @@ package GUI{
 }
 
 package BusinessLogic{
-
     class FacadeUser{
         + login(email,password)
         + {static} getInstance() : FacadeUser
@@ -72,7 +71,6 @@ package BusinessLogic{
         + isStudent(): boolean
         + isAdmin() : boolean
         + isPartner() : boolean
-
     }
 
     class User{
@@ -90,7 +88,6 @@ package BusinessLogic{
         + setPassword(String  password)
         + getRole(): Role
         + setRole(Role role)
-
     }
 
     abstract class Role
@@ -150,7 +147,6 @@ package BusinessLogic{
 }
 
 package DAO{
-
     abstract class UserDAO{
         + searchUser(String email) : User
     }
@@ -172,9 +168,6 @@ package DAO{
 
     MySQLUserDAO <.up. MySQLFactory : creates
     MySQLConnectionUtil <.up. MySQLFactory : creates
-
-
-
 }
 
 @enduml

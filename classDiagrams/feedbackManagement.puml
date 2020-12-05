@@ -37,11 +37,11 @@ package GUI{
 
     FeedbackRouter -right-|> AbstractRouter
 
-    leaveFeedbacksController <-- AbstractRouter
-    seeFeedbacksServiceController <-- AbstractRouter
+    leaveFeedbacksController --> AbstractRouter
+    seeFeedbacksServiceController --> AbstractRouter
 
-    AbstractRouter <.. leaveFeedbacksController : creates
-    AbstractRouter <.. seeFeedbacksServiceController : creates
+    AbstractRouter ..> leaveFeedbacksController : creates
+    AbstractRouter ..> seeFeedbacksServiceController : creates
 }
 
 package BusinessLogic{

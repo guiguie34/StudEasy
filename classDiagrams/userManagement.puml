@@ -1,0 +1,178 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+    abstract class AbstractRouter{
+        + {static} load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+
+    class UserRouter{
+        + {static} REGISTER_FXML_PATH : String = "Views/users/register.fxml"
+        + {static} HOME_STUDENT_FXML_PATH : String = "Views/users/homeStudent.fxml"
+        + {static} HOME_ADMIN_FXML_PATH : String = "Views/users/homeAdmin.fxml"
+        + {static} HOME_PARTNER_FXML_PATH : String = "Views/users/homePartner.fxml"
+        + {static} MY_PROFILE_FXML_PATH : String = "Views/users/myProfile.fxml"
+        + {static} SEARCH_USER_FXML_PATH : String = "Views/users/searchUser.fxml"
+        + {static} INFO_USER_FXML_PATH : String = "Views/users/infoUser.fxml"
+        + {static} getInstance() : FeedbackRouter
+    }
+
+    abstract class HomeAbstractController{
+        - bienvenueL : Label
+        + logout(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class HomePartnerController{
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class HomeStudentController{
+        - numberPoints : Label
+        + seeMyProfile(ActionEvent event)
+        + searchUser(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class HomeAdminController{
+        + searchUser(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+    class RegisterUpdateController{
+        - firstNameTF : TextField
+        - lastNameTF : TextField
+        - emailTF : TextField
+        - confirmEmailTF : TextField
+        - passwordTF : TextField
+        - confirmPasswordTF : TextField
+        + register(ActionEvent event)
+        + update(ActionEvent event)
+        + cancel(ActionEvent event)
+    }
+
+    class MyProfileController{
+        - infoAccount : Text
+        + deleteAccount(ActionEvent event)
+        + updateAccount(ActionEvent event)
+        + cancel(ActionEvent event)
+    }
+
+    class SearchUserController{
+        - searchUserTF : TextField
+        - textsUser : Text[]
+        + seeInfoUser(ActionEvent event)
+        + cancel(ActionEvent event)
+    }
+
+    class infoUserController{
+        - nomUserL : Label
+        - textsService : Text[]
+        + seeService(ActionEvent event)
+        + deleteUser(ActionEvent event)
+        + editUser(ActionEvent event)
+        + cancel(ActionEvent event)
+    }
+
+    HomePartnerController -up-|> HomeAbstractController
+    HomeStudentController -up-|> HomeAbstractController
+    HomeAdminController -up-|> HomeAbstractController
+
+    HomePartnerController -up-> AbstractRouter
+    HomeStudentController -up-> AbstractRouter
+    HomeAdminController -up-> AbstractRouter
+    RegisterUpdateController -up-> AbstractRouter
+    MyProfileController -up-> AbstractRouter
+    SearchUserController -up-> AbstractRouter
+    infoUserController -up-> AbstractRouter
+
+    HomePartnerController <.. AbstractRouter : creates
+    HomeStudentController <.. AbstractRouter : creates
+    HomeAdminController <.. AbstractRouter : creates
+    RegisterUpdateController <.. AbstractRouter : creates
+    MyProfileController <.. AbstractRouter : creates
+    SearchUserController <.. AbstractRouter : creates
+    infoUserController <.. AbstractRouter : creates
+
+    UserRouter -down-|> AbstractRouter
+
+}
+
+package BusinessLogic{
+    class FacadeUser{
+        + {static} getInstance() : FacadeUser
+        + logout()
+        + searchUser(String user) : User[]
+        - searchUser(String email) : User
+        - searchUser(String lastNameUser) : User[]
+        - searchUser(String firstNameUser) : User[]
+        + register(String firstName, String lastName,
+        String mail, String password)
+        + updateMyself(String firstName, String lastName,
+        String mail, String password)
+        + updateUser(User userToUpdate, String firstName, String lastName)
+        + deleteAccount(User userToDelete)
+    }
+
+    abstract class Factory{
+        + CreateUserDAO() : UserDAO
+    }
+
+    class MySQLFactory{
+        - db : Connection
+        + {static} getInstance() : MySQLFactory
+        + CreateUserDAO() : UserDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+    FacadeUser ..> Factory  : creates
+    MySQLFactory -left-|> Factory
+
+    HomePartnerController --> FacadeUser
+    HomeStudentController --> FacadeUser
+    HomeAdminController --> FacadeUser
+    RegisterUpdateController --> FacadeUser
+    MyProfileController --> FacadeUser
+    SearchUserController --> FacadeUser
+    infoUserController --> FacadeUser
+}
+
+package DAO{
+    abstract class UserDAO{
+        + searchUser(String email) : User
+        + searchUser(String lastNameUser) : User[]
+        + searchUser(String firstNameUser) : User[]
+        + register(String firstName, String lastName,
+        String mail, String password)
+        + updateMyself(String firstName, String lastName,
+        String mail, String password)
+        + updateUser(User userToUpdate, String firstName, String lastName)
+        + deleteAccount(User userToDelete)
+    }
+
+    class MySQLUserDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLUserDAO
+        + searchUser(String email) : User
+        + searchUser(String lastNameUser) : User[]
+        + searchUser(String firstNameUser) : User[]
+        + register(String firstName, String lastName,
+        String mail, String password)
+        + updateMyself(String firstName, String lastName,
+        String mail, String password)
+        + updateUser(User userToUpdate, String firstName, String lastName)
+        + deleteAccount(User userToDelete)
+    }
+
+    UserDAO <|-- MySQLUserDAO
+    UserDAO <-right- FacadeUser
+
+    MySQLUserDAO <.right. MySQLFactory : creates
+}
+
+@enduml

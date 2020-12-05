@@ -1,4 +1,4 @@
-package com.github.studeasy.logic.facades.user;
+package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.dao.userDAO.UserDAO;

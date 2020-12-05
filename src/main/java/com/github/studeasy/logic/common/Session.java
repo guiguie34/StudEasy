@@ -15,7 +15,7 @@ public class Session implements SessionI {
     /**
      * Lazy holder containing the unique session
      */
-    public static class loadSession{
+    private static class loadSession{
         public static final Session instance= new Session();
     }
 

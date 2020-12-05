@@ -34,7 +34,7 @@ public abstract class AbstractRouter {
     /**
      * Path for the login file
      */
-    public final static String LOGIN_FXML_PATH = "Views/login.fxml";
+    public final static String LOGIN_FXML_PATH = "views/login.fxml";
 
     /**
      * Allows to change the view (the fxml file to display)

@@ -1,9 +1,9 @@
-package com.github.studeasy.gui.controller.user;
+package com.github.studeasy.gui.controller;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
-import com.github.studeasy.logic.facades.user.FacadeUser;
+import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -111,12 +111,12 @@ package BusinessLogic{
     }
 
     abstract class Factory{
-        + CreateUserDAO() : UserDAO
+        + CreateServiceDAO() : ServiceDAO
     }
     class MySQLFactory{
         - db : Connection
         + getInstance() : MySQLFactory
-        + CreateUserDAO() : UserDAO
+        + CreateServiceDAO() : UserDAO
         - openConnection()
         - closeConnection()
     }

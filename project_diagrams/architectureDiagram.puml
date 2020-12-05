@@ -1,0 +1,27 @@
+@startuml
+package com.github.studeasy{
+    package launcher{}
+
+    package dao{
+        package db{}
+        package exceptions{}
+        package "[objects]DAO"{}
+    }
+
+    package logic{
+      package common{
+          package role{}
+      }
+      package facades{}
+      package factory{}
+  }
+
+    package gui{
+        package controller{
+            package "[objects]"{}
+        }
+        package routers{}
+    }
+}
+
+@enduml

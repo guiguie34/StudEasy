@@ -1,0 +1,10 @@
+@startuml
+package ressources{
+    package images{}
+    package css{}
+    package views{
+        package "[objects]"{}
+    }
+}
+
+@enduml

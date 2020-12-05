@@ -29,7 +29,8 @@ package GUI{
 
     class seeFeedbacksServiceController{
         - serviceL : Label
-        - textsService : Text[]
+        - textServiceT : Text
+        - textsFeedbacksT : Text[]
         + cancel(ActionEvent event)
         + delete(ActionEvent event)
         + initialize(URL location, RessourceBundle resources)
@@ -49,6 +50,7 @@ package BusinessLogic{
         + {static} getInstance() : FacadeFeedback
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
         + delete(Feedback feedbackToDelete)
+        + getFeedbacks(Service service) : Feedback[]
     }
 
     abstract class Factory{
@@ -74,6 +76,7 @@ package DAO{
     abstract class FeedbackDAO{
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
         + delete(Feedback feedbackToDelete)
+        + getFeedbacks(Service service) : Feedback[]
     }
 
     class MySQLFeedbackDAO{
@@ -81,6 +84,7 @@ package DAO{
         + {static} getInstance() : MySQLFeedbackDAO
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
         + delete(Feedback feedbackToDelete)
+        + getFeedbacks(Service service) : Feedback[]
     }
 
     MySQLFeedbackDAO -up-|> FeedbackDAO

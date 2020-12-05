@@ -1,0 +1,37 @@
+@startuml
+autonumber
+actor Partner
+AddUpdateJobOfferController -> FeedBackRouter : getInstance()
+activate AddUpdateJobOfferController
+activate FeedBackRouter
+AddUpdateJobOfferController -> FacadeJob : getInstance()
+activate FacadeJob
+FacadeJob -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLJobDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLJobDAO -> JobDAO : createJobDAO()
+activate MySQLJobDAO
+deactivate MySQLJobDAO
+activate JobDAO
+AddUpdateJobOfferController --> Partner : Display the view
+activate Partner
+Partner -> AddUpdateJobOfferController : Enter job information, push the button add
+AddUpdateJobOfferController -> FacadeJob : addJobOffer(event)
+alt bad info case
+    FacadeJob --> AddUpdateJobOfferController : throws error
+    AddUpdateJobOfferController --> Partner : Ask to enter good information
+else good info case
+    FacadeJob -> JobDAO : addJobOffer(String jobTitle,...,String contactInfo)
+    deactivate FacadeJob
+    database DB
+    JobDAO -> DB : Query Information
+    deactivate JobDAO
+    AddUpdateJobOfferController --> Partner : Display the success of the action
+    Partner -> AddUpdateJobOfferController : Click "ok"
+    deactivate Partner
+    AddUpdateJobOfferController -> FeedBackRouter : changeView(UserRouter.HOME_PARTNER_PATH_FXML)
+    deactivate AddUpdateJobOfferController
+    deactivate FeedBackRouter
+end
+@enduml

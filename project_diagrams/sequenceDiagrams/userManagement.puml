@@ -1,0 +1,37 @@
+@startuml
+autonumber
+actor User
+RegisterUpdateController -> UserRouter : getInstance()
+activate RegisterUpdateController
+activate UserRouter
+RegisterUpdateController -> FacadeUser : getInstance()
+activate FacadeUser
+FacadeUser -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLUserDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLUserDAO -> UserDAO : createUserDAO()
+activate MySQLUserDAO
+deactivate MySQLUserDAO
+activate UserDAO
+RegisterUpdateController --> User : Display the view
+activate User
+User -> RegisterUpdateController : Enter account information, push the button create
+RegisterUpdateController -> FacadeUser : register(event)
+alt bad info case
+    FacadeUser --> RegisterUpdateController : throws error
+    RegisterUpdateController --> User : Ask to enter good information
+else good info case
+    FacadeUser -> UserDAO : register(firstname,lastname,mail,password)
+    deactivate FacadeUser
+    database DB
+    UserDAO -> DB : Query Information
+    deactivate UserDAO
+    RegisterUpdateController --> User : Display the success of the action
+    User -> RegisterUpdateController : Click "ok"
+    deactivate User
+    RegisterUpdateController -> UserRouter : changeView(AbstractRouter.LOGIN_PATH_FXML)
+    deactivate RegisterUpdateController
+    deactivate UserRouter
+end
+@enduml

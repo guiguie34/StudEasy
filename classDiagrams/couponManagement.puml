@@ -1,0 +1,168 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+    abstract class AbstractRouter{
+        + {static} load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+
+    }
+
+    class CouponRouter{
+        + {static} ADD_UPDATE_COUPON_FXML_PATH : String = "Views/coupons/addUpdateCoupon.fxml"
+        + {static} COUPON_FXML_PATH : String = "Views/coupons/coupon.fxml"
+        + {static} SEE_COUPON_FXML_PATH : String = "Views/coupons/seeCoupon.fxml"
+        + {static} getInstance() : CouponRouter
+    }
+
+    class HomePartnerController{
+
+        + seeMyCoupons(ActionEvent event)
+
+    }
+
+    class HomeStudentController{
+        + searchCoupon(ActionEvent event)
+    }
+
+    class HomeAdminController{
+        + addCoupon(ActionEvent event)
+        + manageCoupon(ActionEvent event)
+
+    }
+
+    class AddUpdateCouponController{
+         - labelPrintCoupon : Label
+         - couponTitleTF : TextField
+         - couponDescriptionTF : TextField
+         - couponValueTF : TextField
+         - couponCostTF : TextField
+         - couponQuantityTF : TextField
+         - partnerTF : TextField
+         + addCoupon(ActionEvent event)
+         + updateCoupon(ActionEvent event)
+         + cancel(ActionEvent event)
+         + initialize(URL location, RessourceBundle resources)
+    }
+
+    class CouponController{
+
+         - couponList : Label
+         - searchCouponTF : TextField
+         - couponTexts : Text[]
+         + seeCoupon(ActionEvent event)
+         + searchCoupon(ActionEvent event)
+         + cancel(ActionEvent event)
+         + initialize(URL location, RessourceBundle resources)
+
+    }
+
+    class SeeCouponController{
+        - labelPrintCoupon : Label
+        - couponTitleTF : TextField
+        - couponDescriptionTF : TextField
+        - couponValueTF : TextField
+        - couponCostTF : TextField
+        - couponPartnerTF : TextField
+        - updateB : Button
+        - deleteB : Button
+        - buyB : Button
+        + searchCoupon(ActionEvent event)
+        + deleteCoupon(ActionEvent event)
+        + updateCoupon(ActionEvent event)
+        + buyCoupon(ActionEvent event)
+        + cancel(ActionEvent event)
+        + initialize(URL location, RessourceBundle resources)
+    }
+
+        AbstractRouter <|-right- CouponRouter
+
+        AbstractRouter <-- HomePartnerController
+        AbstractRouter <-- HomeStudentController
+        AbstractRouter <-- HomeAdminController
+        AbstractRouter <-- AddUpdateCouponController
+        AbstractRouter <-- CouponController
+        AbstractRouter <-- SeeCouponController
+
+        HomePartnerController <.. AbstractRouter : creates
+        HomeStudentController <.. AbstractRouter : creates
+        HomeAdminController <.. AbstractRouter : creates
+        AddUpdateCouponController <.. AbstractRouter : creates
+        SeeCouponController <.. AbstractRouter : creates
+        CouponController <.. AbstractRouter : creates
+}
+
+package BusinessLogic{
+
+    class FacadeCoupon{
+        + {static} getInstance() : FacadeCoupon
+        + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + deleteCoupon(Coupon coupon)
+        + searchCoupon(String couponTitle) : Coupon[]
+        + searchAllCoupon() : Coupon[]
+        + seeCoupon() : Coupon
+        + buyCoupon(Coupon coupon)
+        + seeMyCoupons() : Coupon[]
+
+    }
+
+    abstract class Factory{
+
+        + CreateCouponDAO() : CouponDAO
+    }
+
+    class MySQLFactory{
+        - db : Connection
+        + {static} getInstance() : MySQLFactory
+        + CreateCouponDAO() : CouponDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    AddUpdateCouponController --> FacadeCoupon
+    CouponController --> FacadeCoupon
+    SeeCouponController --> FacadeCoupon
+
+    FacadeCoupon ..> Factory  : creates
+    MySQLFactory -left-|> Factory
+}
+
+package DAO{
+
+    abstract class CouponDAO{
+        + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + deleteCoupon(Coupon coupon)
+        + searchCoupon(String couponTitle) : Coupon[]
+        + searchAllCoupon() : Coupon[]
+        + buyCoupon(Coupon coupon)
+        + seeMyCoupons(User u) : Coupon[]
+
+    }
+
+    class MySQLCouponDAO{
+
+        - DB : Connection
+        + {static} getInstance() : MySQLCouponDAO
+        + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + deleteCoupon(Coupon coupon)
+        + searchCoupon(String couponTitle) : Coupon[]
+        + searchAllCoupon() : Coupon[]
+        + buyCoupon(Coupon coupon)
+        + seeMyCoupons(User u) : Coupon[]
+
+    }
+
+    MySQLCouponDAO -up-|> CouponDAO
+    CouponDAO <-right- FacadeCoupon
+
+    MySQLCouponDAO <.right. MySQLFactory : creates
+}
+
+@enduml

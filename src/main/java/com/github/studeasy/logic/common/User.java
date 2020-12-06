@@ -50,9 +50,15 @@ public class User {
 		this.emailAdress=emailAddress;
 		this.password= password;
 		switch (role) {
-			case 0 -> this.role = new RoleAdmin();
-			case 1 -> this.role = new RoleStudent(pseudo,points);
-			case 2 -> this.role = new RolePartner(company);
+			case 0:
+				this.role = new RoleAdmin();
+				break;
+			case 1:
+				this.role = new RoleStudent(pseudo,points);
+				break;
+			case 2:
+				this.role = new RolePartner(company);
+				break;
 		}
 	}
 

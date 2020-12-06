@@ -1,0 +1,37 @@
+@startuml
+autonumber
+actor Admin
+AddUpdatePartnerController -> UserRouter : getInstance()
+activate AddUpdatePartnerController
+activate UserRouter
+AddUpdatePartnerController -> FacadePartner : getInstance()
+activate FacadePartner
+FacadePartner -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLPartnerDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLPartnerDAO -> PartnerDAO : createPartnerDAO()
+activate MySQLPartnerDAO
+deactivate MySQLPartnerDAO
+activate PartnerDAO
+AddUpdatePartnerController --> Admin : Display the view
+activate Admin
+Admin -> AddUpdatePartnerController : Enter partner information, push the button add
+AddUpdatePartnerController -> FacadePartner : submitAddPartner(event)
+alt bad info case
+    FacadePartner --> AddUpdatePartnerController : throws error
+    AddUpdatePartnerController --> Admin : Ask to enter good information
+else good info case
+    FacadePartner -> PartnerDAO : submitAddPartner(String lastname, ... ,String company)
+    deactivate FacadePartner
+    database DB
+    PartnerDAO -> DB : Query Information
+    deactivate PartnerDAO
+    AddUpdatePartnerController --> Admin : Display the success of the action
+    Admin -> AddUpdatePartnerController : Click "ok"
+    deactivate Admin
+    AddUpdatePartnerController -> UserRouter : changeView(UserRouter.HOME_ADMIN_PATH_FXML)
+    deactivate AddUpdatePartnerController
+    deactivate UserRouter
+end
+@enduml

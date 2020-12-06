@@ -35,6 +35,12 @@ package GUI{
         + submitAskService(ActionEvent event)
         + cancel(ActionEvent event)
     }
+    class HistoricController{
+            - services : Service[]
+
+            + getMyServicesBought(ActionEvent event)
+            + cancel(ActionEvent event)
+        }
 
     class myServicesController{
         - services : Service[]
@@ -44,10 +50,13 @@ package GUI{
     }
 
     class viewServiceController{
+        - isMyService() : Boolean
         + acceptTransaction(ActionEvent event)
         + declineTransaction(ActionEvent event)
         + updateService(ActionEvent event)
         + deleteService(ActionEvent event)
+        + buyService(ActionEvent event)
+        + applyForService(ActionEvent event)
         + back(ActionEvent event)
     }
 
@@ -65,26 +74,29 @@ package GUI{
     }
 
 
-    class UserRouter{
+    class ServiceRouter{
         + VIEW_SERVICE_FXML_PATH : String = "views/service/view_service.fxml"
         + PROPOSE_ASK_SERVICE_FXML_PATH : String = "views/service/propose_ask_service.fxml"
         + MY_SERVICES_FXML_PATH : String = "views/service/propose_ask_service.fxml"
         + ALL_SERVICES_FXML_PATH : String = "views/service/all_services.fxml"
-        + getInstance() : UserRouter
+        + SERVICES_BOUGHT_FXML_PATH : String = "views/service/services_bought.fxml"
+        + getInstance() : ServiceRouter
         + login(ActionEvent event )
     }
 
-    AbstractRouter <|-right- UserRouter
+    AbstractRouter <|-right- ServiceRouter
 
 
     AbstractRouter <-- HomeAdminController
     AbstractRouter <-- HomeStudentController
     AbstractRouter <-- allServicesController
+    AbstractRouter <-- HistoricController
     AbstractRouter <-- viewServiceController
     AbstractRouter <-- myServicesController
     AbstractRouter <-- ProposeAskServiceController
 
     allServicesController <.. AbstractRouter : creates
+    HistoricController <.. AbstractRouter : creates
     HomeAdminController <.. AbstractRouter : creates
     HomeStudentController <.. AbstractRouter : creates
     ProposeAskServiceController <.. AbstractRouter : creates
@@ -97,16 +109,20 @@ package GUI{
 }
 package BusinessLogic{
     class FacadeService{
+        - isMyService() : Boolean
         + seeAllServices() : Service[]
         + seeProposedServices() : Service[]
         + seeAskedServices() : Service[]
         + viewService() : Service
         + searchService() : Service[]
+        + getMyServicesBought() : Service[]
         + acceptTransaction()
         + declineTransaction()
         + updateService(String name,String category, String description, int cost)
         + submitProposeService(String name,String category, String description, int cost)
         + submitAskService(String name,String category, String description, int cost)
+        + buyService()
+        + applyForService()
         + deleteService()
         + getInstance() : FacadeService
     }
@@ -127,6 +143,7 @@ package BusinessLogic{
     Factory <|-left- MySQLFactory
 
     FacadeService <-up- allServicesController
+    FacadeService <-up- HistoricController
     FacadeService <-up- viewServiceController
     FacadeService <-up- myServicesController
     FacadeService <-up- ProposeAskServiceController

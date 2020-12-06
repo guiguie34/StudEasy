@@ -1,0 +1,16 @@
+@startuml
+autonumber
+
+
+activate FacadeService
+FacadeService -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLUserDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLUserDAO -> UserDAO : createUserDAO()
+activate MySQLUserDAO
+deactivate MySQLUserDAO
+activate UserDAO
+ -> FacadeService : addPoints(int nbPoints)
+FacadeService -> UserDAO : addPoints(int nbPoints)
+@enduml

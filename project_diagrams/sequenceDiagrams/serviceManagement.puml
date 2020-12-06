@@ -1,0 +1,37 @@
+@startuml
+autonumber
+actor Student
+ProposeAskServiceController -> ServiceRouter : getInstance()
+activate ProposeAskServiceController
+activate ServiceRouter
+ProposeAskServiceController -> FacadeService : getInstance()
+activate FacadeService
+FacadeService -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLServiceDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLServiceDAO -> ServiceDAO : createServiceDAO()
+activate MySQLServiceDAO
+deactivate MySQLServiceDAO
+activate ServiceDAO
+ProposeAskServiceController --> Student : Display the view
+activate Student
+Student -> ProposeAskServiceController : Enter service information, push the button add
+ProposeAskServiceController -> FacadeService : submitProposeService(event)
+alt bad info case
+    FacadeService --> ProposeAskServiceController : throws error
+    ProposeAskServiceController --> Student : Ask to enter good information
+else good info case
+    FacadeService -> ServiceDAO : submitProposeService(String name,...,int cost)
+    deactivate FacadeService
+    database DB
+    ServiceDAO -> DB : Query Information
+    deactivate ServiceDAO
+    ProposeAskServiceController --> Student : Display the success of the action
+    Student -> ProposeAskServiceController : Click "ok"
+    deactivate Student
+    ProposeAskServiceController -> ServiceRouter : changeView(ServiceRouter.HOME_STUDENT_PATH_FXML)
+    deactivate ProposeAskServiceController
+    deactivate ServiceRouter
+end
+@enduml

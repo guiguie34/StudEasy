@@ -1,0 +1,51 @@
+
+
+@startuml
+
+actor User
+autonumber
+Activate LoginView
+alt Login
+  
+  User -> LoginView : Enter his information
+  activate User
+  
+  LoginView -> LoginController : handleEvent
+  participant RouterUser
+  activate LoginController
+  LoginController -> FacadeUser : getInstance()
+  activate FacadeUser
+  FacadeUser -> FactoryMySQL : getInstance()
+  activate FactoryMySQL
+  LoginController -> RouterUser : getInstance()
+  activate RouterUser
+  LoginController -> LoginController : login(email,password)
+  participant Session
+  LoginController-> FacadeUser : login(email,passwrod)
+ 
+  FacadeUser -> FactoryMySQL : createUserDao(email,password)
+  FacadeUser -> Session : getInstance()
+  activate Session
+  FacadeUser -> MySQLUserDAO : searchUser(email,password)
+  activate MySQLUserDAO
+
+  database ddb
+  activate ddb
+  MySQLUserDAO -> ddb : Query information
+  ddb --> MySQLUserDAO : Result Set
+  alt login successful
+    MySQLUserDAO --> FacadeUser : user  
+    LoginController -> RouterUser : login(event)
+    RouterUser -> RouterUser : changeView(pathFXML,event)
+  else login failed
+    MySQLUserDAO --> FacadeUser : Exception
+    FacadeUser --> LoginController : Exception
+    LoginController -> LoginView : Update()
+end
+  
+
+
+  
+end
+
+@enduml

@@ -7,19 +7,21 @@ activate FeedBackRouter
 AddUpdateJobOfferController -> FacadeJob : getInstance()
 activate FacadeJob
 FacadeJob -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLJobDAO : getInstance()
 activate MySQLFactory
+MySQLFactory -> MySQLJobDAO : getInstance()
 deactivate MySQLFactory
-MySQLJobDAO -> JobDAO : createJobDAO()
 activate MySQLJobDAO
+
+MySQLJobDAO -> JobDAO : createJobDAO()
 deactivate MySQLJobDAO
 activate JobDAO
 AddUpdateJobOfferController --> Partner : Display the view
 activate Partner
 Partner -> AddUpdateJobOfferController : Enter job information, push the button add
-AddUpdateJobOfferController -> FacadeJob : addJobOffer(event)
+AddUpdateJobOfferController -> AddUpdateJobOfferController : addJobOffer(event)
+AddUpdateJobOfferController -> FacadeJob : addJobOffer(String jobTitle,...,String contactInfo)
 alt bad info case
-    FacadeJob --> AddUpdateJobOfferController : throws error
+    FacadeJob --> AddUpdateJobOfferController : Throw error
     AddUpdateJobOfferController --> Partner : Ask to enter good information
 else good info case
     FacadeJob -> JobDAO : addJobOffer(String jobTitle,...,String contactInfo)

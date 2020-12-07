@@ -6,5 +6,4 @@ package ressources{
         package "[objects]"{}
     }
 }
-
 @enduml

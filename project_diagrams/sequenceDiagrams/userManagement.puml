@@ -7,19 +7,20 @@ activate UserRouter
 RegisterUpdateController -> FacadeUser : getInstance()
 activate FacadeUser
 FacadeUser -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLUserDAO : getInstance()
 activate MySQLFactory
+MySQLFactory -> MySQLUserDAO : getInstance()
 deactivate MySQLFactory
-MySQLUserDAO -> UserDAO : createUserDAO()
 activate MySQLUserDAO
+MySQLUserDAO -> UserDAO : createUserDAO()
 deactivate MySQLUserDAO
 activate UserDAO
 RegisterUpdateController --> User : Display the view
 activate User
 User -> RegisterUpdateController : Enter account information, push the button create
-RegisterUpdateController -> FacadeUser : register(event)
+RegisterUpdateController -> RegisterUpdateController : register(event)
+RegisterUpdateController -> FacadeUser : register(firstname,lastname,mail,password)
 alt bad info case
-    FacadeUser --> RegisterUpdateController : throws error
+    FacadeUser --> RegisterUpdateController : Throw error
     RegisterUpdateController --> User : Ask to enter good information
 else good info case
     FacadeUser -> UserDAO : register(firstname,lastname,mail,password)

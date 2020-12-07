@@ -22,6 +22,9 @@ package com.github.studeasy{
         }
         package routers{}
     }
-}
 
+    launcher .right.> gui
+    gui ..> logic
+    logic ..> dao
+}
 @enduml

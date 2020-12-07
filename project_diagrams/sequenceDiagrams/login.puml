@@ -1,51 +1,53 @@
-
-
 @startuml
 
 actor User
 autonumber
-Activate LoginView
 alt Login
-  
-  User -> LoginView : Enter his information
-  activate User
-  
-  LoginView -> LoginController : handleEvent
-  participant RouterUser
-  activate LoginController
-  LoginController -> FacadeUser : getInstance()
-  activate FacadeUser
-  FacadeUser -> FactoryMySQL : getInstance()
-  activate FactoryMySQL
-  LoginController -> RouterUser : getInstance()
-  activate RouterUser
-  LoginController -> LoginController : login(email,password)
-  participant Session
-  LoginController-> FacadeUser : login(email,passwrod)
- 
-  FacadeUser -> FactoryMySQL : createUserDao(email,password)
-  FacadeUser -> Session : getInstance()
-  activate Session
-  FacadeUser -> MySQLUserDAO : searchUser(email,password)
-  activate MySQLUserDAO
 
-  database ddb
-  activate ddb
-  MySQLUserDAO -> ddb : Query information
-  ddb --> MySQLUserDAO : Result Set
+
+    LoginController -> FacadeUser : getInstance()
+    activate LoginController
+    participant RouterUser
+    activate FacadeUser
+    FacadeUser -> MySQLFactory : getInstance()
+    activate MySQLFactory
+    MySQLFactory -> MySQLUserDAO : getInstance()
+    deactivate MySQLFactory
+    activate MySQLUserDAO
+    MySQLUserDAO -> UserDAO : createUserDao()
+    deactivate MySQLUserDAO
+    activate UserDAO
+    LoginController -> RouterUser : getInstance()
+    activate RouterUser
+    LoginController --> User : Display view
+    activate User
+    User -> LoginController : Enter his information
+    LoginController -> LoginController : login(event)
+    participant Session
+    LoginController-> FacadeUser : login(email,password)
+
+    FacadeUser -> Session : getInstance()
+    activate Session
+    FacadeUser -> UserDAO : searchUser(email,password)
+    database DB
+    UserDAO -> DB : Query information
+    activate DB
+    DB --> UserDAO : Result Set
+    deactivate DB
   alt login successful
-    MySQLUserDAO --> FacadeUser : user  
-    LoginController -> RouterUser : login(event)
-    RouterUser -> RouterUser : changeView(pathFXML,event)
+    UserDAO --> FacadeUser : user
+    FacadeUser -> Session : setCurrentUser(user)
+    deactivate Session
+    FacadeUser -> RouterUser : changeView(pathFXML,event)
+    deactivate RouterUser
   else login failed
-    MySQLUserDAO --> FacadeUser : Exception
+    UserDAO --> FacadeUser : Exception
+    deactivate UserDAO
     FacadeUser --> LoginController : Exception
-    LoginController -> LoginView : Update()
+    deactivate FacadeUser
+    LoginController --> User : Ask to enter good credentials
+    deactivate LoginController
+    deactivate User
 end
-  
-
-
-  
 end
-
 @enduml

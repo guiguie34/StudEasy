@@ -19,9 +19,7 @@ package GUI{
     }
 
     class HomePartnerController{
-
         + seeMyCoupons(ActionEvent event)
-
     }
 
     class HomeStudentController{

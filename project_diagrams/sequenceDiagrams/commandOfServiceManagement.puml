@@ -1,0 +1,43 @@
+@startuml
+autonumber
+actor Student
+
+ViewServiceController -> UserRouter : getInstance()
+activate ViewServiceController
+activate UserRouter
+ViewServiceController -> FacadeCommandOfService : getInstance()
+activate FacadeCommandOfService
+FacadeCommandOfService -> MySQLFactory : getInstance()
+activate MySQLFactory
+
+activate MySQLCommandOfServiceDAO
+
+FacadeCommandOfService -> MySQLFactory : createCouponDAO()
+MySQLFactory -> MySQLCommandOfServiceDAO : getInstance()
+
+ViewServiceController --> Student : Display the view
+activate Student
+Student -> ViewServiceController : Click on buy button
+ViewServiceController -> ViewServiceController : buyService(event)
+ViewServiceController -> FacadeCommandOfService: buyService(Service s)
+alt bad info case
+    FacadeCommandOfService --> ViewServiceController : Throw error
+    ViewServiceController --> Student : An error occurs
+else good info case
+    FacadeCommandOfService -> MySQLCommandOfServiceDAO : buyService(Service s)
+    database DB
+    MySQLCommandOfServiceDAO -> DB : Query Information
+    ViewServiceController --> Student : Display the success of the action
+
+    Student -> ViewServiceController : Click "ok"
+    deactivate Student
+    ViewServiceController -> UserRouter : changeView(UserRouter.HOME_STUDENT_PATH_FXML)
+    deactivate ViewServiceController
+    deactivate UserRouter
+    deactivate MySQLFactory
+    deactivate FacadeCommandOfService
+    deactivate MySQLCommandOfServiceDAO
+
+
+end
+@enduml

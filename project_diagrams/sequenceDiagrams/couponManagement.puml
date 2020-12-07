@@ -1,0 +1,43 @@
+@startuml
+autonumber
+actor Admin
+
+AddUpdateCouponController -> UserRouter : getInstance()
+activate AddUpdateCouponController
+activate UserRouter
+AddUpdateCouponController -> FacadeCoupon : getInstance()
+activate FacadeCoupon
+FacadeCoupon -> MySQLFactory : getInstance()
+activate MySQLFactory
+
+activate MySQLCouponDAO
+
+FacadeCoupon -> MySQLFactory : createCouponDAO()
+MySQLFactory -> MySQLCouponDAO : getInstance()
+
+AddUpdateCouponController --> Admin : Display the view
+activate Admin
+Admin -> AddUpdateCouponController : Enter coupon information, push the button add
+AddUpdateCouponController -> AddUpdateCouponController : addCoupon(event)
+AddUpdateCouponController -> FacadeCoupon : addCoupon(String title,...,String owner)
+alt bad info case
+    FacadeCoupon --> AddUpdateCouponController : Throw error
+    AddUpdateCouponController --> Admin : Ask to enter good information
+else good info case
+    FacadeCoupon -> MySQLCouponDAO : addCoupon(String jobTitle,...,String owner)
+    database DB
+    MySQLCouponDAO -> DB : Query Information
+    AddUpdateCouponController --> Admin : Display the success of the action
+
+    Admin -> AddUpdateCouponController : Click "ok"
+    deactivate Admin
+    AddUpdateCouponController -> UserRouter : changeView(UserRouter.HOME_PARTNER_PATH_FXML)
+    deactivate AddUpdateCouponController
+    deactivate UserRouter
+    deactivate MySQLFactory
+    deactivate FacadeCoupon
+    deactivate MySQLCouponDAO
+
+
+end
+@enduml

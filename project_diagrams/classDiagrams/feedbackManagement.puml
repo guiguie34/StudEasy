@@ -31,6 +31,7 @@ package GUI{
         - serviceL : Label
         - textServiceT : Text
         - textsFeedbacksT : Text[]
+        - deleteButtonsB : Button[]
         + cancel(ActionEvent event)
         + delete(ActionEvent event)
         + initialize(URL location, RessourceBundle resources)

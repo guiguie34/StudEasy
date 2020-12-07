@@ -39,6 +39,8 @@ package GUI{
         - lengthJobTF : TextField
         - descriptionJobTA : TextArea
         - contactInfoTA : TextArea
+        - addB : Button
+        - updateB : Button
         + addJobOffer(ActionEvent event)
         + updateJobOffer(ActionEvent event)
         + cancel(ActionEvent event)

@@ -50,6 +50,8 @@ package GUI{
         - confirmEmailTF : TextField
         - passwordTF : TextField
         - confirmPasswordTF : TextField
+        - registerB : Button
+        - updateB : Button
         + register(ActionEvent event)
         + update(ActionEvent event)
         + cancel(ActionEvent event)
@@ -72,6 +74,8 @@ package GUI{
     class infoUserController{
         - nomUserL : Label
         - textsService : Text[]
+        - deleteB : Button[]
+        - updateB : Button[]
         + seeService(ActionEvent event)
         + deleteUser(ActionEvent event)
         + editUser(ActionEvent event)

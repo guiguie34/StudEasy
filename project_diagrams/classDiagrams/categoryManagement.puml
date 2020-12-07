@@ -1,0 +1,133 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+    abstract class AbstractRouter{
+        + load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+
+    class CategoryRouter{
+         + MANAGE_CATEGORY_FXML_PATH : String = "views/category/manage_category.fxml"
+         + ADD_UPDATE_CATEGORY_FXML_PATH : String = "views/category/add_update_category.fxml"
+         + {static} SEE_CATEGORY_FXML_PATH : String = "views/coupon/seeCategory.fxml"
+         + getInstance() : CategoryRouter
+    }
+    class HomeAdminController{
+            + manageCategory(ActionEvent event)
+            + addCategory(ActionEvent event)
+    }
+
+     class HomeStudentController{
+            + searchCategory(ActionEvent event)
+     }
+
+     class HomePartnerController{
+             + searchCategory(ActionEvent event)
+     }
+
+    class CategoryManagementController{
+            + updateCategory(ActionEvent event)
+            + deleteCategory(ActionEvent event)
+            + addNewCategory(ActionEvent event)
+            + seeAllCategory(ActionEvent event)
+            + searchCategory(ActionEvent event)
+            + back(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+
+    }
+    class AddUpdateCategoryController{
+            - Categoryname : String
+            - Description : String
+
+            + submitAddCategory(ActionEvent event)
+            + submitUpdateCategory(ActionEvent event)
+            + cancel(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+        }
+
+
+
+    AbstractRouter <|-right- CategoryRouter
+    AbstractRouter <-- HomeAdminController
+    AbstractRouter <-- HomePartnerController
+    AbstractRouter <-- HomeStudentController
+    AbstractRouter <-- CategoryManagementController
+    AbstractRouter <-- AddUpdateCategoryController
+
+
+    CategoryManagementController <.. AbstractRouter : creates
+    HomePartnerController <.. AbstractRouter : creates
+    HomeStudentController <.. AbstractRouter : creates
+    HomeAdminController <.. AbstractRouter : creates
+    AddUpdateCategoryController <.. AbstractRouter : creates
+
+
+
+
+}
+package BusinessLogic{
+    class FacadeCategory{
+        + deleteCategory()
+        + seeAllCategory()
+        + searchCategory(String searchKey)
+        + submitUpdateCategory(String Categoryname,String Description)
+        + submitAddCategory(String Categoryname,String Description)
+        + getInstance() : FacadeCategory
+    }
+
+    abstract class Factory{
+        + CreateCategoryDAO() : CategoryDAO
+    }
+    class MySQLFactory{
+        - db : Connection
+        + getInstance() : MySQLFactory
+        + CreateCategoryDAO() : CategoryDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    Factory <.. FacadeCategory : creates
+    Factory <|-left- MySQLFactory
+
+    FacadeCategory <-- CategoryManagementController
+    FacadeCategory <-- AddUpdateCategoryController
+
+
+
+}
+
+package DAO{
+
+    abstract class categoryDAO{
+        + deleteCategory()
+        + seeAllCategory() : Category[]
+        + searchCategory(String searchKey) : Category
+        + submitUpdateCategory(String Categoryname,String Description)
+        + submitAddCategory(String Categoryname,String Description)
+    }
+
+    class MySQLCategoryDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLCategoryDAO
+        + deleteCategory()
+        + seeAllCategory() : Category[]
+        + searchCategory(String searchKey) : Category
+        + submitUpdateCategory(String Categoryname,String Description)
+        + submitAddCategory(String Categoryname,String Description)
+
+    }
+
+    MySQLCategoryDAO --|> categoryDAO
+    MySQLCategoryDAO <.right. MySQLFactory : creates
+
+    categoryDAO <-right- FacadeCategory
+}
+
+
+
+@enduml

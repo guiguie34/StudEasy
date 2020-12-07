@@ -1,0 +1,110 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package GUI{
+    abstract class AbstractRouter{
+        + load(String pathFXML) : Parent
+        + changeView(String pathFXML, ActionEvent event)
+        + adminRestricted(String pathFXML, ActionEvent event)
+        + studentRestricted(String pathFXML, ActionEvent event)
+        + partnerRestricted(String pathFXML, ActionEvent event)
+    }
+
+    class NotificationRouter{
+         + MANAGE_NOTIFICATION_FXML_PATH : String = "views/notification/manage_notification.fxml"
+         + {static} SEE_NOTIFICATION_FXML_PATH : String = "views/notification/see_notification.fxml"
+         + getInstance() : NotificationRouter
+    }
+    class HomeAdminController{
+            + manageNotification(ActionEvent event)
+    }
+
+     class HomeStudentController{
+            + manageNotification(ActionEvent event)
+     }
+
+     class HomePartnerController{
+            + manageNotification(ActionEvent event)
+     }
+
+    class NotificationManagementController{
+            + deleteNotification(ActionEvent event)
+            + seeAllNotification(ActionEvent event)
+            + seeNotification(ActionEvent event)
+            + MarkAsReadNotification(ActionEvent event)
+            + back(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+
+    }
+
+
+    AbstractRouter <|-right- NotificationRouter
+    AbstractRouter <-- HomeAdminController
+    AbstractRouter <-- HomePartnerController
+    AbstractRouter <-- HomeStudentController
+    AbstractRouter <-- NotificationManagementController
+
+
+    NotificationManagementController <.. AbstractRouter : creates
+    HomePartnerController <.. AbstractRouter : creates
+    HomeStudentController <.. AbstractRouter : creates
+    HomeAdminController <.. AbstractRouter : creates
+
+
+
+}
+package BusinessLogic{
+    class FacadeNotification{
+        + deleteNotification()
+        + seeAllNotification()
+        + seeNotification()
+        + markAsReadNotification()
+        + getInstance() : FacadeCategory
+    }
+
+    abstract class Factory{
+        + CreateNotificationDAO() : NotificationDAO
+    }
+    class MySQLFactory{
+        - db : Connection
+        + getInstance() : MySQLFactory
+        + CreateNotificationDAO() : CategoryDAO
+        - openConnection()
+        - closeConnection()
+    }
+
+
+    Factory <.. FacadeNotification : creates
+    Factory <|-left- MySQLFactory
+
+    FacadeNotification <-- NotificationManagementController
+
+
+}
+
+package DAO{
+
+    abstract class notificationDAO{
+        + deleteNotification()
+        + seeAllNotification() : Category[]
+        + seeNotification()
+        + MarkAsReadNotification()
+    }
+
+    class MySQLNotificationDAO{
+        - DB : Connection
+        + {static} getInstance() : MySQLNotificationDAO
+        + deleteNotification()
+        + seeAllNotification() : Notification[]
+        + MarkAsReadNotification()
+    }
+
+    MySQLNotificationDAO --|> notificationDAO
+    MySQLNotificationDAO <.right. MySQLFactory : creates
+
+    notificationDAO <-right- FacadeNotification
+}
+
+
+
+@enduml

@@ -13,28 +13,40 @@ package GUI{
 
     class HomeStudentController{
             - bienvenueL : Label
+            - myServiceB : Button
+            - myHistoricalB: Button
+            - seeAllServicesB : Button
             + myServices(ActionEvent event)
             + myHistorical(ActionEvent event)
-            + searchServices(ActionEvent event)
+            + seeAllServices(ActionEvent event)
             + logout(ActionEvent event)
             + initialize(URL location, RessourceBundle resources)
     }
 
     class myServicesController{
         - services : Service[]
+        - servicesB : [Button]
         + viewService()
         + back(ActionEvent event)
     }
 
     class myHistoricalController{
             - purchasedServices : CommandOfService[]
+            - addFeedback : Button
+            - feedbackText : TextField
+            - rate : ChoiceBox
             + addFeedback(ActionEvent event)
             + back(ActionEvent event)
      }
 
     class viewServiceController{
         - purchasedServices : CommandOfService[]
+        - buy : Button
+        - accept : Button
+        - decline : Button
+        - isMyService() : Boolean
         + buyService(ActionEvent event)
+        + applyForService(ActionEvent event)
         + acceptTransaction(ActionEvent event)
         + declineTransaction(ActionEvent event)
         + back(ActionEvent event)
@@ -42,17 +54,18 @@ package GUI{
 
 
 
-    class searchServicesController{
-        - services : Service[]
+    class allServicesController{
+            - services : Service[]
 
-        + seeAllServices(ActionEvent event)
-        + seeProposedServices(ActionEvent event)
-        + viewService(ActionEvent event)
-        + searchService(ActionEvent event)
-        + back(ActionEvent event)
-        + initialize(URL location, RessourceBundle resources)
-        + back(ActionEvent event)
-    }
+            + seeAllServices(ActionEvent event)
+            + seeProposedServices(ActionEvent event)
+            + seeAskedServices(ActionEvent event)
+            + viewService(ActionEvent event)
+            + searchService(ActionEvent event)
+            + back(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+            + back(ActionEvent event)
+        }
 
 
     class UserRouter{
@@ -67,12 +80,12 @@ package GUI{
 
 
     AbstractRouter <-- HomeStudentController
-    AbstractRouter <-- searchServicesController
+    AbstractRouter <-- allServicesController
     AbstractRouter <-- viewServiceController
     AbstractRouter <-- myServicesController
     AbstractRouter <-- myHistoricalController
 
-    searchServicesController <.. AbstractRouter : creates
+    allServicesController <.. AbstractRouter : creates
     HomeStudentController <.. AbstractRouter : creates
     myServicesController <.. AbstractRouter : creates
     viewServiceController <.. AbstractRouter : creates
@@ -88,6 +101,7 @@ package BusinessLogic{
         + acceptTransaction(CommandOfService c)
         + declineTransaction(CommandOfService c)
         + buyService(Service s)
+        + applyForService(Service s)
         + addFeedback(CommandOfService c)
         + {static} getInstance() : FacadeService
         ' User is provided by session '
@@ -119,6 +133,7 @@ package DAO{
         + acceptTransaction(CommandOfService c)
         + declineTransaction(CommandOfService c)
         + buyService(Service s)
+        + applyForService(Service s)
         + addFeedback(CommandOfService c)
 
     }
@@ -128,6 +143,7 @@ package DAO{
         + {static} getInstance() : MySQLPartnerDAO
         + acceptTransaction(CommandOfService c)
         + declineTransaction(CommandOfService c)
+        + applyForService(Service s)
         + buyService(Service s)
         + addFeedback(CommandOfService c)
 

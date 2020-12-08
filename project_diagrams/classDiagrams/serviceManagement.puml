@@ -33,6 +33,7 @@ package GUI{
 
         + submitProposeService(ActionEvent event)
         + submitAskService(ActionEvent event)
+        + updateService(ActionEvent event)
         + cancel(ActionEvent event)
     }
     class HistoricController{
@@ -50,6 +51,7 @@ package GUI{
     }
 
     class viewServiceController{
+        - service : Service
         - validateService : Button
         - buyService : Button
         - applyForService : Button
@@ -130,6 +132,7 @@ package BusinessLogic{
         + submitProposeService(String name,String category, String description, int cost)
         + submitAskService(String name,String category, String description, int cost)
         + buyService(Service s)
+        + updateService(String name,String category, String description, int cost, Service service)
         + applyForService()
         + deleteService()
         + getInstance() : FacadeService
@@ -167,6 +170,7 @@ package DAO{
         + seeProposedServices() : Service[]
         + seeAskedServices() : Service[]
         + searchService(String keyword, String category) : Service[]
+        + updateService(String name,String category, String description, int cost, Service service)
         + validateService()
         + updateService(String name,String category, String description, int cost)
         + submitProposeService(String name,String category, String description, int cost)
@@ -180,7 +184,7 @@ package DAO{
         + seeAllServices() : Service[]
         + seeProposedServices() : Service[]
         + seeAskedServices() : Service[]
-        + viewService() : Service
+        + updateService(String name,String category, String description, int cost, Service service)
         + searchService(String keyword, String category) : Service[]
         + validateService()
         + updateService(String name,String category, String description, int cost)

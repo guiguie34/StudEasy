@@ -8,13 +8,14 @@ AddUpdateJobOfferController -> FacadeJob : getInstance()
 activate FacadeJob
 FacadeJob -> MySQLFactory : getInstance()
 activate MySQLFactory
+FacadeJob -> MySQLFactory : createJobDAO()
+
 MySQLFactory -> MySQLJobDAO : getInstance()
 deactivate MySQLFactory
+
 activate MySQLJobDAO
 
-MySQLJobDAO -> JobDAO : createJobDAO()
 deactivate MySQLJobDAO
-activate JobDAO
 AddUpdateJobOfferController --> Partner : Display the view
 activate Partner
 Partner -> AddUpdateJobOfferController : Enter job information, push the button add
@@ -24,11 +25,11 @@ alt bad info case
     FacadeJob --> AddUpdateJobOfferController : Throw error
     AddUpdateJobOfferController --> Partner : Ask to enter good information
 else good info case
-    FacadeJob -> JobDAO : addJobOffer(String jobTitle,...,String contactInfo)
+    FacadeJob -> MySQLJobDAO : addJobOffer(String jobTitle,...,String contactInfo)
     deactivate FacadeJob
     database DB
-    JobDAO -> DB : Query Information
-    deactivate JobDAO
+    MySQLJobDAO -> DB : Query Information
+    deactivate MySQLJobDAO
     AddUpdateJobOfferController --> Partner : Display the success of the action
     Partner -> AddUpdateJobOfferController : Click "ok"
     deactivate Partner

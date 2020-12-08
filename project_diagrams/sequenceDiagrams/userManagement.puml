@@ -8,12 +8,10 @@ RegisterUpdateController -> FacadeUser : getInstance()
 activate FacadeUser
 FacadeUser -> MySQLFactory : getInstance()
 activate MySQLFactory
+FacadeUser -> MySQLFactory : createUserDAO()
 MySQLFactory -> MySQLUserDAO : getInstance()
 deactivate MySQLFactory
 activate MySQLUserDAO
-MySQLUserDAO -> UserDAO : createUserDAO()
-deactivate MySQLUserDAO
-activate UserDAO
 RegisterUpdateController --> User : Display the view
 activate User
 User -> RegisterUpdateController : Enter account information, push the button create
@@ -23,11 +21,11 @@ alt bad info case
     FacadeUser --> RegisterUpdateController : Throw error
     RegisterUpdateController --> User : Ask to enter good information
 else good info case
-    FacadeUser -> UserDAO : register(firstname,lastname,mail,password)
+    FacadeUser -> MySQLUserDAO : register(firstname,lastname,mail,password)
     deactivate FacadeUser
     database DB
-    UserDAO -> DB : Query Information
-    deactivate UserDAO
+    MySQLUserDAO -> DB : Query Information
+    deactivate MySQLUserDAO
     RegisterUpdateController --> User : Display the success of the action
     User -> RegisterUpdateController : Click "ok"
     deactivate User

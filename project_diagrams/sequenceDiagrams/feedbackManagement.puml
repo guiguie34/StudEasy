@@ -6,22 +6,21 @@ activate seeFeedbacksServiceController
 activate FacadeFeedback
 FacadeFeedback -> MySQLFactory : getInstance()
 activate MySQLFactory
+FacadeFeedback -> MySQLFactory : createFeedbackDAO()
 MySQLFactory -> MySQLFeedbackDAO : getInstance()
 deactivate MySQLFactory
 activate MySQLFeedbackDAO
-MySQLFeedbackDAO -> FeedbackDAO : createFeedbackDAO()
 deactivate MySQLFeedbackDAO
-activate FeedbackDAO
 seeFeedbacksServiceController -> seeFeedbacksServiceController : initialize(location,ressources)
 seeFeedbacksServiceController -> FacadeFeedback : getFeedbacks(service)
-FacadeFeedback -> FeedbackDAO : getFeedbacks(service)
+FacadeFeedback -> MySQLFeedbackDAO : getFeedbacks(service)
 database DB
-FeedbackDAO -> DB : Query Information
+MySQLFeedbackDAO -> DB : Query Information
 activate DB
-DB --> FeedbackDAO : Result Set
+DB --> MySQLFeedbackDAO : Result Set
 deactivate DB
-FeedbackDAO --> FacadeFeedback : List of feedbacks
-deactivate FeedbackDAO
+MySQLFeedbackDAO --> FacadeFeedback : List of feedbacks
+deactivate MySQLFeedbackDAO
 FacadeFeedback --> seeFeedbacksServiceController : List of feedbacks
 deactivate FacadeFeedback
 seeFeedbacksServiceController -> seeFeedbacksServiceController : Update the view

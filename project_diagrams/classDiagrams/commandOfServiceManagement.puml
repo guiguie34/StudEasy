@@ -14,10 +14,10 @@ package GUI{
     class HomeStudentController{
             - bienvenueL : Label
             - myServiceB : Button
-            - myHistoricalB: Button
+            - HistoricB: Button
             - seeAllServicesB : Button
             + myServices(ActionEvent event)
-            + myHistorical(ActionEvent event)
+            + Historic(ActionEvent event)
             + seeAllServices(ActionEvent event)
             + logout(ActionEvent event)
             + initialize(URL location, RessourceBundle resources)
@@ -30,20 +30,21 @@ package GUI{
         + back(ActionEvent event)
     }
 
-    class myHistoricalController{
+    class HistoricController{
             - purchasedServices : CommandOfService[]
-            - addFeedback : Button
-            - feedbackText : TextField
-            - rate : ChoiceBox
+            + getMyServicesBought(ActionEvent event)
             + addFeedback(ActionEvent event)
             + back(ActionEvent event)
      }
 
     class viewServiceController{
         - purchasedServices : CommandOfService[]
-        - buy : Button
-        - accept : Button
-        - decline : Button
+        - service : Service
+        - validateService : Button
+        - refuseService : Button
+        - buyService : Button
+        - applyForService : Button
+        - viewFeedbacks : Button
         - isMyService() : Boolean
         + buyService(ActionEvent event)
         + applyForService(ActionEvent event)
@@ -56,6 +57,10 @@ package GUI{
 
     class allServicesController{
             - services : Service[]
+            - keyword : TextField
+            - category : DropBox
+            - askedServices : CheckBox
+            - proposedServices : CheckBox
 
             + seeAllServices(ActionEvent event)
             + seeProposedServices(ActionEvent event)
@@ -71,7 +76,7 @@ package GUI{
     class UserRouter{
         + VIEW_SERVICE_FXML_PATH : String = "views/service/view_service.fxml"
         + MY_SERVICES_FXML_PATH : String = "views/service/propose_ask_service.fxml"
-        + MY_HISTORICAL_FXML_PATH: String = "views/service/myHistorical_service.fxml"
+        + MY_HISTORICAL_FXML_PATH: String = "views/service/Historic_service.fxml"
         + ALL_SERVICES_FXML_PATH : String = "views/service/all_services.fxml"
         + getInstance() : UserRouter
     }
@@ -83,13 +88,13 @@ package GUI{
     AbstractRouter <-- allServicesController
     AbstractRouter <-- viewServiceController
     AbstractRouter <-- myServicesController
-    AbstractRouter <-- myHistoricalController
+    AbstractRouter <-- HistoricController
 
     allServicesController <.. AbstractRouter : creates
     HomeStudentController <.. AbstractRouter : creates
     myServicesController <.. AbstractRouter : creates
     viewServiceController <.. AbstractRouter : creates
-    myHistoricalController <.. AbstractRouter : creates
+    HistoricController <.. AbstractRouter : creates
 
 
 }
@@ -122,7 +127,7 @@ package BusinessLogic{
     Factory <|-left- MySQLFactory
 
     FacadeCommandOfService <-down- viewServiceController
-    FacadeCommandOfService <-down- myHistoricalController
+    FacadeCommandOfService <-down- HistoricController
 
 }
 

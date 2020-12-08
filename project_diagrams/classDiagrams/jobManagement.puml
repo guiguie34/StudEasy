@@ -31,6 +31,7 @@ package GUI{
     }
 
     class AddUpdateJobOfferController{
+        - jobOffer : Job
         - labelPrintJob : Label
         - jobTitleTF : TextField
         - locationTF : TextField
@@ -48,6 +49,7 @@ package GUI{
     }
 
     class JobOffersController{
+        - jobOffers : Job[]
         - jobOffersL : Label
         - searchJobTF : TextField
         - textsJob : Text[]
@@ -59,6 +61,7 @@ package GUI{
     }
 
     class SeeJobOfferController{
+        - jobOffer : Job
         - titleJob : Label
         - textJob : Text
         - updateB : Button
@@ -100,11 +103,7 @@ package BusinessLogic{
           Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
         + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
-        + seeJobOffer() : Job
         + seeJobOffers() : Job
-        - seeAllJobOffers() : Job[]
-        - seeMyJobOffers() : Job[]
-        - seePendingJobOffers() : job[]
     }
 
     abstract class Factory{
@@ -138,7 +137,6 @@ package DAO{
           Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
         + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
-        + seeJobOffer() : Job
         + seeAllJobOffers() : Job[]
         + seeMyJobOffers() : Job[]
         + seePendingJobOffers() : job[]
@@ -154,7 +152,6 @@ package DAO{
           Date dateStartJob, String lengthJob,String descriptionJob, String contactInfo)
         + validateJob(Job jobToValidate)
         + searchJob(String jobTitle) : Job
-        + seeJobOffer() : Job
         + seeAllJobOffers() : Job[]
         + seeMyJobOffers() : Job[]
         + seePendingJobOffers() : job[]

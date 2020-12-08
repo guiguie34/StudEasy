@@ -65,6 +65,7 @@ package GUI{
     }
 
     class SearchUserController{
+        - users: User[]
         - searchUserTF : TextField
         - textsUser : Text[]
         + seeInfoUser(ActionEvent event)
@@ -72,6 +73,7 @@ package GUI{
     }
 
     class infoUserController{
+        - user : User
         - nomUserL : Label
         - textsService : Text[]
         - deleteB : Button[]
@@ -111,9 +113,6 @@ package BusinessLogic{
         + {static} getInstance() : FacadeUser
         + logout()
         + searchUser(String user) : User[]
-        - searchUser(String email) : User
-        - searchUser(String lastNameUser) : User[]
-        - searchUser(String firstNameUser) : User[]
         + register(String firstName, String lastName,
         String mail, String password)
         + updateMyself(String firstName, String lastName,

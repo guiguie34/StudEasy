@@ -18,6 +18,7 @@ package GUI{
     }
 
     class leaveFeedbacksController{
+        - commandConcerned : CommandOfService
         - serviceBoughtL : Label
         - titleFeedbackT : TextField
         - markS : Spinner
@@ -28,6 +29,8 @@ package GUI{
     }
 
     class seeFeedbacksServiceController{
+        - feedbacksService : Feedback[]
+        - serviceConcerned : Service
         - serviceL : Label
         - textServiceT : Text
         - textsFeedbacksT : Text[]
@@ -50,7 +53,7 @@ package BusinessLogic{
     class FacadeFeedback{
         + {static} getInstance() : FacadeFeedback
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
-        + delete(Feedback feedbackToDelete)
+        + delete(Feedback feedbackToDelete, Service serviceConcerned)
         + getFeedbacks(Service service) : Feedback[]
     }
 
@@ -76,7 +79,7 @@ package BusinessLogic{
 package DAO{
     abstract class FeedbackDAO{
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
-        + delete(Feedback feedbackToDelete)
+        + delete(Feedback feedbackToDelete, Service serviceConcerned)
         + getFeedbacks(Service service) : Feedback[]
     }
 
@@ -84,7 +87,7 @@ package DAO{
         - DB : Connection
         + {static} getInstance() : MySQLFeedbackDAO
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
-        + delete(Feedback feedbackToDelete)
+        + delete(Feedback feedbackToDelete, Service serviceConcerned)
         + getFeedbacks(Service service) : Feedback[]
     }
 

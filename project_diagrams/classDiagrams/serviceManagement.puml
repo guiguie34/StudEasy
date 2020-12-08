@@ -11,15 +11,15 @@ package GUI{
     }
     class HomeAdminController{
             - bienvenueL : Label
-            + manageServices(ActionEvent event)
+            + managePendingServices(ActionEvent event)
+            + seeAllServices(ActionEvent event)
             + logout(ActionEvent event)
             + initialize(URL location, RessourceBundle resources)
     }
     class HomeStudentController{
             - bienvenueL : Label
             + myServices(ActionEvent event)
-            + askedServices(ActionEvent event)
-            + proposedServices(ActionEvent event)
+            + seeAllServices(ActionEvent event)
             + proposeService(ActionEvent event)
             + requestService(ActionEvent event)
             + logout(ActionEvent event)
@@ -50,9 +50,16 @@ package GUI{
     }
 
     class viewServiceController{
-        - isMyService() : Boolean
-        + acceptTransaction(ActionEvent event)
-        + declineTransaction(ActionEvent event)
+        - validateService : Button
+        - buyService : Button
+        - applyForService : Button
+        - updateService : Button
+        - deleteService : Button
+        - viewFeedbacks : Button
+        
+        
+        + validateService(ActionEvent event)
+        + viewFeedbacks(ActionEvent event)
         + updateService(ActionEvent event)
         + deleteService(ActionEvent event)
         + buyService(ActionEvent event)
@@ -62,6 +69,10 @@ package GUI{
 
     class allServicesController{
         - services : Service[]
+        - keyword : TextField
+        - category : DropBox
+        - askedServices : CheckBox
+        - proposedServices : CheckBox
 
         + seeAllServices(ActionEvent event)
         + seeProposedServices(ActionEvent event)
@@ -109,19 +120,16 @@ package GUI{
 }
 package BusinessLogic{
     class FacadeService{
-        - isMyService() : Boolean
-        + seeAllServices() : Service[]
-        + seeProposedServices() : Service[]
-        + seeAskedServices() : Service[]
-        + viewService() : Service
-        + searchService() : Service[]
+      
+        + seeAllServices(int typeService) : Service[]
+        + seePendingServices() : Service[]
+        + searchService(String keyword, String category) : Service[]
         + getMyServicesBought() : Service[]
-        + acceptTransaction()
-        + declineTransaction()
+        + validateService()
         + updateService(String name,String category, String description, int cost)
         + submitProposeService(String name,String category, String description, int cost)
         + submitAskService(String name,String category, String description, int cost)
-        + buyService()
+        + buyService(Service s)
         + applyForService()
         + deleteService()
         + getInstance() : FacadeService
@@ -155,13 +163,11 @@ package BusinessLogic{
 package DAO{
 
     abstract class ServiceDAO{
-        + seeAllServices() : Service[]
+        + seePendingServices() : Service[]
         + seeProposedServices() : Service[]
         + seeAskedServices() : Service[]
-        + viewService() : Service
-        + searchService() : Service[]
-        + acceptTransaction()
-        + declineTransaction()
+        + searchService(String keyword, String category) : Service[]
+        + validateService()
         + updateService(String name,String category, String description, int cost)
         + submitProposeService(String name,String category, String description, int cost)
         + submitAskService(String name,String category, String description, int cost)
@@ -175,9 +181,8 @@ package DAO{
         + seeProposedServices() : Service[]
         + seeAskedServices() : Service[]
         + viewService() : Service
-        + searchService() : Service[]
-        + acceptTransaction()
-        + declineTransaction()
+        + searchService(String keyword, String category) : Service[]
+        + validateService()
         + updateService(String name,String category, String description, int cost)
         + submitProposeService(String name,String category, String description, int cost)
         + submitAskService(String name,String category, String description, int cost)

@@ -94,7 +94,7 @@ package BusinessLogic{
 
 package DAO{
 
-    abstract class PartnerDAO{
+    abstract class UserDAO{
         + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
@@ -102,9 +102,9 @@ package DAO{
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
     }
 
-    class MySQLPartnerDAO{
+    class MySQLUserDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLPartnerDAO
+        + {static} getInstance() : MySQLUserDAO
         + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
@@ -113,10 +113,10 @@ package DAO{
 
     }
 
-    MySQLPartnerDAO --|> PartnerDAO
-    MySQLPartnerDAO <.right. MySQLFactory : creates
+    MySQLUserDAO --|> UserDAO
+    MySQLUserDAO <.right. MySQLFactory : creates
 
-    PartnerDAO <-right- FacadeUser
+    UserDAO <-right- FacadeUser
 }
 
 

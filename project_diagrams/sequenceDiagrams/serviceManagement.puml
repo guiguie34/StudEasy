@@ -7,13 +7,14 @@ activate ServiceRouter
 ProposeAskServiceController -> FacadeService : getInstance()
 activate FacadeService
 FacadeService -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLServiceDAO : getInstance()
+
 activate MySQLFactory
-deactivate MySQLFactory
-MySQLServiceDAO -> ServiceDAO : createServiceDAO()
+
+FacadeService -> MySQLFactory : createMySQLServiceDAO()
+MySQLFactory -> MySQLServiceDAO : getInstance()
 activate MySQLServiceDAO
-deactivate MySQLServiceDAO
-activate ServiceDAO
+deactivate MySQLFactory
+
 ProposeAskServiceController --> Student : Display the view
 activate Student
 Student -> ProposeAskServiceController : Enter service information, push the button add
@@ -22,11 +23,11 @@ alt bad info case
     FacadeService --> ProposeAskServiceController : throws error
     ProposeAskServiceController --> Student : Ask to enter good information
 else good info case
-    FacadeService -> ServiceDAO : submitProposeService(String name,...,int cost)
+    FacadeService -> MySQLServiceDAO : submitProposeService(String name,...,int cost)
     deactivate FacadeService
     database DB
-    ServiceDAO -> DB : Query Information
-    deactivate ServiceDAO
+    MySQLServiceDAO -> DB : Query Information
+    deactivate MySQLServiceDAO
     ProposeAskServiceController --> Student : Display the success of the action
     Student -> ProposeAskServiceController : Click "ok"
     deactivate Student

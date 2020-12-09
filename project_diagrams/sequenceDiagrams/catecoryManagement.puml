@@ -1,0 +1,37 @@
+@startuml
+autonumber
+actor Admin
+AddUpdateCategoryController -> CategoryRouter : getInstance()
+activate AddUpdateCategoryController
+activate CategoryRouter
+AddUpdateCategoryController -> FacadeCategory : getInstance()
+activate FacadeCategory
+FacadeCategory -> MySQLFactory : getInstance()
+MySQLFactory -> MySQLCategoryDAO : getInstance()
+activate MySQLFactory
+deactivate MySQLFactory
+MySQLCategoryDAO -> CategoryDAO : createCategoryDAO()
+activate MySQLCategoryDAO
+deactivate MySQLCategoryDAO
+activate CategoryDAO
+AddUpdateCategoryController --> Admin : Display the view
+activate Admin
+Admin -> AddUpdateCategoryController : Enter category name, push the button add
+AddUpdateCategoryController -> FacadeCategory : submitAddCategory(event)
+alt bad info case
+    FacadeCategory --> AddUpdateCategoryController : throws error
+    AddUpdateCategoryController --> Admin : Ask to enter good information
+else good info case
+    FacadeCategory -> CategoryDAO : submitAddCategory(String categoryname,String description)
+    deactivate FacadeCategory
+    database DB
+    CategoryDAO -> DB : Query Information
+    deactivate CategoryDAO
+    AddUpdateCategoryController --> Admin : Display the success of the action
+    Admin -> AddUpdateCategoryController : Click "ok"
+    deactivate Admin
+    AddUpdateCategoryController -> CategoryRouter : changeView(CategoryRouter.HOME_ADMIN_PATH_FXML)
+    deactivate AddUpdateCategoryController
+    deactivate CategoryRouter
+end
+@enduml

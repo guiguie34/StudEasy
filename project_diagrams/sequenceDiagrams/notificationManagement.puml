@@ -1,0 +1,29 @@
+@startuml
+autonumber
+actor User
+seeNotificationController -> FacadeNotification : getInstance()
+activate seeNotificationController
+activate FacadeNotification
+FacadeNotification -> MySQLFactory : getInstance()
+activate MySQLFactory
+FacadeNotification -> MySQLFactory : createNotificationDAO()
+MySQLFactory -> MySQLNotificationDAO : getInstance()
+deactivate MySQLFactory
+activate MySQLNotificationDAO
+deactivate MySQLNotificationDAO
+seeNotificationController -> seeNotificationController : initialize(location,ressources)
+seeNotificationController -> FacadeNotification : getNotification(User)
+FacadeNotification-> MySQLNotificationDAO : getNotifications(User)
+database DB
+MySQLNotificationDAO -> DB : Query Information
+activate DB
+DB --> MySQLNotificationDAO : Result Set
+deactivate DB
+MySQLNotificationDAO --> FacadeNotification : List of notifications
+deactivate MySQLNotificationDAO
+FacadeNotification --> seeNotificationController : List of notifications
+deactivate FacadeNotification
+seeNotificationController -> seeNotificationController : Update the view
+seeNotificationController --> User : Display notifications
+deactivate seeNotificationController
+@enduml

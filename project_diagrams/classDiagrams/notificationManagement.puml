@@ -37,15 +37,26 @@ package GUI{
 
     }
 
+     class seeNotificationController{
+            - notification: notification[]
+            - titleNotification : String
+            - description : String
+            + cancel(ActionEvent event)
+            + delete(ActionEvent event)
+            + setNotificationSeen(ActionEvent event)
+            + initialize(URL location, RessourceBundle resources)
+        }
+
 
     AbstractRouter <|-right- NotificationRouter
     AbstractRouter <-- HomeAdminController
     AbstractRouter <-- HomePartnerController
     AbstractRouter <-- HomeStudentController
     AbstractRouter <-- NotificationManagementController
-
+    AbstractRouter <-- seeNotificationController
 
     NotificationManagementController <.. AbstractRouter : creates
+    seeNotificationController <.. AbstractRouter : creates
     HomePartnerController <.. AbstractRouter : creates
     HomeStudentController <.. AbstractRouter : creates
     HomeAdminController <.. AbstractRouter : creates
@@ -78,7 +89,7 @@ package BusinessLogic{
     Factory <|-left- MySQLFactory
 
     FacadeNotification <-- NotificationManagementController
-
+    FacadeNotification <-- seeNotificationController
 
 }
 

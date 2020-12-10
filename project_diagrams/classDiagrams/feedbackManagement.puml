@@ -58,12 +58,12 @@ package BusinessLogic{
     }
 
     abstract class Factory{
+        + {static} getInstance() : Factory
         + CreateFeedbackDAO() : FeedbackDAO
     }
 
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateFeedbackDAO() : FeedbackDAO
         - openConnection()
         - closeConnection()
@@ -72,12 +72,12 @@ package BusinessLogic{
     leaveFeedbacksController --> FacadeFeedback
     seeFeedbacksServiceController --> FacadeFeedback
 
-    FacadeFeedback ..> Factory  : creates
     MySQLFactory -left-|> Factory
 }
 
 package DAO{
     abstract class FeedbackDAO{
+        + {static} getInstance() : FeedbackDAO
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
         + delete(Feedback feedbackToDelete, Service serviceConcerned)
         + getFeedbacks(Service service) : Feedback[]
@@ -85,7 +85,6 @@ package DAO{
 
     class MySQLFeedbackDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLFeedbackDAO
         + submitFeedback(int rate, String title, String comment, CommandOfService cmdService)
         + delete(Feedback feedbackToDelete, Service serviceConcerned)
         + getFeedbacks(Service service) : Feedback[]
@@ -94,6 +93,7 @@ package DAO{
     MySQLFeedbackDAO -up-|> FeedbackDAO
     FeedbackDAO <-right- FacadeFeedback
 
+    FeedbackDAO ..> Factory  : creates
     MySQLFeedbackDAO <.right. MySQLFactory : creates
 
 }

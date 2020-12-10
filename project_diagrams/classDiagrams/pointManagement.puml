@@ -9,36 +9,29 @@ package BusinessLogic{
     }
 
     abstract class Factory{
+        + {static} getInstance() : Factory
         + CreateUserDAO() : UserDAO
     }
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()
     }
 
-
-    Factory <.. FacadeUser : creates
     Factory <|-up- MySQLFactory
-
-
-
-
-
 }
 
 package DAO{
 
     abstract class UserDAO{
+        + {static} getInstance() : UserDAO
         + addPoints(int nbPoints, User user)
         + removePoints(int nbPoints, User user)
     }
 
     class MySQLUserDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLUserDAO
         + addPoints(int nbPoints, User user)
         + removePoints(int nbPoints, User user)
 
@@ -47,6 +40,7 @@ package DAO{
     MySQLUserDAO --|> UserDAO
     MySQLUserDAO <.right. MySQLFactory : creates
 
+    Factory <.. UserDAO : creates
     UserDAO <-right- FacadeUser
 }
 

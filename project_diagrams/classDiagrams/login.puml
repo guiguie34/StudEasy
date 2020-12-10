@@ -123,7 +123,7 @@ package BusinessLogic{
 
     abstract class Factory{
         + CreateUserDAO() : UserDAO
-        + {static} getInstance() : MySQLFactory
+        + {static} getInstance() : Factory
     }
 
     class MySQLFactory{
@@ -148,7 +148,7 @@ package BusinessLogic{
 package DAO{
     abstract class UserDAO{
         + searchUser(String email) : User
-        + {static} getInstance() : MySQLUserDAO
+        + {static} getInstance() : UserDAO
     }
 
     class MySQLUserDAO{

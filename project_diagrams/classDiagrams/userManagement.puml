@@ -122,18 +122,17 @@ package BusinessLogic{
     }
 
     abstract class Factory{
+        + {static} getInstance() : Factory
         + CreateUserDAO() : UserDAO
     }
 
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()
     }
 
-    FacadeUser ..> Factory  : creates
     MySQLFactory -left-|> Factory
 
     HomePartnerController --> FacadeUser
@@ -147,6 +146,7 @@ package BusinessLogic{
 
 package DAO{
     abstract class UserDAO{
+        + {static} getInstance() : UserDAO
         + searchUser(String email) : User
         + searchUser(String lastNameUser) : User[]
         + searchUser(String firstNameUser) : User[]
@@ -160,7 +160,6 @@ package DAO{
 
     class MySQLUserDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLUserDAO
         + searchUser(String email) : User
         + searchUser(String lastNameUser) : User[]
         + searchUser(String firstNameUser) : User[]
@@ -173,8 +172,9 @@ package DAO{
     }
 
     UserDAO <|-- MySQLUserDAO
-    UserDAO <-right- FacadeUser
+    UserDAO <-- FacadeUser
 
+    UserDAO ..> Factory  : creates
     MySQLUserDAO <.right. MySQLFactory : creates
 }
 

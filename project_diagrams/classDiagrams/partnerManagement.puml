@@ -62,59 +62,55 @@ package GUI{
 }
 package BusinessLogic{
     class FacadeUser{
-        + deleteUser()
+        + deleteUser(User user)
         + seeAllPartners()
         + searchPartner(String searchKey)
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, User user)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
         + {static} getInstance() : FacadeUser
     }
 
     abstract class Factory{
+        + {static} getInstance() : Factory
         + CreateUserDAO() : UserDAO
     }
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()
     }
 
 
-    Factory <.. FacadeUser : creates
     Factory <|-left- MySQLFactory
 
     FacadeUser <-- PartnerManagementController
     FacadeUser <-- AddUpdatePartnerController
-
-
-
 }
 
 package DAO{
 
     abstract class UserDAO{
-        + deleteUser()
+        + {static} getInstance() : UserDAO
+        + deleteUser(User user)
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, User user)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
     }
 
     class MySQLUserDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLUserDAO
-        + deleteUser()
+        + deleteUser(User user)
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, User user)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
-
     }
 
     MySQLUserDAO --|> UserDAO
     MySQLUserDAO <.right. MySQLFactory : creates
+    Factory <.. UserDAO : creates
 
     UserDAO <-right- FacadeUser
 }

@@ -21,8 +21,6 @@ package GUI{
 
     }
 
-
-
     class CategoryManagementController{
             + updateCategory(ActionEvent event)
             + deleteCategory(ActionEvent event)
@@ -54,10 +52,6 @@ package GUI{
     CategoryManagementController <.. AbstractRouter : creates
     HomeAdminController <.. AbstractRouter : creates
     AddUpdateCategoryController <.. AbstractRouter : creates
-
-
-
-
 }
 package BusinessLogic{
     class FacadeCategory{
@@ -70,38 +64,34 @@ package BusinessLogic{
 
     abstract class Factory{
         + CreateCategoryDAO() : CategoryDAO
+        + {static} getInstance() : Factory
     }
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateCategoryDAO() : CategoryDAO
         - openConnection()
         - closeConnection()
     }
 
 
-    Factory <.. FacadeCategory : creates
-    Factory <|-left- MySQLFactory
+    Factory <|-- MySQLFactory
 
     FacadeCategory <-- CategoryManagementController
     FacadeCategory <-- AddUpdateCategoryController
-
-
-
 }
 
 package DAO{
 
-    abstract class categoryDAO{
+    abstract class CategoryDAO{
         + deleteCategory()
         + seeAllCategory() : Category[]
         + submitUpdateCategory(String Categoryname,String Description)
         + submitAddCategory(String Categoryname,String Description)
+        + {static} getInstance() : CategoryDAO
     }
 
     class MySQLCategoryDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLCategoryDAO
         + deleteCategory()
         + seeAllCategory() : Category[]
         + submitUpdateCategory(String Categoryname,String Description)
@@ -109,10 +99,11 @@ package DAO{
 
     }
 
-    MySQLCategoryDAO --|> categoryDAO
+    MySQLCategoryDAO --|> CategoryDAO
     MySQLCategoryDAO <.right. MySQLFactory : creates
 
-    categoryDAO <-right- FacadeCategory
+    CategoryDAO ..> Factory : creates
+    CategoryDAO <-right- FacadeCategory
 }
 
 

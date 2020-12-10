@@ -102,28 +102,25 @@ package GUI{
 
 package BusinessLogic{
     class FacadeCommandOfService{
-
         + acceptTransaction(CommandOfService c)
         + declineTransaction(CommandOfService c)
         + buyService(Service s)
         + applyForService(Service s)
         + addFeedback(CommandOfService c)
         + {static} getInstance() : FacadeService
-        ' User is provided by session '
     }
 
     abstract class Factory{
         + CreateCommandOfServiceDAO() : CommandOfServiceDAO
+       + {static} getInstance() : Factory
     }
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateCommandOfServiceDAO() : CommandOfServiceDAO
         - openConnection()
         - closeConnection()
     }
 
-    Factory <.. FacadeCommandOfService : creates
     Factory <|-left- MySQLFactory
 
     FacadeCommandOfService <-down- viewServiceController
@@ -140,12 +137,11 @@ package DAO{
         + buyService(Service s)
         + applyForService(Service s)
         + addFeedback(CommandOfService c)
-
+        + {static} getInstance() : CommandOfServiceDAO
     }
 
     class MySQLCommandOfServiceDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLPartnerDAO
         + acceptTransaction(CommandOfService c)
         + declineTransaction(CommandOfService c)
         + applyForService(Service s)
@@ -156,7 +152,7 @@ package DAO{
 
     MySQLCommandOfServiceDAO --|> CommandOfServiceDAO
     MySQLCommandOfServiceDAO <.right. MySQLFactory : creates
-
+    CommandOfServiceDAO ..> Factory : creates
     CommandOfServiceDAO <-right- FacadeCommandOfService
 
 

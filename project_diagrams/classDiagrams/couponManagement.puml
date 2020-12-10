@@ -108,13 +108,12 @@ package BusinessLogic{
     }
 
     abstract class Factory{
-
+        + {static} getInstance() : Factory
         + CreateCouponDAO() : CouponDAO
     }
 
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateCouponDAO() : CouponDAO
         - openConnection()
         - closeConnection()
@@ -125,13 +124,13 @@ package BusinessLogic{
     AllCouponsController --> FacadeCoupon
     SeeCouponController --> FacadeCoupon
 
-    FacadeCoupon ..> Factory  : creates
     MySQLFactory -left-|> Factory
 }
 
 package DAO{
 
     abstract class CouponDAO{
+        + {static} getInstance() : CouponDAO
         + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
         + updateCoupon(String title, String description, double value, double cost, int quantity, String partner, Coupon coupon)
         + deleteCoupon(Coupon coupon)
@@ -145,7 +144,6 @@ package DAO{
     class MySQLCouponDAO{
 
         - DB : Connection
-        + {static} getInstance() : MySQLCouponDAO
         + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
         + updateCoupon(String title, String description, double value, double cost, int quantity, String partner, Coupon coupon)
         + deleteCoupon(Coupon coupon)
@@ -158,6 +156,7 @@ package DAO{
 
     MySQLCouponDAO -up-|> CouponDAO
     CouponDAO <-right- FacadeCoupon
+    CouponDAO ..> Factory  : creates
 
     MySQLCouponDAO <.right. MySQLFactory : creates
 }

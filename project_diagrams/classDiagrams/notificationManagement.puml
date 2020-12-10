@@ -67,26 +67,23 @@ package GUI{
 }
 package BusinessLogic{
     class FacadeNotification{
-        + deleteNotification()
+        + deleteNotification(Notification notif)
         + seeAllNotification()
-        + seeNotification()
-        + markAsReadNotification()
+        + markAsReadNotification(Notification notif)
         + {static} getInstance() : FacadeCategory
     }
 
     abstract class Factory{
+        + {static} getInstance() : Factory
         + CreateNotificationDAO() : NotificationDAO
     }
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateNotificationDAO() : CategoryDAO
         - openConnection()
         - closeConnection()
     }
 
-
-    Factory <.. FacadeNotification : creates
     Factory <|-left- MySQLFactory
 
     FacadeNotification <-- NotificationManagementController
@@ -96,27 +93,27 @@ package BusinessLogic{
 
 package DAO{
 
-    abstract class notificationDAO{
-        + deleteNotification()
+    abstract class NotificationDAO{
+        + {static} getInstance() : NotificationDAO
+        + deleteNotification(Notification notif)
         + seeAllNotification() : Notification[]
-        + seeNotification()
         + createNotification(User user)
-        + MarkAsReadNotification()
+        + MarkAsReadNotification(Notification notif)
     }
 
     class MySQLNotificationDAO{
         - DB : Connection
-        + {static} getInstance() : MySQLNotificationDAO
-        + deleteNotification()
+        + deleteNotification(Notification notif)
         + seeAllNotification() : Notification[]
         + createNotification(User user)
-        + MarkAsReadNotification()
+        + MarkAsReadNotification(Notification notif)
     }
 
-    MySQLNotificationDAO --|> notificationDAO
+    MySQLNotificationDAO --|> NotificationDAO
     MySQLNotificationDAO <.right. MySQLFactory : creates
 
-    notificationDAO <-right- FacadeNotification
+    Factory <.. NotificationDAO : creates
+    NotificationDAO <-right- FacadeNotification
 }
 
 

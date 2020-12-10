@@ -65,7 +65,7 @@ package BusinessLogic{
         + deleteUser()
         + seeAllPartners()
         + searchPartner(String searchKey)
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
         + getInstance() : FacadeUser
     }
@@ -98,7 +98,7 @@ package DAO{
         + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
     }
 
@@ -108,7 +108,7 @@ package DAO{
         + deleteUser()
         + seeAllPartners() : User[]
         + searchPartner(String searchKey) : User
-        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company)
+        + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
 
     }

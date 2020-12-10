@@ -26,10 +26,10 @@ package GUI{
             + initialize(URL location, RessourceBundle resources)
     }
     class ProposeAskServiceController{
-        - name : String
-        - category : String
-        - description : String
-        - cost : int
+        - name : TextField
+        - category : TextField
+        - description : TextField
+        - cost : TextField
 
         + submitProposeService(ActionEvent event)
         + submitAskService(ActionEvent event)

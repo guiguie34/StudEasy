@@ -68,7 +68,6 @@ package GUI{
         - updateB : Button
         - deleteB : Button
         - buyB : Button
-        + searchCoupon(ActionEvent event)
         + deleteCoupon(ActionEvent event)
         + updateCoupon(ActionEvent event)
         + buyCoupon(ActionEvent event)
@@ -98,7 +97,7 @@ package BusinessLogic{
     class FacadeCoupon{
         + {static} getInstance() : FacadeCoupon
         + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
-        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner, Coupon coupon)
         + deleteCoupon(Coupon coupon)
         + searchCoupon(String couponTitle) : Coupon[]
         + searchAllCoupon() : Coupon[]
@@ -134,7 +133,7 @@ package DAO{
 
     abstract class CouponDAO{
         + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
-        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner, Coupon coupon)
         + deleteCoupon(Coupon coupon)
         + searchCoupon(String couponTitle) : Coupon[]
         + searchAllCoupon() : Coupon[]
@@ -148,7 +147,7 @@ package DAO{
         - DB : Connection
         + {static} getInstance() : MySQLCouponDAO
         + addCoupon(String title, String description, double value, double cost, int quantity, String partner)
-        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner)
+        + updateCoupon(String title, String description, double value, double cost, int quantity, String partner, Coupon coupon)
         + deleteCoupon(Coupon coupon)
         + searchCoupon(String couponTitle) : Coupon[]
         + searchAllCoupon() : Coupon[]

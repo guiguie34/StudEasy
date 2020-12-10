@@ -31,6 +31,7 @@ package GUI{
             + deleteNotification(ActionEvent event)
             + seeAllNotification(ActionEvent event)
             + seeNotification(ActionEvent event)
+            + createNotification(ActionEvent event)
             + MarkAsReadNotification(ActionEvent event)
             + back(ActionEvent event)
             + initialize(URL location, RessourceBundle resources)
@@ -97,8 +98,9 @@ package DAO{
 
     abstract class notificationDAO{
         + deleteNotification()
-        + seeAllNotification() : Category[]
+        + seeAllNotification() : Notification[]
         + seeNotification()
+        + createNotification(User user)
         + MarkAsReadNotification()
     }
 
@@ -107,6 +109,7 @@ package DAO{
         + {static} getInstance() : MySQLNotificationDAO
         + deleteNotification()
         + seeAllNotification() : Notification[]
+        + createNotification(User user)
         + MarkAsReadNotification()
     }
 

@@ -3,8 +3,8 @@ skinparam classAttributeIconSize 0
 
 package BusinessLogic{
     class FacadeUser{
-        - addPoints(int nbPoints)
-        - removePoints(int nbPoints)
+        - addPoints(int nbPoints, User user)
+        - removePoints(int nbPoints, User user)
         + getInstance() : FacadeUser
     }
 
@@ -32,15 +32,15 @@ package BusinessLogic{
 package DAO{
 
     abstract class UserDAO{
-        + addPoints(int nbPoints)
-        + removePoints(int nbPoints)
+        + addPoints(int nbPoints, User user)
+        + removePoints(int nbPoints, User user)
     }
 
     class MySQLUserDAO{
         - DB : Connection
         + {static} getInstance() : MySQLUserDAO
-        + addPoints(int nbPoints)
-        + removePoints(int nbPoints)
+        + addPoints(int nbPoints, User user)
+        + removePoints(int nbPoints, User user)
 
     }
 

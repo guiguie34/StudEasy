@@ -18,16 +18,10 @@ package GUI{
     }
     class HomeAdminController{
             + manageCategory(ActionEvent event)
-            + addCategory(ActionEvent event)
+
     }
 
-     class HomeStudentController{
-            + searchCategory(ActionEvent event)
-     }
 
-     class HomePartnerController{
-             + searchCategory(ActionEvent event)
-     }
 
     class CategoryManagementController{
             + updateCategory(ActionEvent event)
@@ -53,15 +47,11 @@ package GUI{
 
     AbstractRouter <|-right- CategoryRouter
     AbstractRouter <-- HomeAdminController
-    AbstractRouter <-- HomePartnerController
-    AbstractRouter <-- HomeStudentController
     AbstractRouter <-- CategoryManagementController
     AbstractRouter <-- AddUpdateCategoryController
 
 
     CategoryManagementController <.. AbstractRouter : creates
-    HomePartnerController <.. AbstractRouter : creates
-    HomeStudentController <.. AbstractRouter : creates
     HomeAdminController <.. AbstractRouter : creates
     AddUpdateCategoryController <.. AbstractRouter : creates
 
@@ -73,7 +63,6 @@ package BusinessLogic{
     class FacadeCategory{
         + deleteCategory()
         + seeAllCategory()
-        + searchCategory(String searchKey)
         + submitUpdateCategory(String Categoryname,String Description)
         + submitAddCategory(String Categoryname,String Description)
         + getInstance() : FacadeCategory
@@ -106,7 +95,6 @@ package DAO{
     abstract class categoryDAO{
         + deleteCategory()
         + seeAllCategory() : Category[]
-        + searchCategory(String searchKey) : Category
         + submitUpdateCategory(String Categoryname,String Description)
         + submitAddCategory(String Categoryname,String Description)
     }
@@ -116,7 +104,6 @@ package DAO{
         + {static} getInstance() : MySQLCategoryDAO
         + deleteCategory()
         + seeAllCategory() : Category[]
-        + searchCategory(String searchKey) : Category
         + submitUpdateCategory(String Categoryname,String Description)
         + submitAddCategory(String Categoryname,String Description)
 

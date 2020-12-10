@@ -129,6 +129,7 @@ package BusinessLogic{
     class MySQLFactory{
         - db : Connection
         + CreateUserDAO() : UserDAO
+        + getDb() : Connection
         - openConnection()
         - closeConnection()
     }

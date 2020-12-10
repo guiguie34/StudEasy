@@ -6,15 +6,18 @@ activate AddUpdateJobOfferController
 activate FeedBackRouter
 AddUpdateJobOfferController -> FacadeJob : getInstance()
 activate FacadeJob
-FacadeJob -> MySQLFactory : getInstance()
+FacadeJob -> JobDAO : getInstance()
+activate JobDAO
+JobDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-FacadeJob -> MySQLFactory : createJobDAO()
-
-MySQLFactory -> MySQLJobDAO : getInstance()
+JobDAO -> MySQLFactory : createJobDAO()
+deactivate JobDAO
+MySQLFactory --> MySQLJobDAO : MySQLJobDAO()
 deactivate MySQLFactory
-
 activate MySQLJobDAO
-
 deactivate MySQLJobDAO
 AddUpdateJobOfferController --> Partner : Display the view
 activate Partner

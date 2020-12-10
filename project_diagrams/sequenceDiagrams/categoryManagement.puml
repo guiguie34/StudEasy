@@ -6,11 +6,16 @@ activate AddUpdateCategoryController
 activate CategoryRouter
 AddUpdateCategoryController -> FacadeCategory : getInstance()
 activate FacadeCategory
-FacadeCategory -> MySQLFactory : getInstance()
+FacadeCategory -> CategoryDAO : getInstance()
+activate CategoryDAO
+CategoryDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-
-FacadeCategory -> MySQLFactory : createCategoryDAO()
-MySQLFactory -> MySQLCategoryDAO : getInstance()
+CategoryDAO -> MySQLFactory : createCategoryDAO()
+deactivate CategoryDAO
+MySQLFactory --> MySQLCategoryDAO : MySQLCategoryDAO()
 deactivate MySQLFactory
 activate MySQLCategoryDAO
 deactivate MySQLCategoryDAO

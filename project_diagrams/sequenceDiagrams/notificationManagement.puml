@@ -4,10 +4,16 @@ actor User
 seeNotificationController -> FacadeNotification : getInstance()
 activate seeNotificationController
 activate FacadeNotification
-FacadeNotification -> MySQLFactory : getInstance()
+FacadeNotification -> NotificationDAO : getInstance()
+activate NotificationDAO
+NotificationDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-FacadeNotification -> MySQLFactory : createNotificationDAO()
-MySQLFactory -> MySQLNotificationDAO : getInstance()
+NotificationDAO -> MySQLFactory : createNotificationDAO()
+deactivate NotificationDAO
+MySQLFactory --> MySQLNotificationDAO : MySQLNotificationDAO()
 deactivate MySQLFactory
 activate MySQLNotificationDAO
 deactivate MySQLNotificationDAO

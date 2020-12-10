@@ -6,14 +6,21 @@ activate AddUpdatePartnerController
 activate UserRouter
 AddUpdatePartnerController -> FacadePartner : getInstance()
 activate FacadePartner
-FacadePartner -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLPartnerDAO : getInstance()
-activate MySQLFactory
-deactivate MySQLFactory
-MySQLPartnerDAO -> PartnerDAO : createPartnerDAO()
-activate MySQLPartnerDAO
-deactivate MySQLPartnerDAO
+FacadePartner -> PartnerDAO : getInstance()
 activate PartnerDAO
+PartnerDAO -> Factory : getInstance()
+
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
+activate MySQLFactory
+PartnerDAO -> MySQLFactory : createPartnerDao()
+deactivate PartnerDAO
+MySQLFactory --> MySQLPartnerDAO : MySQLPartnerDAO()
+activate MySQLPartnerDAO
+deactivate MySQLFactory
+
+
 AddUpdatePartnerController --> Admin : Display the view
 activate Admin
 Admin -> AddUpdatePartnerController : Enter partner information, push the button add
@@ -22,11 +29,11 @@ alt bad info case
     FacadePartner --> AddUpdatePartnerController : throws error
     AddUpdatePartnerController --> Admin : Ask to enter good information
 else good info case
-    FacadePartner -> PartnerDAO : submitAddPartner(String lastname, ... ,String company)
+    FacadePartner -> MySQLPartnerDAO : submitAddPartner(String lastname, ... ,String company)
     deactivate FacadePartner
     database DB
-    PartnerDAO -> DB : Query Information
-    deactivate PartnerDAO
+    MySQLPartnerDAO -> DB : Query Information
+    deactivate MySQLPartnerDAO
     AddUpdatePartnerController --> Admin : Display the success of the action
     Admin -> AddUpdatePartnerController : Click "ok"
     deactivate Admin

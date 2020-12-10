@@ -2,15 +2,26 @@
 autonumber
 
 
-activate FacadeService
-FacadeService -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLUserDAO : getInstance()
+
+
+activate FacadeUser
+FacadeUser -> UserDAO : getInstance()
+activate UserDAO
+UserDAO -> Factory : getInstance()
+
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
+UserDAO -> MySQLFactory : createUserDao()
+
+MySQLFactory --> MySQLUserDAO : MySQLUserDAO()
 deactivate MySQLFactory
-MySQLUserDAO -> UserDAO : createUserDAO()
 activate MySQLUserDAO
 deactivate MySQLUserDAO
-activate UserDAO
- -> FacadeService : addPoints(int nbPoints)
-FacadeService -> UserDAO : addPoints(int nbPoints)
+
+
+
+ -> FacadeUser : addPoints(int nbPoints, User user)
+FacadeUser -> UserDAO : addPoints(int nbPoints, User user)
 @enduml

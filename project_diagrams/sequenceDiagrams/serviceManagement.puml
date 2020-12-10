@@ -1,19 +1,29 @@
 @startuml
 autonumber
 actor Student
-ProposeAskServiceController -> ServiceRouter : getInstance()
-activate ProposeAskServiceController
-activate ServiceRouter
 ProposeAskServiceController -> FacadeService : getInstance()
+activate ProposeAskServiceController
 activate FacadeService
-FacadeService -> MySQLFactory : getInstance()
 
+participant ServiceRouter
+activate FacadeService
+FacadeService -> ServiceDAO : getInstance()
+activate ServiceDAO
+ServiceDAO -> Factory : getInstance()
+
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-
-FacadeService -> MySQLFactory : createMySQLServiceDAO()
-MySQLFactory -> MySQLServiceDAO : getInstance()
+ServiceDAO -> MySQLFactory : createServiceDao()
+deactivate ServiceDAO
+MySQLFactory --> MySQLServiceDAO : MySQLServiceDAO()
 activate MySQLServiceDAO
 deactivate MySQLFactory
+
+ProposeAskServiceController -> ServiceRouter : getInstance()
+
+activate ServiceRouter
 
 ProposeAskServiceController --> Student : Display the view
 activate Student

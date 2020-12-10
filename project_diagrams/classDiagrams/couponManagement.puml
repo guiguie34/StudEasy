@@ -46,7 +46,7 @@ package GUI{
          + initialize(URL location, RessourceBundle resources)
     }
 
-    class CouponController{
+    class AllCouponsController{
 
          - couponList : Label
          - searchCouponTF : TextField
@@ -81,7 +81,7 @@ package GUI{
         AbstractRouter <-- HomeStudentController
         AbstractRouter <-- HomeAdminController
         AbstractRouter <-- AddUpdateCouponController
-        AbstractRouter <-- CouponController
+        AbstractRouter <-- AllCouponsController
         AbstractRouter <-- SeeCouponController
 
         HomePartnerController <.. AbstractRouter : creates
@@ -89,7 +89,7 @@ package GUI{
         HomeAdminController <.. AbstractRouter : creates
         AddUpdateCouponController <.. AbstractRouter : creates
         SeeCouponController <.. AbstractRouter : creates
-        CouponController <.. AbstractRouter : creates
+        AllCouponsController <.. AbstractRouter : creates
 }
 
 package BusinessLogic{
@@ -122,7 +122,7 @@ package BusinessLogic{
 
 
     AddUpdateCouponController --> FacadeCoupon
-    CouponController --> FacadeCoupon
+    AllCouponsController --> FacadeCoupon
     SeeCouponController --> FacadeCoupon
 
     FacadeCoupon ..> Factory  : creates

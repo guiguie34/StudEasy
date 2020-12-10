@@ -7,13 +7,20 @@ activate AddUpdateCouponController
 activate UserRouter
 AddUpdateCouponController -> FacadeCoupon : getInstance()
 activate FacadeCoupon
-FacadeCoupon -> MySQLFactory : getInstance()
+FacadeCoupon -> CouponDAO : getInstance()
+activate CouponDAO
+CouponDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
 activate MySQLFactory
+deactivate Factory
+CouponDAO -> MySQLFactory : createCouponDAO()
+deactivate CouponDAO
+MySQLFactory --> MySQLCouponDAO : MySQLCouponDAO()
+    deactivate MySQLFactory
 
 activate MySQLCouponDAO
 
-FacadeCoupon -> MySQLFactory : createCouponDAO()
-MySQLFactory -> MySQLCouponDAO : getInstance()
 
 AddUpdateCouponController --> Admin : Display the view
 activate Admin
@@ -34,7 +41,6 @@ else good info case
     AddUpdateCouponController -> UserRouter : changeView(UserRouter.HOME_PARTNER_PATH_FXML)
     deactivate AddUpdateCouponController
     deactivate UserRouter
-    deactivate MySQLFactory
     deactivate FacadeCoupon
     deactivate MySQLCouponDAO
 

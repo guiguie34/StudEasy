@@ -7,13 +7,19 @@ activate ViewServiceController
 activate UserRouter
 ViewServiceController -> FacadeCommandOfService : getInstance()
 activate FacadeCommandOfService
-FacadeCommandOfService -> MySQLFactory : getInstance()
+FacadeCommandOfService -> CommandOfServiceDAO : getInstance()
+activate CommandOfServiceDAO
+CommandOfServiceDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
 activate MySQLFactory
-
+deactivate Factory
+CommandOfServiceDAO -> MySQLFactory : createCouponDAO()
+deactivate CommandOfServiceDAO
+MySQLFactory --> MySQLCommandOfServiceDAO : MySQLCommandOfServiceDAO()
+deactivate MySQLFactory
 activate MySQLCommandOfServiceDAO
 
-FacadeCommandOfService -> MySQLFactory : createCouponDAO()
-MySQLFactory -> MySQLCommandOfServiceDAO : getInstance()
 
 ViewServiceController --> Student : Display the view
 activate Student

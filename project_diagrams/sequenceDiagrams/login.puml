@@ -9,14 +9,22 @@ alt Login
     activate LoginController
     participant RouterUser
     activate FacadeUser
-    FacadeUser -> MySQLFactory : getInstance()
+    FacadeUser -> UserDAO : getInstance()
+    activate UserDAO
+    UserDAO -> Factory : getInstance()
+
+    activate Factory
+    Factory --> MySQLFactory : MySQLFactory()
+    deactivate Factory
     activate MySQLFactory
-    MySQLFactory -> MySQLUserDAO : getInstance()
+    UserDAO -> MySQLFactory : createUserDao()
+    deactivate UserDAO
+    MySQLFactory --> MySQLUserDAO : MySQLUserDAO()
     deactivate MySQLFactory
     activate MySQLUserDAO
-    MySQLUserDAO -> UserDAO : createUserDao()
     deactivate MySQLUserDAO
-    activate UserDAO
+
+
     LoginController -> RouterUser : getInstance()
     activate RouterUser
     LoginController --> User : Display view
@@ -28,21 +36,21 @@ alt Login
 
     FacadeUser -> Session : getInstance()
     activate Session
-    FacadeUser -> UserDAO : searchUser(email,password)
+    FacadeUser -> MySQLUserDAO : searchUser(email,password)
     database DB
-    UserDAO -> DB : Query information
+    MySQLUserDAO -> DB : Query information
     activate DB
-    DB --> UserDAO : Result Set
+    DB --> MySQLUserDAO : Result Set
     deactivate DB
   alt login successful
-    UserDAO --> FacadeUser : user
+    MySQLUserDAO --> FacadeUser : user
     FacadeUser -> Session : setCurrentUser(user)
     deactivate Session
     FacadeUser -> RouterUser : changeView(pathFXML,event)
     deactivate RouterUser
   else login failed
-    UserDAO --> FacadeUser : Exception
-    deactivate UserDAO
+    MySQLUserDAO --> FacadeUser : Exception
+    deactivate MySQLUserDAO
     FacadeUser --> LoginController : Exception
     deactivate FacadeUser
     LoginController --> User : Ask to enter good credentials

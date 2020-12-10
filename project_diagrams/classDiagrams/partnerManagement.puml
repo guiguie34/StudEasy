@@ -3,7 +3,7 @@ skinparam classAttributeIconSize 0
 
 package GUI{
     abstract class AbstractRouter{
-        + load(String pathFXML) : Parent
+        + {static}  load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
         + studentRestricted(String pathFXML, ActionEvent event)
@@ -39,9 +39,9 @@ package GUI{
         }
 
     class UserRouter{
-        + MANAGE_PARTNER_FXML_PATH : String = "views/partner/manage_partner.fxml"
-        + ADD_UPDATE_FXML_PATH : String = "views/partner/add_update_partner.fxml"
-        + getInstance() : UserRouter
+        + {static} MANAGE_PARTNER_FXML_PATH : String = "views/partner/manage_partner.fxml"
+        + {static} ADD_UPDATE_FXML_PATH : String = "views/partner/add_update_partner.fxml"
+        + {static} getInstance() : UserRouter
         + login(ActionEvent event )
     }
 
@@ -67,7 +67,7 @@ package BusinessLogic{
         + searchPartner(String searchKey)
         + submitUpdatePartner(String lastname, String firstname, String emailAdress,String password, String company, Partner partner)
         + submitAddPartner(String lastname, String firstname, String emailAdress,String password, String company)
-        + getInstance() : FacadeUser
+        + {static} getInstance() : FacadeUser
     }
 
     abstract class Factory{
@@ -75,7 +75,7 @@ package BusinessLogic{
     }
     class MySQLFactory{
         - db : Connection
-        + getInstance() : MySQLFactory
+        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()

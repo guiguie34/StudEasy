@@ -3,7 +3,7 @@ skinparam classAttributeIconSize 0
 
 package GUI{
     abstract class AbstractRouter{
-        + load(String pathFXML) : Parent
+        + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
         + studentRestricted(String pathFXML, ActionEvent event)
@@ -88,12 +88,12 @@ package GUI{
 
 
     class ServiceRouter{
-        + VIEW_SERVICE_FXML_PATH : String = "views/service/view_service.fxml"
-        + PROPOSE_ASK_SERVICE_FXML_PATH : String = "views/service/propose_ask_service.fxml"
-        + MY_SERVICES_FXML_PATH : String = "views/service/propose_ask_service.fxml"
-        + ALL_SERVICES_FXML_PATH : String = "views/service/all_services.fxml"
-        + SERVICES_BOUGHT_FXML_PATH : String = "views/service/services_bought.fxml"
-        + getInstance() : ServiceRouter
+        + {static} VIEW_SERVICE_FXML_PATH : String = "views/service/view_service.fxml"
+        + {static} PROPOSE_ASK_SERVICE_FXML_PATH : String = "views/service/propose_ask_service.fxml"
+        + {static} MY_SERVICES_FXML_PATH : String = "views/service/propose_ask_service.fxml"
+        + {static} ALL_SERVICES_FXML_PATH : String = "views/service/all_services.fxml"
+        + {static} SERVICES_BOUGHT_FXML_PATH : String = "views/service/services_bought.fxml"
+        + {static} getInstance() : ServiceRouter
         + login(ActionEvent event )
     }
 
@@ -116,9 +116,6 @@ package GUI{
     myServicesController <.. AbstractRouter : creates
     viewServiceController <.. AbstractRouter : creates
 
-
-
-
 }
 package BusinessLogic{
     class FacadeService{
@@ -135,7 +132,7 @@ package BusinessLogic{
         + updateService(String name,String category, String description, int cost, Service service)
         + applyForService()
         + deleteService()
-        + getInstance() : FacadeService
+        + {static} getInstance() : FacadeService
     }
 
     abstract class Factory{
@@ -143,7 +140,7 @@ package BusinessLogic{
     }
     class MySQLFactory{
         - db : Connection
-        + getInstance() : MySQLFactory
+        + {static} getInstance() : MySQLFactory
         + CreateServiceDAO() : UserDAO
         - openConnection()
         - closeConnection()

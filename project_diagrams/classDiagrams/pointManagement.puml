@@ -5,7 +5,7 @@ package BusinessLogic{
     class FacadeUser{
         - addPoints(int nbPoints, User user)
         - removePoints(int nbPoints, User user)
-        + getInstance() : FacadeUser
+        + {static} getInstance() : FacadeUser
     }
 
     abstract class Factory{
@@ -13,7 +13,7 @@ package BusinessLogic{
     }
     class MySQLFactory{
         - db : Connection
-        + getInstance() : MySQLFactory
+        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()

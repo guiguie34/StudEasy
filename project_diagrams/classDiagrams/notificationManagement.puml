@@ -3,7 +3,7 @@ skinparam classAttributeIconSize 0
 
 package GUI{
     abstract class AbstractRouter{
-        + load(String pathFXML) : Parent
+        + {static} load(String pathFXML) : Parent
         + changeView(String pathFXML, ActionEvent event)
         + adminRestricted(String pathFXML, ActionEvent event)
         + studentRestricted(String pathFXML, ActionEvent event)
@@ -11,9 +11,9 @@ package GUI{
     }
 
     class NotificationRouter{
-         + MANAGE_NOTIFICATION_FXML_PATH : String = "views/notification/manage_notification.fxml"
+         + {static} MANAGE_NOTIFICATION_FXML_PATH : String = "views/notification/manage_notification.fxml"
          + {static} SEE_NOTIFICATION_FXML_PATH : String = "views/notification/see_notification.fxml"
-         + getInstance() : NotificationRouter
+         + {static} getInstance() : NotificationRouter
     }
     class HomeAdminController{
             + manageNotification(ActionEvent event)
@@ -71,7 +71,7 @@ package BusinessLogic{
         + seeAllNotification()
         + seeNotification()
         + markAsReadNotification()
-        + getInstance() : FacadeCategory
+        + {static} getInstance() : FacadeCategory
     }
 
     abstract class Factory{
@@ -79,7 +79,7 @@ package BusinessLogic{
     }
     class MySQLFactory{
         - db : Connection
-        + getInstance() : MySQLFactory
+        + {static} getInstance() : MySQLFactory
         + CreateNotificationDAO() : CategoryDAO
         - openConnection()
         - closeConnection()

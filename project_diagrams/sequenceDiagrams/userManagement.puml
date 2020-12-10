@@ -6,10 +6,16 @@ activate RegisterUpdateController
 activate UserRouter
 RegisterUpdateController -> FacadeUser : getInstance()
 activate FacadeUser
-FacadeUser -> MySQLFactory : getInstance()
+FacadeUser -> UserDAO : getInstance()
+activate UserDAO
+UserDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory :MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-FacadeUser -> MySQLFactory : createUserDAO()
-MySQLFactory -> MySQLUserDAO : getInstance()
+UserDAO -> MySQLFactory : createUserDAO()
+deactivate UserDAO
+MySQLFactory --> MySQLUserDAO : MySQLUserDAO()
 deactivate MySQLFactory
 activate MySQLUserDAO
 RegisterUpdateController --> User : Display the view

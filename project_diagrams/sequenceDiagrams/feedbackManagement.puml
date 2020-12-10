@@ -4,10 +4,16 @@ actor Partner
 seeFeedbacksServiceController -> FacadeFeedback : getInstance()
 activate seeFeedbacksServiceController
 activate FacadeFeedback
-FacadeFeedback -> MySQLFactory : getInstance()
+FacadeFeedback -> FeedbackDAO : getInstance()
+activate FeedbackDAO
+FeedbackDAO -> Factory : getInstance()
+activate Factory
+Factory --> MySQLFactory : MySQLFactory()
+deactivate Factory
 activate MySQLFactory
-FacadeFeedback -> MySQLFactory : createFeedbackDAO()
-MySQLFactory -> MySQLFeedbackDAO : getInstance()
+FeedbackDAO -> MySQLFactory : createFeedbackDAO()
+deactivate FeedbackDAO
+MySQLFactory --> MySQLFeedbackDAO : MySQLFeedbackDAO()
 deactivate MySQLFactory
 activate MySQLFeedbackDAO
 deactivate MySQLFeedbackDAO

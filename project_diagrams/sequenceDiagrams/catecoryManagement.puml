@@ -7,13 +7,13 @@ activate CategoryRouter
 AddUpdateCategoryController -> FacadeCategory : getInstance()
 activate FacadeCategory
 FacadeCategory -> MySQLFactory : getInstance()
-MySQLFactory -> MySQLCategoryDAO : getInstance()
 activate MySQLFactory
+
+FacadeCategory -> MySQLFactory : createCategoryDAO()
+MySQLFactory -> MySQLCategoryDAO : getInstance()
 deactivate MySQLFactory
-MySQLCategoryDAO -> CategoryDAO : createCategoryDAO()
 activate MySQLCategoryDAO
 deactivate MySQLCategoryDAO
-activate CategoryDAO
 AddUpdateCategoryController --> Admin : Display the view
 activate Admin
 Admin -> AddUpdateCategoryController : Enter category name, push the button add
@@ -22,11 +22,11 @@ alt bad info case
     FacadeCategory --> AddUpdateCategoryController : throws error
     AddUpdateCategoryController --> Admin : Ask to enter good information
 else good info case
-    FacadeCategory -> CategoryDAO : submitAddCategory(String categoryname,String description)
+    FacadeCategory -> MySQLCategoryDAO : submitAddCategory(String categoryname,String description)
     deactivate FacadeCategory
     database DB
-    CategoryDAO -> DB : Query Information
-    deactivate CategoryDAO
+    MySQLCategoryDAO -> DB : Query Information
+    deactivate MySQLCategoryDAO
     AddUpdateCategoryController --> Admin : Display the success of the action
     Admin -> AddUpdateCategoryController : Click "ok"
     deactivate Admin

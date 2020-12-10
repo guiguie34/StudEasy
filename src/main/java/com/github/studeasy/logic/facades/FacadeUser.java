@@ -4,8 +4,6 @@ import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
-import com.github.studeasy.logic.factory.Factory;
-import com.github.studeasy.logic.factory.MySQLFactory;
 
 /**
  * The Facade User for the UserDAO
@@ -23,9 +21,8 @@ public class FacadeUser {
      * Instantiate the factory
      */
     private FacadeUser() {
-        // We ask the factory to instantiate the DAO
-        Factory factory = MySQLFactory.getInstance();
-        this.DAO = factory.createUserDAO();
+        // We retrieve the UserDao
+        this.DAO = UserDAO.getInstance();
     }
 
     /**

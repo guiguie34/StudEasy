@@ -22,7 +22,7 @@ public class MySQLConnectionUtil{
         {
             // We set the information of the database
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://database-1.c4y60ykreptw.eu-west-3.rds.amazonaws.com:3306/";
+            String url = "jdbc:mysql://database-studeasy-officiel.c4y60ykreptw.eu-west-3.rds.amazonaws.com :3306/";
             String user = "admin";
             String passwd = "studeasy";
             String dbName = "studeasy";

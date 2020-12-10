@@ -2,7 +2,7 @@ package com.github.studeasy.dao.userDAO;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.logic.common.User;
-import com.github.studeasy.logic.factory.MySQLFactory;
+import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,24 +23,9 @@ public class MySQLUserDAO extends UserDAO{
     /**
      * Instantiate the connection db
      */
-    private MySQLUserDAO() {
-        MySQLFactory connection = MySQLFactory.getInstance();
+    public MySQLUserDAO() {
+        Factory connection = Factory.getInstance();
         this.DB = connection.getDb();
-    }
-
-    /**
-     * Lazy holder which contains the objet MySQLUserDAO
-     */
-    private static class createMySQLFactory{
-        static final MySQLUserDAO INSTANCE = new MySQLUserDAO();
-    }
-
-    /**
-     * Static method which returns the instance of the MySQLUserDAO
-     * @return the instance of MySQLUserDAO
-     */
-    public static MySQLUserDAO getInstance(){
-        return MySQLUserDAO.createMySQLFactory.INSTANCE;
     }
 
     /**

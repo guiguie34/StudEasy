@@ -12,12 +12,15 @@ import java.sql.SQLException;
  */
 public class MySQLFactory extends Factory {
 
+    /**
+     * The connection to the database
+     */
     private Connection db;
 
     /**
-     * Default constructor of a singleton MySQLFactory
+     * Default constructor of a MySQLFactory
      */
-    private MySQLFactory(){
+    public MySQLFactory(){
         this.openConnection();
     }
 
@@ -38,21 +41,6 @@ public class MySQLFactory extends Factory {
     }
 
     /**
-     * Lazy holder which contains the objet MySQLFactory
-     */
-    private static class createMySQLFactory{
-        static final MySQLFactory INSTANCE = new MySQLFactory();
-    }
-
-    /**
-     * Static method which returns the instance of the MySQLFactory
-     * @return the instance of MySQLFactory
-     */
-    public static MySQLFactory getInstance(){
-        return createMySQLFactory.INSTANCE;
-    }
-
-    /**
      * To get the connection to the database
      * @return the connection to the database
      */
@@ -66,6 +54,6 @@ public class MySQLFactory extends Factory {
      */
     @Override
     public UserDAO createUserDAO() {
-        return MySQLUserDAO.getInstance();
+        return new MySQLUserDAO();
     }
 }

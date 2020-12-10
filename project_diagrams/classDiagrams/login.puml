@@ -123,11 +123,11 @@ package BusinessLogic{
 
     abstract class Factory{
         + CreateUserDAO() : UserDAO
+        + {static} getInstance() : MySQLFactory
     }
 
     class MySQLFactory{
         - db : Connection
-        + {static} getInstance() : MySQLFactory
         + CreateUserDAO() : UserDAO
         - openConnection()
         - closeConnection()
@@ -141,7 +141,6 @@ package BusinessLogic{
     SessionI <|.. SessionUser : implements
     SessionI <-- AbstractRouter
     SessionUser <.. FacadeUser : creates
-    Factory <.. FacadeUser : creates
     Factory <|-- MySQLFactory
     FacadeUser <-up- LoginController
 }
@@ -149,12 +148,12 @@ package BusinessLogic{
 package DAO{
     abstract class UserDAO{
         + searchUser(String email) : User
+        + {static} getInstance() : MySQLUserDAO
     }
 
     class MySQLUserDAO{
         - DB : Connection
         + searchUser(String email) : User
-        + {static} getInstance() : MySQLUserDAO
     }
 
     class MySQLConnectionUtil{
@@ -163,11 +162,12 @@ package DAO{
         + {static} getInstance() : MySQLConnectionUtil
     }
 
-    UserDAO <|-up MySQLUserDAO
-    UserDAO <-up- FacadeUser
+    UserDAO <|- MySQLUserDAO
+    UserDAO <-- FacadeUser
+    UserDAO ..> Factory : creates
 
-    MySQLUserDAO <.up. MySQLFactory : creates
-    MySQLConnectionUtil <.up. MySQLFactory : creates
+    MySQLUserDAO <.left. MySQLFactory : creates
+    MySQLConnectionUtil <.left. MySQLFactory : creates
 }
 
 @enduml

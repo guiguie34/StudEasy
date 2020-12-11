@@ -12,6 +12,11 @@ import com.github.studeasy.logic.common.User;
 public class FacadeUser {
 
     /**
+     * Singleton of the facade user
+     */
+    private static FacadeUser facadeUser = null;
+
+    /**
      * The DAO connected to the database
      */
     private final UserDAO DAO;
@@ -26,18 +31,14 @@ public class FacadeUser {
     }
 
     /**
-     * Lazy holder that create a FacadeUser
-     */
-    private static class createFacadeUser {
-        static final FacadeUser INSTANCE = new FacadeUser();
-    }
-
-    /**
-     * Static function that allow to get the Instance of the FacadeUser
+     * Static function that allow to get the instance of the FacadeUser
      * @return the instance of FacadeUser
      */
     public static FacadeUser getInstance(){
-        return createFacadeUser.INSTANCE;
+        if(facadeUser == null){
+            facadeUser = new FacadeUser();
+        }
+        return facadeUser;
     }
 
     /**

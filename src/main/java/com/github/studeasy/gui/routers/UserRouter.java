@@ -10,6 +10,11 @@ import java.io.IOException;
 public class UserRouter extends AbstractRouter {
 
     /**
+     * Singleton of the user router
+     */
+    private static UserRouter userRouter = null;
+
+    /**
      * Calls the parent constructor, getting the
      * instance of the session
      */
@@ -18,18 +23,14 @@ public class UserRouter extends AbstractRouter {
     }
 
     /**
-     * Lazy holder of the user router
-     */
-    private static class loadRouter{
-        public static final UserRouter instance= new UserRouter();
-    }
-
-    /**
      * Used to return the unique instance of the UserRouter
      * @return
      */
     public static UserRouter getInstance(){
-        return UserRouter.loadRouter.instance;
+        if(userRouter == null){
+            userRouter = new UserRouter();
+        }
+        return userRouter;
     }
 
     /**

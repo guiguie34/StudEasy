@@ -9,6 +9,11 @@ import javax.swing.*;
 public class MySQLConnectionUtil{
 
     /**
+     * Singleton of the MySQLConnectionUtil
+     */
+    private static MySQLConnectionUtil mySQLConnectionUtil = null;
+
+    /**
      * The connection to the database
      */
     private Connection db = null;
@@ -37,22 +42,18 @@ public class MySQLConnectionUtil{
     }
 
     /**
-     * Lazy holder, create the unique connection to the database
-     */
-    private static class createConn{
-        static final MySQLConnectionUtil instance= new MySQLConnectionUtil();
-    }
-
-    /**
-     * Allows to retrieve the singleton of the class
+     * Retrieve the singleton of the class
      * @return the singleton of the class
      */
     public static MySQLConnectionUtil getInstance(){
-        return createConn.instance;
+        if(mySQLConnectionUtil == null){
+            mySQLConnectionUtil = new MySQLConnectionUtil();
+        }
+        return mySQLConnectionUtil;
     }
 
     /**
-     * Allows to retrieve the connection to the database
+     * Retrieve the connection to the database
      * @return the connection to the database
      */
     public Connection getDb(){

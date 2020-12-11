@@ -8,23 +8,29 @@ import com.github.studeasy.logic.common.role.*;
 public class Session implements SessionI {
 
     /**
+     * Singleton of the session
+     */
+    private static Session session = null;
+
+    /**
      * User kept in memory in the session
      */
     private User currentUser;
 
     /**
-     * Lazy holder containing the unique session
+     * Private constructor for the singleton
      */
-    private static class loadSession{
-        public static final Session instance= new Session();
-    }
+    private Session(){}
 
     /**
-     * Get the unique session in the lazy holder
+     * Get the unique session
      * @return the session
      */
     public static Session getInstance(){
-        return Session.loadSession.instance;
+        if(session == null){
+            session = new Session();
+        }
+        return session;
     }
 
     /**

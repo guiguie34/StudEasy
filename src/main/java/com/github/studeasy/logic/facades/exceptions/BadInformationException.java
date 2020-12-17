@@ -1,4 +1,6 @@
 package com.github.studeasy.logic.facades.exceptions;
 
-public class BadInformationsException {
+public class BadInformationException {
+
+
 }

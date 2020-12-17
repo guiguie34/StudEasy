@@ -80,7 +80,7 @@ public class FacadeUser {
         String REGEXPASSWORD = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if(password.equals(confirmPassword)){
             if(email.equals(confirmEmail)){
-                if(password.matches(REGEXPASSWORD)){
+                if(true){ //password.matches(REGEXPASSWORD)
                     salt = PasswordUtils.getSalt(30);
                     password = PasswordUtils.generateSecurePassword(password,salt);
                     DAO.register(firstName, lastName, pseudo, email, password,salt);

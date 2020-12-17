@@ -13,7 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ResourceBundle;
 
 /**
@@ -31,6 +33,7 @@ public class RegisterUpdateController implements Initializable {
      * The facade used by the controller
      */
     private final FacadeUser FACADE;
+    private final int action;
 
     /**
      * The field to enter the first name
@@ -96,9 +99,10 @@ public class RegisterUpdateController implements Initializable {
      * Instantiate the parent's attributes with
      * a router and a facade used for users
      */
-    public RegisterUpdateController(){
+    public RegisterUpdateController(int action){
         this.ROUTER = UserRouter.getInstance();
         this.FACADE = FacadeUser.getInstance();
+        this.action = action;
     }
 
 
@@ -107,8 +111,8 @@ public class RegisterUpdateController implements Initializable {
      * Register a User on the platform and redirect him, or indicates him its credentials are wrong
      * @param event
      */
-    public void register(ActionEvent event){
-        System.out.println("qsdsqd");
+    public void register(){
+
         // We retrieve the user inputs
         String firstName = firstNameTF.getText();
         String lastName = lastNameTF.getText();
@@ -117,21 +121,33 @@ public class RegisterUpdateController implements Initializable {
         String password = passwordTF.getText();
         String confirmPassword = confirmPasswordTF.getText();
         String pseudo = pseudoTF.getText();
+        //If all the fields aren't empty
+        if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !pseudo.isEmpty()){
+            try {
+                FACADE.register(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword);
+                ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
 
-        try {
-            FACADE.register(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword);
-            ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
 
+            }catch (BadInformationException exception){
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText(exception.getMessage());
 
-        }catch (BadInformationException exception){
+            }
+            catch (SQLIntegrityConstraintViolationException e){
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText("There is already an account with this email");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }else{
             registerFailLabel.setAlignment(Pos.CENTER);
             registerFailLabel.setTextFill(Paint.valueOf("red"));
-            registerFailLabel.setText(exception.getMessage());
+            registerFailLabel.setText("All fields are required");
+        }
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
 
 
@@ -144,7 +160,7 @@ public class RegisterUpdateController implements Initializable {
      * Update the parameters of a user and redirect him, or indicates him its credentials are wrong
      * @param event
      */
-    public void update(ActionEvent event){
+    public void update(){
 
     }
 
@@ -153,8 +169,8 @@ public class RegisterUpdateController implements Initializable {
      * Cancel the action and redirect to the home of the user
      * @param event
      */
-    public void cancel(ActionEvent event){
-
+    public void cancel(ActionEvent event) throws IOException {
+        ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
     }
 
     /**
@@ -165,5 +181,14 @@ public class RegisterUpdateController implements Initializable {
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        //if register
+        if(action == 0){
+            registerB.setText("Register");
+            registerB.setOnAction((event -> register()));
+        }else if(action == 1){
+            registerB.setText("Update");
+            registerB.setOnAction((event -> update()));
+        }
+    }
 }

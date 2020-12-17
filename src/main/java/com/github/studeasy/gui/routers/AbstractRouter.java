@@ -56,6 +56,15 @@ public abstract class AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void changeView(String pathFXML, ActionEvent event) throws IOException {
+        this.changeView(event,load(pathFXML));
+    }
+
+    /**
+     * This method is used to change the view properly, it displays the new
+     * fxml file
+     * @param event the action trigerring the change of view
+     */
+    public void changeView(ActionEvent event, Parent root) {
         // The stage that will contain the new view
         Stage dialogStage;
         // We retrieve the node we are
@@ -63,7 +72,7 @@ public abstract class AbstractRouter {
         // We now retrieve the current window, to update it properly
         dialogStage = (Stage) node.getScene().getWindow();
         // We load the new fxml and make it visible then
-        dialogStage.getScene().setRoot(load(pathFXML));
+        dialogStage.getScene().setRoot(root);
         dialogStage.show();
     }
 

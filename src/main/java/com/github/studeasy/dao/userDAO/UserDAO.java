@@ -4,7 +4,7 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
 
 /**
- * Interface for the User DAO
+ * Abstract class for the User DAO
  * Contains the methods needed by the User DAO
  */
 public abstract class UserDAO {

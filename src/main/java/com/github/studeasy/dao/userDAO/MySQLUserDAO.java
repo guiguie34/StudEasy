@@ -53,12 +53,35 @@ public class MySQLUserDAO extends UserDAO{
                 throw new BadCredentialsException("No user found");
             } else {
                 // We create a user according to his role
-                currentUser= new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9));
+                currentUser= new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9), resultSet.getString(10));
             }
         }
         catch(SQLException e){
             e.printStackTrace();
         }
         return currentUser;
+    }
+
+    public void register(String firstName,String lastName,String pseudo,String email,String password, String salt) throws Exception{
+        try {
+            // We prepare the SQL request to insert a user
+            PreparedStatement preparedStatement;
+
+            String request = "INSERT INTO user (firstName,lastName,role,password,emailAddress,pseudo,salt) VALUES  (?,?,?,?,?,?,?)";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setInt(3, 1);
+            preparedStatement.setString(4, password);
+            preparedStatement.setString(5, email);
+            preparedStatement.setString(6, pseudo);
+            preparedStatement.setString(7, salt);
+            // We execute the query
+            preparedStatement.executeUpdate();
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -35,4 +35,6 @@ public abstract class UserDAO {
      * @throws Exception if the user doesn't exist in the database
      */
     public abstract User searchUser(String email) throws Exception;
+
+    public abstract void register(String firstName,String lastName,String pseudo,String email,String password, String salt) throws Exception;
 }

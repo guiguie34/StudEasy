@@ -78,6 +78,7 @@ public class LoginController implements Initializable {
             ((UserRouter)ROUTER).login(event);
         }
         catch(BadCredentialsException e){
+
             // Wrong credentials, we show the user
             loginFailLabel.setAlignment(Pos.CENTER);
             loginFailLabel.setTextFill(Paint.valueOf("red"));

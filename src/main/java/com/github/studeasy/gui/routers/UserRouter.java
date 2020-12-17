@@ -51,11 +51,26 @@ public class UserRouter extends AbstractRouter {
     private final static String HOME_PARTNER_FXML_PATH = "views/user/homePartner.fxml";
 
     /**
+     * Path to the home partner view
+     */
+    private final static String ADD_PARTNER_FXML_PATH = "views/partner/addUpdatePartner.fxml";
+
+    /**
      * Function loading the appropriate view for the connecting user
      * @param event the action trigerring this method
      * @throws IOException
      */
     public void login(ActionEvent event) throws  IOException {
+        studentRestricted(HOME_STUDENT_FXML_PATH,event);
+        adminRestricted(HOME_ADMIN_FXML_PATH,event);
+        partnerRestricted(HOME_PARTNER_FXML_PATH,event);
+    }
+
+    public void addPartner(ActionEvent event) throws IOException {
+        adminRestricted(ADD_PARTNER_FXML_PATH,event);
+    }
+
+    public void backToDashboard(ActionEvent event) throws IOException {
         studentRestricted(HOME_STUDENT_FXML_PATH,event);
         adminRestricted(HOME_ADMIN_FXML_PATH,event);
         partnerRestricted(HOME_PARTNER_FXML_PATH,event);

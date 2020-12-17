@@ -35,4 +35,7 @@ public abstract class UserDAO {
      * @throws Exception if the user doesn't exist in the database
      */
     public abstract User searchUser(String email) throws Exception;
+
+
+    public abstract User submitAddPartner(String email,String password, String firstname, String lastname, String company) throws Exception;
 }

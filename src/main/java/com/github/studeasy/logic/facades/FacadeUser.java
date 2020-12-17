@@ -59,4 +59,12 @@ public class FacadeUser {
             throw new BadCredentialsException("Bad Password");
         }
     }
+
+    public void submitAddPartner(String email, String password, String firstname, String lastname, String company) throws Exception {
+        try {
+            DAO.submitAddPartner(email,password,firstname,lastname,company);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

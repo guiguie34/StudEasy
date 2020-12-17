@@ -1,4 +1,4 @@
-package com.github.studeasy.dao.ServiceDAO;
+package com.github.studeasy.dao.serviceDAO;
 
 /**
  * Abstract class for the Service DAO

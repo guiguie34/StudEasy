@@ -1,4 +1,4 @@
-package com.github.studeasy.gui.controller.categoryTag;
+package com.github.studeasy.gui.controller.service;
 
 import javafx.fxml.Initializable;
 
@@ -6,9 +6,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * The controller used to add or update a category
+ * The controller used to see the buying history of a user
  */
-public class AddUpdateCategoryController implements Initializable {
+public class HistoricController implements Initializable {
 
     /**
      * Function from the interface Initializable

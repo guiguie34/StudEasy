@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -39,33 +40,44 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="addUpdateL" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <font>
-                                <Font name="System Bold" size="36.0" />
-                            </font>
-                        </Label>
-                  <Button id="negativeButton" layoutX="22.0" layoutY="474.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Cancel">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
                   <TextField fx:id="nameCatTF" layoutX="461.0" layoutY="162.0" prefHeight="31.0" prefWidth="248.0" promptText="Name of the Category ..." />
+                  <TextArea fx:id="descriptionCatTF" layoutX="461.0" layoutY="226.0" prefHeight="118.0" prefWidth="248.0" promptText="Description of the Category ..." />
                   <Button id="positiveButton" fx:id="addUpdateB" layoutX="549.0" layoutY="392.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
+                  <Button id="negativeButton" layoutX="22.0" layoutY="474.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="71.0" text="Cancel">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                        <Label fx:id="addUpdateL" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
                   <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="407.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/category/categoryTag.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="407.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="407.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/category/descriptionCat.png" />
                      </image>
                   </ImageView>
-                  <TextArea fx:id="descriptionCatTF" layoutX="461.0" layoutY="218.0" prefHeight="118.0" prefWidth="248.0" promptText="Description of the Category ..." />
+                  <Label fx:id="addUpdateCatFailed" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="113.0" prefHeight="15.0" prefWidth="601.0" />
+                  <Text layoutX="515.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Between 2 and 25 characters">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="527.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum 50 characters">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
             </children>

@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.categoryTag;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.CategoryRouter;
 import com.github.studeasy.logic.facades.FacadeCategory;
+import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,6 +58,12 @@ public class AddUpdateCategoryController implements Initializable {
     private Button addUpdateB;
 
     /**
+     * The label displaying why the action failed
+     */
+    @FXML
+    private Label addUpdateCatFailed;
+
+    /**
      * Indicates if we want to add or update
      * 0 add,
      * 1 update
@@ -73,25 +82,49 @@ public class AddUpdateCategoryController implements Initializable {
     }
 
     /**
-     * TODO add
      * Triggered when the user pushes the add button
-     * @param event
+     * Ask the facade to add a new category
+     * @param event the event triggered
      */
-    public void submitAddCategory(ActionEvent event){
+    public void submitAddCategory(ActionEvent event) {
+        // We retrieve the inputs of the user
         String nameCat = nameCatTF.getText();
         String descriptionCat = descriptionCatTF.getText();
-        System.out.println("You try to add");
+        try{
+            // Ask the facade to add the new category
+            FACADE.submitAddCategory(nameCat,descriptionCat);
+            // We redirect to the categories management page
+            ROUTER.adminRestricted(CategoryRouter.MANAGE_CATEGORY_FXML_PATH,event);
+        }
+        // If there is an error, we display it to the user
+        catch(BadInformationException err){
+            addUpdateCatFailed.setTextFill(Paint.valueOf("red"));
+            addUpdateCatFailed.setText(err.getMessage());
+        }
+        catch (IOException err){
+            err.printStackTrace();
+        }
     }
 
     /**
      * TODO update
      * Triggered when the user pushes the update button
+     * Ask the facade to update a category
      * @param event
      */
     public void submitUpdateCategory(ActionEvent event){
         String newNameCat = nameCatTF.getText();
         String newDescriptionCat = descriptionCatTF.getText();
         System.out.println("You try to update");
+    }
+
+    /**
+     * Triggered when the user wants to cancel
+     * @param event the event triggered
+     * @throws IOException if an error occurs
+     */
+    public void cancel(ActionEvent event) throws IOException {
+        ROUTER.adminRestricted(CategoryRouter.MANAGE_CATEGORY_FXML_PATH,event);
     }
 
     /**
@@ -104,10 +137,6 @@ public class AddUpdateCategoryController implements Initializable {
         addUpdateB.setOnAction(this::submitAddCategory);
         nameCatTF.setOnAction(this::submitAddCategory);
     }
-
-    /**
-     * TODO cancel button
-     */
 
     /**
      * Function called to instantiate and display the label and buttons when we want to update

@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.categoryTag.AddUpdateCategoryController;
+import com.github.studeasy.logic.common.CategoryTag;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,13 +55,14 @@ public class CategoryRouter extends AbstractRouter{
      * @param pathFXML the path to the fxml file
      * @param event the action trigerring the change of view
      * @param addUpdate 0 if we add, 1 if we update
-     * @throws IOException
+     * @param categoryTagToUpdate the categoryTag we want to update or null
+     * @throws IOException if an error occurs
      */
-    public void addOrUpdateCategory(String pathFXML, ActionEvent event, int addUpdate) throws IOException {
+    public void addOrUpdateCategory(String pathFXML, ActionEvent event, int addUpdate, CategoryTag categoryTagToUpdate) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with addUpdate telling if we add or update
-        AddUpdateCategoryController addUpdateCategoryController = new AddUpdateCategoryController(addUpdate);
+        AddUpdateCategoryController addUpdateCategoryController = new AddUpdateCategoryController(addUpdate,categoryTagToUpdate);
         // We link this controller with the FXML
         loader.setController(addUpdateCategoryController);
         Parent root = loader.load();

@@ -2,6 +2,7 @@ package com.github.studeasy.gui.controller.categoryTag;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.CategoryRouter;
+import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.facades.FacadeCategory;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
@@ -71,14 +72,21 @@ public class AddUpdateCategoryController implements Initializable {
     private int addUpdate;
 
     /**
-     * Instantiate the attributes with
-     * a router and a facade used for categories
-     * @param addUpdate 0 if we add, 1 if we update
+     * The category we try to update
+     * null if we try to add
      */
-    public AddUpdateCategoryController(int addUpdate){
+    private CategoryTag category;
+
+    /**
+     * Create the controller with the router and the facade
+     * @param addUpdate 0 if we add, 1 if we update
+     * @param categoryTagToUpdate the category to update
+     */
+    public AddUpdateCategoryController(int addUpdate, CategoryTag categoryTagToUpdate){
         this.ROUTER = CategoryRouter.getInstance();
         this.FACADE = FacadeCategory.getInstance();
         this.addUpdate = addUpdate;
+        this.category = categoryTagToUpdate;
     }
 
     /**
@@ -142,10 +150,12 @@ public class AddUpdateCategoryController implements Initializable {
      * Function called to instantiate and display the label and buttons when we want to update
      */
     private void caseUpdate(){
-        this.addUpdateL.setText("Update a Category");
+        this.addUpdateL.setText("Update a Category: "+category.getName());
         addUpdateB.setText("Update");
         addUpdateB.setOnAction(this::submitUpdateCategory);
         nameCatTF.setOnAction(this::submitUpdateCategory);
+        nameCatTF.setText(category.getName());
+        descriptionCatTF.setText(category.getDescription());
     }
 
     /**

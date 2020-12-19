@@ -35,6 +35,12 @@ public abstract class CategoryDAO {
     public abstract ArrayList<CategoryTag> seeAllCategories();
 
     /**
+     * Function used to delete a category from the database
+     * @param categoryToDelete the category to delete
+     */
+    public abstract void deleteCategory(CategoryTag categoryToDelete);
+
+    /**
      * Function used to add a category in the database
      * @param nameCat the name of the category
      * @param descriptionCat the description of the category

@@ -52,8 +52,17 @@ public class FacadeCategory {
     }
 
     /**
-     * TODO delete / update categories
+     * TODO update categories
      */
+
+    /**
+     * Function asking the DAO to delete a category
+     * @param categoryToDelete the category to delete
+     */
+    public void deleteCategory(CategoryTag categoryToDelete){
+        // We ask the DAO to delete the category
+        DAO.deleteCategory(categoryToDelete);
+    }
 
     /**
      * Function used to add a category

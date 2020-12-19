@@ -59,6 +59,27 @@ public class MySQLCategoryDAO extends CategoryDAO{
     }
 
     /**
+     * TODO TEST DELETE
+     * Function used to delete a category from the database
+     * @param categoryToDelete the category to delete
+     */
+    public void deleteCategory(CategoryTag categoryToDelete){
+        // We prepare the SQL request to delete a category tag
+        PreparedStatement preparedStatement;
+        String request = "DELETE FROM categorytag WHERE nameCategory = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, categoryToDelete.getName());
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    /**
      * Function used to add a category in the database
      * @param nameCat the name of the category
      * @param descriptionCat the description of the category

@@ -6,9 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Abstract class for the routers
@@ -35,6 +40,39 @@ public abstract class AbstractRouter {
      * Path for the login file
      */
     public final static String LOGIN_FXML_PATH = "views/login.fxml";
+
+    /**
+     * Function showing the user a confirmation box, if he confirms then we continue the action
+     * @param infoMessage the message in the box
+     * @param headerText the header of the box
+     * @param title the name of the info box
+     * @return true if he says ok, false otherwise
+     */
+    public static boolean confirmationBox(String infoMessage, String headerText, String title){
+        // Create the custom dialog.
+        Dialog dialog = new Dialog<>();
+        // We set the info inside the dialog box
+        dialog.setTitle(title);
+        dialog.setHeaderText(headerText);
+        dialog.setContentText(infoMessage);
+        // We get the Stage
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        // We add a nice ?
+        dialog.setGraphic(new ImageView("images/common/help.png"));
+        // And we add the logo
+        stage.getIcons().add(new Image("images/logo.png"));
+        // We add the ok and cancel buttons
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        // We ask the user the confirmation of the action
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // Yes, we can do it
+            return true;
+        } else {
+            // No, we cancel the operation
+            return false;
+        }
+    }
 
     /**
      * Allows to change the view (the fxml file to display)

@@ -116,7 +116,7 @@
                 </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button id="negativeButton" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
+                  <Button id="negativeButton" fx:id="cancelB" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancelRegister" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
                   <Button id="neutralButton" fx:id="registerUpdateB" layoutX="516.0" layoutY="58.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" text="Register" />
                </children>
             </AnchorPane>

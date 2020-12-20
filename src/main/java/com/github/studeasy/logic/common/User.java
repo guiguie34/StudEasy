@@ -46,6 +46,10 @@ public class User {
 	 */
 	private String salt;
 	/**
+	 * pseudo
+	 */
+	private String pseudo;
+	/**
 	 * Default constructor
 	 */
 	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points, String salt) {
@@ -54,6 +58,7 @@ public class User {
 		this.emailAdress=emailAddress;
 		this.password= password;
 		this.salt = salt;
+		this.pseudo = pseudo;
 		switch (role) {
 			case 0:
 				this.role = new RoleAdmin();
@@ -111,5 +116,13 @@ public class User {
 
 	public String getSalt() {
 		return salt;
+	}
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
 	}
 }

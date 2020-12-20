@@ -1,5 +1,6 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.user.MyProfileController;
 import com.github.studeasy.gui.controller.user.RegisterUpdateController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -37,23 +38,37 @@ public class UserRouter extends AbstractRouter {
     }
 
     /**
-     * Load the view and display the good label and buttons for adding or
-     * updating a category
+     * Load the view and display the good label and buttons for register page
+     * or update his profile page
      * @param pathFXML the path to the fxml file
-     * @param event the action trigerring the change of view
-     * @param addUpdate 0 if we add, 1 if we update
+     * @param event the action triggering the change of view
+     * @param registerUpdate 0 if we add, 1 if we register
      * @throws IOException
      */
-    public void registerOrUpdateUser(String pathFXML, ActionEvent event, int addUpdate) throws IOException {
+    public void registerOrUpdateUser(String pathFXML, ActionEvent event, int registerUpdate) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with
-        RegisterUpdateController registerUpdateController = new RegisterUpdateController(addUpdate);
+        RegisterUpdateController registerUpdateController = new RegisterUpdateController(registerUpdate);
         loader.setController(registerUpdateController);
         Parent root = loader.load();
         this.changeView(event,root);
     }
 
+    /**
+     * Load the view and display all the information related to the profile
+     * of a student
+     * @param event the action triggering the change of view
+     * @throws IOException
+     */
+    public void profileUser(ActionEvent event) throws IOException {
+        changeView(PROFILE_USER_FXML_PATH, event);
+    }
+
+    /**
+     * Path to the profile view
+     */
+    public final static String PROFILE_USER_FXML_PATH = "views/user/myProfile.fxml";
     /**
      * Path to the register view
      */
@@ -61,7 +76,7 @@ public class UserRouter extends AbstractRouter {
     /**
      * Path to the home student view
      */
-    private final static String HOME_STUDENT_FXML_PATH = "views/user/homeStudent.fxml";
+    public final static String HOME_STUDENT_FXML_PATH = "views/user/homeStudent.fxml";
     /**
      * Path to the home admin view
      */

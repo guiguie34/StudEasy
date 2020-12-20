@@ -2,6 +2,8 @@ package com.github.studeasy.gui.controller.user;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.Session;
+import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
@@ -33,6 +35,10 @@ public class RegisterUpdateController implements Initializable {
      * The facade used by the controller
      */
     private final FacadeUser FACADE;
+
+    /**
+     * The action is 0 to register and 1 to update
+     */
     private final int action;
 
     /**
@@ -93,6 +99,12 @@ public class RegisterUpdateController implements Initializable {
      */
     @FXML
     private Button registerUpdateB;
+
+    /**
+     * The button to come back to the previous page
+     */
+    @FXML
+    private Button cancelB;
 
 
     /**
@@ -166,11 +178,28 @@ public class RegisterUpdateController implements Initializable {
 
     /**
      * Triggered when the user pushed the cancel button
-     * Cancel the action and redirect to the home of the user
+     * Cancel the action and redirect to the login page
      * @param event
      */
-    public void cancel(ActionEvent event) throws IOException {
-        ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
+    public void cancelRegister(ActionEvent event) {
+        try {
+            ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the user pushed the cancel button
+     * Cancel the action and redirect to the login page
+     * @param event
+     */
+    public void cancelUpdate(ActionEvent event) {
+        try {
+            ROUTER.changeView(UserRouter.PROFILE_USER_FXML_PATH,event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,11 +216,20 @@ public class RegisterUpdateController implements Initializable {
             title.setText("REGISTER");
             registerUpdateB.setText("Register");
             registerUpdateB.setOnAction((this::register));
+            cancelB.setOnAction((this::cancelRegister));
+
         //if update
         }else if(action == 1){
-            title.setText("UPDATE");
+            User user = Session.getInstance().getCurrentUser();
+            title.setText("Modify My information");
             registerUpdateB.setText("Update");
             registerUpdateB.setOnAction((this::update));
+            cancelB.setOnAction((this::cancelUpdate));
+
+            firstNameTF.setText(user.getFirstname());
+            lastNameTF.setText(user.getLastname());
+            emailTF.setText(user.getEmailAdress());
+            pseudoTF.setText(user.getPseudo());
         }
 
     }

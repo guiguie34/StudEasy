@@ -38,7 +38,7 @@ public class PasswordUtils {
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-
+        System.out.println(securePassword);
         returnValue = Base64.getEncoder().encodeToString(securePassword);
 
         return returnValue;

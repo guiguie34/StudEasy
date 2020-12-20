@@ -11,21 +11,11 @@ import java.util.ResourceBundle;
 /**
  * The controller of the partner view
  */
-public class HomePartnerController implements Initializable {
-    /**
-     * The router used by the controller
-     */
-    private final AbstractRouter ROUTER;
+public class HomePartnerController extends HomeAbstractController implements Initializable {
 
-    /**
-     /**
-     * The facade used by the controller
-     */
-    private final FacadeUser FACADE;
 
     public HomePartnerController(){
-        this.ROUTER = UserRouter.getInstance();
-        this.FACADE = FacadeUser.getInstance();
+        super();
     }
 
     /**

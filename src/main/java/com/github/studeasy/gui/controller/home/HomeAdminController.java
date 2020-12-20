@@ -11,21 +11,18 @@ import java.util.ResourceBundle;
 /**
  * The controller of the admin view
  */
-public class HomeAdminController implements Initializable {
-    /**
-     * The router used by the controller
-     */
-    private final AbstractRouter ROUTER;
+public class HomeAdminController extends HomeAbstractController implements Initializable {
 
-    /**
-     /**
-     * The facade used by the controller
-     */
-    private final FacadeUser FACADE;
 
     public HomeAdminController(){
-        this.ROUTER = UserRouter.getInstance();
-        this.FACADE = FacadeUser.getInstance();
+        super();
+    }
+
+    /**
+     * Go to the search users pages
+     */
+    public void searchUsers(){
+
     }
 
     /**

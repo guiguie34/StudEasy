@@ -42,10 +42,15 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="neutralButton" layoutX="155.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadMyProfile" text="My profile" />
+                  <Button id="neutralButton" layoutX="155.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadMyProfile" prefHeight="26.0" prefWidth="146.0" text="My profile" />
                   <Label fx:id="failLabel" layoutX="26.0" layoutY="79.0" prefHeight="15.0" prefWidth="372.0" />
                     </children>
                 </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button id="negativeButton" layoutX="169.0" layoutY="57.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="37.0" prefWidth="89.0" text="Disconnect" />
+               </children>
+            </AnchorPane>
             </children>
         </GridPane>
     </children>

@@ -2,6 +2,7 @@ package com.github.studeasy.gui.controller.categoryTag;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.CategoryRouter;
+import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.facades.FacadeCategory;
 import javafx.beans.value.ObservableValue;
@@ -89,7 +90,7 @@ public class CategoryManagementController implements Initializable {
     }
 
     /**
-     * Triggered when the admin wants to go to the add/update a category page
+     * Triggered when the admin wants to go to the add a category page
      * @param event the event triggered
      * @throws IOException if an error occurs
      */
@@ -98,7 +99,7 @@ public class CategoryManagementController implements Initializable {
     }
 
     /**
-     * Triggered when the user pushes one of the update button
+     * Triggered when the user pushes one of the update button, redirected to the update page
      * @param event the event triggered
      * @param categoryToUpdate the category the user wants to update
      */
@@ -149,20 +150,19 @@ public class CategoryManagementController implements Initializable {
                 "Confirmation of the deletion: "+categoryToDelete.getName(),
                 "Stud'Easy - Confirmation")){
             // We ask the facade to delete the category
-            //FACADE.deleteCategory(categoryToDelete);
+            FACADE.deleteCategory(categoryToDelete);
             // We remove this category from the table
             categoriesList.removeAll(categoryToDelete);
         }
     }
 
     /**
-     * TODO cancel button
      * Triggered when the user wants to go back
      * @param event the event triggered
      * @throws IOException if an error occurs
      */
     public void cancel(ActionEvent event) throws IOException {
-        System.out.println("CANCEL");
+        ROUTER.adminRestricted(UserRouter.HOME_ADMIN_FXML_PATH,event);
     }
 
     /**
@@ -233,15 +233,7 @@ public class CategoryManagementController implements Initializable {
         // In case we don't have any category
         categoryTV.setPlaceholder(new Label("There is currently no category to display"));
         // We retrieve all the categories and put them in an observable list
-        //categoriesList = FXCollections.observableArrayList(FACADE.seeAllCategories());
-        categoriesList = FXCollections.observableArrayList(
-                new CategoryTag("AAA","BBB"),
-                new CategoryTag("RGD","BRRBB"),
-                new CategoryTag("AAHTGFA","BGBB"),
-                new CategoryTag("AARFDA","BRFBB"),
-                new CategoryTag("FFFF","BBBBGF"),
-                new CategoryTag("AAAFRD","BBGB")
-        );
+        categoriesList = FXCollections.observableArrayList(FACADE.seeAllCategories());
         // We put the names of the categories on the right column
         nameColumn.setCellValueFactory(
                 new PropertyValueFactory<CategoryTag,String>("name")

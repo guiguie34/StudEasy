@@ -26,9 +26,6 @@ public class CategoryRouter extends AbstractRouter{
      * Path to add or update a category view
      */
     public final static String ADD_UPDATE_CATEGORY_FXML_PATH = "views/category/add_update_category.fxml";    /**
-     * Path to see a category view
-     */
-    public final static String SEE_CATEGORY_FXML_PATH = "views/category/see_category.fxml";
 
     /**
      * Calls the parent constructor, getting the
@@ -40,7 +37,7 @@ public class CategoryRouter extends AbstractRouter{
 
     /**
      * Used to return the unique instance of the CategoryRouter
-     * @return
+     * @return the categoryRouter
      */
     public static CategoryRouter getInstance(){
         if(categoryRouter == null){

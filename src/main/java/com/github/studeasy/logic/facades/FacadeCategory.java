@@ -52,10 +52,6 @@ public class FacadeCategory {
     }
 
     /**
-     * TODO update categories
-     */
-
-    /**
      * Function asking the DAO to delete a category
      * @param categoryToDelete the category to delete
      */
@@ -65,27 +61,18 @@ public class FacadeCategory {
     }
 
     /**
-     * Function used to add a category
+     * Check if a category is good to be updated or created
      * @param nameCat the name of the category
      * @param descriptionCat the description of the category
-     * @throws BadInformationException occurs when bad information are provided
+     * @return true if it's ok
+     * @throws BadInformationException the error indicating what's wrong
      */
-    public void submitAddCategory(String nameCat, String descriptionCat) throws BadInformationException{
+    private boolean changesCategoryAllowed(String nameCat, String descriptionCat) throws BadInformationException{
         // We check the values are not empty
         if(!nameCat.isEmpty() && !descriptionCat.isEmpty()){
             // It's not empty, we now check if it's a valid name and description
-            if((nameCat.length() >= 2 && nameCat.length() <= 25) && (descriptionCat.length() < 50)){
-                // We search for a category with the same name
-                CategoryTag existingCat = DAO.searchCategory(nameCat);
-                // If it doesn't exist, we can create the new category
-                if(existingCat == null){
-                    // We create the category
-                    DAO.submitAddCategory(nameCat,descriptionCat);
-                }
-                // Already exists
-                else {
-                    throw new BadInformationException("A category with this name already exists");
-                }
+            if((nameCat.length() >= 2 && nameCat.length() <= 25) && (descriptionCat.length() <= 50)){
+                return true;
             }
             // The name doesn't have a fitted size
             else{
@@ -95,6 +82,53 @@ public class FacadeCategory {
         // One of the value is empty
         else {
             throw new BadInformationException("All fields are required");
+        }
+    }
+
+    /**
+     * Function used to add a category
+     * @param nameCat the name of the category
+     * @param descriptionCat the description of the category
+     * @throws BadInformationException occurs when bad information are provided
+     */
+    public void submitAddCategory(String nameCat, String descriptionCat) throws BadInformationException{
+        // We check if we can add the category
+        if(changesCategoryAllowed(nameCat,descriptionCat)){
+            // We search for a category with the same name
+            CategoryTag existingCat = DAO.searchCategory(nameCat);
+            // If it doesn't exist, we can create the new category
+            if(existingCat == null){
+                // We create the category
+                DAO.submitAddCategory(nameCat,descriptionCat);
+            }
+            // Already exists
+            else {
+                throw new BadInformationException("A category with this name already exists");
+            }
+        }
+    }
+
+    /**
+     * Function used to update a category
+     * @param nameCat the name of the category
+     * @param descriptionCat the description of the category
+     * @param categoryToUpdate the category to update
+     * @throws BadInformationException occurs when bad information are provided
+     */
+    public void submitUpdateCategory(String nameCat, String descriptionCat, CategoryTag categoryToUpdate) throws BadInformationException{
+        // We check if we can update with those name and description
+        if(changesCategoryAllowed(nameCat,descriptionCat)){
+            // We search if there is a category with the same name
+            CategoryTag existingCat = DAO.searchCategory(nameCat);
+            // If it doesn't exist, or if it is the same name as the updated category
+            if(existingCat == null || existingCat.getName().equals(categoryToUpdate.getName())){
+                // We update the category
+                DAO.submitUpdateCategory(nameCat, descriptionCat, categoryToUpdate);
+            }
+            // Already exists
+            else {
+                throw new BadInformationException("A category with this name already exists");
+            }
         }
     }
 }

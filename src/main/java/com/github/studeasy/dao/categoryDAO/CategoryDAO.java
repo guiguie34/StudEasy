@@ -48,6 +48,14 @@ public abstract class CategoryDAO {
     public abstract void submitAddCategory(String nameCat, String descriptionCat);
 
     /**
+     * Function used to update a category in the database
+     * @param nameCat the name of the category
+     * @param descriptionCat the description of the category
+     * @param categoryToUpdate the category to update
+     */
+    public abstract void submitUpdateCategory(String nameCat, String descriptionCat, CategoryTag categoryToUpdate);
+
+    /**
      * Function used to retrieve a category with the name given
      * @param nameCat the name of the category wanted
      * @return the categoryTag corresponding, or null if there isn't

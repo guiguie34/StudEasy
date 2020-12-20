@@ -59,7 +59,6 @@ public class MySQLCategoryDAO extends CategoryDAO{
     }
 
     /**
-     * TODO TEST DELETE
      * Function used to delete a category from the database
      * @param categoryToDelete the category to delete
      */
@@ -92,6 +91,31 @@ public class MySQLCategoryDAO extends CategoryDAO{
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, nameCat);
             preparedStatement.setString(2, descriptionCat);
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    /**
+     * Function used to update a category in the database
+     * @param nameCat the name of the category
+     * @param descriptionCat the description of the category
+     * @param categoryToUpdate the category to update
+     */
+    public void submitUpdateCategory(String nameCat, String descriptionCat, CategoryTag categoryToUpdate){
+        // We prepare the SQL request to insert a category tag
+        PreparedStatement preparedStatement;
+        String request = "UPDATE categorytag SET nameCategory = ?, descriptionCategory = ? WHERE nameCategory = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, nameCat);
+            preparedStatement.setString(2, descriptionCat);
+            preparedStatement.setString(3, categoryToUpdate.getName());
+
             // We execute the query
             preparedStatement.executeUpdate();
         }

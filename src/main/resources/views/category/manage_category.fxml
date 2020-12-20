@@ -45,33 +45,33 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="positiveButton" layoutX="990.0" layoutY="474.0" mnemonicParsing="false" onAction="#addNewCategory" prefHeight="29.0" prefWidth="147.0" text="Add a Category">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
                   <TextField fx:id="searchCategoryTF" layoutX="946.0" layoutY="18.0" promptText="Search category ..." />
                   <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="924.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/searchIcon.png" />
                      </image>
                   </ImageView>
-                  <Button id="negativeButton" layoutX="23.0" layoutY="474.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="63.0" text="Back">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <TableView fx:id="categoryTV" layoutX="147.0" layoutY="71.0" prefHeight="372.0" prefWidth="880.0">
+                  <TableView fx:id="categoryTV" layoutX="71.0" layoutY="71.0" prefHeight="372.0" prefWidth="1026.0">
                     <columns>
-                      <TableColumn fx:id="nameColumn" maxWidth="240.0" prefWidth="240.0" text="Name of the Category" />
-                      <TableColumn fx:id="descColumn" editable="false" maxWidth="482.9333801269531" prefWidth="482.9333801269531" sortable="false" text="Description of the Category" />
-                        <TableColumn fx:id="updateColumn" editable="false" maxWidth="100.0" prefWidth="100.0" sortable="false" style="-fx-alignment: CENTER;" text="Update" />
-                        <TableColumn fx:id="deleteColumn" editable="false" maxWidth="100.0" minWidth="-Infinity" prefWidth="100.0" sortable="false" style="-fx-alignment: CENTER;" text="Delete" />
+                      <TableColumn fx:id="nameColumn" maxWidth="286.0" prefWidth="286.0" resizable="false" text="Name of the Category" />
+                      <TableColumn fx:id="descColumn" editable="false" maxWidth="500.0" prefWidth="500.0" resizable="false" sortable="false" text="Description of the Category" />
+                        <TableColumn fx:id="updateColumn" editable="false" maxWidth="120.0" minWidth="0.0" prefWidth="120.0" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Update" />
+                        <TableColumn fx:id="deleteColumn" editable="false" maxWidth="120.0" minWidth="-Infinity" prefWidth="120.0" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Delete" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <Button id="positiveButton" layoutX="990.0" layoutY="474.0" mnemonicParsing="false" onAction="#addNewCategory" prefHeight="29.0" prefWidth="147.0" text="Add a Category">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button id="negativeButton" layoutX="23.0" layoutY="474.0" mnemonicParsing="false" onAction="#cancel" prefHeight="22.0" prefWidth="63.0" text="Back">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </children>
@@ -80,5 +80,6 @@
    <stylesheets>
       <URL value="@../../css/app.css" />
       <URL value="@../../css/buttons.css" />
+      <URL value="@../../css/tableView.css" />
    </stylesheets>
 </AnchorPane>

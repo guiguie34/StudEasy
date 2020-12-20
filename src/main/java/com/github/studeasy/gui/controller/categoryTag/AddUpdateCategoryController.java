@@ -78,7 +78,7 @@ public class AddUpdateCategoryController implements Initializable {
     private CategoryTag category;
 
     /**
-     * Create the controller with the router and the facade
+     * Create the controller with the router, the facade
      * @param addUpdate 0 if we add, 1 if we update
      * @param categoryTagToUpdate the category to update
      */
@@ -115,15 +115,27 @@ public class AddUpdateCategoryController implements Initializable {
     }
 
     /**
-     * TODO update
      * Triggered when the user pushes the update button
      * Ask the facade to update a category
-     * @param event
+     * @param event the event triggered
      */
     public void submitUpdateCategory(ActionEvent event){
+        // We retrieve the inputs of the user
         String newNameCat = nameCatTF.getText();
         String newDescriptionCat = descriptionCatTF.getText();
-        System.out.println("You try to update");
+        try{
+            // Ask the facade to update the category
+            FACADE.submitUpdateCategory(newNameCat,newDescriptionCat,this.category);
+            // We redirect to the categories management
+            ROUTER.adminRestricted(CategoryRouter.MANAGE_CATEGORY_FXML_PATH,event);
+        }
+        catch(BadInformationException err){
+            addUpdateCatFailed.setTextFill(Paint.valueOf("red"));
+            addUpdateCatFailed.setText(err.getMessage());
+        }
+        catch (IOException err){
+            err.printStackTrace();
+        }
     }
 
     /**
@@ -136,29 +148,6 @@ public class AddUpdateCategoryController implements Initializable {
     }
 
     /**
-     * Function called to instantiate and display the label and buttons
-     * when we want to add
-     */
-    private void caseAdd(){
-        this.addUpdateL.setText("Add a New Category");
-        addUpdateB.setText("Add");
-        addUpdateB.setOnAction(this::submitAddCategory);
-        nameCatTF.setOnAction(this::submitAddCategory);
-    }
-
-    /**
-     * Function called to instantiate and display the label and buttons when we want to update
-     */
-    private void caseUpdate(){
-        this.addUpdateL.setText("Update a Category: "+category.getName());
-        addUpdateB.setText("Update");
-        addUpdateB.setOnAction(this::submitUpdateCategory);
-        nameCatTF.setOnAction(this::submitUpdateCategory);
-        nameCatTF.setText(category.getName());
-        descriptionCatTF.setText(category.getDescription());
-    }
-
-    /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before
      * the view appears on the client side
@@ -167,11 +156,21 @@ public class AddUpdateCategoryController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(this.addUpdate == 0){
-            this.caseAdd();
+        if(this.addUpdate == 1){
+            // We want to update
+            this.addUpdateL.setText("Update a Category: "+category.getName());
+            addUpdateB.setText("Update");
+            addUpdateB.setOnAction(this::submitUpdateCategory);
+            nameCatTF.setOnAction(this::submitUpdateCategory);
+            nameCatTF.setText(category.getName());
+            descriptionCatTF.setText(category.getDescription());
         }
         else{
-            this.caseUpdate();
+            // We want to add
+            this.addUpdateL.setText("Add a New Category");
+            addUpdateB.setText("Add");
+            addUpdateB.setOnAction(this::submitAddCategory);
+            nameCatTF.setOnAction(this::submitAddCategory);
         }
     }
 }

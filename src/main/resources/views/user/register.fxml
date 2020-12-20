@@ -39,42 +39,42 @@
                 </VBox>
                 <AnchorPane prefHeight="463.0" prefWidth="934.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="427.0" text="REGISTER" AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="427.0" text="REGISTER" AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="firstNameTF" layoutX="311.0" layoutY="128.0" onAction="#register" prefHeight="32.0" prefWidth="265.0" promptText="First Name ...">
+                  <TextField fx:id="firstNameTF" layoutX="311.0" layoutY="128.0" prefHeight="32.0" prefWidth="265.0" promptText="First Name ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="lastNameTF" layoutX="311.0" layoutY="205.0" onAction="#register" prefHeight="32.0" prefWidth="265.0" promptText="Last Name ...">
+                  <TextField fx:id="lastNameTF" layoutX="311.0" layoutY="205.0" prefHeight="32.0" prefWidth="265.0" promptText="Last Name ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="emailTF" layoutX="311.0" layoutY="288.0" onAction="#register" prefHeight="32.0" prefWidth="265.0" promptText="Email Address ...">
+                  <TextField fx:id="emailTF" layoutX="311.0" layoutY="288.0" prefHeight="32.0" prefWidth="265.0" promptText="Email Address ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="confirmEmailTF" layoutX="311.0" layoutY="327.0" onAction="#register" prefHeight="32.0" prefWidth="265.0" promptText="Confirm Email adress ...">
+                  <TextField fx:id="confirmEmailTF" layoutX="311.0" layoutY="327.0" prefHeight="32.0" prefWidth="265.0" promptText="Confirm Email adress ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <PasswordField fx:id="passwordTF" layoutX="662.0" layoutY="171.0" onAction="#register" prefHeight="32.0" prefWidth="266.0" promptText="Password ...">
+                  <PasswordField fx:id="passwordTF" layoutX="662.0" layoutY="171.0" prefHeight="32.0" prefWidth="266.0" promptText="Password ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </PasswordField>
-                  <PasswordField fx:id="confirmPasswordTF" layoutX="662.0" layoutY="216.0" onAction="#register" prefHeight="32.0" prefWidth="266.0" promptText="Confirm password ...">
+                  <PasswordField fx:id="confirmPasswordTF" layoutX="662.0" layoutY="216.0" prefHeight="32.0" prefWidth="266.0" promptText="Confirm password ...">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </PasswordField>
-                  <TextField fx:id="pseudoTF" layoutX="663.0" layoutY="306.0" onAction="#register" prefHeight="32.0" prefWidth="265.0" promptText="Pseudo ...">
+                  <TextField fx:id="pseudoTF" layoutX="663.0" layoutY="306.0" prefHeight="32.0" prefWidth="265.0" promptText="Pseudo ...">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -117,7 +117,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Button id="negativeButton" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
-                  <Button id="neutralButton" layoutX="516.0" layoutY="58.0" mnemonicParsing="false" onAction="#register" prefHeight="37.0" prefWidth="168.0" text="Register" />
+                  <Button id="neutralButton" fx:id="registerUpdateB" layoutX="516.0" layoutY="58.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" text="Register" />
                </children>
             </AnchorPane>
             </children>

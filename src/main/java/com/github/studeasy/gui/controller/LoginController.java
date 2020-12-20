@@ -94,7 +94,7 @@ public class LoginController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void loadRegister(ActionEvent event) throws IOException {
-        ROUTER.changeView(UserRouter.REGISTER_FXML_PATH,event);
+        ((UserRouter)ROUTER).registerOrUpdateUser(UserRouter.REGISTER_FXML_PATH,event,0);
     }
 
     /**

@@ -36,6 +36,11 @@ public class RegisterUpdateController implements Initializable {
     private final int action;
 
     /**
+     * Label of the title of the page
+     */
+    @FXML
+    private Label title;
+    /**
      * The field to enter the first name
      */
     @FXML
@@ -87,13 +92,8 @@ public class RegisterUpdateController implements Initializable {
      * The button for register
      */
     @FXML
-    private Button registerB;
+    private Button registerUpdateB;
 
-    /**
-     * The button for update an user
-     */
-    @FXML
-    private Button updateB;
 
     /**
      * Instantiate the parent's attributes with
@@ -111,7 +111,7 @@ public class RegisterUpdateController implements Initializable {
      * Register a User on the platform and redirect him, or indicates him its credentials are wrong
      * @param event
      */
-    public void register(){
+    public void register(ActionEvent event){
 
         // We retrieve the user inputs
         String firstName = firstNameTF.getText();
@@ -160,7 +160,7 @@ public class RegisterUpdateController implements Initializable {
      * Update the parameters of a user and redirect him, or indicates him its credentials are wrong
      * @param event
      */
-    public void update(){
+    public void update(ActionEvent event){
 
     }
 
@@ -184,11 +184,15 @@ public class RegisterUpdateController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //if register
         if(action == 0){
-            registerB.setText("Register");
-            registerB.setOnAction((event -> register()));
+            title.setText("REGISTER");
+            registerUpdateB.setText("Register");
+            registerUpdateB.setOnAction((this::register));
+        //if update
         }else if(action == 1){
-            registerB.setText("Update");
-            registerB.setOnAction((event -> update()));
+            title.setText("UPDATE");
+            registerUpdateB.setText("Update");
+            registerUpdateB.setOnAction((this::update));
         }
+
     }
 }

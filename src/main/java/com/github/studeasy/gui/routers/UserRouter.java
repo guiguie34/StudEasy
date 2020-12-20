@@ -1,6 +1,9 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.user.RegisterUpdateController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 
@@ -31,6 +34,24 @@ public class UserRouter extends AbstractRouter {
             userRouter = new UserRouter();
         }
         return userRouter;
+    }
+
+    /**
+     * Load the view and display the good label and buttons for adding or
+     * updating a category
+     * @param pathFXML the path to the fxml file
+     * @param event the action trigerring the change of view
+     * @param addUpdate 0 if we add, 1 if we update
+     * @throws IOException
+     */
+    public void registerOrUpdateUser(String pathFXML, ActionEvent event, int addUpdate) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with
+        RegisterUpdateController registerUpdateController = new RegisterUpdateController(addUpdate);
+        loader.setController(registerUpdateController);
+        Parent root = loader.load();
+        this.changeView(event,root);
     }
 
     /**

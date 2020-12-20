@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.home;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -21,7 +22,13 @@ public class HomeAdminController extends HomeAbstractController implements Initi
     /**
      * Go to the search users pages
      */
-    public void searchUsers(){
+    public void searchUsers(ActionEvent event){
+        try {
+            ((UserRouter)ROUTER).searchUsers(event);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 

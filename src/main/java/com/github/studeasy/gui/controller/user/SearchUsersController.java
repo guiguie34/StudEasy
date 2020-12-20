@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 /**
  * The controller for the search a user view
  */
-public class SearchUserController implements Initializable {
+public class SearchUsersController implements Initializable {
+
+
 
     /**
      * Function from the interface Initializable

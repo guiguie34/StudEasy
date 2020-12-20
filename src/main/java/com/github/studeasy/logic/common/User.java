@@ -45,15 +45,9 @@ public class User {
 	 * salt to encrypt/decrypt the password
 	 */
 	private String salt;
-	/**
-	 * pseudo
-	 */
-	private String pseudo;
 
-	/**
-	 * points of the student
-	 */
-	private int points;
+
+
 
 	/**
 	 * Default constructor
@@ -64,8 +58,6 @@ public class User {
 		this.emailAdress=emailAddress;
 		this.password= password;
 		this.salt = salt;
-		this.pseudo = pseudo;
-		this.points = points;
 		switch (role) {
 			case 0:
 				this.role = new RoleAdmin();
@@ -78,6 +70,8 @@ public class User {
 				break;
 		}
 	}
+
+
 
 	public String getLastname() {
 		return lastname;
@@ -120,23 +114,5 @@ public class User {
 	}
 	
 
-	public int getPoints() {
-		return points;
-	}
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public String getPseudo() {
-		return pseudo;
-	}
-
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
-	}
 }

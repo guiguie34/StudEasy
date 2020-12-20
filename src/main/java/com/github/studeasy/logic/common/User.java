@@ -119,18 +119,7 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public String getPseudo() {
-		return pseudo;
-	}
-
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
-	}
+	
 
 	public int getPoints() {
 		return points;

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The user DAO using a MySQL database
@@ -130,6 +131,37 @@ public class MySQLUserDAO extends UserDAO{
         return searchUser(email);
     }
 
+    /**
+     * Get all the users who are student
+     * @return An ArrayList of all the students in database
+     */
+    public ArrayList<User> seeAllUsers(){
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            // We prepare the SQL request to retrieve a category
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM user WHERE role=?";
+            preparedStatement = DB.prepareStatement(request);
+            //Indicate that the role of the user must be student
+            preparedStatement.setInt(1, 1);
 
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We retrieve all the existing users
+            while (resultSet.next()) {
+                // We create the user
+                User user = new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9), resultSet.getString(10));
+                // And put it with the others
+                users.add(user);
+            }
+        }
+        // Error with the database
+        catch(SQLException err){
+            err.printStackTrace();
+        }
+        return users;
+    }
 
 }

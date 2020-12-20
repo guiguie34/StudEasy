@@ -81,7 +81,7 @@ public class MyProfileController implements Initializable {
     public void deleteMyAccount(ActionEvent event) {
         try {
             if(AbstractRouter.confirmationBox("Do you really want to delete your account ? You will miss us","Confirm the deletion","Warning")){
-                FACADE.deleteMyAccount(user.getEmailAdress());
+                FACADE.deleteMyAccount(user.getEmailAddress());
                 ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
             }
         }catch (Exception e){
@@ -122,6 +122,6 @@ public class MyProfileController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         firstNameTF.setText(user.getFirstname());
         lastNameTF.setText(user.getLastname());
-        emailTF.setText(user.getEmailAdress());
+        emailTF.setText(user.getEmailAddress());
     }
 }

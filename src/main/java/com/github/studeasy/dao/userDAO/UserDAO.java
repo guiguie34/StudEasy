@@ -4,6 +4,7 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Abstract class for the User DAO
@@ -57,5 +58,22 @@ public abstract class UserDAO {
      */
     public abstract void deleteUser(String email) throws Exception;
 
+    /**
+     * Update information of an user
+     * @param firstName the first name of the user
+     * @param lastName last name of the user
+     * @param pseudo pseudo of the user
+     * @param email email of the user
+     * @param password password of the user
+     * @param salt salt of the user
+     * @return the new user
+     * @throws Exception if an error occur
+     */
     public abstract User update(String firstName, String lastName, String pseudo, String email, String password, String salt) throws Exception;
+
+    /**
+     * Get all the users who are student
+     * @return An ArrayList of all the students in database
+     */
+    public abstract ArrayList<User> seeAllUsers();
 }

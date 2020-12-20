@@ -8,6 +8,8 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
 
+import java.util.ArrayList;
+
 /**
  * The Facade User for the UserDAO
  * It contains methods that allow a user to login
@@ -129,4 +131,12 @@ public class FacadeUser {
     }
 
 
+    /**
+     * Method which will get all the users
+     * @return an ArrayList of all the users
+     */
+    public ArrayList<User> seeAllUsers() {
+        //we ask to the DAO to retrieve all the users
+        return DAO.seeAllUsers();
+    }
 }

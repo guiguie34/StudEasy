@@ -4,6 +4,8 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.common.role.RoleAdmin;
+import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
@@ -266,8 +268,8 @@ public class RegisterUpdateController implements Initializable {
 
             firstNameTF.setText(user.getFirstname());
             lastNameTF.setText(user.getLastname());
-            emailTF.setText(user.getEmailAdress());
-            pseudoTF.setText(user.getPseudo());
+            emailTF.setText(user.getEmailAddress());
+            pseudoTF.setText(((RoleStudent)user.getRole()).getPseudo());
         }
 
     }

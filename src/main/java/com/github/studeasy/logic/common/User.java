@@ -42,13 +42,29 @@ public class User {
 	private List<Notification> notifications;
 
 	/**
+	 * salt to encrypt/decrypt the password
+	 */
+	private String salt;
+	/**
+	 * pseudo
+	 */
+	private String pseudo;
+
+	/**
+	 * points of the student
+	 */
+	private int points;
+
+	/**
 	 * Default constructor
 	 */
-	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points) {
+	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points, String salt) {
 		this.lastname=lastName;
 		this.firstname=firstName;
 		this.emailAdress=emailAddress;
 		this.password= password;
+		this.salt = salt;
+		this.pseudo = pseudo;
 		switch (role) {
 			case 0:
 				this.role = new RoleAdmin();
@@ -61,6 +77,8 @@ public class User {
 				break;
 		}
 	}
+
+
 
 	public String getLastname() {
 		return lastname;
@@ -100,5 +118,25 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 }

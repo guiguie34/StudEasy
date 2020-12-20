@@ -4,7 +4,11 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +23,13 @@ public class HomeStudentController implements Initializable {
      */
     private final AbstractRouter ROUTER;
 
+
     /**
+     * label displayed if an error occur
+     */
+    @FXML
+    private Label failLabel;
+
      /**
      * The facade used by the controller
      */
@@ -35,8 +45,16 @@ public class HomeStudentController implements Initializable {
      * @param event the event triggered
      * @throws IOException if an error occurs
      */
-    public void loadMyProfile(ActionEvent event) throws IOException {
-        ((UserRouter)ROUTER).profileUser(event);
+    public void loadMyProfile(ActionEvent event){
+        try {
+            ((UserRouter)ROUTER).profileUser(event);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            failLabel.setAlignment(Pos.CENTER);
+            failLabel.setTextFill(Paint.valueOf("red"));
+            failLabel.setText("Error, try again later");
+        }
     }
 
     /**

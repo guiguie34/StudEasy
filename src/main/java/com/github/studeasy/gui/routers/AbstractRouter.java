@@ -58,7 +58,7 @@ public abstract class AbstractRouter {
         // We get the Stage
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
         // We add a nice ?
-        dialog.setGraphic(new ImageView("images/common/help.png"));
+        //dialog.setGraphic(new ImageView("images/common/help.png"));
         // And we add the logo
         stage.getIcons().add(new Image("images/logo.png"));
         // We add the ok and cancel buttons

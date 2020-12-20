@@ -8,7 +8,9 @@ import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +54,12 @@ public class MyProfileController implements Initializable {
     @FXML
     private Label emailTF;
 
+    /**
+     * Label if an error occur
+     */
+    @FXML
+    private Label deleteFailLabel;
+
 
 
     /**
@@ -69,9 +77,20 @@ public class MyProfileController implements Initializable {
     /**
      * Triggered when the user wants to go to the delete his account
      * @param event the event triggered
-     * @throws IOException if an error occurs
      */
-    public void deleteMyAccount(ActionEvent event) throws IOException {
+    public void deleteMyAccount(ActionEvent event) {
+        try {
+            if(AbstractRouter.confirmationBox("Do you really want to delete your account ? You will miss us","Confirm the deletion","Warning")){
+                FACADE.deleteMyAccount(user.getEmailAdress());
+                ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            deleteFailLabel.setAlignment(Pos.CENTER);
+            deleteFailLabel.setTextFill(Paint.valueOf("red"));
+            deleteFailLabel.setText("Error, try again later");
+        }
+
     }
 
     /**

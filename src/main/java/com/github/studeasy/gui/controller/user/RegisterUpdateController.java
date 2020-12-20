@@ -136,7 +136,7 @@ public class RegisterUpdateController implements Initializable {
         //If all the fields aren't empty
         if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !pseudo.isEmpty()){
             try {
-                FACADE.register(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword);
+                FACADE.registerUpdate(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword,0);
                 ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
 
 
@@ -152,7 +152,9 @@ public class RegisterUpdateController implements Initializable {
                 registerFailLabel.setText("There is already an account with this email");
             }
             catch (Exception e){
-                e.printStackTrace();
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText("Error, Try again later");
             }
         }else{
             registerFailLabel.setAlignment(Pos.CENTER);
@@ -173,7 +175,43 @@ public class RegisterUpdateController implements Initializable {
      * @param event
      */
     public void update(ActionEvent event){
+        // We retrieve the user inputs
+        String firstName = firstNameTF.getText();
+        String lastName = lastNameTF.getText();
+        String email = emailTF.getText();
+        String confirmEmail = confirmEmailTF.getText();
+        String password = passwordTF.getText();
+        String confirmPassword = confirmPasswordTF.getText();
+        String pseudo = pseudoTF.getText();
+        //If all the fields aren't empty
+        if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !pseudo.isEmpty()){
+            try {
+                FACADE.registerUpdate(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword,1);
+                ROUTER.changeView(UserRouter.PROFILE_USER_FXML_PATH,event);
 
+
+            }catch (BadInformationException exception){
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText(exception.getMessage());
+
+            }
+            catch (SQLIntegrityConstraintViolationException e){
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText("There is already an account with this email");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                registerFailLabel.setAlignment(Pos.CENTER);
+                registerFailLabel.setTextFill(Paint.valueOf("red"));
+                registerFailLabel.setText("Error, Try again later");
+            }
+        }else{
+            registerFailLabel.setAlignment(Pos.CENTER);
+            registerFailLabel.setTextFill(Paint.valueOf("red"));
+            registerFailLabel.setText("All fields are required");
+        }
     }
 
     /**
@@ -221,7 +259,7 @@ public class RegisterUpdateController implements Initializable {
         //if update
         }else if(action == 1){
             User user = Session.getInstance().getCurrentUser();
-            title.setText("Modify My information");
+            title.setText("Modify my information");
             registerUpdateB.setText("Update");
             registerUpdateB.setOnAction((this::update));
             cancelB.setOnAction((this::cancelUpdate));

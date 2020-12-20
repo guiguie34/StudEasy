@@ -49,6 +49,12 @@ public class User {
 	 * pseudo
 	 */
 	private String pseudo;
+
+	/**
+	 * points of the student
+	 */
+	private int points;
+
 	/**
 	 * Default constructor
 	 */

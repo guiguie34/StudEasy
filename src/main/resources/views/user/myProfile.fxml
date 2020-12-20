@@ -67,11 +67,12 @@
                   <Label fx:id="emailTF" layoutX="407.0" layoutY="214.0" prefHeight="15.0" prefWidth="298.0" />
                   <Button id="negativeButton" layoutX="705.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteMyAccount" prefHeight="38.0" prefWidth="150.0" text="Delete my account" />
                   <Button id="positiveButton" layoutX="323.0" layoutY="316.0" mnemonicParsing="false" onAction="#loadUpdate" prefHeight="38.0" prefWidth="150.0" text="Modify my account" />
+                  <Label fx:id="deleteFailLabel" layoutX="419.0" layoutY="74.0" prefHeight="15.0" prefWidth="372.0" />
                     </children>
                 </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button id="negativeButton" fx:id="cancelB" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
+                  <Button id="negativeButton" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
                </children>
             </AnchorPane>
             </children>

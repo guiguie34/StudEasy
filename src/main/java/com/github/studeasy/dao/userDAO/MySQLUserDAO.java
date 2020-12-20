@@ -62,6 +62,16 @@ public class MySQLUserDAO extends UserDAO{
         return currentUser;
     }
 
+    /**
+     * Method which will register a new user in the database
+     * @param firstName first name of the new user
+     * @param lastName last Name of the new user
+     * @param pseudo pseudo of the new user
+     * @param email email of the new user
+     * @param password password of the new user
+     * @param salt  salt key of the new user
+     * @throws SQLException if an error occur
+     */
     public void register(String firstName,String lastName,String pseudo,String email,String password, String salt) throws SQLException {
         // We prepare the SQL request to insert a user
         PreparedStatement preparedStatement;
@@ -79,4 +89,47 @@ public class MySQLUserDAO extends UserDAO{
         preparedStatement.executeUpdate();
 
     }
+
+    /**
+     * method which will delete an user from the db
+     * @param email the email of the new user
+     * @throws Exception if an error occur
+     */
+    public void deleteUser(String email) throws Exception{
+        // We prepare the SQL request to update a user
+        PreparedStatement preparedStatement;
+        String request = "DELETE FROM user WHERE user.emailAddress = ? ";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setString(1, email);
+        preparedStatement.executeUpdate();
+    }
+
+    public User update(String firstName, String lastName, String pseudo, String email, String password, String salt) throws Exception {
+        // We prepare the SQL request to insert a user
+        PreparedStatement preparedStatement;
+        String request = "UPDATE user SET firstName= ?, "
+                +" lastName = ? ,"
+                +" role = ?, "
+                + "password = ?, "
+                + "emailAddress = ?,"
+                + "pseudo = ?,"
+                + "salt = ?"
+                + "WHERE emailAddress = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setString(1, firstName);
+        preparedStatement.setString(2, lastName);
+        preparedStatement.setInt(3, 1);
+        preparedStatement.setString(4, password);
+        preparedStatement.setString(5, email);
+        preparedStatement.setString(6, pseudo);
+        preparedStatement.setString(7, salt);
+        preparedStatement.setString(8, email);
+
+        // We execute the query
+        preparedStatement.executeUpdate();
+        return searchUser(email);
+    }
+
+
+
 }

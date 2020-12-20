@@ -34,6 +34,13 @@ public class Session implements SessionI {
     }
 
     /**
+     * destroy the current session
+     */
+    public static void destroySession(){
+        session =null;
+    }
+
+    /**
      * Get the current user in the session
      * @return the current user
      */

@@ -35,4 +35,8 @@ public class CategoryTag {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String toString(){
+		return this.name + ": " + this.description;
+	}
 }

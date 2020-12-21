@@ -25,7 +25,7 @@ public class CategoryRouter extends AbstractRouter{
     /**
      * Path to add or update a category view
      */
-    public final static String ADD_UPDATE_CATEGORY_FXML_PATH = "views/category/add_update_category.fxml";    /**
+    public final static String ADD_UPDATE_CATEGORY_FXML_PATH = "views/category/add_update_category.fxml";
 
     /**
      * Calls the parent constructor, getting the

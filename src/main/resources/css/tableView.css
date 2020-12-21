@@ -1,6 +1,6 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:  #90BCC9;
+    -fx-background-color: #90bcc9;
 }
 .table-view .column-header .label{
     -fx-font-weight: bold;
@@ -9,13 +9,12 @@
 }
 .table-view .cell{
     -fx-text-fill: black;
-    -fx-background-color: #e7e1e1;
     -fx-alignment: CENTER;
 }
 
 .table-row-cell:selected {
+    -fx-background-color: #90bcc9;
     -fx-font-weight: bold;
-    -fx-text-fill: black;
 }
 .scroll-bar:horizontal {
     -fx-opacity: 0;

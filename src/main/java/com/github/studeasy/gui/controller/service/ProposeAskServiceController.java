@@ -3,11 +3,14 @@ package com.github.studeasy.gui.controller.service;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.ServiceRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.CategoryTag;
+import com.github.studeasy.logic.facades.FacadeCategory;
 import com.github.studeasy.logic.facades.FacadeService;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,10 +27,14 @@ public class ProposeAskServiceController implements Initializable {
     private final AbstractRouter ROUTER;
 
     /**
-     /**
-     * The facade used by the controller
+     * The facade service used by the controller
      */
-    private final FacadeService FACADE;
+    private final FacadeService FACADE_SERVICE;
+
+    /**
+     * The facade service used by the controller
+     */
+    private final FacadeCategory FACADE_CATEGORY;
 
     /**
      * Tells if the user wants to propose or request a service
@@ -42,12 +49,59 @@ public class ProposeAskServiceController implements Initializable {
     private Label proposeRequestL;
 
     /**
-     * Create the controller with the router, the facade
+     * The textfield for the title of the service
+     */
+    @FXML
+    private TextField titleServiceTF;
+
+    /**
+     * The textarea for the description of the service
+     */
+    @FXML
+    private TextArea descriptionServiceTA;
+
+    /**
+     * The choice box for the category
+     */
+    @FXML
+    private ChoiceBox<CategoryTag> categoriesCB;
+
+    /**
+     * The spinner to enter the price of the service
+     */
+    @FXML
+    private Spinner<Integer> costServiceS;
+
+    /**
+     * Create the controller with the router, the facades
      */
     public ProposeAskServiceController(int proposeRequest){
         this.ROUTER = ServiceRouter.getInstance();
-        this.FACADE = FacadeService.getInstance();
+        this.FACADE_SERVICE = FacadeService.getInstance();
+        this.FACADE_CATEGORY = FacadeCategory.getInstance();
         this.proposeRequest = proposeRequest;
+    }
+
+    /**
+     * TODO ADD A SERVICE
+     * Triggered when the student tries to post his service
+     * @param event
+     */
+    public void submitService(ActionEvent event){
+        // We retrieve what the user entered
+        String titleS = this.titleServiceTF.getText();
+        String descriptionS = this.descriptionServiceTA.getText();
+        CategoryTag categoryS = this.categoriesCB.getValue();
+        int costS = this.costServiceS.getValue();
+        // The message displayed in the confirmation box
+        String infoMessage = "Are you sure you want to add this service ?\n" +
+                "You won't be able to modify it later";
+        // We ask the student if he is sure to add the service
+        if(AbstractRouter.confirmationBox(infoMessage,
+                "Confirmation: "+ proposeRequestL.getText(),
+                "Stud'Easy - Confirmation")){
+            // We add the service
+        }
     }
 
     /**
@@ -77,5 +131,9 @@ public class ProposeAskServiceController implements Initializable {
             // The student wants to request a service
             proposeRequestL.setText("Propose a service");
         }
+        // We fill the choice box with the categories
+        this.categoriesCB.setItems(FXCollections.observableArrayList(FACADE_CATEGORY.seeAllCategories()));
+        // The first item is selected by default
+        this.categoriesCB.getSelectionModel().selectFirst();
     }
 }

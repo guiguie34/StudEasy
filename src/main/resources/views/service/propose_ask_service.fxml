@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -42,9 +31,15 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                  <TextField layoutX="461.0" layoutY="162.0" prefHeight="31.0" prefWidth="248.0" promptText="Title of the Service ..." />
-                  <TextArea layoutX="461.0" layoutY="226.0" prefHeight="118.0" prefWidth="248.0" promptText="Description of the Service ..." />
-                  <Button id="positiveButton" layoutX="539.0" layoutY="390.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Post">
+                  <TextField fx:id="titleServiceTF" layoutX="280.0" layoutY="104.0" prefHeight="31.0" prefWidth="279.0" promptText="Title of the Service ..." />
+                  <TextArea fx:id="descriptionServiceTA" layoutX="280.0" layoutY="175.0" prefHeight="234.0" prefWidth="279.0" promptText="Description of the Service ..." />
+                  <ChoiceBox fx:id="categoriesCB" layoutX="700.0" layoutY="107.0" prefHeight="23.0" prefWidth="197.0" />
+                  <Spinner fx:id="costServiceS" layoutX="700.0" layoutY="214.0" prefHeight="23.0" prefWidth="197.0">
+                    <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" max="1000" min="0"/>
+                    </valueFactory>
+                  </Spinner>
+                  <Button id="positiveButton" layoutX="539.0" layoutY="449.0" mnemonicParsing="false" onAction="#submitService" prefHeight="27.0" prefWidth="90.0" text="Post">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -59,33 +54,46 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="74.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="642.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/category/categoryTag.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="407.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="228.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/category/descriptionCat.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="515.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Between 2 and 25 characters">
+                  <Text layoutX="335.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Between 2 and 25 characters">
                      <font>
                         <Font name="System Italic" size="10.0" />
                      </font>
                   </Text>
-                  <Text layoutX="527.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum 50 characters">
+                  <Text layoutX="344.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum 500 characters">
                      <font>
                         <Font name="System Italic" size="10.0" />
                      </font>
                   </Text>
-                  <ChoiceBox layoutX="130.0" layoutY="166.0" prefWidth="150.0" />
-                  <Spinner layoutX="130.0" layoutY="235.0" min="0" initialValue="0"/>
-                  <Text layoutX="154.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category of the service">
+                  <Text layoutX="749.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category of the service">
                      <font>
                         <Font name="System Italic" size="10.0" />
                      </font>
                   </Text>
+                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="228.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/service/title.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="734.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost of the service (in points)">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="49.0" fitWidth="39.0" layoutX="642.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/service/cost.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </children>
@@ -94,5 +102,6 @@
     <stylesheets>
         <URL value="@../../css/app.css" />
         <URL value="@../../css/buttons.css" />
+      <URL value="@../../css/choiceBox.css" />
     </stylesheets>
 </AnchorPane>

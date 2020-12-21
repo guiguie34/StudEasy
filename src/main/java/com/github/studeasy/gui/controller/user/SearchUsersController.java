@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -39,7 +40,7 @@ public class SearchUsersController implements Initializable {
      * The field to search a user
      */
     @FXML
-    private TextField searchCategoryTF;
+    private TextField searchUserTF;
 
     /**
      * The table containing the categories information
@@ -66,10 +67,10 @@ public class SearchUsersController implements Initializable {
     private TableColumn<User, String> emailColumn;
 
     /**
-     * The column containing the buttons to see an user
+     * The column containing the pseudo to see a user
      */
     @FXML
-    private TableColumn actionColumn;
+    private TableColumn<User, String> pseudoColumn;
 
     /**
      * All the users displayed in the table
@@ -83,7 +84,7 @@ public class SearchUsersController implements Initializable {
 
     /**
      * Triggered when the user pushed the cancel button
-     * Cancel the action and redirect to the login page
+     * Cancel the action and redirect to the home page
      * @param event
      */
     public void cancel(ActionEvent event) {
@@ -118,9 +119,14 @@ public class SearchUsersController implements Initializable {
         });
     }
 
-    public void viewUser(ActionEvent event){
+    /**
+     * redirect to the profile of an user
+     * @param event event
+     * @param user user to display
+     */
+    public void viewUser(Event event, User user){
         try {
-            ROUTER.changeView(UserRouter.HOME_ADMIN_FXML_PATH,event);
+            ((UserRouter)ROUTER).viewUser(UserRouter.VIEW_USER_FXML_PATH,event, user);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,19 +160,19 @@ public class SearchUsersController implements Initializable {
         // We create a filtered list containing the data
         FilteredList<User> filteredUsers = new FilteredList<>(studentList, p -> true);
         // We associate the text field with a function listening to what is entered
-        searchCategoryTF.textProperty().addListener((observable,oldValue,newValue) -> this.searchUser(observable,oldValue,newValue,filteredUsers));
+        searchUserTF.textProperty().addListener((observable,oldValue,newValue) -> this.searchUser(observable,oldValue,newValue,filteredUsers));
         // We create a sorted list based on our filtered data
         SortedList<User> sortedData = new SortedList<>(filteredUsers);
         sortedData.comparatorProperty().bind(studentManagement.comparatorProperty());
         // We add the sorted data in the table
         studentManagement.setItems(sortedData);
-
+        //put a listener (double click) on each row to go to the information of an user
         studentManagement.setRowFactory( tv -> {
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     User rowData = row.getItem();
-                    System.out.println(rowData);
+                    this.viewUser(event,rowData);
                 }
             });
             return row ;

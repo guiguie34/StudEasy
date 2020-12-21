@@ -81,7 +81,7 @@ public class MyProfileController implements Initializable {
     public void deleteMyAccount(ActionEvent event) {
         try {
             if(AbstractRouter.confirmationBox("Do you really want to delete your account ? You will miss us","Confirm the deletion","Warning")){
-                FACADE.deleteMyAccount(user.getEmailAddress());
+                FACADE.deleteAccount(user.getEmailAddress());
                 ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
             }
         }catch (Exception e){

@@ -1,7 +1,10 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.user.InfoUserController;
 import com.github.studeasy.gui.controller.user.RegisterUpdateController;
+import com.github.studeasy.logic.common.User;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -55,6 +58,23 @@ public class UserRouter extends AbstractRouter {
     }
 
     /**
+     *  Load the page of a specific user
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param user the user to display
+     * @throws IOException
+     */
+    public void viewUser(String pathFXML, Event event, User user) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with
+        InfoUserController infoUserController = new InfoUserController(user);
+        loader.setController(infoUserController);
+        Parent root = loader.load();
+        this.changeView(event,root);
+    }
+
+    /**
      * Load the view and display all the information related to the profile
      * of a student
      * @param event the action triggering the change of view
@@ -89,6 +109,11 @@ public class UserRouter extends AbstractRouter {
      * Path to searchUser view
      */
     public final static String SEARCH_USER_FXML_PATH = "views/user/searchUsers.fxml";
+
+    /**
+     * Path to viewUser view
+     */
+    public final static String VIEW_USER_FXML_PATH = "views/user/viewUser.fxml";
 
 
     /**

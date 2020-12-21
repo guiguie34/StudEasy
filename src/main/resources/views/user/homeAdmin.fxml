@@ -45,6 +45,11 @@
                   <Button id="neutralButton" layoutX="140.0" layoutY="95.0" mnemonicParsing="false" onAction="#searchUsers" prefHeight="26.0" prefWidth="146.0" text="Search users" />
                     </children>
                 </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button id="negativeButton" layoutX="169.0" layoutY="57.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="37.0" prefWidth="89.0" text="Disconnect" />
+               </children>
+            </AnchorPane>
             </children>
         </GridPane>
     </children>

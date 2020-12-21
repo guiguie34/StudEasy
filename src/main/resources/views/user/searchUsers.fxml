@@ -45,7 +45,7 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="searchCategoryTF" layoutX="946.0" layoutY="18.0" promptText="Search category ..." />
+                        <TextField fx:id="searchUserTF" layoutX="946.0" layoutY="18.0" promptText="Search category ..." />
                         <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="924.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../images/common/searchIcon.png" />

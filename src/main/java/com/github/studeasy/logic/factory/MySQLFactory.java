@@ -3,6 +3,8 @@ package com.github.studeasy.logic.factory;
 import com.github.studeasy.dao.categoryDAO.CategoryDAO;
 import com.github.studeasy.dao.categoryDAO.MySQLCategoryDAO;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
+import com.github.studeasy.dao.serviceDAO.MySQLServiceDAO;
+import com.github.studeasy.dao.serviceDAO.ServiceDAO;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
@@ -66,5 +68,14 @@ public class MySQLFactory extends Factory {
     @Override
     public CategoryDAO createCategoryDAO() {
         return new MySQLCategoryDAO();
+    }
+
+    /**
+     * Method which will create a MySQLServiceDAO
+     * @return the MySQLServiceDAO
+     */
+    @Override
+    public ServiceDAO createServiceDAO() {
+        return new MySQLServiceDAO();
     }
 }

@@ -18,7 +18,7 @@ public abstract class CategoryDAO {
     /**
      * Static method which returns the instance of the CategoryDAO,
      * or ask the factory to create one
-     * @return the instance of MySQLUserDAO
+     * @return the instance of MySQLCategoryDAO
      */
     public static CategoryDAO getInstance(){
         if (categoryDAO == null){

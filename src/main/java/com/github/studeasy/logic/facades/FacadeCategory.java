@@ -33,7 +33,7 @@ public class FacadeCategory {
 
     /**
      * Static function that allow to get the instance of the FacadeCategory
-     * @return the instance of FacadeUser
+     * @return the instance of FacadeCategory
      */
     public static FacadeCategory getInstance(){
         if(facadeCategory == null){

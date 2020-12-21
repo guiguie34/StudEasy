@@ -1,0 +1,22 @@
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: #90bcc9;
+}
+.table-view .column-header .label{
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+}
+.table-view .cell{
+    -fx-text-fill: black;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #90bcc9;
+    -fx-font-weight: bold;
+}
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-padding: -7;
+}

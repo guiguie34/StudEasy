@@ -92,7 +92,7 @@ public class ProposeAskServiceController implements Initializable {
 
     /**
      * Triggered when the student tries to post his service
-     * @param event
+     * @param event the event triggered
      */
     public void submitService(ActionEvent event){
         // We retrieve what the user entered
@@ -112,9 +112,12 @@ public class ProposeAskServiceController implements Initializable {
                 // We add the service
                 try {
                     FACADE_SERVICE.submitService(titleS,descriptionS,categoryS,costS,proposeRequest);
+                    ROUTER.studentRestricted(UserRouter.HOME_STUDENT_FXML_PATH,event);
                 } catch (BadInformationException err) {
                     addServiceFailedL.setTextFill(Paint.valueOf("red"));
                     addServiceFailedL.setText(err.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }

@@ -46,7 +46,7 @@ public class MySQLCategoryDAO extends CategoryDAO{
             // We retrieve all the existing categories
             while (resultSet.next()) {
                 // We create the category
-                CategoryTag category = new CategoryTag(resultSet.getString(2),resultSet.getString(3));
+                CategoryTag category = new CategoryTag(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3));
                 // And put it with the others
                 categories.add(category);
             }
@@ -65,10 +65,10 @@ public class MySQLCategoryDAO extends CategoryDAO{
     public void deleteCategory(CategoryTag categoryToDelete){
         // We prepare the SQL request to delete a category tag
         PreparedStatement preparedStatement;
-        String request = "DELETE FROM categorytag WHERE nameCategory = ?";
+        String request = "DELETE FROM categorytag WHERE idCategory = ?";
         try {
             preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setString(1, categoryToDelete.getName());
+            preparedStatement.setInt(1, categoryToDelete.getIdCat());
             // We execute the query
             preparedStatement.executeUpdate();
         }
@@ -109,12 +109,12 @@ public class MySQLCategoryDAO extends CategoryDAO{
     public void submitUpdateCategory(String nameCat, String descriptionCat, CategoryTag categoryToUpdate){
         // We prepare the SQL request to insert a category tag
         PreparedStatement preparedStatement;
-        String request = "UPDATE categorytag SET nameCategory = ?, descriptionCategory = ? WHERE nameCategory = ?";
+        String request = "UPDATE categorytag SET nameCategory = ?, descriptionCategory = ? WHERE idCategory = ?";
         try {
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, nameCat);
             preparedStatement.setString(2, descriptionCat);
-            preparedStatement.setString(3, categoryToUpdate.getName());
+            preparedStatement.setInt(3, categoryToUpdate.getIdCat());
 
             // We execute the query
             preparedStatement.executeUpdate();
@@ -145,7 +145,7 @@ public class MySQLCategoryDAO extends CategoryDAO{
             // We check if the query retrieved a category
             if (resultSet.next()) {
                 // We create the corresponding category
-                existingCat = new CategoryTag(resultSet.getString(2),resultSet.getString(3));
+                existingCat = new CategoryTag(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3));
             }
         }
         // Error with the database

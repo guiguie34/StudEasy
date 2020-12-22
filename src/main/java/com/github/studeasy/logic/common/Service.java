@@ -138,6 +138,14 @@ public class Service {
 		this.status = status;
 	}
 
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
 	public List<CommandOfService> getServices() {
 		return services;
 	}

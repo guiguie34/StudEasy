@@ -1,8 +1,11 @@
 package com.github.studeasy.dao.serviceDAO;
 
 import com.github.studeasy.logic.common.CategoryTag;
+import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -30,6 +33,13 @@ public abstract class ServiceDAO {
     }
 
     /**
+     * Retrieve the services of the user
+     * @param currentUser the user wanting to see his services
+     * @return the services of the user
+     */
+    public abstract ArrayList<Service> getMyServices(User currentUser);
+
+    /**
      * Create a service with those information
      * @param titleS the title of the new service
      * @param descriptionS the description of the new service
@@ -37,7 +47,8 @@ public abstract class ServiceDAO {
      * @param cost the cost of the new service
      * @param typeS the type of the service
      * @param creationDate the date of creation
+     * @param user the user creating the service
      */
     public abstract void submitService(String titleS, String descriptionS, CategoryTag category,
-                                       int cost, int typeS, Date creationDate);
+                                       int cost, int typeS, Date creationDate, User user);
 }

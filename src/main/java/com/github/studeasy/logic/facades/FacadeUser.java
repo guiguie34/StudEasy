@@ -7,6 +7,7 @@ import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
+import com.github.studeasy.logic.utils.regexUtils;
 
 import java.util.ArrayList;
 
@@ -92,8 +93,8 @@ public class FacadeUser {
         //Minimum eight characters, at least one letter, one number and one special character
         if(password.equals(confirmPassword)){
             if(email.equals(confirmEmail)){
-                if(true){ //password.matches(REGEXPASSWORD)
-                    if (true) { //password.matches(REGEXPASSWORD)
+                if(true){ //regexUtils.matches_password(password)
+                    if (true) { //regexUtils.matches_mail(email)
                         //if it's a register
                         if(action == 0){
                             salt = PasswordUtils.getSalt(30);

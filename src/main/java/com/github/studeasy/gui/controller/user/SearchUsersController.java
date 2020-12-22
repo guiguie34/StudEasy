@@ -43,7 +43,7 @@ public class SearchUsersController implements Initializable {
     private TextField searchUserTF;
 
     /**
-     * The table containing the categories information
+     * The table containing the users information
      */
     @FXML
     private TableView<User> studentManagement;

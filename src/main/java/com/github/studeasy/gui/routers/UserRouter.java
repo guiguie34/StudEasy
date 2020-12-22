@@ -30,7 +30,7 @@ public class UserRouter extends AbstractRouter {
 
     /**
      * Used to return the unique instance of the UserRouter
-     * @return
+     * @return an instance of the router
      */
     public static UserRouter getInstance(){
         if(userRouter == null){

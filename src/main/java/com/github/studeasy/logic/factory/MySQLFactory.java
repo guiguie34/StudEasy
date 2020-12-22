@@ -1,6 +1,8 @@
 package com.github.studeasy.logic.factory;
 
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
+import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
+import com.github.studeasy.dao.feedbackDAO.MySQLFeedbackDAO;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
@@ -34,7 +36,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * Close the connection
-     * @throws SQLException
+     * @throws SQLException if an error occur
      */
     private void closeConnection() throws SQLException {
         this.db.close();
@@ -55,5 +57,10 @@ public class MySQLFactory extends Factory {
     @Override
     public UserDAO createUserDAO() {
         return new MySQLUserDAO();
+    }
+
+    @Override
+    public FeedbackDAO createFeedbackDAO() {
+        return new MySQLFeedbackDAO();
     }
 }

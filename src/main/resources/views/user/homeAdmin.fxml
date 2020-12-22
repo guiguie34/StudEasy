@@ -43,6 +43,7 @@
                             </font>
                         </Label>
                   <Button id="neutralButton" layoutX="140.0" layoutY="95.0" mnemonicParsing="false" onAction="#searchUsers" prefHeight="26.0" prefWidth="146.0" text="Search users" />
+                  <Button id="neutralButton" layoutX="140.0" layoutY="147.0" mnemonicParsing="false" onAction="#test" prefHeight="26.0" prefWidth="146.0" text="testFeedback" />
                     </children>
                 </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

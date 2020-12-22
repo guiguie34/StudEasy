@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
@@ -30,6 +31,15 @@ public class HomeAdminController extends HomeAbstractController implements Initi
         }
 
 
+    }
+
+    public  void test(ActionEvent event){
+        try {
+
+            FeedbackRouter.getInstance().viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH,event,5);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

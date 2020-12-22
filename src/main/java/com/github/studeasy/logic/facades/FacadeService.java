@@ -1,6 +1,10 @@
 package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
+import com.github.studeasy.logic.common.CategoryTag;
+import com.github.studeasy.logic.facades.exceptions.BadInformationException;
+
+import java.util.Date;
 
 /**
  * The Facade Service for the ServiceDAO
@@ -36,5 +40,27 @@ public class FacadeService {
             facadeService = new FacadeService();
         }
         return facadeService;
+    }
+
+    /**
+     * Function used to check if we can add the service, then add it
+     * @param titleS the title of the new service
+     * @param descriptionS the description of the new service
+     * @param category the category associated to the new service
+     * @param cost the cost of the new service
+     * @param typeS the type of the service
+     * @throws BadInformationException if the service is not conform
+     */
+    public void submitService(String titleS, String descriptionS, CategoryTag category, int cost, int typeS) throws BadInformationException {
+        // We check if the title and the description fit
+        if((titleS.length() >= 2 && titleS.length() <= 25) && descriptionS.length() <= 500){
+            Date creationDate = new Date();
+            // We create it
+            DAO.submitService(titleS,descriptionS,category,cost,typeS,creationDate);
+        }
+        else{
+            // We tell the user what's wrong
+            throw new BadInformationException("The title and description do not have a correct length");
+        }
     }
 }

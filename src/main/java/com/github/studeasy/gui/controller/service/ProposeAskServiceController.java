@@ -6,11 +6,13 @@ import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.facades.FacadeCategory;
 import com.github.studeasy.logic.facades.FacadeService;
+import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +51,12 @@ public class ProposeAskServiceController implements Initializable {
     private Label proposeRequestL;
 
     /**
+     * The label displaying the error that occured
+     */
+    @FXML
+    private Label addServiceFailedL;
+
+    /**
      * The textfield for the title of the service
      */
     @FXML
@@ -83,7 +91,6 @@ public class ProposeAskServiceController implements Initializable {
     }
 
     /**
-     * TODO ADD A SERVICE
      * Triggered when the student tries to post his service
      * @param event
      */
@@ -96,11 +103,24 @@ public class ProposeAskServiceController implements Initializable {
         // The message displayed in the confirmation box
         String infoMessage = "Are you sure you want to add this service ?\n" +
                 "You won't be able to modify it later";
-        // We ask the student if he is sure to add the service
-        if(AbstractRouter.confirmationBox(infoMessage,
-                "Confirmation: "+ proposeRequestL.getText(),
-                "Stud'Easy - Confirmation")){
-            // We add the service
+        // We first check if the title and the description are not empty
+        if(!titleS.isEmpty() && !descriptionS.isEmpty()){
+            // We ask the student if he is sure to add the service
+            if(AbstractRouter.confirmationBox(infoMessage,
+                    "Confirmation: "+ proposeRequestL.getText(),
+                    "Stud'Easy - Confirmation")){
+                // We add the service
+                try {
+                    FACADE_SERVICE.submitService(titleS,descriptionS,categoryS,costS,proposeRequest);
+                } catch (BadInformationException err) {
+                    addServiceFailedL.setTextFill(Paint.valueOf("red"));
+                    addServiceFailedL.setText(err.getMessage());
+                }
+            }
+        }
+        else{
+            addServiceFailedL.setTextFill(Paint.valueOf("red"));
+            addServiceFailedL.setText("All the fields must be completed");
         }
     }
 

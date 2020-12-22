@@ -1,6 +1,9 @@
 package com.github.studeasy.dao.serviceDAO;
 
+import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.factory.Factory;
+
+import java.util.Date;
 
 /**
  * Abstract class for the Service DAO
@@ -25,4 +28,16 @@ public abstract class ServiceDAO {
         }
         return serviceDAO;
     }
+
+    /**
+     * Create a service with those information
+     * @param titleS the title of the new service
+     * @param descriptionS the description of the new service
+     * @param category the category associated to the new service
+     * @param cost the cost of the new service
+     * @param typeS the type of the service
+     * @param creationDate the date of creation
+     */
+    public abstract void submitService(String titleS, String descriptionS, CategoryTag category,
+                                       int cost, int typeS, Date creationDate);
 }

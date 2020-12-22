@@ -63,14 +63,24 @@ public class MySQLUserDAO extends UserDAO{
     }
 
 
-    public User submitAddPartner(String email,String password, String firstname, String lastname, String company) throws Exception{
+    /**
+     * Add a partner to the database
+     * @param email
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param salt
+     * @throws Exception if an error occurs
+     */
+    public void submitAddPartner(String email,String password, String firstname, String lastname, String company, String salt) throws Exception{
         User currentUser = null;
         try {
             // We prepare the SQL request to retrieve a user
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             int resultSet;
-            String request = "INSERT INTO user(firstName,lastName,role,password,emailAddress,company) VALUES(?,?,?,?,?,?)";
+            String request = "INSERT INTO user(firstName,lastName,role,password,emailAddress,company,salt) VALUES(?,?,?,?,?,?,?)";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, firstname);
             preparedStatement.setString(2, lastname);
@@ -78,14 +88,14 @@ public class MySQLUserDAO extends UserDAO{
             preparedStatement.setString(4, password);
             preparedStatement.setString(5, email);
             preparedStatement.setString(6, company);
+            preparedStatement.setString(7, salt);
             // We execute the query
             resultSet = preparedStatement.executeUpdate();
-            currentUser = searchUser(email);
+            //currentUser = searchUser(email);
         }
         catch(SQLException e){
             throw e;
         }
-        return currentUser;
     }
 
 }

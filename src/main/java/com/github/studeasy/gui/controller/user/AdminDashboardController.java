@@ -32,7 +32,12 @@ public class AdminDashboardController implements Initializable {
 
     }
 
-    public void addpartner(ActionEvent event) throws IOException {
+    /**
+     * Load the view to create a partner account
+     * @param event the action trigerring the change of view
+     * @throws IOException if an error occurs
+     */
+    public void addPartner(ActionEvent event) throws IOException {
         ((UserRouter)ROUTER).addPartner(event);
     }
 }

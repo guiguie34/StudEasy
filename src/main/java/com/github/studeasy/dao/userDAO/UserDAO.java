@@ -37,5 +37,15 @@ public abstract class UserDAO {
     public abstract User searchUser(String email) throws Exception;
 
 
-    public abstract User submitAddPartner(String email,String password, String firstname, String lastname, String company) throws Exception;
+    /**
+     * Add a partner to the database
+     * @param email
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param salt
+     * @throws Exception if an error occurs
+     */
+    public abstract void submitAddPartner(String email,String password, String firstname, String lastname, String company, String salt) throws Exception;
 }

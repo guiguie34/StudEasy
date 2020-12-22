@@ -4,6 +4,8 @@ import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.facades.exceptions.BadInformationException;
+import com.github.studeasy.logic.utils.PasswordUtils;
 
 /**
  * The Facade User for the UserDAO
@@ -60,9 +62,29 @@ public class FacadeUser {
         }
     }
 
-    public void submitAddPartner(String email, String password, String firstname, String lastname, String company) throws Exception {
+    /**
+     * Check if the logs are the same
+     * TODO: See for strength of password
+     * @param email
+     * @param confirmEmail
+     * @param password
+     * @param confirmPassword
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @throws Exception
+     */
+    public void submitAddPartner(String email, String confirmEmail,String password, String confirmPassword, String firstname, String lastname, String company) throws Exception {
+        String salt;
         try {
-            DAO.submitAddPartner(email,password,firstname,lastname,company);
+            if(email.equals(confirmEmail) &&  password.equals(confirmPassword)) {
+                salt = PasswordUtils.getSalt(30);
+                password = PasswordUtils.generateSecurePassword(password, salt);
+                DAO.submitAddPartner(email, password, firstname, lastname, company, salt);
+            }
+            else{
+                throw new BadInformationException("The provided information doesn't match ! Please retry");
+            }
         } catch (Exception e) {
             throw e;
         }

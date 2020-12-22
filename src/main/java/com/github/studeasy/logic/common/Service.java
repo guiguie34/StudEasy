@@ -8,6 +8,11 @@ import java.util.*;
 public class Service {
 
 	/**
+	 * The id of the service
+	 */
+	private int idService;
+
+	/**
 	 * Title of the service
 	 */
 	private String title;
@@ -23,9 +28,11 @@ public class Service {
 	private int cost;
 
 	/**
-	 * Describe the type of the service (Service proposed/asked)
+	 * Describe the type of the service
+	 * 0 proposed
+	 * 1 requested
 	 */
-	private String typeService;
+	private int typeService;
 
 	/**
 	 * Reference to the user who has created the service
@@ -38,16 +45,24 @@ public class Service {
 	private CategoryTag category;
 
 	/**
-	 * Describe the status of the service (pending/validated)
+	 * Describe the status of the service
+	 * 0 pending
+	 * 1 validated
 	 */
-	private String status;
+	private int status;
+
+	/**
+	 * The date and time when it was created
+	 */
+	private Date dateCreation;
 
 	/**
 	 * Reference to the orders containing this service
 	 */
 	private List<CommandOfService> services;
 
-	public Service(String title, String description, int cost, String typeService, User owner, CategoryTag category, String status) {
+	public Service(int idService, String title, String description, int cost, int typeService, User owner, CategoryTag category, int status, Date dateCreation) {
+		this.idService = idService;
 		this.title = title;
 		this.description = description;
 		this.cost = cost;
@@ -55,7 +70,16 @@ public class Service {
 		this.owner = owner;
 		this.category = category;
 		this.status = status;
+		this.dateCreation = dateCreation;
 		this.services = new ArrayList<>();
+	}
+
+	public int getIdService() {
+		return idService;
+	}
+
+	public void setIdService(int idService) {
+		this.idService = idService;
 	}
 
 	public String getTitle() {
@@ -82,11 +106,11 @@ public class Service {
 		this.cost = cost;
 	}
 
-	public String getTypeService() {
+	public int getTypeService() {
 		return typeService;
 	}
 
-	public void setTypeService(String typeService) {
+	public void setTypeService(int typeService) {
 		this.typeService = typeService;
 	}
 
@@ -106,11 +130,11 @@ public class Service {
 		this.category = category;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

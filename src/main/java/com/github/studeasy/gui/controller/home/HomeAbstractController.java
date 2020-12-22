@@ -10,9 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 public abstract class HomeAbstractController  {
     /**
      * label displayed if an error occur
@@ -40,7 +37,7 @@ public abstract class HomeAbstractController  {
      */
     public void disconnect(ActionEvent event) {
         try{
-            Session.destroySession();
+            Session.getInstance().disconnect();
             ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
         }catch (Exception e){
             e.printStackTrace();

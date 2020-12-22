@@ -93,15 +93,15 @@ public class MySQLUserDAO extends UserDAO{
 
     /**
      * method which will delete an user from the db
-     * @param email the email of the new user
+     * @param id the email of the new user
      * @throws Exception if an error occur
      */
-    public void deleteUser(String email) throws Exception{
+    public void deleteUser(int id) throws Exception{
         // We prepare the SQL request to update a user
         PreparedStatement preparedStatement;
-        String request = "DELETE FROM user WHERE user.emailAddress = ? ";
+        String request = "DELETE FROM user WHERE user.idUser = ? ";
         preparedStatement = DB.prepareStatement(request);
-        preparedStatement.setString(1, email);
+        preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
     }
 
@@ -152,7 +152,7 @@ public class MySQLUserDAO extends UserDAO{
             // We retrieve all the existing users
             while (resultSet.next()) {
                 // We create the user
-                User user = new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9), resultSet.getString(10));
+                User user = new User(resultSet.getInt(1),resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9), resultSet.getString(10));
                 // And put it with the others
                 users.add(user);
             }

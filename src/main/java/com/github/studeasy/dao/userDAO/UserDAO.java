@@ -53,10 +53,10 @@ public abstract class UserDAO {
 
     /**
      * method which will delete an user from the db
-     * @param email the email of the new user
+     * @param id the id of the user to delete
      * @throws Exception if an error occur
      */
-    public abstract void deleteUser(String email) throws Exception;
+    public abstract void deleteUser(int id) throws Exception;
 
     /**
      * Update information of an user

@@ -125,9 +125,9 @@ public class FacadeUser {
     }
 
 
-    public void deleteAccount(String email) throws Exception {
-        Session.destroySession();
-        DAO.deleteUser(email);
+    public void deleteAccount(int id) throws Exception {
+        Session.getInstance().disconnect();
+        DAO.deleteUser(id);
     }
 
 

@@ -79,7 +79,7 @@ public class InfoUserController implements Initializable {
     public void deleteAccount(ActionEvent event) {
         try {
             if(AbstractRouter.confirmationBox("Do you really want to delete this user ? ","Confirm the deletion","Warning")){
-                FACADE.deleteAccount(user.getEmailAddress());
+                FACADE.deleteAccount(user.getIdUser());
                 ROUTER.changeView(UserRouter.SEARCH_USER_FXML_PATH,event);
             }
         }catch (Exception e){

@@ -13,6 +13,11 @@ import java.util.*;
 public class User {
 
 	/**
+	 * Id of the user
+	 */
+	private int idUser;
+
+	/**
 	 * Lastname of the user
 	 */
 	private String lastname;
@@ -46,13 +51,11 @@ public class User {
 	 */
 	private String salt;
 
-
-
-
 	/**
 	 * Default constructor
 	 */
-	public User(String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points, String salt) {
+	public User(int idUser, String lastName,String firstName,String emailAddress,String password,int role, String company,String pseudo, int points, String salt) {
+		this.idUser = idUser;
 		this.lastname=lastName;
 		this.firstname=firstName;
 		this.emailAdress=emailAddress;
@@ -71,7 +74,13 @@ public class User {
 		}
 	}
 
+	public int getIdUser() {
+		return idUser;
+	}
 
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 
 	public String getLastname() {
 		return lastname;

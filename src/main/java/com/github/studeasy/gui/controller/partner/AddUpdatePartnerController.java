@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -81,6 +82,12 @@ public class AddUpdatePartnerController implements Initializable {
     private Label label;
 
     /**
+     * Tooltip for password
+     */
+    @FXML 
+    private Tooltip passwordTooltip;
+
+    /**
      * Instantiate the parent's attributes with
      * a router and a facade used for admin controller
      */
@@ -105,27 +112,30 @@ public class AddUpdatePartnerController implements Initializable {
         String company = companyTF.getText();
         label.setText("");
             // We ask the facade to check
-        try {
-            FACADE.submitAddPartner(email,confirmEmail, password,confirmPassword,firstname,lastname,company);
-            label.setTextFill(Color.GREEN);
-            label.setText("Success ! ");
-            emailTF.setText("");
-            passwordTF.setText("");
-            firstnameTF.setText("");
-            lastnameTF.setText("");
-            companyTF.setText("");
-            confirmEmailTF.setText("");
-            confirmPasswordTF.setText("");
+        if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !company.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty() && !confirmEmail.isEmpty()) {
+            try {
+                FACADE.submitAddPartner(email, confirmEmail, password, confirmPassword, firstname, lastname, company);
+                label.setTextFill(Color.GREEN);
+                label.setText("Success ! ");
+                emailTF.setText("");
+                passwordTF.setText("");
+                firstnameTF.setText("");
+                lastnameTF.setText("");
+                companyTF.setText("");
+                confirmEmailTF.setText("");
+                confirmPasswordTF.setText("");
+            } catch (SQLIntegrityConstraintViolationException e) {
+                label.setTextFill(Color.RED);
+                label.setText("The email address provided already exists in the system, please retry with another email");
+            } catch (BadInformationException e) {
+                label.setText(e.getMessage());
+            } catch (Exception e) {
+                label.setText("An error occurs, please retry");
+            }
         }
-        catch(SQLIntegrityConstraintViolationException e){
+        else{
             label.setTextFill(Color.RED);
-            label.setText("The email address provided already exists in the system, please retry with another email");
-        }
-        catch(BadInformationException e){
-            label.setText(e.getMessage());
-        }
-        catch (Exception e) {
-            label.setText("An error occurs, please retry");
+            label.setText("Please fill all the field");
         }
     }
 
@@ -139,7 +149,12 @@ public class AddUpdatePartnerController implements Initializable {
     }
 
     @Override
+    /**
+     * TODO: Use for update
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        
+        passwordTooltip.setText("Test");
+        passwordTF.setTooltip(passwordTooltip);
     }
 }

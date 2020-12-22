@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -33,21 +34,21 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="280.2666534423828" minHeight="10.0" prefHeight="126.6666473388672" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="443.2" minHeight="10.0" prefHeight="382.399951171875" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="151.20004882812498" minHeight="10.0" prefHeight="151.20004882812498" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="473.0" minHeight="10.0" prefHeight="443.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="151.20004882812498" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="573.0" text="Add Partner">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="573.0" text="Create Partner account">
                             <font>
                                 <Font name="Arial Bold" size="42.0" />
                             </font>
                         </Label>
                </children></VBox>
-                <AnchorPane prefHeight="445.0" prefWidth="573.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <AnchorPane prefHeight="442.0" prefWidth="574.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="364.0" prefHeight="17.0" prefWidth="550.0" textAlignment="CENTER">
+                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="400.0" prefHeight="17.0" prefWidth="550.0" textAlignment="CENTER">
                      <font>
                         <Font size="17.0" />
                      </font></Label>
@@ -57,30 +58,48 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="201.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="132.0" minHeight="5.0" prefHeight="97.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="firstnameTF" prefHeight="27.0" prefWidth="179.0" promptText="Firstname" />
-                        <TextField fx:id="lastnameTF" promptText="Lastname" GridPane.columnIndex="1" />
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <PasswordField fx:id="passwordTF" promptText="Password" />
-                              <PasswordField fx:id="confirmPasswordTF" promptText="Confirm password" />
+                              <TextField fx:id="lastnameTF" layoutX="30.0" layoutY="30.0" prefWidth="220.0" promptText="Lastname" />
+                              <Label layoutX="30.0" layoutY="4.0" text="Lastname:" />
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <TextField fx:id="emailTF" promptText="Email" />
-                              <TextField fx:id="confirmEmailTF" promptText="Confirm email" />
+                              <PasswordField fx:id="confirmPasswordTF" layoutY="60.0" prefWidth="220.0" promptText="Confirm password" />
+                              <PasswordField fx:id="passwordTF" layoutY="30.0" prefWidth="220.0" promptText="Password">
+                                 <tooltip>
+                                    <Tooltip fx:id="passwordTooltip" wrapText="true" />
+                                 </tooltip>
+                              </PasswordField>
+                              <Label layoutY="4.0" text="Password:" />
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <children>
-                              <TextField fx:id="companyTF" promptText="Company" />
+                              <TextField fx:id="confirmEmailTF" layoutY="60.0" prefHeight="27.0" prefWidth="220.0" promptText="Confirm email" />
+                              <TextField fx:id="emailTF" layoutY="30.0" prefHeight="27.0" prefWidth="220.0" promptText="Email" />
+                              <Label layoutY="4.0" text="Email: " />
                            </children>
-                        </VBox>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="firstnameTF" layoutY="30.0" prefHeight="27.0" prefWidth="220.0" promptText="Firstname" />
+                              <Label layoutY="4.0" text="Firstname:" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <TextField fx:id="companyTF" layoutX="30.0" layoutY="30.0" prefWidth="220.0" promptText="Company" />
+                              <Label layoutX="30.0" layoutY="4.0" text="Company name: " />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                     </children>
@@ -97,7 +116,7 @@
                 </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Button id="negativeButton" alignment="CENTER" layoutX="133.0" layoutY="59.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="89.0" styleClass="..\..\css\buttons.css" text="Cancel" />
+                  <Button id="negativeButton" alignment="CENTER" layoutX="133.0" layoutY="59.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="89.0" styleClass="..\..\css\buttons.css" text="Back" />
                </children>
             </AnchorPane>
             </children>

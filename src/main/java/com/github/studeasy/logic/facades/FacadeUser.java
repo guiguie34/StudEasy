@@ -6,7 +6,7 @@ import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
-
+import com.github.studeasy.logic.utils.regexUtils;
 /**
  * The Facade User for the UserDAO
  * It contains methods that allow a user to login
@@ -78,9 +78,19 @@ public class FacadeUser {
         String salt;
         try {
             if(email.equals(confirmEmail) &&  password.equals(confirmPassword)) {
-                salt = PasswordUtils.getSalt(30);
-                password = PasswordUtils.generateSecurePassword(password, salt);
-                DAO.submitAddPartner(email, password, firstname, lastname, company, salt);
+                if(regexUtils.matches_mail(email)) {
+                    if(regexUtils.matches_password(password)) {
+                        salt = PasswordUtils.getSalt(30);
+                        password = PasswordUtils.generateSecurePassword(password, salt);
+                        DAO.submitAddPartner(email, password, firstname, lastname, company, salt);
+                    }
+                    else{
+                        throw new BadInformationException("Password not enough strong ! Please retry");
+                    }
+                }
+                else{
+                    throw new BadInformationException("Email not strong enough ! Please retry");
+                }
             }
             else{
                 throw new BadInformationException("The provided information doesn't match ! Please retry");

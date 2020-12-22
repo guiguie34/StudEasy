@@ -1,0 +1,6 @@
+.choice-box .menu-item:focused {
+    -fx-background-color: #90bcc9; }
+
+.choice-box {
+    -fx-mark-color: #135c72;
+}

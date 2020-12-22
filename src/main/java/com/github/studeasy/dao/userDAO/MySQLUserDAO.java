@@ -54,7 +54,7 @@ public class MySQLUserDAO extends UserDAO{
                 throw new BadCredentialsException("No user found");
             } else {
                 // We create a user according to his role
-                currentUser= new User(resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9), resultSet.getString(10));
+                currentUser= new User(resultSet.getInt(1),resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9),resultSet.getString(10));
             }
         }
         catch(SQLException e){

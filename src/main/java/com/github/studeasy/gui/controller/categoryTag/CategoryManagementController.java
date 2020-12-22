@@ -172,36 +172,38 @@ public class CategoryManagementController implements Initializable {
      */
     private void addButtonsToTable(CategoryManagementController currentController, TableColumn tabC) {
         // cellFactory will contain our buttons
-        Callback<TableColumn<CategoryTag, Void>, TableCell<CategoryTag, Void>> cellFactory = new Callback<TableColumn<CategoryTag, Void>, TableCell<CategoryTag, Void>>() {
+        Callback<TableColumn<CategoryTag, Void>, TableCell<CategoryTag, Void>> cellFactory = new Callback<>() {
             // For each row of the table view, we want to create the buttons
             @Override
             public TableCell<CategoryTag, Void> call(final TableColumn<CategoryTag, Void> param) {
-                final TableCell<CategoryTag, Void> cell = new TableCell<CategoryTag, Void>() {
+                final TableCell<CategoryTag, Void> cell = new TableCell<>() {
                     // The image replacing the button
                     Image img;
                     // And the displayer of the image
-                    ImageView iv;
+                    final ImageView iv;
                     // We create the button
                     private final Button btn = new Button();
+
                     {
                         // We want it transparent, so we only see the image
                         btn.setStyle("-fx-background-color: transparent;");
                         // We assign the right button to the right column
-                        switch(tabC.getId()){
+                        switch (tabC.getId()) {
                             // Update column
-                            case("updateColumn"):
+                            case ("updateColumn"):
                                 img = new Image("images/common/update.png");
-                                btn.setOnAction(event -> currentController.updateCategory(event,getTableView().getItems().get(getIndex())));
+                                btn.setOnAction(event -> currentController.updateCategory(event, getTableView().getItems().get(getIndex())));
                                 break;
                             // Delete column
-                            case("deleteColumn"):
+                            case ("deleteColumn"):
                                 img = new Image("images/common/trash.png");
-                                btn.setOnAction(event -> currentController.deleteCategory(event,getTableView().getItems().get(getIndex())));
+                                btn.setOnAction(event -> currentController.deleteCategory(event, getTableView().getItems().get(getIndex())));
                                 break;
                         }
                         iv = new ImageView(img);
                         btn.setGraphic(iv);
                     }
+
                     // We only want to print the buttons on the rows containing data
                     @Override
                     public void updateItem(Void item, boolean empty) {

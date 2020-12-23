@@ -59,4 +59,12 @@ public class FacadeUser {
             throw new BadCredentialsException("Bad Password");
         }
     }
+
+    public void addPoints(int nbPoints,User user) throws Exception {
+
+    }
+
+    public void removePoints(int nbPoints,User user) throws Exception{
+
+    }
 }

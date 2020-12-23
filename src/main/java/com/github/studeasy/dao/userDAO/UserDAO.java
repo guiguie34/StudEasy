@@ -35,4 +35,20 @@ public abstract class UserDAO {
      * @throws Exception if the user doesn't exist in the database
      */
     public abstract User searchUser(String email) throws Exception;
+
+    /***
+     * Method that asking the database to add points to a user
+     * @param nbPoints
+     * @param user
+     * @throws Exception
+     */
+    public abstract void addPoints(int nbPoints,User user) throws Exception;
+
+    /***
+     * Methode that asking the database to remove points from a user
+     * @param nbPoints
+     * @param user
+     * @throws Exception
+     */
+    public abstract void removePoints(int nbPoints,User user) throws Exception;
 }

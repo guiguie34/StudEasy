@@ -138,8 +138,10 @@ public class RegisterUpdateController implements Initializable {
         //If all the fields aren't empty
         if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !pseudo.isEmpty()){
             try {
-                FACADE.registerUpdate(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword,0);
-                ROUTER.changeView(UserRouter.LOGIN_FXML_PATH,event);
+                String key = FACADE.registerUpdate(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword,0);
+                registerUpdateB.setVisible(false);
+                ((UserRouter)ROUTER).confirmUser(UserRouter.CONFIRM_USER_FXML_PATH,event,email);
+                FACADE.sendMail(email,key);
 
 
             }catch (BadInformationException exception){
@@ -154,6 +156,7 @@ public class RegisterUpdateController implements Initializable {
                 registerFailLabel.setText("There is already an account with this email");
             }
             catch (Exception e){
+                e.printStackTrace();
                 registerFailLabel.setAlignment(Pos.CENTER);
                 registerFailLabel.setTextFill(Paint.valueOf("red"));
                 registerFailLabel.setText("Error, Try again later");

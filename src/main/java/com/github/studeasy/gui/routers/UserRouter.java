@@ -1,5 +1,6 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.user.ConfirmUserController;
 import com.github.studeasy.gui.controller.user.InfoUserController;
 import com.github.studeasy.gui.controller.user.RegisterUpdateController;
 import com.github.studeasy.logic.common.User;
@@ -75,6 +76,23 @@ public class UserRouter extends AbstractRouter {
     }
 
     /**
+     *  Load the page of a specific user
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param user the user to confirm
+     * @throws IOException
+     */
+    public void confirmUser(String pathFXML, Event event, String email) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with
+        ConfirmUserController confirmUserController = new ConfirmUserController(email);
+        loader.setController(confirmUserController);
+        Parent root = loader.load();
+        this.changeView(event,root);
+    }
+
+    /**
      * Load the view and display all the information related to the profile
      * of a student
      * @param event the action triggering the change of view
@@ -114,6 +132,11 @@ public class UserRouter extends AbstractRouter {
      * Path to viewUser view
      */
     public final static String VIEW_USER_FXML_PATH = "views/user/viewUser.fxml";
+
+    /**
+     * Path to viewUser view
+     */
+    public final static String CONFIRM_USER_FXML_PATH = "views/user/confirmUser.fxml";
 
 
     /**

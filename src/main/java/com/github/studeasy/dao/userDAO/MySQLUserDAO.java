@@ -2,6 +2,7 @@ package com.github.studeasy.dao.userDAO;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.facades.exceptions.BadKeyException;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.Connection;
@@ -63,6 +64,25 @@ public class MySQLUserDAO extends UserDAO{
         return currentUser;
     }
 
+    public boolean isConfirmed(String email) throws Exception{
+        // We prepare the SQL request to retrieve a user
+        PreparedStatement preparedStatement;
+        // Will contain the result of the query
+        ResultSet resultSet;
+        String request = "SELECT confirm FROM user WHERE emailAddress = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setString(1, email);
+        // We execute the query
+        resultSet = preparedStatement.executeQuery();
+        // We check if the query retrieved a user
+        if (!resultSet.next()) {
+            // No, we throw an error
+            throw new BadCredentialsException("No user found");
+        } else {
+            return (resultSet.getInt(1) == 1);
+        }
+    }
+
     /**
      * Method which will register a new user in the database
      * @param firstName first name of the new user
@@ -71,13 +91,13 @@ public class MySQLUserDAO extends UserDAO{
      * @param email email of the new user
      * @param password password of the new user
      * @param salt  salt key of the new user
+     * @param key key sent by email
      * @throws SQLException if an error occur
      */
-    public void register(String firstName,String lastName,String pseudo,String email,String password, String salt) throws SQLException {
+    public void register(String firstName,String lastName,String pseudo,String email,String password, String salt, String key) throws SQLException {
         // We prepare the SQL request to insert a user
         PreparedStatement preparedStatement;
-
-        String request = "INSERT INTO user (firstName,lastName,role,password,emailAddress,pseudo,salt) VALUES  (?,?,?,?,?,?,?)";
+        String request = "INSERT INTO user (firstName,lastName,role,password,emailAddress,pseudo,salt,keyConfirm) VALUES  (?,?,?,?,?,?,?,?)";
         preparedStatement = DB.prepareStatement(request);
         preparedStatement.setString(1, firstName);
         preparedStatement.setString(2, lastName);
@@ -86,6 +106,7 @@ public class MySQLUserDAO extends UserDAO{
         preparedStatement.setString(5, email);
         preparedStatement.setString(6, pseudo);
         preparedStatement.setString(7, salt);
+        preparedStatement.setString(8, key);
         // We execute the query
         preparedStatement.executeUpdate();
 
@@ -105,6 +126,17 @@ public class MySQLUserDAO extends UserDAO{
         preparedStatement.executeUpdate();
     }
 
+    /**
+     * Method which will update the user in database
+     * @param firstName the first name of the user
+     * @param lastName last name of the user
+     * @param pseudo pseudo of the user
+     * @param email email of the user
+     * @param password password of the user
+     * @param salt salt of the user
+     * @return the User updated
+     * @throws Exception if an error occur
+     */
     public User update(String firstName, String lastName, String pseudo, String email, String password, String salt) throws Exception {
         // We prepare the SQL request to insert a user
         PreparedStatement preparedStatement;
@@ -162,6 +194,49 @@ public class MySQLUserDAO extends UserDAO{
             err.printStackTrace();
         }
         return users;
+    }
+
+    /**
+     * Method who will confirm the account
+     * @param email the email of the user to confirm
+     * @param key key entered by the user
+     * @return true if the account is confirmed false otherwise
+     */
+    public boolean confirmAccount(String email,String key) throws Exception{
+
+        // We prepare the SQL request to retrieve a user
+        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement2;
+        // Will contain the result of the query
+        ResultSet resultSet;
+        String request = "SELECT * FROM user WHERE emailAddress = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setString(1, email);
+        // We execute the query
+        resultSet = preparedStatement.executeQuery();
+        // We check if the query retrieved a user
+        if (!resultSet.next()) {
+            // No, we throw an error
+            throw new BadCredentialsException("No user found");
+        } else {
+            //if the 2 keys corresponds
+            System.out.println("key "+ resultSet.getString(12));
+            if(resultSet.getString(12).equals(key)){
+                //let's confirm the account
+                String request2 = "UPDATE user SET confirm = ?"+" WHERE emailAddress = ?";
+                preparedStatement2 = DB.prepareStatement(request2);
+                preparedStatement2.setInt(1, 1);
+                preparedStatement2.setString(2, email);
+                preparedStatement2.executeUpdate();
+                return true;
+
+            }else{
+                return false;
+            }
+
+        }
+
+
     }
 
 }

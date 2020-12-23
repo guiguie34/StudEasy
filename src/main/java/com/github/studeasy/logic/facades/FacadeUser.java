@@ -6,6 +6,8 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
+import com.github.studeasy.logic.utils.KeyGen;
+import com.github.studeasy.logic.utils.Mail;
 import com.github.studeasy.logic.utils.PasswordUtils;
 import com.github.studeasy.logic.utils.regexUtils;
 
@@ -77,6 +79,16 @@ public class FacadeUser {
     }
 
     /**
+     * Ask to the DAO if the user is confirmed
+     * @param email email of the user
+     * @return true if the user is confirmed, false otherwise
+     * @throws Exception if an error occur
+     */
+    public boolean isConfirmed(String email) throws Exception{
+        return (DAO.isConfirmed(email));
+    }
+
+    /**
      * Function registerUpdate will register/update user information in the system.
      * Some information, as the password strength etc..., will be checked before registration
      * @param firstName the first name of the user
@@ -87,19 +99,21 @@ public class FacadeUser {
      * @param confirmPassword confirm the password
      * @throws BadInformationException if ane error occur
      */
-    public void registerUpdate(String firstName,String lastName,String pseudo, String email, String confirmEmail,String password,String confirmPassword, int action) throws Exception {
+    public String registerUpdate(String firstName,String lastName,String pseudo, String email, String confirmEmail,String password,String confirmPassword, int action) throws Exception {
 
         String salt;
         //Minimum eight characters, at least one letter, one number and one special character
         if(password.equals(confirmPassword)){
             if(email.equals(confirmEmail)){
                 if(true){ //regexUtils.matches_password(password)
-                    if (true) { //regexUtils.matches_mail(email)
+                    if (regexUtils.matches_mail(email)) { //regexUtils.matches_mail(email)
                         //if it's a register
                         if(action == 0){
                             salt = PasswordUtils.getSalt(30);
                             password = PasswordUtils.generateSecurePassword(password, salt);
-                            DAO.register(firstName, lastName, pseudo, email, password, salt);
+                            String key = KeyGen.generateKey();
+                            DAO.register(firstName, lastName, pseudo, email, password, salt,key);
+                            return key;
                         }
                         //if it's an update of the profile
                         else{
@@ -123,6 +137,11 @@ public class FacadeUser {
         }else {
             throw new BadInformationException("Bad information, Passwords doesn't correspond");
         }
+        return null;
+    }
+
+    public void sendMail(String email, String key){
+        Mail.sendMail("Stud'Easy Validation","Hi, Here is your key to confirm your account:\n"+ key,email);
     }
 
 
@@ -139,5 +158,15 @@ public class FacadeUser {
     public ArrayList<User> seeAllUsers() {
         //we ask to the DAO to retrieve all the users
         return DAO.seeAllUsers();
+    }
+
+    /**
+     * Method who will ask to the DAO to confirm the account
+     * @param email the email of the user to confirm
+     * @param key key entered by the user
+     * @return true if the account is confirmed false otherwise
+     */
+    public boolean confirmAccount(String email,String key) throws Exception {
+        return(DAO.confirmAccount(email,key));
     }
 }

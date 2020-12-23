@@ -47,9 +47,10 @@ public abstract class UserDAO {
      * @param email email of the new user
      * @param password password of the new user
      * @param salt  salt key of the new user
+     * @param key key sent by email
      * @throws SQLException if an error occur
      */
-    public abstract void register(String firstName,String lastName,String pseudo,String email,String password, String salt) throws Exception;
+    public abstract void register(String firstName,String lastName,String pseudo,String email,String password, String salt, String key) throws Exception;
 
     /**
      * method which will delete an user from the db
@@ -76,4 +77,20 @@ public abstract class UserDAO {
      * @return An ArrayList of all the students in database
      */
     public abstract ArrayList<User> seeAllUsers();
+
+    /**
+     * Method who will confirm the account
+     * @param email the email of the user to confirm
+     * @param key key entered by the user
+     * @return true if the account is confirmed false otherwise
+     */
+    public abstract boolean confirmAccount(String email,String key) throws Exception;
+
+    /**
+     * Verify if an user is confirmed
+     * @param email the email of the user
+     * @return true if the user is confirmed false otherwise
+     * @throws Exception if an error occur
+     */
+    public abstract boolean isConfirmed(String email) throws Exception;
 }

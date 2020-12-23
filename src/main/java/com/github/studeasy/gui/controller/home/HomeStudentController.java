@@ -42,6 +42,10 @@ public class HomeStudentController extends HomeAbstractController implements Ini
         }
     }
 
+    /**
+     * test fonction for feedbacks
+     * @param event
+     */
     public  void test(ActionEvent event){
         try {
 

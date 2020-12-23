@@ -104,7 +104,7 @@ public class MyServicesController implements Initializable {
      */
     public void viewService(MouseEvent event, Service service) {
         try {
-            ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service);
+            ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service,0);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -45,6 +45,12 @@ public abstract class ServiceDAO {
     public abstract ArrayList<Service> getPendingServices();
 
     /**
+     * Retrieve all the services
+     * @return the services
+     */
+    public abstract ArrayList<Service> getOnlineServices();
+
+    /**
      * Set to default the category of the service
      */
     public abstract void setDefaultCategory();

@@ -91,17 +91,39 @@ public class MySQLServiceDAO extends ServiceDAO {
      * @return the pending services
      */
     public ArrayList<Service> getPendingServices() {
+        String request = "SELECT * FROM service, categorytag, user " +
+                    "WHERE stateService = 0 " +
+                    "AND fkCategory = categorytag.idCategory " +
+                    "AND ownerService = user.idUser " +
+                    "ORDER BY dateCreationService ASC";
+        return getServices(request);
+    }
+
+    /**
+     * Retrieve all the services
+     * @return the services
+     */
+    public ArrayList<Service> getOnlineServices(){
+        String request = "SELECT * FROM service, categorytag, user " +
+                "WHERE stateService = 1 " +
+                "AND fkCategory = categorytag.idCategory " +
+                "AND ownerService = user.idUser " +
+                "ORDER BY dateCreationService DESC";
+        return this.getServices(request);
+    }
+
+    /**
+     * Function used to get services through a SQL request
+     * @param request the SQL request
+     * @return a list of services
+     */
+    private ArrayList<Service> getServices(String request){
         ArrayList<Service> servicesList = new ArrayList<>();
         try {
             // We prepare the SQL request to retrieve the pending services
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT * FROM service, categorytag, user " +
-                    "WHERE stateService = 0 " +
-                    "AND fkCategory = categorytag.idCategory " +
-                    "AND ownerService = user.idUser " +
-                    "ORDER BY dateCreationService ASC";
             preparedStatement = DB.prepareStatement(request);
             // We execute the query
             resultSet = preparedStatement.executeQuery();

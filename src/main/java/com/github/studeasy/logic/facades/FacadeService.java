@@ -67,6 +67,15 @@ public class FacadeService {
     }
 
     /**
+     * Retrieve all the services
+     * @return the services
+     */
+    public ArrayList<Service> getOnlineServices() {
+        // We ask the DAO to retrieve all the services
+        return DAO.getOnlineServices();
+    }
+
+    /**
      * Delete the service
      * @param service the service to delete
      */

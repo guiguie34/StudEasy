@@ -112,12 +112,20 @@ public class ViewServiceController implements Initializable {
     private Service service;
 
     /**
+     * Used to know from where the user comes from
+     * 0 manage pending services / my services
+     * 1 see all services online
+     */
+    private int pendingAllServices;
+
+    /**
      * Create the controller with the router, the facade
      */
-    public ViewServiceController(Service service){
+    public ViewServiceController(Service service, int pendingAllServices){
         this.ROUTER = ServiceRouter.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
         this.service = service;
+        this.pendingAllServices = pendingAllServices;
     }
 
     /**
@@ -161,10 +169,15 @@ public class ViewServiceController implements Initializable {
         Session session = Session.getInstance();
         try {
             if(session.isStudent()){
-                ROUTER.studentRestricted(ServiceRouter.MY_SERVICES_FXML_PATH, event);
+                if(pendingAllServices == 0){
+                    ROUTER.studentRestricted(ServiceRouter.MY_SERVICES_FXML_PATH,event);
+                }
+                else{
+                    ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,pendingAllServices);
+                }
             }
             else if(session.isAdmin()){
-                ROUTER.adminRestricted(ServiceRouter.ALL_SERVICES_FXML_PATH, event);
+                ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,pendingAllServices);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -229,11 +242,11 @@ public class ViewServiceController implements Initializable {
         User currentUser = session.getCurrentUser();
         // We display the buttons the user is allowed to use
         // Only the admin and the owner can delete the service
-        if(currentUser == owner || session.isAdmin()){
+        if(currentUser.getIdUser() == owner.getIdUser() || session.isAdmin()){
             deleteB.setVisible(true);
         }
         // We can buy or apply only if we are a student and if we're not the owner
-        if(session.isStudent() && owner != currentUser){
+        if(session.isStudent() && owner.getIdUser() != currentUser.getIdUser()){
             applyBuyServiceB.setVisible(true);
         }
         // Only the admin can validate a service, if it's pending

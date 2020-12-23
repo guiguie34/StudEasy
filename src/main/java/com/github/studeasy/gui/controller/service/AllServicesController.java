@@ -85,16 +85,30 @@ public class AllServicesController implements Initializable {
     private TableColumn<Service,String> categoryColumn;
 
     /**
+     * The label showing what services are displayed
+     */
+    @FXML
+    private Label pendingAllServicesL;
+
+    /**
      * The list of the services displayed in the table
      */
     private ObservableList<Service> servicesList;
 
     /**
+     * Indicates what services we should display
+     * 0 the pending services
+     * 1 all the services
+     */
+    private int pendingAllServices;
+
+    /**
      * Create the controller with the router, the facade
      */
-    public AllServicesController(){
+    public AllServicesController(int pendingAllServices){
         this.ROUTER = ServiceRouter.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
+        this.pendingAllServices = pendingAllServices;
     }
 
     /**
@@ -106,7 +120,7 @@ public class AllServicesController implements Initializable {
      */
     public void viewService(MouseEvent event, Service service) {
         try {
-            ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service);
+            ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service,pendingAllServices);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,14 +132,19 @@ public class AllServicesController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void cancel(ActionEvent event) throws IOException {
-        ROUTER.adminRestricted(UserRouter.HOME_ADMIN_FXML_PATH,event);
+        Session session = Session.getInstance();
+        if(session.isAdmin()){
+            ROUTER.adminRestricted(UserRouter.HOME_ADMIN_FXML_PATH,event);
+        }
+        if(session.isStudent()){
+            ROUTER.studentRestricted(UserRouter.HOME_STUDENT_FXML_PATH,event);
+        }
     }
 
     /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before
      * the view appears on the client side
-     *
      * @param location
      * @param resources
      */
@@ -136,9 +155,17 @@ public class AllServicesController implements Initializable {
         // According to the role of the user, we won't display the same things
         // We retrieve all the services and put them in an observable list
         Session session = Session.getInstance();
-        if (session.isAdmin()) {
+        // Admin managing the pending services
+        if (session.isAdmin() && pendingAllServices == 0) {
+            this.pendingAllServicesL.setText("Pending Services");
             // We only retrieve the pending services
             servicesList = FXCollections.observableArrayList(FACADE_SERVICE.getPendingServices());
+        }
+        // We display all the services
+        else {
+            this.pendingAllServicesL.setText("All Services Online");
+            // We retrieve all the services
+            servicesList = FXCollections.observableArrayList(FACADE_SERVICE.getOnlineServices());
         }
         // We put the titles of the services on the right column
         titleColumn.setCellValueFactory(

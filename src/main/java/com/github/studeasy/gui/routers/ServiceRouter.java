@@ -1,5 +1,6 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.service.AllServicesController;
 import com.github.studeasy.gui.controller.service.ProposeAskServiceController;
 import com.github.studeasy.gui.controller.service.ViewServiceController;
 import com.github.studeasy.logic.common.Service;
@@ -85,15 +86,35 @@ public class ServiceRouter extends AbstractRouter{
      * @param pathFXML the path to the fxml file
      * @param event the action triggering the change of view
      * @param service the service to display
+     * @param pendingAllServices to know where the user come from (0 -> manage pending/my services, 1 -> see all Services)
      * @throws IOException if an error occurs
      */
-    public void viewService(String pathFXML, Event event, Service service) throws IOException {
+    public void viewService(String pathFXML, Event event, Service service, int pendingAllServices) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with the service
-        ViewServiceController viewServiceController = new ViewServiceController(service);
+        ViewServiceController viewServiceController = new ViewServiceController(service, pendingAllServices);
         // We link this controller with the FXML
         loader.setController(viewServiceController);
+        Parent root = loader.load();
+        // And we change the view
+        this.changeView(event,root);
+    }
+
+    /**
+     * Load the view and display the service
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param pendingAllServices 0 if the admin manages the services, 1 to see everything
+     * @throws IOException if an error occurs
+     */
+    public void viewAllServices(String pathFXML, Event event, int pendingAllServices) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller
+        AllServicesController allServicesController = new AllServicesController(pendingAllServices);
+        // We link this controller with the FXML
+        loader.setController(allServicesController);
         Parent root = loader.load();
         // And we change the view
         this.changeView(event,root);

@@ -1,6 +1,9 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.partner.AddUpdatePartnerController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -77,8 +80,17 @@ public class UserRouter extends AbstractRouter {
      * @param event the action triggering this method
      * @throws IOException if an error occurs
      */
-    public void addPartner(ActionEvent event) throws IOException {
-        adminRestricted(ADD_PARTNER_FXML_PATH,event);
+    public void addOrUpdatePartner(ActionEvent event,int addUpdate,Object partnerToUpdate) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(ADD_PARTNER_FXML_PATH));
+        // We create the controller with addUpdate telling if we add or update
+        AddUpdatePartnerController addUpdateCategoryController = new AddUpdatePartnerController(addUpdate,partnerToUpdate);
+        // We link this controller with the FXML
+        loader.setController(addUpdateCategoryController);
+        Parent root = loader.load();
+        // And we change the view
+        this.changeView(event,root);
+        //adminRestricted(ADD_PARTNER_FXML_PATH,event);
     }
 
     /**

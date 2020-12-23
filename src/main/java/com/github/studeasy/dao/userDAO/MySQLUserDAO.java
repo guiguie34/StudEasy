@@ -138,4 +138,67 @@ public class MySQLUserDAO extends UserDAO{
         }
     }
 
+    /**
+     * Update the partner with provided information
+     * @param email
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param salt
+     * @param user
+     * @throws Exception
+     */
+    public void submitUpdatePartner(String email,String password, String firstname, String lastname, String company, String salt, Object user) throws Exception{
+        try {
+            // We prepare the SQL request to retrieve a user
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            int resultSet; //firstName,lastName,role,password,emailAddress,company,salt
+            String request = "UPDATE user SET firstName = ?, lastName= ?, password = ?, emailAddress = ?, company = ?, salt =?  WHERE idUser = ?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, firstname);
+            preparedStatement.setString(2, lastname);
+            preparedStatement.setString(3, password);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, company);
+            preparedStatement.setString(6, salt);
+            preparedStatement.setInt(7, ((User)user).getIdUser());
+
+            resultSet = preparedStatement.executeUpdate();
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    /**
+     * Update partner with provided information (except password)
+     * @param email
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param user
+     * @throws Exception
+     */
+    public void submitUpdatePartnerNoPassword(String email, String firstname, String lastname, String company, Object user) throws Exception{
+        try {
+            // We prepare the SQL request to retrieve a user
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            int resultSet; //firstName,lastName,role,password,emailAddress,company,salt
+            String request = "UPDATE user SET firstName = ?, lastName= ?, emailAddress = ?, company = ?  WHERE idUser = ?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, firstname);
+            preparedStatement.setString(2, lastname);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, company);
+            preparedStatement.setInt(5, ((User)user).getIdUser());
+
+            resultSet = preparedStatement.executeUpdate();
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
 }

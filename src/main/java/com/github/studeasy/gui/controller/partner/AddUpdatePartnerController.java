@@ -2,6 +2,8 @@ package com.github.studeasy.gui.controller.partner;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.common.role.RolePartner;
 import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -82,23 +85,44 @@ public class AddUpdatePartnerController implements Initializable {
     private Label label;
 
     /**
+     * Title label
+     */
+    @FXML
+    private Label titleLabel;
+
+    /**
      * Tooltip for password
      */
     @FXML 
     private Tooltip passwordTooltip;
 
     /**
+     * Indicates if we want to add or update
+     * 0 add,
+     * 1 update
+     */
+    private int addUpdate;
+
+    /**
+     * The partner we try to update
+     * null if we try to add
+     */
+    private User partner;
+
+    /**
      * Instantiate the parent's attributes with
      * a router and a facade used for admin controller
      */
-    public AddUpdatePartnerController(){
+    public AddUpdatePartnerController(int addUpdate, Object partnerToUpdate){
         this.ROUTER = UserRouter.getInstance();
         this.FACADE = FacadeUser.getInstance();
+        this.addUpdate = addUpdate;
+        this.partner = (User)partnerToUpdate;
     }
 
 
     /**
-     * Submit the information provided by the admin for create a partner account to the facade
+     * Submit the information provided by the admin for create or update a partner account to the facade
      * @param event The event triggering the function
      */
     public void submit(ActionEvent event) {
@@ -111,31 +135,58 @@ public class AddUpdatePartnerController implements Initializable {
         String lastname = lastnameTF.getText();
         String company = companyTF.getText();
         label.setText("");
+        if(this.addUpdate == 0) {
             // We ask the facade to check
-        if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !company.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty() && !confirmEmail.isEmpty()) {
-            try {
-                FACADE.submitAddPartner(email, confirmEmail, password, confirmPassword, firstname, lastname, company);
-                label.setTextFill(Color.GREEN);
-                label.setText("Success ! ");
-                emailTF.setText("");
-                passwordTF.setText("");
-                firstnameTF.setText("");
-                lastnameTF.setText("");
-                companyTF.setText("");
-                confirmEmailTF.setText("");
-                confirmPasswordTF.setText("");
-            } catch (SQLIntegrityConstraintViolationException e) {
+            if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !company.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty() && !confirmEmail.isEmpty()) {
+                try {
+                    FACADE.submitAddPartner(email, confirmEmail, password, confirmPassword, firstname, lastname, company);
+                    label.setTextFill(Color.GREEN);
+                    label.setText("Success ! ");
+                    emailTF.setText("");
+                    passwordTF.setText("");
+                    firstnameTF.setText("");
+                    lastnameTF.setText("");
+                    companyTF.setText("");
+                    confirmEmailTF.setText("");
+                    confirmPasswordTF.setText("");
+                } catch (SQLIntegrityConstraintViolationException e) {
+                    label.setTextFill(Color.RED);
+                    label.setText("The email address provided already exists in the system, please retry with another email");
+                } catch (BadInformationException e) {
+                    label.setText(e.getMessage());
+                } catch (Exception e) {
+                    label.setText("An error occurs, please retry");
+                }
+            } else {
                 label.setTextFill(Color.RED);
-                label.setText("The email address provided already exists in the system, please retry with another email");
-            } catch (BadInformationException e) {
-                label.setText(e.getMessage());
-            } catch (Exception e) {
-                label.setText("An error occurs, please retry");
+                label.setText("Please fill all the field");
             }
         }
         else{
-            label.setTextFill(Color.RED);
-            label.setText("Please fill all the field");
+            if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !company.isEmpty()  && !confirmEmail.isEmpty()) {
+                try {
+                    if (AbstractRouter.confirmationBox("Are you sure you want to update this partner ?",
+                            "Confirmation of the update: " + partner.getFirstname() + " " + partner.getLastname(),
+                            "Stud'Easy - Confirmation")) {
+                        FACADE.submitUpdatePartner(email, confirmEmail, password, confirmPassword, firstname, lastname, company, partner);
+                        label.setTextFill(Color.GREEN);
+                        label.setText("Success ! ");
+                    }
+                }
+                catch (SQLIntegrityConstraintViolationException e) {
+                    label.setTextFill(Color.RED);
+                    label.setText("The email address provided already exists in the system, please retry with another email");
+                } catch (BadInformationException e) {
+                    label.setText(e.getMessage());
+                } catch (Exception e) {
+                    label.setText("An error occurs, please retry");
+                }
+
+            }
+            else {
+                label.setTextFill(Color.RED);
+                label.setText("Please fill all the field (except password if not needed)");
+            }
         }
     }
 
@@ -148,11 +199,23 @@ public class AddUpdatePartnerController implements Initializable {
         ((UserRouter)ROUTER).managePartner(event);
     }
 
-    @Override
     /**
-     * TODO: Use for update
+     *
+     * @param url
+     * @param resourceBundle
      */
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(this.addUpdate == 1){
+            // We want to update
+            this.titleLabel.setFont(new Font(25));
+            this.titleLabel.setText("Update a Partner: "+partner.getFirstname() + " " + partner.getLastname());
 
+            firstnameTF.setText(partner.getFirstname());
+            lastnameTF.setText(partner.getLastname());
+            companyTF.setText(((RolePartner)partner.getRole()).getCompany());
+            emailTF.setText(partner.getEmailAdress());
+            confirmEmailTF.setText(partner.getEmailAdress());
+        }
     }
 }

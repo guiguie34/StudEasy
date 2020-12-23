@@ -115,7 +115,7 @@ public class PartnerManagementController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void addPartner(ActionEvent event) throws IOException {
-        ((UserRouter)ROUTER).addPartner(event);
+        ((UserRouter)ROUTER).addOrUpdatePartner(event,0,null);
     }
 
     /*
@@ -147,7 +147,8 @@ public class PartnerManagementController implements Initializable {
      * @param event The event triggering the method
      * @param user The user to be updated
      */
-    public void updatePartner(ActionEvent event, Object user){
+    public void updatePartner(ActionEvent event, Object user) throws IOException {
+        ((UserRouter)ROUTER).addOrUpdatePartner(event,1,(User) user);
 
     }
     /**
@@ -177,7 +178,13 @@ public class PartnerManagementController implements Initializable {
                             // Update column
                             case ("updateColumn"):
                                 img = new Image("images/common/update.png");
-                                btn.setOnAction(event -> currentController.updatePartner(event, getTableView().getItems().get(getIndex())));
+                                btn.setOnAction(event -> {
+                                    try {
+                                        currentController.updatePartner(event, getTableView().getItems().get(getIndex()));
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
                                 break;
                             // Delete column
                             case ("deleteColumn"):

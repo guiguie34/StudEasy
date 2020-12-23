@@ -65,4 +65,26 @@ public abstract class UserDAO {
      */
     public abstract void deletePartner(Object user) throws Exception;
 
+    /**
+     * Update the partner without change the password
+     * @param email
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @throws Exception
+     */
+    public abstract void submitUpdatePartnerNoPassword(String email, String firstname, String lastname, String company,Object user) throws Exception;
+
+    /**
+     * Update with password change
+     * @param email
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param salt
+     * @throws Exception
+     */
+    public abstract void submitUpdatePartner(String email,String password, String firstname, String lastname, String company, String salt, Object user) throws Exception;
+
 }

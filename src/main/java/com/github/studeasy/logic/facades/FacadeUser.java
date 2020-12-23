@@ -103,6 +103,44 @@ public class FacadeUser {
         }
     }
 
+    public void submitUpdatePartner(String email, String confirmEmail,String password, String confirmPassword, String firstname, String lastname, String company, Object user) throws Exception {
+        String salt;
+        try{
+            if(email.equals(confirmEmail) &&  password.equals(confirmPassword)){
+                if(!password.equals("")) {
+                    if (regexUtils.matches_mail(email)) {
+                        if (regexUtils.matches_password(password)) {
+                            salt = PasswordUtils.getSalt(30);
+                            password = PasswordUtils.generateSecurePassword(password, salt);
+                            DAO.submitUpdatePartner(email, password, firstname, lastname, company, salt,(User) user);
+                        }
+                        else{
+                            throw new BadInformationException("Password not enough strong ! Please retry");
+                        }
+                    }
+                    else{
+                        throw new BadInformationException("Email not strong enough ! Please retry");
+                    }
+                }
+                else{
+                    if (regexUtils.matches_mail(email)) {
+                        DAO.submitUpdatePartnerNoPassword(email, firstname, lastname, company, (User) user);
+
+                    }
+                    else{
+                        throw new BadInformationException("Email not strong enough ! Please retry");
+                    }
+                }
+            }
+            else{
+                throw new BadInformationException("The provided information doesn't match ! Please retry");
+            }
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
     /**
      * Get all the partner
      * @return ArrayList of all partner

@@ -1,7 +1,10 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.service.ProposeAskServiceController;
+import com.github.studeasy.gui.controller.service.ViewServiceController;
+import com.github.studeasy.logic.common.Service;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -72,6 +75,25 @@ public class ServiceRouter extends AbstractRouter{
         ProposeAskServiceController proposeAskServiceController = new ProposeAskServiceController(proposeRequest);
         // We link this controller with the FXML
         loader.setController(proposeAskServiceController);
+        Parent root = loader.load();
+        // And we change the view
+        this.changeView(event,root);
+    }
+
+    /**
+     * Load the view and display the service
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param service the service to display
+     * @throws IOException if an error occurs
+     */
+    public void viewService(String pathFXML, Event event, Service service) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with the service
+        ViewServiceController viewServiceController = new ViewServiceController(service);
+        // We link this controller with the FXML
+        loader.setController(viewServiceController);
         Parent root = loader.load();
         // And we change the view
         this.changeView(event,root);

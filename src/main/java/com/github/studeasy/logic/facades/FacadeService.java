@@ -8,7 +8,6 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * The Facade Service for the ServiceDAO
@@ -59,6 +58,15 @@ public class FacadeService {
     }
 
     /**
+     * Delete the service
+     * @param service the service to delete
+     */
+    public void deleteService(Service service) {
+        // We ask the DAO to delete it
+        this.DAO.deleteService(service);
+    }
+
+    /**
      * Function used to check if we can add the service, then add it
      * @param titleS the title of the new service
      * @param descriptionS the description of the new service
@@ -73,9 +81,8 @@ public class FacadeService {
             // We retrieve the user creating the service
             Session sessionUser = Session.getInstance();
             User currentUser = sessionUser.getCurrentUser();
-            Date creationDate = new Date();
             // We ask the DAO to create the service
-            DAO.submitService(titleS,descriptionS,category,cost,typeS,creationDate,currentUser);
+            DAO.submitService(titleS,descriptionS,category,cost,typeS,currentUser);
         }
         else{
             // We tell the user what's wrong

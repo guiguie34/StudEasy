@@ -29,6 +29,24 @@ public class MySQLServiceDAO extends ServiceDAO {
     }
 
     /**
+     * Set to default the category of the service
+     */
+    public void setDefaultCategory(){
+        // We prepare the SQL request to update the category
+        PreparedStatement preparedStatement;
+        String request = "UPDATE service SET fkCategory = 1 WHERE fkCategory IS NULL";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    /**
      * Retrieve the services of the user
      * @param currentUser the user wanting to see his services
      * @return the services of the user
@@ -69,23 +87,40 @@ public class MySQLServiceDAO extends ServiceDAO {
     }
 
     /**
+     * Delete the service
+     * @param service the service to delete
+     */
+    public void deleteService(Service service){
+        // We prepare the SQL request to delete a service
+        PreparedStatement preparedStatement;
+        String request = "DELETE FROM service WHERE idService = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1, service.getIdService());
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    /**
      * Create a service with those information
      * @param titleS the title of the new service
      * @param descriptionS the description of the new service
      * @param category the category associated to the new service
      * @param cost the cost of the new service
      * @param typeS the type of the service
-     * @param creationDate the date of creation
      * @param user the user creating the service
      */
     public void submitService(String titleS, String descriptionS, CategoryTag category,
-                                       int cost, int typeS, Date creationDate, User user){
-        // We convert the date to the JDBC format
-        Timestamp sDate = new Timestamp(creationDate.getTime());
+                                       int cost, int typeS, User user){
         // We prepare the SQL request to insert a service
         PreparedStatement preparedStatement;
         String request = "INSERT INTO service (titleService,descriptionService," +
-                "costService,typeService,fkCategory,dateCreationService, ownerService) VALUES  (?,?,?,?,?,?,?)";
+                "costService,typeService,fkCategory, ownerService) VALUES  (?,?,?,?,?,?)";
         try {
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, titleS);
@@ -93,8 +128,7 @@ public class MySQLServiceDAO extends ServiceDAO {
             preparedStatement.setInt(3, cost);
             preparedStatement.setInt(4,typeS);
             preparedStatement.setInt(5, category.getIdCat());
-            preparedStatement.setTimestamp(6, sDate);
-            preparedStatement.setInt(7, user.getIdUser());
+            preparedStatement.setInt(6, user.getIdUser());
             // We execute the query
             preparedStatement.executeUpdate();
             // The service is automatically in a pending state

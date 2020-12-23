@@ -7,7 +7,6 @@ import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.facades.FacadeService;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -97,6 +96,21 @@ public class MyServicesController implements Initializable {
     }
 
     /**
+     * Triggered when a user double clicks on a service, to see
+     * the information of the service
+     * @param event the event triggered
+     * @param service the service the user wants to see
+     * @throws IOException if an error occurs
+     */
+    public void viewService(MouseEvent event, Service service) {
+        try {
+            ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Triggered when the user wants to go back
      * @param event the event triggered
      * @throws IOException if an error occurs
@@ -129,7 +143,6 @@ public class MyServicesController implements Initializable {
     }
 
     /**
-     * TODO double click --> see all the info of the service
      * Function from the interface Initializable
      * Make changes to the controller and its view before
      * the view appears on the client side
@@ -207,5 +220,17 @@ public class MyServicesController implements Initializable {
 
         // We add the data in the table
         servicesTV.setItems(servicesList);
+
+        // Put a listener (double click) on each row to go to the information of a service
+        servicesTV.setRowFactory( tv -> {
+            TableRow<Service> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Service rowData = row.getItem();
+                    this.viewService(event,rowData);
+                }
+            });
+            return row ;
+        });
     }
 }

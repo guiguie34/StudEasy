@@ -1,5 +1,6 @@
 package com.github.studeasy.dao.categoryDAO;
 
+import com.github.studeasy.dao.serviceDAO.ServiceDAO;
 import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.factory.Factory;
 
@@ -71,6 +72,9 @@ public class MySQLCategoryDAO extends CategoryDAO{
             preparedStatement.setInt(1, categoryToDelete.getIdCat());
             // We execute the query
             preparedStatement.executeUpdate();
+            // Now we need to set back the category of the service to a default value
+            ServiceDAO dao = ServiceDAO.getInstance();
+            dao.setDefaultCategory();
         }
         // Error with the database
         catch (SQLException err) {

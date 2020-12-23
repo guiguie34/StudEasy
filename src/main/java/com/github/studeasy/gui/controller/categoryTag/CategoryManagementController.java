@@ -4,7 +4,9 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.CategoryRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.CategoryTag;
+import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.facades.FacadeCategory;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -170,13 +172,23 @@ public class CategoryManagementController implements Initializable {
      * @param currentController the controller associated, to trigger the events with the buttons
      * @param tabC the column where we add the buttons (update or delete column)
      */
-    private void addButtonsToTable(CategoryManagementController currentController, TableColumn tabC) {
+    private void addButtonsToTable(CategoryManagementController currentController, TableColumn<CategoryTag,Boolean> tabC) {
+        // We make the buttons available for every categories
+        // However we don't want the user to delete the default category
+        tabC.setCellValueFactory(c -> {
+            CategoryTag cat = c.getValue();
+            if(cat.getIdCat() != 1 || tabC.getId().equals("updateColumn")){
+                return new SimpleObjectProperty<>(true);
+            }
+            else return new SimpleObjectProperty<>(false);
+        });
+
         // cellFactory will contain our buttons
-        Callback<TableColumn<CategoryTag, Void>, TableCell<CategoryTag, Void>> cellFactory = new Callback<>() {
+        Callback<TableColumn<CategoryTag, Boolean>, TableCell<CategoryTag, Boolean>> cellFactory = new Callback<>() {
             // For each row of the table view, we want to create the buttons
             @Override
-            public TableCell<CategoryTag, Void> call(final TableColumn<CategoryTag, Void> param) {
-                final TableCell<CategoryTag, Void> cell = new TableCell<>() {
+            public TableCell<CategoryTag, Boolean> call(final TableColumn<CategoryTag, Boolean> param) {
+                final TableCell<CategoryTag, Boolean> cell = new TableCell<>() {
                     // The image replacing the button
                     Image img;
                     // And the displayer of the image
@@ -206,11 +218,11 @@ public class CategoryManagementController implements Initializable {
 
                     // We only want to print the buttons on the rows containing data
                     @Override
-                    public void updateItem(Void item, boolean empty) {
+                    public void updateItem(Boolean item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
-                        } else {
+                        } else if(item){
                             setGraphic(btn);
                         }
                     }

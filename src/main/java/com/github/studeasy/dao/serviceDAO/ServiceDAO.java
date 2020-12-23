@@ -39,6 +39,12 @@ public abstract class ServiceDAO {
     public abstract ArrayList<Service> getMyServices(User currentUser);
 
     /**
+     * Retrieve all the pending services
+     * @return the pending services
+     */
+    public abstract ArrayList<Service> getPendingServices();
+
+    /**
      * Set to default the category of the service
      */
     public abstract void setDefaultCategory();
@@ -48,6 +54,12 @@ public abstract class ServiceDAO {
      * @param service the service to delete
      */
     public abstract void deleteService(Service service);
+
+    /**
+     * Validate the service
+     * @param service the service to validate
+     */
+    public abstract void validateService(Service service);
 
     /**
      * Create a service with those information

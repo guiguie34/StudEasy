@@ -101,6 +101,12 @@ public class ViewServiceController implements Initializable {
     private Button validateB;
 
     /**
+     * The Button to see the feedbacks
+     */
+    @FXML
+    private Button viewFeedbacksB;
+
+    /**
      * The service to display
      */
     private Service service;
@@ -116,6 +122,7 @@ public class ViewServiceController implements Initializable {
 
     /**
      * Triggered when the user wants to delete the service
+     * @param event the event triggered
      */
     public void deleteService(ActionEvent event){
         // We ask the confirmation of the deletion
@@ -130,12 +137,35 @@ public class ViewServiceController implements Initializable {
     }
 
     /**
+     * Triggered when the admin wants to validate a pending service
+     * @param event the event triggered
+     */
+    public void validateService(ActionEvent event){
+        // We ask the confirmation of the validation
+        if(AbstractRouter.confirmationBox("Are you sure you want to validate this service ?",
+                "Confirmation of the validation: "+this.service.getTitle(),
+                "Stud'Easy - Confirmation")){
+            // We ask the facade to validate the service
+            FACADE_SERVICE.validateService(this.service);
+            // We redirect
+            this.cancel(event);
+        }
+    }
+
+    /**
      * Triggered when the user wants to go back
      * @param event the event triggered
      */
     public void cancel(ActionEvent event) {
+        // We use the session to know where to redirect
+        Session session = Session.getInstance();
         try {
-            ROUTER.studentRestricted(ServiceRouter.MY_SERVICES_FXML_PATH, event);
+            if(session.isStudent()){
+                ROUTER.studentRestricted(ServiceRouter.MY_SERVICES_FXML_PATH, event);
+            }
+            else if(session.isAdmin()){
+                ROUTER.adminRestricted(ServiceRouter.ALL_SERVICES_FXML_PATH, event);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,11 +201,15 @@ public class ViewServiceController implements Initializable {
         Image img;
         switch(this.service.getStatus()){
             case(0):
+                // pending
                 img = new Image("images/service/pending.png");
                 this.statusImage.setImage(img);
                 break;
             case(1):
+                // validated
                 img = new Image("images/service/validated.png");
+                // We can only see the feedbacks if the service is validated
+                this.viewFeedbacksB.setVisible(true);
                 this.statusImage.setImage(img);
                 break;
         }

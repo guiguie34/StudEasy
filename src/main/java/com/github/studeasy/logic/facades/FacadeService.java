@@ -58,12 +58,30 @@ public class FacadeService {
     }
 
     /**
+     * Retrieve all the pending services
+     * @return the pending services
+     */
+    public ArrayList<Service> getPendingServices() {
+        // We ask the DAO to retrieve the pending services
+        return DAO.getPendingServices();
+    }
+
+    /**
      * Delete the service
      * @param service the service to delete
      */
     public void deleteService(Service service) {
         // We ask the DAO to delete it
         this.DAO.deleteService(service);
+    }
+
+    /**
+     * Validate the service
+     * @param service the service to validate
+     */
+    public void validateService(Service service){
+        // We ask the DAO to validate the service
+        this.DAO.validateService(service);
     }
 
     /**

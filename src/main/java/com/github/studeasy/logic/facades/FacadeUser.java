@@ -61,10 +61,18 @@ public class FacadeUser {
     }
 
     public void addPoints(int nbPoints,User user) throws Exception {
-
+        Session sessionUser = Session.getInstance();
+        if(user.equals(sessionUser.getCurrentUser())){
+            DAO.addPoints(nbPoints, user);
+        }
+        else throw new Exception("Permission deny");
     }
 
     public void removePoints(int nbPoints,User user) throws Exception{
-
+        Session sessionUser = Session.getInstance();
+        if(user.equals(sessionUser.getCurrentUser())){
+            DAO.removePoints(nbPoints, user);
+        }
+        else throw new Exception("Permission deny");
     }
 }

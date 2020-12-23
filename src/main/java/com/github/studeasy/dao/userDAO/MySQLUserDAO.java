@@ -79,6 +79,18 @@ public class MySQLUserDAO extends UserDAO{
     }
 
     public void removePoints(int nbPoints,User user) throws Exception{
-
+        try{
+            PreparedStatement preparedStatement;
+            ResultSet resultSet;
+            String request = "UPDATE user SET points = points - ? where idUser = ?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1, nbPoints);
+            preparedStatement.setInt(2,user.getIdUser());
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+        }
+        catch(SQLException e){
+            throw e;
+        }
     }
 }

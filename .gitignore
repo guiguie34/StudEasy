@@ -176,3 +176,4 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,windows,intellij
+/src/main/resources/environment/

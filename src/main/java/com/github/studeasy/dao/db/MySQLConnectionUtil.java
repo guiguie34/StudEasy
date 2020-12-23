@@ -1,6 +1,9 @@
 package com.github.studeasy.dao.db;
 
+import com.github.studeasy.logic.utils.PropertiesEnv;
+
 import java.sql.*;
+import java.util.Properties;
 import javax.swing.*;
 
 /**
@@ -23,13 +26,14 @@ public class MySQLConnectionUtil{
      */
     private MySQLConnectionUtil()
     {
+        Properties p = PropertiesEnv.getDatabaseProperties();
         try
         {
             // We set the information of the database
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://database-studeasy-officiel.c4y60ykreptw.eu-west-3.rds.amazonaws.com :3306/";
-            String user = "admin";
-            String passwd = "studeasy";
+            String url = p.getProperty("URL");
+            String user = p.getProperty("USER");
+            String passwd = p.getProperty("PWD");
             String dbName = "studeasy";
             // We try to connect to the database using those information
             this.db = DriverManager.getConnection(url+dbName, user, passwd);
@@ -40,6 +44,7 @@ public class MySQLConnectionUtil{
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
 
     /**
      * Retrieve the singleton of the class

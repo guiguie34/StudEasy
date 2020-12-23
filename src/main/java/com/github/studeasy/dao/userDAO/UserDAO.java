@@ -3,6 +3,9 @@ package com.github.studeasy.dao.userDAO;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * Abstract class for the User DAO
  * Contains the methods needed by the User DAO
@@ -48,4 +51,18 @@ public abstract class UserDAO {
      * @throws Exception if an error occurs
      */
     public abstract void submitAddPartner(String email,String password, String firstname, String lastname, String company, String salt) throws Exception;
+
+    /**
+     * Get all the partner from the database
+     * @return ArrayList containing all the partner
+     */
+    public abstract ArrayList<User> getAllPartner() throws Exception;
+
+    /**
+     * Delete the partner from the DB
+     * @param user The user to be deleted
+     * @throws Exception if an error occurs
+     */
+    public abstract void deletePartner(Object user) throws Exception;
+
 }

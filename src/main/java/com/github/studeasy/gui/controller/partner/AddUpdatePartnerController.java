@@ -140,12 +140,12 @@ public class AddUpdatePartnerController implements Initializable {
     }
 
     /**
-     * Load the view to return to the admin dashboard
+     * Return to the manage Partner view
      * @param event The event triggering the function
      * @throws IOException if an error occurs
      */
     public void cancel(ActionEvent event) throws IOException {
-        ((UserRouter)ROUTER).backToDashboard(event);
+        ((UserRouter)ROUTER).managePartner(event);
     }
 
     @Override
@@ -153,8 +153,6 @@ public class AddUpdatePartnerController implements Initializable {
      * TODO: Use for update
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        
-        passwordTooltip.setText("Test");
-        passwordTF.setTooltip(passwordTooltip);
+
     }
 }

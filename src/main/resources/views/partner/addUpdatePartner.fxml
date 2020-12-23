@@ -40,11 +40,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="573.0" text="Create Partner account">
-                            <font>
-                                <Font name="Arial Bold" size="42.0" />
-                            </font>
-                        </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <ImageView fitHeight="186.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/logo.png" />
+                     </image>
+                  </ImageView>
                </children></VBox>
                 <AnchorPane prefHeight="442.0" prefWidth="574.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
@@ -74,7 +75,7 @@
                               <PasswordField fx:id="confirmPasswordTF" layoutY="60.0" prefWidth="220.0" promptText="Confirm password" />
                               <PasswordField fx:id="passwordTF" layoutY="30.0" prefWidth="220.0" promptText="Password">
                                  <tooltip>
-                                    <Tooltip fx:id="passwordTooltip" wrapText="true" />
+                                    <Tooltip fx:id="passwordTooltip" text="- At least one digit&#10;- At least one lower case letter&#10;- At least one upper case letter&#10;- At least one special character in @#$%^&amp;+=*&#10;- No whitespace&#10;- At least 8 character" wrapText="true" />
                                  </tooltip>
                               </PasswordField>
                               <Label layoutY="4.0" text="Password:" />
@@ -102,21 +103,25 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="573.0" text="Create Partner account">
+                            <font>
+                                <Font name="Arial Bold" size="42.0" />
+                            </font>
+                        </Label>
                     </children>
                 </AnchorPane>
-                <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <AnchorPane prefHeight="152.0" prefWidth="616.0">
                      <children>
-                        <Button id="positiveButton" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="59.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Submit" />
+                        <Button id="positiveButton" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="45.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Submit" />
                      </children>
                   </AnchorPane>
                </children>
                 </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Button id="negativeButton" alignment="CENTER" layoutX="133.0" layoutY="59.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="89.0" styleClass="..\..\css\buttons.css" text="Back" />
+                  <Button id="negativeButton" alignment="CENTER" layoutX="133.0" layoutY="45.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="89.0" styleClass="..\..\css\buttons.css" text="Back" />
                </children>
             </AnchorPane>
             </children>

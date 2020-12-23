@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The user DAO using a MySQL database
@@ -94,6 +96,44 @@ public class MySQLUserDAO extends UserDAO{
             //currentUser = searchUser(email);
         }
         catch(SQLException e){
+            throw e;
+        }
+    }
+
+    /**
+     * Get all the partner from the database
+     * @return ArrayList containing all the partner
+     */
+    public ArrayList<User> getAllPartner() throws Exception {
+        List<User> partner = new ArrayList<User>();
+        try {
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM user WHERE role= 2";
+            preparedStatement = DB.prepareStatement(request);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                partner.add(new User(resultSet.getInt(1), resultSet.getString(3), resultSet.getString(2), resultSet.getString(6), resultSet.getString(5), resultSet.getInt(4), resultSet.getString(8), resultSet.getString(7), resultSet.getInt(9), resultSet.getString(10)));
+            }
+        } catch (Exception e) {
+           throw e;
+        }
+        return ((ArrayList<User>) partner);
+    }
+
+    public void deletePartner(Object user) throws Exception{
+        try {
+            // We prepare the SQL request to retrieve a user
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            int resultSet;
+            String request = "DELETE  FROM user WHERE emailAddress=?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, ((User) user).getEmailAdress());
+            resultSet = preparedStatement.executeUpdate();
+        }
+        catch (Exception e){
             throw e;
         }
     }

@@ -7,6 +7,10 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
 import com.github.studeasy.logic.utils.regexUtils;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * The Facade User for the UserDAO
  * It contains methods that allow a user to login
@@ -64,7 +68,6 @@ public class FacadeUser {
 
     /**
      * Check if the logs are the same
-     * TODO: See for strength of password
      * @param email
      * @param confirmEmail
      * @param password
@@ -98,5 +101,20 @@ public class FacadeUser {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    /**
+     * Get all the partner
+     * @return ArrayList of all partner
+     */
+    public ArrayList<User> getAllPartner() throws Exception {
+        return DAO.getAllPartner();
+    }
+
+    /**
+     * Delete
+     */
+    public void deletePartner(Object user) throws Exception {
+        DAO.deletePartner((User) user);
     }
 }

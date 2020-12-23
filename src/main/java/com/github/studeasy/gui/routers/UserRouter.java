@@ -2,6 +2,7 @@ package com.github.studeasy.gui.routers;
 
 import javafx.event.ActionEvent;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -56,6 +57,11 @@ public class UserRouter extends AbstractRouter {
     private final static String ADD_PARTNER_FXML_PATH = "views/partner/addUpdatePartner.fxml";
 
     /**
+     * Path to the home partner view
+     */
+    private final static String MANAGE_PARTNER_FXML_PATH = "views/partner/partnerManagement.fxml";
+
+    /**
      * Function loading the appropriate view for the connecting user
      * @param event the action trigerring this method
      * @throws IOException
@@ -75,6 +81,14 @@ public class UserRouter extends AbstractRouter {
         adminRestricted(ADD_PARTNER_FXML_PATH,event);
     }
 
+    /**
+     * Function loading the appropriate view to manage the partner
+     * @param event
+     * @throws IOException
+     */
+    public void managePartner(ActionEvent event) throws IOException{
+        adminRestricted(MANAGE_PARTNER_FXML_PATH,event);
+    }
     /**
      * Function loading dashboard for each kind of user
      * @param event the action triggering this method

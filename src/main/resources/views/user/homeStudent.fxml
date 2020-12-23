@@ -44,6 +44,7 @@
                         </Label>
                   <Button id="neutralButton" layoutX="155.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadMyProfile" prefHeight="26.0" prefWidth="146.0" text="My profile" />
                   <Label fx:id="failLabel" layoutX="26.0" layoutY="79.0" prefHeight="15.0" prefWidth="372.0" />
+                  <Button id="neutralButton" layoutX="155.0" layoutY="158.0" mnemonicParsing="false" onAction="#test" prefHeight="26.0" prefWidth="146.0" text="testFeedback" />
                     </children>
                 </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

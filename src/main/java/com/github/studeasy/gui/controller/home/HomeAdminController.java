@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.home;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -25,7 +26,9 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      */
     public void searchUsers(ActionEvent event){
         try {
-            ((UserRouter)ROUTER).searchUsers(event);
+            if(Session.getInstance().isAdmin()){
+                ((UserRouter)ROUTER).searchUsers(event);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

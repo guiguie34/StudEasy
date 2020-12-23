@@ -43,4 +43,21 @@ public abstract class FeedbackDAO {
      * @param idFeedback the id of the feedback to delete
      */
     public abstract void deleteFeedback(int idFeedback) throws SQLException;
+
+    /**
+     *indicate if the service has been purchased by the user connected
+     * @param idService the id of the service concerned
+     * @return true if the student has bought the service else false
+     */
+    public abstract boolean hasCommand(int idService);
+
+    /**
+     * add the feedback in database
+     * @param title the title of the feedback
+     * @param comment the comment of the feedback
+     * @param rate the rate of the feedback
+     * @param idService the id of the service concerned
+     * @throws Exception if an error occur
+     */
+    public abstract void leaveFeedback(String title, String comment, int rate, int idService) throws Exception;
 }

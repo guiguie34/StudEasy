@@ -1,12 +1,10 @@
 package com.github.studeasy.gui.controller.feedback;
 
-import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Feedback;
 import com.github.studeasy.logic.common.Session;
-import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeFeedback;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -51,10 +49,22 @@ public class SeeFeedbacksServiceController implements Initializable {
     private TextField searchFeedbackTF;
 
     /**
+     * The button to add a feedBack
+     */
+    @FXML
+    private Button addFeedbackButton;
+
+    /**
      * The label if an error occur
      */
     @FXML
     private Label failLabel;
+
+    /**
+     * The label of the title of the page
+     */
+    @FXML
+    private Label titleLabel;
 
     /**
      * The table containing the feedbacks information
@@ -107,6 +117,15 @@ public class SeeFeedbacksServiceController implements Initializable {
         this.FACADE = FacadeFeedback.getInstance();
         this.idService = idService;
 
+    }
+
+    /**
+     * Triggered when the user wants to go to add a feedback page
+     * @param event the event triggered
+     * @throws IOException if an error occurs
+     */
+    public void loadAddFeedback(ActionEvent event) throws IOException {
+        ((FeedbackRouter)ROUTER).addFeedback(FeedbackRouter.ADD_FEEDBACK_FXML_PATH,event,idService);
     }
 
     /**
@@ -213,15 +232,15 @@ public class SeeFeedbacksServiceController implements Initializable {
 
     /**
      * Triggered when the user pushed the cancel button
-     * Cancel the action and redirect to the home page
+     * Cancel the action and redirect to the service page
      * @param event
      */
     public void cancel(ActionEvent event) {
-        try {
-            ROUTER.changeView(UserRouter.HOME_ADMIN_FXML_PATH,event);
+        /*try {
+            //Come back to the view of the service
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -272,6 +291,10 @@ public class SeeFeedbacksServiceController implements Initializable {
         feedbackManagement.setRowFactory( tv -> {
             return new TableRow<Feedback>();
         });
+
+        titleLabel.setText("Feedbacks for the service");
+
+        addFeedbackButton.setVisible(FACADE.hasCommand(idService) && Session.getInstance().isStudent());
 
     }
 }

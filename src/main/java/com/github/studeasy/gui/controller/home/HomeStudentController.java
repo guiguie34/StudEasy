@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
@@ -41,7 +42,14 @@ public class HomeStudentController extends HomeAbstractController implements Ini
         }
     }
 
+    public  void test(ActionEvent event){
+        try {
 
+            FeedbackRouter.getInstance().viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH,event,5);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Function from the interface Initializable

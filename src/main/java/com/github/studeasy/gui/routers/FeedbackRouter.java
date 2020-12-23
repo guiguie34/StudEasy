@@ -1,8 +1,11 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.feedback.LeaveFeedbacksController;
 import com.github.studeasy.gui.controller.feedback.SeeFeedbacksServiceController;
 import com.github.studeasy.gui.controller.user.InfoUserController;
+import com.github.studeasy.gui.controller.user.RegisterUpdateController;
 import com.github.studeasy.logic.common.User;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +17,13 @@ import java.io.IOException;
  */
 public class FeedbackRouter extends AbstractRouter{
 
+
     /**
      * Singleton of the feedback router
      */
     private static FeedbackRouter feedbackRouter = null;
+
+    public static final String ADD_FEEDBACK_FXML_PATH = "views/feedback/addFeedback.fxml" ;
 
     /**
      * Path to the feedbacks of a service
@@ -42,6 +48,23 @@ public class FeedbackRouter extends AbstractRouter{
             feedbackRouter = new FeedbackRouter();
         }
         return feedbackRouter;
+    }
+
+    /**
+     * Load the view for add a feedback page
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param idService The id of the service
+     * @throws IOException
+     */
+    public void addFeedback(String pathFXML, ActionEvent event, int idService) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with
+        LeaveFeedbacksController leaveFeedbacksController = new LeaveFeedbacksController(idService);
+        loader.setController(leaveFeedbacksController);
+        Parent root = loader.load();
+        this.changeView(event,root);
     }
 
     /**

@@ -39,6 +39,15 @@ public class FacadeFeedback {
     }
 
     /**
+     *ask to the dao if the service has been purchased by the user connected
+     * @param idService the id of the service concerned
+     * @return true if the student has bought the service else false
+     */
+    public boolean hasCommand(int idService) {
+        return DAO.hasCommand(idService);
+    }
+
+    /**
      * Method which will ask to the DAO to get all the feedbacks related to a service
      * @param idService the service concerned
      * @return All the feedbacks in an ArrayList
@@ -54,5 +63,17 @@ public class FacadeFeedback {
      */
     public void deleteFeedback(Feedback feedbackToDelete) throws SQLException {
         DAO.deleteFeedback(feedbackToDelete.getIdFeedback());
+    }
+
+    /**
+     * Ask to the DAO to add the feedback in database
+     * @param title the title of the feedback
+     * @param comment the comment of the feedback
+     * @param rate the rate of the feedback
+     * @param idService the id of the service concerned
+     * @throws Exception if an error occur
+     */
+    public void leaveFeedback(String title, String comment, int rate, int idService) throws Exception {
+        DAO.leaveFeedback(title,  comment, rate, idService);
     }
 }

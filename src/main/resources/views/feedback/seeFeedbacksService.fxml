@@ -40,7 +40,7 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" text="Feedbacks of the Service" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" text="Feedbacks of the Service" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -55,8 +55,8 @@
                             <columns>
                                 <TableColumn fx:id="titleColumn" maxWidth="286.0" prefWidth="224.7999267578125" resizable="false" text="Title" />
                                 <TableColumn fx:id="commentColumn" editable="false" maxWidth="648.0000610351562" prefWidth="448.0000305175781" resizable="false" sortable="false" text="Comment" />
-                                <TableColumn fx:id="dateColumn" editable="false" maxWidth="626.4000244140625" minWidth="0.0" prefWidth="153.5999755859375" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Date" />
-                                <TableColumn fx:id="rateColumn" editable="false" maxWidth="484.79998779296875" minWidth="-Infinity" prefWidth="72.7999267578125" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Rate" />
+                                <TableColumn fx:id="dateColumn" editable="false" maxWidth="626.4000244140625" minWidth="0.0" prefWidth="153.5999755859375" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Purchase Date" />
+                                <TableColumn fx:id="rateColumn" editable="false" maxWidth="484.79998779296875" minWidth="-Infinity" prefWidth="72.7999267578125" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Rate (/5)" />
                         <TableColumn fx:id="actionColumn" editable="false" maxWidth="484.79998779296875" minWidth="-Infinity" prefWidth="136.800048828125" resizable="false" sortable="false" style="-fx-alignment: CENTER;" text="Action" />
                             </columns>
                             <columnResizePolicy>
@@ -69,6 +69,11 @@
                             </font>
                         </Button>
                   <Label fx:id="failLabel" layoutX="309.0" layoutY="59.0" prefHeight="15.0" prefWidth="542.0" />
+                  <Button id="positiveButton" fx:id="addFeedbackButton" layoutX="984.0" layoutY="474.0" mnemonicParsing="false" onAction="#loadAddFeedback" prefHeight="39.0" prefWidth="168.0" text="Add a feedback">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </children>

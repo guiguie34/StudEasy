@@ -1,9 +1,8 @@
 package com.github.studeasy.gui.routers;
 
-import com.github.studeasy.gui.controller.service.AllServicesController;
-import com.github.studeasy.gui.controller.service.ProposeAskServiceController;
-import com.github.studeasy.gui.controller.service.ViewServiceController;
+import com.github.studeasy.gui.controller.service.*;
 import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.Session;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -111,10 +110,19 @@ public class ServiceRouter extends AbstractRouter{
     public void viewAllServices(String pathFXML, Event event, int pendingAllServices) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        Session session = Session.getInstance();
         // We create the controller
-        AllServicesController allServicesController = new AllServicesController(pendingAllServices);
+        AbstractViewServicesController abstractViewServicesController;
+        if(session.isStudent() && pendingAllServices == 0){
+            // The student wants to see his services
+            abstractViewServicesController = new MyServicesController(pendingAllServices);
+        }
+        else{
+            // The user wants to see all the services
+            abstractViewServicesController = new AllServicesController(pendingAllServices);
+        }
         // We link this controller with the FXML
-        loader.setController(allServicesController);
+        loader.setController(abstractViewServicesController);
         Parent root = loader.load();
         // And we change the view
         this.changeView(event,root);

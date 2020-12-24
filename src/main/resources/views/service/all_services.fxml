@@ -66,8 +66,8 @@
                   </ImageView>
                   <CheckBox fx:id="proposedCB" layoutX="32.0" layoutY="28.0" mnemonicParsing="false" selected="true" text="Proposed" />
                   <CheckBox fx:id="requestedCB" layoutX="116.0" layoutY="28.0" mnemonicParsing="false" selected="true" text="Requested" />
-                  <TextField fx:id="filterTitleTF" layoutX="844.0" layoutY="25.0" promptText="Filter title ..." visible="false" />
-                  <TextField fx:id="filterCategoryTF" layoutX="1004.0" layoutY="25.0" promptText="Filter category ..." visible="false" />
+                  <TextField fx:id="filterTitleTF" layoutX="844.0" layoutY="25.0" promptText="Filter title ..." />
+                  <TextField fx:id="filterCategoryTF" layoutX="1004.0" layoutY="25.0" promptText="Filter category ..." />
                   <Button id="negativeButton" layoutX="23.0" layoutY="474.0" mnemonicParsing="false" onAction="#cancel" prefHeight="22.0" prefWidth="63.0" text="Back">
                      <font>
                         <Font size="15.0" />

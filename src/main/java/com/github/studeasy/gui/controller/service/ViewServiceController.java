@@ -170,7 +170,7 @@ public class ViewServiceController implements Initializable {
         try {
             if(session.isStudent()){
                 if(pendingAllServices == 0){
-                    ROUTER.studentRestricted(ServiceRouter.MY_SERVICES_FXML_PATH,event);
+                    ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.MY_SERVICES_FXML_PATH,event,pendingAllServices);
                 }
                 else{
                     ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,pendingAllServices);

@@ -119,6 +119,7 @@
                   <Button id="neutralButton" fx:id="viewFeedbacksB" layoutX="788.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="155.0" text="View Feedbacks" visible="false" />
                   <Button id="positiveButton" fx:id="applyBuyServiceB" layoutX="367.0" layoutY="452.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="155.0" visible="false" />
                   <Button id="positiveButton" fx:id="validateB" layoutX="892.0" layoutY="418.0" mnemonicParsing="false" onAction="#validateService" prefHeight="27.0" prefWidth="85.0" text="Validate" visible="false" />
+                  <Button id="positiveButton" fx:id="updateB" layoutX="402.0" layoutY="451.0" mnemonicParsing="false" onAction="#updateService" prefHeight="27.0" prefWidth="85.0" text="Update" visible="false" />
                     </children>
                 </AnchorPane>
             </children>

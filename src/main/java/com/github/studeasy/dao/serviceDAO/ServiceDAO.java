@@ -62,6 +62,13 @@ public abstract class ServiceDAO {
     public abstract void deleteService(Service service);
 
     /**
+     * Update the service with this category
+     * @param categoryS the new category
+     * @param service the service to update
+     */
+    public abstract void updateCategoryService(CategoryTag categoryS, Service service);
+
+    /**
      * Validate the service
      * @param service the service to validate
      */

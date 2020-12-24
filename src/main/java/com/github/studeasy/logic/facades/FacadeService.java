@@ -85,6 +85,16 @@ public class FacadeService {
     }
 
     /**
+     * Update the service with this category
+     * @param categoryS the new category
+     * @param service the service to update
+     */
+    public void updateCategoryService(CategoryTag categoryS, Service service) {
+        // We ask the DAO to update the service
+        this.DAO.updateCategoryService(categoryS,service);
+    }
+
+    /**
      * Validate the service
      * @param service the service to validate
      */

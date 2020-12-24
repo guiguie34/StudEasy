@@ -65,14 +65,15 @@ public class ServiceRouter extends AbstractRouter{
      * a service
      * @param pathFXML the path to the fxml file
      * @param event the action triggering the change of view
-     * @param proposeRequest 0 if we propose, 1 if we request
+     * @param proposeRequest 0 if we propose, 1 if we request, 2 if we update
+     * @param origin to know from where come from the student, 0 -> MyServices, 1 -> seeAllServices and 2 -> Home Student
      * @throws IOException if an error occurs
      */
-    public void proposeOrRequestService(String pathFXML, ActionEvent event, int proposeRequest) throws IOException {
+    public void proposeOrRequestService(String pathFXML, ActionEvent event, int proposeRequest, int origin, Service service) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with proposeRequest telling if we propose or request
-        ProposeAskServiceController proposeAskServiceController = new ProposeAskServiceController(proposeRequest);
+        ProposeAskServiceController proposeAskServiceController = new ProposeAskServiceController(proposeRequest, origin, service);
         // We link this controller with the FXML
         loader.setController(proposeAskServiceController);
         Parent root = loader.load();

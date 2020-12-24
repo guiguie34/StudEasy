@@ -101,6 +101,12 @@ public class ViewServiceController implements Initializable {
     private Button validateB;
 
     /**
+     * The update button
+     */
+    @FXML
+    private Button updateB;
+
+    /**
      * The Button to see the feedbacks
      */
     @FXML
@@ -141,6 +147,18 @@ public class ViewServiceController implements Initializable {
             FACADE_SERVICE.deleteService(this.service);
             // We redirect
                 this.cancel(event);
+        }
+    }
+
+    /**
+     * Triggered when the user wants to update the service
+     * @param event
+     */
+    public void updateService(ActionEvent event){
+        try {
+            ((ServiceRouter)ROUTER).proposeOrRequestService(ServiceRouter.PROPOSE_ASK_SERVICE_FXML_PATH,event,2,pendingAllServices,service);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -244,6 +262,10 @@ public class ViewServiceController implements Initializable {
         // Only the admin and the owner can delete the service
         if(currentUser.getIdUser() == owner.getIdUser() || session.isAdmin()){
             deleteB.setVisible(true);
+        }
+        // Only the owner can update his services
+        if(currentUser.getIdUser() == owner.getIdUser()){
+            updateB.setVisible(true);
         }
         // We can buy or apply only if we are a student and if we're not the owner
         if(session.isStudent() && owner.getIdUser() != currentUser.getIdUser()){

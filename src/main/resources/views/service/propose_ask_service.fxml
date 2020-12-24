@@ -38,7 +38,7 @@
                         <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" max="1000" min="0" />
                     </valueFactory>
                   </Spinner>
-                  <Button id="positiveButton" layoutX="539.0" layoutY="449.0" mnemonicParsing="false" onAction="#submitService" prefHeight="27.0" prefWidth="90.0" text="Post">
+                  <Button id="positiveButton" fx:id="addUpdateB" layoutX="539.0" layoutY="449.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0">
                      <font>
                         <Font size="15.0" />
                      </font>

@@ -172,6 +172,28 @@ public class MySQLServiceDAO extends ServiceDAO {
     }
 
     /**
+     * Update the service with this category
+     * @param categoryS the new category
+     * @param service the service to update
+     */
+    public void updateCategoryService(CategoryTag categoryS, Service service){
+        // We prepare the SQL request to update the service
+        PreparedStatement preparedStatement;
+        String request = "UPDATE service SET fkCategory = ? WHERE idService = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1, categoryS.getIdCat());
+            preparedStatement.setInt(2, service.getIdService());
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    /**
      * Validate the service
      * @param service the service to validate
      */

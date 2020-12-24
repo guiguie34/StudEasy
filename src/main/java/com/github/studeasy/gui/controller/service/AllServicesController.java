@@ -9,15 +9,15 @@ import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeService;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -91,6 +91,30 @@ public class AllServicesController implements Initializable {
     private Label pendingAllServicesL;
 
     /**
+     * To filter the categories
+     */
+    @FXML
+    private TextField filterCategoryTF;
+
+    /**
+     * To filter the titles
+     */
+    @FXML
+    private TextField filterTitleTF;
+
+    /**
+     * To select the proposed services
+     */
+    @FXML
+    private CheckBox proposedCB;
+
+    /**
+     * To select the requested services
+     */
+    @FXML
+    private CheckBox requestedCB;
+
+    /**
      * The list of the services displayed in the table
      */
     private ObservableList<Service> servicesList;
@@ -103,7 +127,17 @@ public class AllServicesController implements Initializable {
     private int pendingAllServices;
 
     /**
+     * Indicates if we should display the requested, the proposed or all the services
+     * 2 -> we display everything
+     * 1 -> we display the requested ones
+     * 0 -> we display the proposed ones
+     * -1 -> we display nothing
+     */
+    private int proposeRequestDisplayServices = 2;
+
+    /**
      * Create the controller with the router, the facade
+     * @param pendingAllServices indicates if we manage or if we see services
      */
     public AllServicesController(int pendingAllServices){
         this.ROUTER = ServiceRouter.getInstance();
@@ -116,13 +150,149 @@ public class AllServicesController implements Initializable {
      * the information of the service
      * @param event the event triggered
      * @param service the service the user wants to see
-     * @throws IOException if an error occurs
      */
     public void viewService(MouseEvent event, Service service) {
         try {
             ((ServiceRouter) ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service,pendingAllServices);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the user types text in the search text field for the category
+     * It filters the data to display only the services with the categories matching what is entered
+     * Also checks the data of the other textfield (filters linked)
+     * @param observable
+     * @param oldValue
+     * @param newValue the new value entered by the user
+     * @param filteredData the data filtered
+     */
+    public void filterCategory(ObservableValue<? extends String> observable, String oldValue, String newValue, FilteredList<Service> filteredData) {
+        // We check for each service
+        filteredData.setPredicate(service -> {
+            // We check if we need to display with the checkboxes
+            if(displayServices(service)){
+                // If the text field is empty, we display all the categories
+                // If the title field is also empty
+                if ((newValue == null || newValue.isEmpty())
+                && (this.filterTitleTF.getText() == null || this.filterTitleTF.getText().isEmpty())) {
+                    return true;
+                }
+                // We compare what is entered (in lower case)
+                String lowerCaseFilter = newValue.toLowerCase();
+                CategoryTag category = service.getCategory();
+                // If the filter matches the name of the category
+                // We need to check if the other text field also matches
+                if (category.getName().toLowerCase().contains(lowerCaseFilter)
+                    && ((this.filterTitleTF.getText() == null || this.filterTitleTF.getText().isEmpty())
+                    || service.getTitle().toLowerCase().contains(this.filterTitleTF.getText()))){
+                        // The service is displayed
+                        return true;
+                }
+                else {
+                    // The category name doesn't match, not displayed
+                    // Or the title doesn't match
+                    return false;
+                }
+            }
+            // Not a type of service to display
+            else{
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Triggered when the user types text in the search text field for the title
+     * It filters the data to display only the services with the categories matching what is entered
+     * Also checks the data of the other textfield (filters linked)
+     * @param observable
+     * @param oldValue
+     * @param newValue the new value entered by the user
+     * @param filteredData the data filtered
+     */
+    public void filterTitle(ObservableValue<? extends String> observable, String oldValue, String newValue, FilteredList<Service> filteredData) {
+        // We check for each service
+        filteredData.setPredicate(service -> {
+            // We check if we need to display
+            if(displayServices(service)){
+                // If the text field is empty, we display all the services
+                // If the other text field is also empty
+                if ((newValue == null || newValue.isEmpty())
+                && (this.filterCategoryTF.getText() == null || this.filterCategoryTF.getText().isEmpty())) {
+                    return true;
+                }
+
+                // We compare what he entered (in lower case)
+                String lowerCaseFilter = newValue.toLowerCase();
+                CategoryTag category = service.getCategory();
+                // If the filter matches the title of the service and the category
+                if (service.getTitle().toLowerCase().contains(lowerCaseFilter)
+                &&  ((this.filterCategoryTF.getText() == null || this.filterCategoryTF.getText().isEmpty())
+                    || category.getName().toLowerCase().contains(this.filterCategoryTF.getText()))){
+                    // The service is displayed
+                    return true;
+                } else {
+                    // The title doesn't match, not displayed
+                    // or the category doesn't match
+                    return false;
+                }
+            }
+            // Not a type of service to display
+            else{
+                return false;
+            }
+        });
+    }
+
+    /**
+     * We check if we need to display this service
+     * @param service the services to display
+     * @return true if we can display it, false otherwise
+     */
+    private boolean displayServices(Service service){
+        switch(this.proposeRequestDisplayServices){
+            case(2):
+                // We display all the services
+                return true;
+            default:
+                // We display only the services selected
+                if(service.getTypeService() == this.proposeRequestDisplayServices){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+        }
+    }
+
+    /**
+     * Update the services to display
+     * @param event the event triggered
+     * @param filteredData the filtered data of services
+     */
+    public void updateSelection(ActionEvent event, FilteredList<Service> filteredData){
+        // We check what is selected or not
+        if(this.proposedCB.isSelected() && this.requestedCB.isSelected()){
+            // We have to display all the services
+            this.proposeRequestDisplayServices = 2;
+        }
+        else if(this.proposedCB.isSelected()){
+            // We only have the proposed services
+            this.proposeRequestDisplayServices = 0;
+        }
+        else if(this.requestedCB.isSelected()){
+            // We have to display the requested services
+            this.proposeRequestDisplayServices = 1;
+        }
+        else{
+            this.proposeRequestDisplayServices = -1;
+        }
+        // We update the data to display according to the text fields
+        if(this.pendingAllServices != 0) {
+            this.filterTitle(null, null, this.filterTitleTF.getText(), filteredData);
+            this.filterCategory(null, null, this.filterCategoryTF.getText(), filteredData);
         }
     }
 
@@ -164,6 +334,8 @@ public class AllServicesController implements Initializable {
         // We display all the services
         else {
             this.pendingAllServicesL.setText("All Services Online");
+            this.filterCategoryTF.setVisible(true);
+            this.filterTitleTF.setVisible(true);
             // We retrieve all the services
             servicesList = FXCollections.observableArrayList(FACADE_SERVICE.getOnlineServices());
         }
@@ -227,5 +399,19 @@ public class AllServicesController implements Initializable {
             });
             return row ;
         });
+
+        // We create a filtered list containing the data
+        FilteredList<Service> filteredServices = new FilteredList<>(servicesList, p -> true);
+        // We associate the text fields with a function listening to what is entered (to filter data)
+        filterCategoryTF.textProperty().addListener((observable,oldValue,newValue) -> this.filterCategory(observable,oldValue,newValue,filteredServices));
+        filterTitleTF.textProperty().addListener((observable,oldValue,newValue) -> this.filterTitle(observable,oldValue,newValue,filteredServices));
+        // We do the same with the checkboxes to filter the services according to their type
+        proposedCB.setOnAction((event) -> this.updateSelection(event,filteredServices));
+        requestedCB.setOnAction((event) -> this.updateSelection(event,filteredServices));
+        // We create a sorted list based on our filtered data
+        SortedList<Service> sortedData = new SortedList<>(filteredServices);
+        sortedData.comparatorProperty().bind(servicesTV.comparatorProperty());
+        // We add the sorted data in the table
+        servicesTV.setItems(sortedData);
     }
 }

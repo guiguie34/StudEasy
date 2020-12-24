@@ -2,9 +2,11 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -57,6 +59,15 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="6.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/common/searchIcon.png" />
+                     </image>
+                  </ImageView>
+                  <CheckBox fx:id="proposedCB" layoutX="32.0" layoutY="28.0" mnemonicParsing="false" selected="true" text="Proposed" />
+                  <CheckBox fx:id="requestedCB" layoutX="116.0" layoutY="28.0" mnemonicParsing="false" selected="true" text="Requested" />
+                  <TextField fx:id="filterTitleTF" layoutX="844.0" layoutY="25.0" promptText="Filter title ..." visible="false" />
+                  <TextField fx:id="filterCategoryTF" layoutX="1004.0" layoutY="25.0" promptText="Filter category ..." visible="false" />
                   <Button id="negativeButton" layoutX="23.0" layoutY="474.0" mnemonicParsing="false" onAction="#cancel" prefHeight="22.0" prefWidth="63.0" text="Back">
                      <font>
                         <Font size="15.0" />

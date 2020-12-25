@@ -23,6 +23,8 @@ public class regexUtils {
      */
     private static final String password_regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{8,}$";
 
+    private static final String phone_regex = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
+
     public static boolean matches_mail(String input){
         pattern = Pattern.compile(email_regex);
         matcher = pattern.matcher(input);
@@ -31,6 +33,12 @@ public class regexUtils {
 
     public static boolean matches_password(String input){
         pattern = Pattern.compile(password_regex);
+        matcher = pattern.matcher(input);
+        return matcher.find();
+    }
+
+    public static boolean matches_phone(String input){
+        pattern = Pattern.compile(phone_regex);
         matcher = pattern.matcher(input);
         return matcher.find();
     }

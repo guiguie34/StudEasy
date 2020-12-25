@@ -1,6 +1,8 @@
 package com.github.studeasy.logic.factory;
 
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
+import com.github.studeasy.dao.jobDAO.JobDAO;
+import com.github.studeasy.dao.jobDAO.MySQLJobDAO;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
@@ -55,5 +57,14 @@ public class MySQLFactory extends Factory {
     @Override
     public UserDAO createUserDAO() {
         return new MySQLUserDAO();
+    }
+
+    /**
+     * Method which will create a MySQLJobDAO
+     * @return the MySQLJobDAO
+     */
+    @Override
+    public JobDAO createJobDAO() {
+        return new MySQLJobDAO();
     }
 }

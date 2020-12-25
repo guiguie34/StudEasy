@@ -31,12 +31,5 @@ public class AdminDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    /**
-     * Load the view to manage Partner account
-     * @param event the action trigerring the change of view
-     * @throws IOException if an error occurs
-     */
-    public void managePartner(ActionEvent event) throws IOException {
-        ((UserRouter)ROUTER).managePartner(event);
-    }
+
 }

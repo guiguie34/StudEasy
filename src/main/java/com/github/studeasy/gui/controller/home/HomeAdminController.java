@@ -3,8 +3,10 @@ package com.github.studeasy.gui.controller.home;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +28,15 @@ public class HomeAdminController implements Initializable {
     public HomeAdminController(){
         this.ROUTER = UserRouter.getInstance();
         this.FACADE = FacadeUser.getInstance();
+    }
+
+    /**
+     * Load the view to manage Partner account
+     * @param event the action trigerring the change of view
+     * @throws IOException if an error occurs
+     */
+    public void managePartner(ActionEvent event) throws IOException {
+        ((UserRouter)ROUTER).managePartner(event);
     }
 
     /**

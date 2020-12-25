@@ -67,7 +67,7 @@ public class FacadeUser {
     }
 
     /**
-     * Check if the logs are the same
+     * Checks if the logs are the same and calls the DAO to add the partner to the DB
      * @param email
      * @param confirmEmail
      * @param password
@@ -103,6 +103,18 @@ public class FacadeUser {
         }
     }
 
+    /**
+     * Checks if the logs are the same and call the DAO to update a partner
+     * @param email
+     * @param confirmEmail
+     * @param password
+     * @param confirmPassword
+     * @param firstname
+     * @param lastname
+     * @param company
+     * @param user
+     * @throws Exception
+     */
     public void submitUpdatePartner(String email, String confirmEmail,String password, String confirmPassword, String firstname, String lastname, String company, Object user) throws Exception {
         String salt;
         try{
@@ -150,7 +162,7 @@ public class FacadeUser {
     }
 
     /**
-     * Delete
+     * Delete a partner
      */
     public void deletePartner(Object user) throws Exception {
         DAO.deletePartner((User) user);

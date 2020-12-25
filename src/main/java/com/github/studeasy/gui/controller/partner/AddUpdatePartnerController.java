@@ -153,8 +153,10 @@ public class AddUpdatePartnerController implements Initializable {
                     label.setTextFill(Color.RED);
                     label.setText("The email address provided already exists in the system, please retry with another email");
                 } catch (BadInformationException e) {
+                    label.setTextFill(Color.RED);
                     label.setText(e.getMessage());
                 } catch (Exception e) {
+                    label.setTextFill(Color.RED);
                     label.setText("An error occurs, please retry");
                 }
             } else {
@@ -177,8 +179,10 @@ public class AddUpdatePartnerController implements Initializable {
                     label.setTextFill(Color.RED);
                     label.setText("The email address provided already exists in the system, please retry with another email");
                 } catch (BadInformationException e) {
+                    label.setTextFill(Color.RED);
                     label.setText(e.getMessage());
                 } catch (Exception e) {
+                    label.setTextFill(Color.RED);
                     label.setText("An error occurs, please retry");
                 }
 

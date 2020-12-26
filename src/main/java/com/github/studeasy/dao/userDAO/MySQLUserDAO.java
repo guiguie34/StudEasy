@@ -93,4 +93,28 @@ public class MySQLUserDAO extends UserDAO{
             throw e;
         }
     }
+
+    public int viewPoints(User user) throws Exception{
+        int respoints = 0;
+        try{
+            PreparedStatement preparedStatement;
+            ResultSet resultSet;
+            String request = "SELECT points AS pointUser from user where idUser = ?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1,user.getIdUser());
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                // No, we throw an error
+                throw new BadCredentialsException("No user found");
+            } else {
+                // stock the result of execution
+                respoints = resultSet.getInt("pointUser");
+            }
+        }
+        catch(SQLException e){
+            throw e;
+        }
+        return respoints;
+    }
 }

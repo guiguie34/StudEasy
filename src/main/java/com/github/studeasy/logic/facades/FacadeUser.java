@@ -60,6 +60,13 @@ public class FacadeUser {
         }
     }
 
+    /***
+     * Add points for a user
+     * @param nbPoints
+     * @param user
+     * @throws Exception
+     */
+
     public void addPoints(int nbPoints,User user) throws Exception {
         Session sessionUser = Session.getInstance();
         if(user.equals(sessionUser.getCurrentUser())){
@@ -68,6 +75,12 @@ public class FacadeUser {
         else throw new Exception("Permission deny");
     }
 
+    /***
+     * Remove points of a user
+     * @param nbPoints
+     * @param user
+     * @throws Exception
+     */
     public void removePoints(int nbPoints,User user) throws Exception{
         Session sessionUser = Session.getInstance();
         if(user.equals(sessionUser.getCurrentUser())){
@@ -75,4 +88,21 @@ public class FacadeUser {
         }
         else throw new Exception("Permission deny");
     }
+
+    /***
+     * View number of points for a user
+     * @param user
+     * @return points
+     * @throws Exception
+     */
+    public int viewPoints(User user) throws Exception{
+        Session sessionUser = Session.getInstance();
+        int points = 0;
+        if(user.equals(sessionUser.getCurrentUser())){
+            points=DAO.viewPoints(user);
+        }
+        else throw new Exception("Permission deny");
+        return points;
+    }
+
 }

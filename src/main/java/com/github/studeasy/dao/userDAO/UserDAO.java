@@ -51,4 +51,12 @@ public abstract class UserDAO {
      * @throws Exception
      */
     public abstract void removePoints(int nbPoints,User user) throws Exception;
+
+    /***
+     * Methode that allows to see points of a user
+     * @param user
+     * @return nombre de points
+     * @throws Exception
+     */
+    public abstract int viewPoints(User user) throws Exception;
 }

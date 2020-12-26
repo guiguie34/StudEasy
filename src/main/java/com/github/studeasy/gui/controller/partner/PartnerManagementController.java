@@ -118,10 +118,6 @@ public class PartnerManagementController implements Initializable {
         ((UserRouter)ROUTER).addOrUpdatePartner(event,0,null);
     }
 
-    /*
-    TODO: Implements tableView (display Partner, add buttons)
-    TODO: Implements methods in facade and DAO (deletePartner,searchPartner,update)
-     */
 
     /**
      * Delete the partner from the system

@@ -39,6 +39,15 @@ public abstract class UserDAO {
      */
     public abstract User searchUser(String email) throws Exception;
 
+    /**
+     * Method asking the database if a user with this id exist,
+     * and returning him if he exists
+     * @param email the id to check
+     * @return the user corresponding
+     * @throws Exception if the user doesn't exist in the database
+     */
+    public abstract User searchUserById(int id) throws Exception;
+
 
     /**
      * Add a partner to the database

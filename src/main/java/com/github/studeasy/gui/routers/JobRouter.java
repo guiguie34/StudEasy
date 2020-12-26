@@ -1,7 +1,8 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.job.AddUpdateJobOfferController;
-import com.github.studeasy.gui.controller.partner.AddUpdatePartnerController;
+import com.github.studeasy.gui.controller.job.JobOffersController;
+import com.github.studeasy.logic.common.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,9 +39,9 @@ public class JobRouter extends AbstractRouter {
     }
 
     /**
-     * Path to the handle Job
+     * Path to see all jobs
      */
-    private final static String HANDLE_JOB_FXML_PATH = "views/job/handleJob.fxml";
+    private final static String SEE_ALL_JOB_FXML_PATH = "views/job/JobOffersController.fxml";
 
     /**
      * Path to add or update Job
@@ -61,16 +62,6 @@ public class JobRouter extends AbstractRouter {
     private final static String HOME_PARTNER_FXML_PATH = "views/user/homePartner.fxml";
 
 
-
-    /**
-     * Load the view for the partner to handle his job offer
-     *
-     * @param event
-     * @throws IOException
-     */
-    public void handleJob(ActionEvent event) throws IOException {
-        partnerRestricted(HANDLE_JOB_FXML_PATH, event);
-    }
 
     /**
      * Function loading the appropriate view to add job for a partner
@@ -103,5 +94,27 @@ public class JobRouter extends AbstractRouter {
         studentRestricted(HOME_STUDENT_FXML_PATH, event);
         adminRestricted(HOME_ADMIN_FXML_PATH, event);
         partnerRestricted(HOME_PARTNER_FXML_PATH, event);
+    }
+
+
+    /**
+     * Function loading the appropriate view to validate job for a partner
+     *
+     * @param event the action triggering this method
+     * @throws IOException if an error occurs
+     */
+    public void handleJob(ActionEvent event) throws IOException {
+        if (SESSION.isAdmin()) {
+            // We load the right FXML
+            FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(SEE_ALL_JOB_FXML_PATH));
+            // We create the controller
+            JobOffersController jobOffersController = new JobOffersController(((Session)SESSION).getCurrentUser());
+            // We link this controller with the FXML
+            loader.setController(jobOffersController);
+            Parent root = loader.load();
+            // And we change the view
+            this.changeView(event, root);
+        }
+
     }
 }

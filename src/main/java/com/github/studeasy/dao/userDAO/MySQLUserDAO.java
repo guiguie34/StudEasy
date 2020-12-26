@@ -201,4 +201,31 @@ public class MySQLUserDAO extends UserDAO{
             throw e;
         }
     }
+
+    public User searchUserById(int id) throws Exception{
+        User currentUser = null;
+        try {
+            // We prepare the SQL request to retrieve a user
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM user WHERE idUser = ?";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1, id);
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We check if the query retrieved a user
+            if (!resultSet.next()) {
+                // No, we throw an error
+                throw new BadCredentialsException("No user found");
+            } else {
+                // We create a user according to his role
+                currentUser= new User(resultSet.getInt(1),resultSet.getString(3),resultSet.getString(2),resultSet.getString(6),resultSet.getString(5),resultSet.getInt(4),resultSet.getString(8),resultSet.getString(7),resultSet.getInt(9),resultSet.getString(10));
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return currentUser;
+    }
 }

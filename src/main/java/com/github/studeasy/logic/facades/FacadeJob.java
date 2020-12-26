@@ -1,12 +1,14 @@
 package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.jobDAO.JobDAO;
+import com.github.studeasy.logic.common.Job;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.regexUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 /**
@@ -71,5 +73,9 @@ public class FacadeJob {
         else{
             throw new BadInformationException("Mail not valid, please retry");
         }
+    }
+
+    public ArrayList<Job> getPendingJob() throws Exception {
+        return DAO.getPendingJob();
     }
 }

@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.JobRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
@@ -37,6 +38,15 @@ public class HomeAdminController implements Initializable {
      */
     public void managePartner(ActionEvent event) throws IOException {
         ((UserRouter)ROUTER).managePartner(event);
+    }
+
+    /**
+     * Load the view to manage validate pending job
+     * @param event the action trigerring the change of view
+     * @throws IOException if an error occurs
+     */
+    public void manageJob(ActionEvent event) throws IOException {
+        (JobRouter.getInstance()).handleJob(event);
     }
 
     /**

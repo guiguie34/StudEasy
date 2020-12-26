@@ -1,10 +1,12 @@
 package com.github.studeasy.dao.jobDAO;
 
 import com.github.studeasy.dao.userDAO.UserDAO;
+import com.github.studeasy.logic.common.Job;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Interface for the Job DAO
@@ -35,4 +37,10 @@ public abstract class JobDAO {
      * @throws Exception
      */
     public abstract void addJob(String title, String location, String role, String duration, String mail, String phone, LocalDate localDate, String description, Object currentUser) throws Exception;
+
+    /**
+     * Get all the pending job
+     * @return
+     */
+    public abstract ArrayList<Job> getPendingJob() throws Exception;
 }

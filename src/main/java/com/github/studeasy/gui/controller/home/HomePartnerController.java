@@ -37,7 +37,7 @@ public class HomePartnerController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void handleJob(ActionEvent event) throws IOException {
-        ((JobRouter)ROUTER).handleJob(event);
+        ((JobRouter)ROUTER).viewJobs(event);
     }
 
     public void addJob(ActionEvent event) throws IOException {

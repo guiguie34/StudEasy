@@ -46,7 +46,7 @@ public class HomeAdminController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void manageJob(ActionEvent event) throws IOException {
-        (JobRouter.getInstance()).handleJob(event);
+        (JobRouter.getInstance()).viewJobs(event);
     }
 
     /**

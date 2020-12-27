@@ -2,6 +2,8 @@ package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.job.AddUpdateJobOfferController;
 import com.github.studeasy.gui.controller.job.JobOffersController;
+import com.github.studeasy.gui.controller.job.SeeJobOfferController;
+import com.github.studeasy.logic.common.Job;
 import com.github.studeasy.logic.common.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -44,9 +46,14 @@ public class JobRouter extends AbstractRouter {
     private final static String SEE_ALL_JOB_FXML_PATH = "views/job/JobOffersController.fxml";
 
     /**
-     * Path to add or update Job
+     * Path to add or update job
      */
     private final static String ADD_UPDATE_JOB_FXML_PATH = "views/job/addUpdateJob.fxml";
+
+    /**
+     * Path to see one job
+     */
+    private final static String SEE_JOB_FXML_PATH = "views/job/seeJobOfferController.fxml";
 
     /**
      * Path to the home student view
@@ -98,12 +105,12 @@ public class JobRouter extends AbstractRouter {
 
 
     /**
-     * Function loading the appropriate view to validate job for a partner
+     * Function loading the appropriate view to view all jobs
      *
      * @param event the action triggering this method
      * @throws IOException if an error occurs
      */
-    public void handleJob(ActionEvent event) throws IOException {
+    public void viewJobs(ActionEvent event) throws IOException {
         if (SESSION.isAdmin()) {
             // We load the right FXML
             FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(SEE_ALL_JOB_FXML_PATH));
@@ -117,4 +124,25 @@ public class JobRouter extends AbstractRouter {
         }
 
     }
+
+    /**
+     * Function loading the appropriate view to see one job
+     * @param event the action triggering the method
+     * @throws IOException if an error occurs
+     */
+    public void seeJob(ActionEvent event,Object job) throws IOException {
+        if (SESSION.isAdmin()) {
+            // We load the right FXML
+            FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(SEE_JOB_FXML_PATH));
+            // We create the controller
+            SeeJobOfferController jobController = new SeeJobOfferController((Job)job,((Session)SESSION).getCurrentUser());
+            // We link this controller with the FXML
+            loader.setController(jobController);
+            Parent root = loader.load();
+            // And we change the view
+            this.changeView(event, root);
+        }
+    }
+
+
 }

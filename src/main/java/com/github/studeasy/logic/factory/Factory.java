@@ -1,5 +1,6 @@
 package com.github.studeasy.logic.factory;
 
+import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
 import java.sql.Connection;
@@ -36,4 +37,10 @@ public abstract class Factory {
      * @return the User DAO
      */
     public abstract UserDAO createUserDAO();
+
+    /***
+     * Method that will create a CommandOfServiceDAO
+     * @return CommandOfServiceDAO
+     */
+    public abstract CommandOfServiceDAO createCommandOfServiceDAO();
 }

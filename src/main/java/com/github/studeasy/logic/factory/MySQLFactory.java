@@ -1,5 +1,7 @@
 package com.github.studeasy.logic.factory;
 
+import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
+import com.github.studeasy.dao.commandOfServiceDAO.MySQLCommandOfServiceDAO;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
@@ -55,5 +57,14 @@ public class MySQLFactory extends Factory {
     @Override
     public UserDAO createUserDAO() {
         return new MySQLUserDAO();
+    }
+
+    /***
+     * Method that will create a MySQLCommandOfServiceDAO
+     * @return the MySQLCommandOfServiceDAO
+     */
+    @Override
+    public CommandOfServiceDAO createCommandOfServiceDAO() {
+        return new MySQLCommandOfServiceDAO();
     }
 }

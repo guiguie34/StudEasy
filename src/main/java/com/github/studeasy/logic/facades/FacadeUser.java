@@ -9,15 +9,9 @@ import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
 import com.github.studeasy.logic.utils.regexUtils;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.KeyGen;
 import com.github.studeasy.logic.utils.Mail;
-import com.github.studeasy.logic.utils.PasswordUtils;
-import com.github.studeasy.logic.utils.regexUtils;
-
-import java.util.ArrayList;
 
 /**
  * The Facade User for the UserDAO

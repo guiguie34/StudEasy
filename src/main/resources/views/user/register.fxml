@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,13 +18,13 @@
     <children>
         <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.0" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1199.0" minWidth="0.0" prefWidth="1199.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1117.0" minWidth="0.0" prefWidth="0.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="280.2666534423828" minHeight="10.0" prefHeight="126.6666473388672" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="443.2" minHeight="10.0" prefHeight="382.399951171875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="280.2666534423828" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="469.0" minHeight="10.0" prefHeight="463.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="151.20004882812498" minHeight="10.0" prefHeight="151.20004882812498" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
@@ -34,15 +37,89 @@
                         </ImageView>
                     </children>
                 </VBox>
-                <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <AnchorPane prefHeight="463.0" prefWidth="934.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="37.0" prefHeight="53.0" prefWidth="427.0" text="REGISTER" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="37.0">
+                        <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="427.0" text="REGISTER" AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
+                  <TextField fx:id="firstNameTF" layoutX="311.0" layoutY="128.0" prefHeight="32.0" prefWidth="265.0" promptText="First Name ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="lastNameTF" layoutX="311.0" layoutY="205.0" prefHeight="32.0" prefWidth="265.0" promptText="Last Name ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="emailTF" layoutX="311.0" layoutY="288.0" prefHeight="32.0" prefWidth="265.0" promptText="Email Address ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="confirmEmailTF" layoutX="311.0" layoutY="327.0" prefHeight="32.0" prefWidth="265.0" promptText="Confirm Email adress ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="passwordTF" layoutX="662.0" layoutY="171.0" prefHeight="32.0" prefWidth="266.0" promptText="Password ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+                  <PasswordField fx:id="confirmPasswordTF" layoutX="662.0" layoutY="216.0" prefHeight="32.0" prefWidth="266.0" promptText="Confirm password ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+                  <TextField fx:id="pseudoTF" layoutX="663.0" layoutY="306.0" prefHeight="32.0" prefWidth="265.0" promptText="Pseudo ...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="registerFailLabel" layoutX="216.0" layoutY="441.0" prefHeight="17.0" prefWidth="769.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="311.0" layoutY="106.0" prefHeight="18.0" prefWidth="99.0" text="First name">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="311.0" layoutY="183.0" prefHeight="18.0" prefWidth="118.0" text="Last name">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="311.0" layoutY="261.0" prefHeight="18.0" prefWidth="109.0" text="Email address">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="662.0" layoutY="151.0" prefHeight="18.0" prefWidth="69.0" text="Password">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="663.0" layoutY="283.0" prefHeight="18.0" prefWidth="69.0" text="Pseudo">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="947.0" layoutY="193.0" prefHeight="17.0" prefWidth="212.0" text="Minimum eight characters," />
+                  <Label layoutX="946.0" layoutY="208.0" prefHeight="17.0" prefWidth="186.0" text="at least one uppercase letter, " />
+                  <Label layoutX="947.0" layoutY="223.0" text="one lowercase letter and one number" />
                     </children>
                 </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button id="negativeButton" fx:id="cancelB" layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#cancelRegister" prefHeight="37.0" prefWidth="89.0" text="Cancel" />
+                  <Button id="neutralButton" fx:id="registerUpdateB" layoutX="516.0" layoutY="58.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" text="Register" />
+               </children>
+            </AnchorPane>
             </children>
         </GridPane>
     </children>

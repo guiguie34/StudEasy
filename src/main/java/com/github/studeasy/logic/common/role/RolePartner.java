@@ -32,4 +32,13 @@ public class RolePartner extends Role{
         this.jobs = new ArrayList<Job>();
         this.coupons = new ArrayList<Coupon>();
     }
+
+    public String getCompany() {
+        return company;
+    }
+
+    @Override
+    public String toString() {
+        return this.getCompany();
+    }
 }

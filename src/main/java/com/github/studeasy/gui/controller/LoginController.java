@@ -72,12 +72,18 @@ public class LoginController implements Initializable {
         String password = passwordTF.getText();
         // Surrounded by a try catch, in case a wrong auth occurs
         try {
-            // We ask the facade to check
-            FACADE.login(email, password);
-            // If it's alright, we're redirected to the right page by the router
-            ((UserRouter)ROUTER).login(event);
+            if(FACADE.isConfirmed(email)){
+                // We ask the facade to check
+                FACADE.login(email, password);
+                // If it's alright, we're redirected to the right page by the router
+                ((UserRouter)ROUTER).login(event);
+            }else{
+                ((UserRouter)ROUTER).confirmUser(UserRouter.CONFIRM_USER_FXML_PATH,event,email);
+            }
+
         }
         catch(BadCredentialsException e){
+
             // Wrong credentials, we show the user
             loginFailLabel.setAlignment(Pos.CENTER);
             loginFailLabel.setTextFill(Paint.valueOf("red"));
@@ -93,7 +99,7 @@ public class LoginController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void loadRegister(ActionEvent event) throws IOException {
-        ROUTER.changeView(UserRouter.REGISTER_FXML_PATH,event);
+        ((UserRouter)ROUTER).registerOrUpdateUser(UserRouter.REGISTER_FXML_PATH,event,0);
     }
 
     /**

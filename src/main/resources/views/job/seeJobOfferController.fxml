@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="200.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="865.0" minWidth="10.0" prefWidth="864.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="337.0" minWidth="10.0" prefWidth="200.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="280.2666534423828" minHeight="10.0" prefHeight="126.6666473388672" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="491.0" minHeight="10.0" prefHeight="474.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="151.20004882812498" minHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                    <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <ImageView fitHeight="186.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/logo.png" />
+                            </image>
+                        </ImageView>
+                    </children></VBox>
+                <AnchorPane prefHeight="442.0" prefWidth="574.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <GridPane layoutX="1.0" layoutY="60.0" prefHeight="422.0" prefWidth="866.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="132.0" minHeight="5.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="201.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="220.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                    <children>
+                                        <Label layoutY="10.0" text="Role in the company:" />
+                              <Label fx:id="roleLabel" layoutY="30.0" prefHeight="27.0" prefWidth="850.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <children>
+                                        <Label layoutY="10.0" text="Job location:" />
+                              <Label fx:id="locationLabel" layoutY="30.0" prefHeight="27.0" prefWidth="850.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="99.0" prefWidth="573.0">
+                                    <children>
+                                        <Label layoutY="4.0" text="Job title:" />
+                              <Label fx:id="titleLabel" layoutY="30.0" prefHeight="27.0" prefWidth="850.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                    <children>
+                                        <Label layoutY="10.0" text="Start of the job:" />
+                                        <Label layoutX="330.0" layoutY="10.0" text="Job Duration:" />
+                              <Label fx:id="startLabel" layoutY="30.0" prefHeight="27.0" prefWidth="219.0" />
+                              <Label fx:id="durationLabel" layoutX="330.0" layoutY="30.0" prefHeight="27.0" prefWidth="520.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                    <children>
+                                        <Label layoutY="10.0" text="Job Description:" />
+                                        <TextArea fx:id="descriptionTA" editable="false" layoutY="30.0" prefHeight="96.0" prefWidth="850.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                    <children>
+                                        <Label layoutY="10.0" text="Contact mail:" />
+                                        <Label layoutX="425.0" layoutY="10.0" text="Contact phone:" />
+                              <Label fx:id="mailLabel" layoutY="30.0" prefHeight="27.0" prefWidth="350.0" />
+                              <Label fx:id="phoneLabel" layoutX="425.0" layoutY="30.0" prefHeight="27.0" prefWidth="225.0" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </GridPane>
+                        <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="865.0" text="Label">
+                            <font>
+                                <Font name="Arial Bold" size="42.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <children>
+                        <AnchorPane prefHeight="112.0" prefWidth="786.0">
+                            <children>
+                                <Button id="positiveButton" fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="39.0" mnemonicParsing="false" onAction="#option2" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
+                        <Button id="negativeButton" fx:id="button1" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#option1" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <children>
+                        <Button id="negativeButton" alignment="CENTER" layoutX="72.0" layoutY="39.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="89.0" styleClass="..\..\css\buttons.css" text="Back" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </GridPane>
+    </children>
+    <stylesheets>
+        <URL value="@../../css/buttons.css" />
+        <URL value="@../../css/app.css" />
+    </stylesheets>
+</AnchorPane>

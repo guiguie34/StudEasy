@@ -30,7 +30,7 @@ public class User {
 	/**
 	 * Email of the user
 	 */
-	private String emailAdress;
+	private String emailAddress;
 
 	/**
 	 * Password of the user
@@ -58,7 +58,7 @@ public class User {
 		this.idUser = idUser;
 		this.lastname=lastName;
 		this.firstname=firstName;
-		this.emailAdress=emailAddress;
+		this.emailAddress=emailAddress;
 		this.password= password;
 		this.salt = salt;
 		switch (role) {
@@ -98,12 +98,12 @@ public class User {
 		this.firstname = firstname;
 	}
 
-	public String getEmailAdress() {
-		return emailAdress;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setEmailAdress(String emailAdress) {
-		this.emailAdress = emailAdress;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	public String getPassword() {

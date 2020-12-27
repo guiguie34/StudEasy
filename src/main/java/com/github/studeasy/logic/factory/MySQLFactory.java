@@ -2,9 +2,15 @@ package com.github.studeasy.logic.factory;
 
 import com.github.studeasy.dao.categoryDAO.CategoryDAO;
 import com.github.studeasy.dao.categoryDAO.MySQLCategoryDAO;
+import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
+import com.github.studeasy.dao.commandOfServiceDAO.MySQLCommandOfServiceDAO;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.serviceDAO.MySQLServiceDAO;
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
+import com.github.studeasy.dao.jobDAO.JobDAO;
+import com.github.studeasy.dao.jobDAO.MySQLJobDAO;
+import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
+import com.github.studeasy.dao.feedbackDAO.MySQLFeedbackDAO;
 import com.github.studeasy.dao.userDAO.MySQLUserDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 
@@ -38,7 +44,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * Close the connection
-     * @throws SQLException
+     * @throws SQLException if an error occur
      */
     private void closeConnection() throws SQLException {
         this.db.close();
@@ -59,6 +65,29 @@ public class MySQLFactory extends Factory {
     @Override
     public UserDAO createUserDAO() {
         return new MySQLUserDAO();
+    }
+
+    @Override
+    public FeedbackDAO createFeedbackDAO() {
+        return new MySQLFeedbackDAO();
+    }
+
+    /**
+     * Method which will create a MySQLJobDAO
+     * @return the MySQLJobDAO
+     */
+    @Override
+    public JobDAO createJobDAO() {
+        return new MySQLJobDAO();
+    }
+
+    /***
+     * Method that will create a MySQLCommandOfServiceDAO
+     * @return the MySQLCommandOfServiceDAO
+     */
+    @Override
+    public CommandOfServiceDAO createCommandOfServiceDAO() {
+        return new MySQLCommandOfServiceDAO();
     }
 
     /**

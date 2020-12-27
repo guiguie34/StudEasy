@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomeAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane layoutX="-6.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+        <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,15 +42,14 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="neutralButton" layoutX="140.0" layoutY="95.0" mnemonicParsing="false" onAction="#searchUsers" prefHeight="26.0" prefWidth="146.0" text="Search users" />
-                  <Button id="neutralButton" layoutX="140.0" layoutY="147.0" mnemonicParsing="false" onAction="#test" prefHeight="26.0" prefWidth="146.0" text="testFeedback" />
+                  <Button id="neutralButton" layoutX="148.0" layoutY="113.0" mnemonicParsing="false" text="Manage Categories" />
+                  <Button id="neutralButton" layoutX="163.0" layoutY="286.0" mnemonicParsing="false" text="Manage Partner" />
+                  <Button id="neutralButton" layoutX="129.0" layoutY="158.0" mnemonicParsing="false" text="Manage Pending Services" />
+                  <Button id="neutralButton" layoutX="168.0" layoutY="242.0" mnemonicParsing="false" text="Search Users" />
+                  <Button id="neutralButton" layoutX="160.0" layoutY="197.0" mnemonicParsing="false" text="See All Services" />
+                  <Button id="negativeButton" layoutX="327.0" layoutY="372.0" mnemonicParsing="false" text="Logout" />
                     </children>
                 </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Button id="negativeButton" layoutX="169.0" layoutY="57.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="37.0" prefWidth="89.0" text="Disconnect" />
-               </children>
-            </AnchorPane>
             </children>
         </GridPane>
     </children>

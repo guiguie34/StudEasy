@@ -6,6 +6,11 @@ package com.github.studeasy.logic.common;
 public class Job {
 
 	/**
+	 * Id of the job
+ 	 */
+	private int idJob;
+
+	/**
 	 * Title of the job
 	 */
 	private String title;
@@ -50,7 +55,8 @@ public class Job {
 	 */
 	 private User owner;
 
-	public Job(String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner) {
+	public Job(int id, String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner) {
+		this.idJob=id;
 		this.title = title;
 		this.localisation = localisation;
 		this.role = role;
@@ -62,6 +68,11 @@ public class Job {
 		this.owner = owner;
 	}
 
+	public int getIdJob() {return idJob;}
+
+	public void setIdJob(int id){
+		this.idJob=id;
+	}
 	public String getTitle() {
 		return title;
 	}

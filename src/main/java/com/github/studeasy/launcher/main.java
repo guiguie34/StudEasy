@@ -3,6 +3,7 @@ package com.github.studeasy.launcher;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class main extends Application {
         stage.setTitle("Stud'Easy");
         stage.centerOnScreen();
         stage.setResizable(false);
+        stage.getIcons().add(new Image("images/logo.png"));
         stage.setScene(new Scene(AbstractRouter.load(AbstractRouter.LOGIN_FXML_PATH)));
         stage.show();
     }

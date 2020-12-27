@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -41,6 +42,12 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
+                  <Button id="neutralButton" layoutX="148.0" layoutY="113.0" mnemonicParsing="false" text="Manage Categories" />
+                  <Button id="neutralButton" layoutX="163.0" layoutY="286.0" mnemonicParsing="false" text="Manage Partner" />
+                  <Button id="neutralButton" layoutX="129.0" layoutY="158.0" mnemonicParsing="false" text="Manage Pending Services" />
+                  <Button id="neutralButton" layoutX="168.0" layoutY="242.0" mnemonicParsing="false" text="Search Users" />
+                  <Button id="neutralButton" layoutX="160.0" layoutY="197.0" mnemonicParsing="false" text="See All Services" />
+                  <Button id="negativeButton" layoutX="327.0" layoutY="372.0" mnemonicParsing="false" text="Logout" />
                     </children>
                 </AnchorPane>
             </children>

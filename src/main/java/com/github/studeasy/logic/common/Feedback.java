@@ -1,9 +1,16 @@
 package com.github.studeasy.logic.common;
 
+import java.sql.Date;
+
 /**
  * Class describing a feedback
  */
 public class Feedback {
+
+	/**
+	 * id of the feedback
+	 */
+	private int idFeedback;
 
 	/**
 	 * Title of the feedback
@@ -15,21 +22,20 @@ public class Feedback {
 	 */
 	private int rate;
 
+	private Date date;
+
 	/**
 	 * Short comment about the service
 	 */
 	private String comment;
 
-	/**
-	 * Service related to the feedback
-	 */
-	private CommandOfService service;
 
-	public Feedback(String title, int rate, String comment, CommandOfService service) {
+	public Feedback(int idFeedback,String title,String comment ,Date date, int rate) {
 		this.title = title;
 		this.rate = rate;
 		this.comment = comment;
-		this.service=service;
+		this.date = date;
+		this.idFeedback = idFeedback;
 	}
 
 	public String getTitle() {
@@ -56,11 +62,19 @@ public class Feedback {
 		this.comment = comment;
 	}
 
-	public CommandOfService getService() {
-		return service;
+	public int getIdFeedback() {
+		return idFeedback;
 	}
 
-	public void setService(CommandOfService service) {
-		this.service = service;
+	public void setIdFeedback(int idFeedback) {
+		this.idFeedback = idFeedback;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

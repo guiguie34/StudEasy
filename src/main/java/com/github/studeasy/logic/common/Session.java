@@ -34,6 +34,14 @@ public class Session implements SessionI {
     }
 
     /**
+     * destroy the current session
+     */
+    public void disconnect(){
+
+        currentUser =null;
+    }
+
+    /**
      * Get the current user in the session
      * @return the current user
      */

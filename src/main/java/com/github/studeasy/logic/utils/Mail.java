@@ -26,7 +26,7 @@ public class Mail {
         return session;
     }
 
-    public static void sendMail (String subject, String text, String adrReceiver){
+    public static void sendMail (String subject, String text, String adrReceiver) throws Exception{
         try {
             Message message = new MimeMessage(SESSION);
             message.setFrom(new InternetAddress(ADDRESS));

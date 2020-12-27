@@ -136,7 +136,7 @@ public class FacadeUser {
         return null;
     }
 
-    public void sendMail(String email, String key){
+    public void sendMail(String email, String key) throws Exception{
         Mail.sendMail("Stud'Easy Validation","Hi, Here is your key to confirm your account:\n"+ key,email);
     }
 

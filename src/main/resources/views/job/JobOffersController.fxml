@@ -68,11 +68,7 @@
                      </image>
                   </ImageView>
                   <TextField fx:id="searchJobTF" layoutX="875.0" layoutY="18.0" promptText="Search Job ..." />
-                  <ListView fx:id="listview" layoutX="17.0" layoutY="69.0" prefHeight="417.0" prefWidth="1049.0">
-                     <padding>
-                        <Insets bottom="20.0" />
-                     </padding>
-                  </ListView>
+                  <ListView fx:id="listview" layoutX="17.0" layoutY="69.0" prefHeight="417.0" prefWidth="1049.0" />
                </children>
             </AnchorPane>
             </children>
@@ -82,5 +78,6 @@
         <URL value="@../../css/buttons.css" />
         <URL value="@../../css/app.css" />
         <URL value="@../../css/tableView.css" />
+      <URL value="@../../css/listView.css" />
     </stylesheets>
 </AnchorPane>

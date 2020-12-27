@@ -42,18 +42,7 @@ public class HomeStudentController extends HomeAbstractController implements Ini
         }
     }
 
-    /**
-     * test fonction for feedbacks
-     * @param event
-     */
-    public  void test(ActionEvent event){
-        try {
 
-            FeedbackRouter.getInstance().viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH,event,5);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Function from the interface Initializable

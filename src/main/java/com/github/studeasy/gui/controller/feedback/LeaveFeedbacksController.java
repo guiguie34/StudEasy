@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.feedback;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.facades.FacadeFeedback;
 import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
@@ -60,14 +61,20 @@ public class LeaveFeedbacksController implements Initializable {
     private ChoiceBox<Integer> rateCB;
 
     /**
-     * id of the service concerned
+     * The origin of the user
      */
-    private int idService;
+    private int origin;
 
-    public LeaveFeedbacksController(int idService) {
+    /**
+     * The service concerned
+     */
+    private Service service;
+
+    public LeaveFeedbacksController(Service service, int origin) {
         this.ROUTER = FeedbackRouter.getInstance();
         this.FACADE = FacadeFeedback.getInstance();
-        this.idService = idService;
+        this.origin = origin;
+        this.service = service;
     }
 
     public void leaveFeedback(ActionEvent event){
@@ -78,8 +85,8 @@ public class LeaveFeedbacksController implements Initializable {
         if(!title.isEmpty() && !comment.isEmpty()){
             try {
                 if(AbstractRouter.confirmationBox("You will leave this feedback","Confirm your action","Stud'Easy confirmation")) {
-                    FACADE.leaveFeedback(title, comment, rate, idService);
-                    ((FeedbackRouter) ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH, event, idService);
+                    FACADE.leaveFeedback(title, comment, rate, service.getIdService());
+                    ((FeedbackRouter) ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH, event, service,origin);
                 }
 
             }catch (BadInformationException exception){
@@ -117,7 +124,7 @@ public class LeaveFeedbacksController implements Initializable {
     public void cancel(ActionEvent event) {
         try {
             //Come back to the view of the feedbacks
-            ((FeedbackRouter) ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH, event, idService);
+            ((FeedbackRouter) ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH, event, service,origin);
         } catch (IOException e) {
             e.printStackTrace();
         }

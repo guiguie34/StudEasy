@@ -1,9 +1,11 @@
 package com.github.studeasy.gui.controller.service;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.ServiceRouter;
 import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RoleStudent;
+import com.github.studeasy.logic.facades.FacadeFeedback;
 import com.github.studeasy.logic.facades.FacadeService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +35,11 @@ public class ViewServiceController implements Initializable {
      * The facade service used by the controller
      */
     private final FacadeService FACADE_SERVICE;
+
+    /**
+     * The feedback router used by the controller
+     */
+    private final AbstractRouter FEEDBACK_ROUTER;
 
     /**
      * The title of the service
@@ -130,6 +137,7 @@ public class ViewServiceController implements Initializable {
     public ViewServiceController(Service service, int pendingAllServices){
         this.ROUTER = ServiceRouter.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
+        this.FEEDBACK_ROUTER = FeedbackRouter.getInstance();
         this.service = service;
         this.pendingAllServices = pendingAllServices;
     }
@@ -175,6 +183,18 @@ public class ViewServiceController implements Initializable {
             FACADE_SERVICE.validateService(this.service);
             // We redirect
             this.cancel(event);
+        }
+    }
+
+    /**
+     * Triggered when the user wants to see the feedbacks of a service
+     * @param event the event triggered
+     */
+    public void viewFeedbacks(ActionEvent event){
+        try {
+            ((FeedbackRouter) FEEDBACK_ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH,event,service,pendingAllServices);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

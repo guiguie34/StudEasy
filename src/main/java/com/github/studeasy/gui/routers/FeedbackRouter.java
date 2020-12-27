@@ -4,6 +4,7 @@ import com.github.studeasy.gui.controller.feedback.LeaveFeedbacksController;
 import com.github.studeasy.gui.controller.feedback.SeeFeedbacksServiceController;
 import com.github.studeasy.gui.controller.user.InfoUserController;
 import com.github.studeasy.gui.controller.user.RegisterUpdateController;
+import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.User;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -54,14 +55,15 @@ public class FeedbackRouter extends AbstractRouter{
      * Load the view for add a feedback page
      * @param pathFXML the path to the fxml file
      * @param event the action triggering the change of view
-     * @param idService The id of the service
+     * @param service The service
+     * @param origin to know from where the user comes from
      * @throws IOException
      */
-    public void addFeedback(String pathFXML, ActionEvent event, int idService) throws IOException {
+    public void addFeedback(String pathFXML, ActionEvent event, Service service, int origin) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with
-        LeaveFeedbacksController leaveFeedbacksController = new LeaveFeedbacksController(idService);
+        LeaveFeedbacksController leaveFeedbacksController = new LeaveFeedbacksController(service,origin);
         loader.setController(leaveFeedbacksController);
         Parent root = loader.load();
         this.changeView(event,root);
@@ -71,14 +73,15 @@ public class FeedbackRouter extends AbstractRouter{
      *  Load the page of the feedbacks of a service
      * @param pathFXML the path to the fxml file
      * @param event the action triggering the change of view
-     * @param idService the id of the service concerned
+     * @param service the service concerned
+     * @param origin to know from where the user comes from
      * @throws IOException if an error occur
      */
-    public void viewFeedbacks(String pathFXML, Event event, int idService) throws IOException {
+    public void viewFeedbacks(String pathFXML, Event event, Service service, int origin) throws IOException {
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with
-        SeeFeedbacksServiceController seeFeedbacksServiceController = new SeeFeedbacksServiceController(idService);
+        SeeFeedbacksServiceController seeFeedbacksServiceController = new SeeFeedbacksServiceController(service,origin);
         loader.setController(seeFeedbacksServiceController);
         Parent root = loader.load();
         this.changeView(event,root);

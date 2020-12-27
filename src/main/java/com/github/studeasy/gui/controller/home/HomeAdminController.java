@@ -2,7 +2,9 @@ package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.JobRouter;
+import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -14,22 +16,29 @@ import java.util.ResourceBundle;
 /**
  * The controller of the admin view
  */
-public class HomeAdminController implements Initializable {
-    /**
-     * The router used by the controller
-     */
-    private final AbstractRouter ROUTER;
+public class HomeAdminController extends HomeAbstractController implements Initializable {
 
-    /**
-     /**
-     * The facade used by the controller
-     */
-    private final FacadeUser FACADE;
 
     public HomeAdminController(){
-        this.ROUTER = UserRouter.getInstance();
-        this.FACADE = FacadeUser.getInstance();
+        super();
     }
+
+    /**
+     * Go to the search users pages
+     */
+    public void searchUsers(ActionEvent event){
+        try {
+            if(Session.getInstance().isAdmin()){
+                ((UserRouter)ROUTER).searchUsers(event);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
     /**
      * Load the view to manage Partner account

@@ -3,6 +3,7 @@ package com.github.studeasy.gui.routers;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.SessionI;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -102,7 +103,7 @@ public abstract class AbstractRouter {
      * fxml file
      * @param event the action trigerring the change of view
      */
-    public void changeView(ActionEvent event, Parent root) {
+    public void changeView(Event event, Parent root) {
         // The stage that will contain the new view
         Stage dialogStage;
         // We retrieve the node we are

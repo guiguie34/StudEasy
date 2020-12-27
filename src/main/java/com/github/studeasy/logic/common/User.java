@@ -102,7 +102,7 @@ public class User {
 		return emailAddress;
 	}
 
-	public void setEmailAdress(String emailAddress) {
+	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
 

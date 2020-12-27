@@ -17,8 +17,11 @@ import java.util.ResourceBundle;
 public class HomePartnerController extends HomeAbstractController implements Initializable {
 
 
+    private final AbstractRouter JOB_ROUTER;
+
     public HomePartnerController(){
         super();
+        JOB_ROUTER = JobRouter.getInstance();
     }
 
     /**
@@ -27,11 +30,11 @@ public class HomePartnerController extends HomeAbstractController implements Ini
      * @throws IOException if an error occurs
      */
     public void handleJob(ActionEvent event) throws IOException {
-        ((JobRouter)ROUTER).viewJobs(event);
+        ((JobRouter)JOB_ROUTER).viewJobs(event);
     }
 
     public void addJob(ActionEvent event) throws IOException {
-        ((JobRouter)ROUTER).addOrUpdateJob(event,0,null);
+        ((JobRouter)JOB_ROUTER).addOrUpdateJob(event,0,null);
     }
 
     /**

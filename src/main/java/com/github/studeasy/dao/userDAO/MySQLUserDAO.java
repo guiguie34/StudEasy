@@ -308,7 +308,7 @@ public class MySQLUserDAO extends UserDAO{
             int resultSet;
             String request = "DELETE  FROM user WHERE emailAddress=?";
             preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setString(1, ((User) user).getEmailAdress());
+            preparedStatement.setString(1, ((User) user).getEmailAddress());
             resultSet = preparedStatement.executeUpdate();
         }
         catch (Exception e){

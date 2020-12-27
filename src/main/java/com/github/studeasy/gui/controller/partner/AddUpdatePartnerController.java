@@ -218,8 +218,8 @@ public class AddUpdatePartnerController implements Initializable {
             firstnameTF.setText(partner.getFirstname());
             lastnameTF.setText(partner.getLastname());
             companyTF.setText(((RolePartner)partner.getRole()).getCompany());
-            emailTF.setText(partner.getEmailAdress());
-            confirmEmailTF.setText(partner.getEmailAdress());
+            emailTF.setText(partner.getEmailAddress());
+            confirmEmailTF.setText(partner.getEmailAddress());
         }
     }
 }

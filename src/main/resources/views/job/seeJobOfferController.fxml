@@ -115,8 +115,8 @@
                     <children>
                         <AnchorPane prefHeight="112.0" prefWidth="786.0">
                             <children>
-                                <Button id="positiveButton" fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="39.0" mnemonicParsing="false" onAction="#option2" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" />
-                        <Button id="negativeButton" fx:id="button1" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#option1" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" />
+                                <Button id="positiveButton" fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="39.0" mnemonicParsing="false" onAction="#option2" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
+                        <Button id="negativeButton" fx:id="button1" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#option1" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
                             </children>
                         </AnchorPane>
                     </children>

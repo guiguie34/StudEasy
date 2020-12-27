@@ -42,7 +42,7 @@ public abstract class UserDAO {
     /**
      * Method asking the database if a user with this id exist,
      * and returning him if he exists
-     * @param email the id to check
+     * @param id the id to check
      * @return the user corresponding
      * @throws Exception if the user doesn't exist in the database
      */

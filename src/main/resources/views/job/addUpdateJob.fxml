@@ -115,7 +115,7 @@
                     <children>
                         <AnchorPane prefHeight="112.0" prefWidth="786.0">
                             <children>
-                                <Button id="positiveButton" alignment="CENTER" contentDisplay="CENTER" layoutX="336.0" layoutY="39.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Submit" />
+                                <Button id="positiveButton" fx:id="buttonSubmit" alignment="CENTER" contentDisplay="CENTER" layoutX="336.0" layoutY="39.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Submit" />
                               <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="786.0" textAlignment="CENTER">
                                   <font>
                                       <Font size="17.0" />

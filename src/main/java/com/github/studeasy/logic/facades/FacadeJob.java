@@ -75,7 +75,63 @@ public class FacadeJob {
         }
     }
 
+    /**
+     * Return the pending job
+     * @return arraylist of pending jobs
+     * @throws Exception if an error occurs
+     */
     public ArrayList<Job> getPendingJob() throws Exception {
         return DAO.getPendingJob();
+    }
+
+    /**
+     * Submit the admin choice for the selected job
+     * @param job Selected job
+     * @param choice choice
+     * @throws Exception if an error occurs
+     */
+    public void choiceForJob(Object job,int choice) throws Exception{
+        DAO.choiceForJob((Job)job,choice);
+    }
+
+
+    /**
+     * Return all jobs
+     * @return arraylist of all jobs
+     * @throws Exception if an error occurs
+     */
+    public ArrayList<Job> getAllJobs() throws Exception {
+        return DAO.getAllJobs();
+    }
+
+    /**
+     * Return all jobs from one user
+     * @return arraylist of all jobs
+     * @throws Exception if an error occurs
+     */
+    public ArrayList<Job> getMyJobs(Object user) throws Exception {
+        return DAO.getMyJobs((User) user);
+    }
+
+    /**
+     * Call DAO to delete Job
+     * @param job Job to delete
+     */
+    public void deleteJob(Object job) throws Exception {
+        DAO.deleteJob((Job)job);
+    }
+
+    public void updateJob(String title, String location, String role, String duration, String mail, String phone, LocalDate localDate, String description, int idJob) throws Exception{
+        if(regexUtils.matches_mail(mail)) {
+            if(regexUtils.matches_phone(phone)) {
+                DAO.updateJob(title, location, role, duration, mail, phone, localDate, description, idJob);
+            }
+            else{
+                throw new BadInformationException("Phone number is not valid, please retry");
+            }
+        }
+        else{
+            throw new BadInformationException("Mail not valid, please retry");
+        }
     }
 }

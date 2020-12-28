@@ -25,10 +25,16 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      */
     private final AbstractRouter CATEGORY_ROUTER;
 
+    /**
+     * The job router used by the controller
+     */
+    private final AbstractRouter JOB_ROUTER;
+
     public HomeAdminController(){
         super();
         this.SERVICE_ROUTER = ServiceRouter.getInstance();
         this.CATEGORY_ROUTER = CategoryRouter.getInstance();
+        this.JOB_ROUTER = JobRouter.getInstance();
     }
 
     /**
@@ -59,7 +65,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      * @throws IOException if an error occurs
      */
     public void manageJob(ActionEvent event) throws IOException {
-        (JobRouter.getInstance()).viewJobs(event);
+        ((JobRouter)JOB_ROUTER).viewJobs(event);
     }
 
     /**

@@ -11,16 +11,14 @@ import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 /**
@@ -107,6 +105,17 @@ public class AddUpdateJobOfferController implements Initializable {
     @FXML
     private Label label;
 
+    /**
+     * Button to submit
+     */
+    @FXML
+    private Button buttonSubmit;
+
+    /**
+     * Page title
+     */
+    @FXML
+    private Label titleLabel;
 
 
     /**
@@ -161,8 +170,31 @@ public class AddUpdateJobOfferController implements Initializable {
             }
 
         }
-        else{
+        else {
+            if (!title.isEmpty() && !location.isEmpty() && !role.isEmpty() && !duration.isEmpty() && !mail.isEmpty() && !phone.isEmpty() && localDate != null && !description.isEmpty()) {
 
+                if (AbstractRouter.confirmationBox("Are you sure you want to update your job offer ? \nIf your job offer have been already validated by an admin, \nyour job offer will have to be validated once again",
+                        "Confirmation of the deletion",
+                        "Stud'Easy - Confirmation")) {
+                    try {
+                        FACADE.updateJob(title, location, role, duration, mail, phone, localDate, description, job.getIdJob());
+                        label.setTextFill(Color.GREEN);
+                        label.setText("Success ! You can click on 'back' button ");
+
+                    }
+                    catch (BadInformationException e) {
+                        label.setTextFill(Color.RED);
+                        label.setText(e.getMessage());
+                    } catch (Exception e) {
+                        label.setTextFill(Color.RED);
+                        label.setText("An error occurs, please retry");
+                    }
+                }
+            }
+            else{
+                label.setTextFill(Color.RED);
+                label.setText("Please fill all the field");
+            }
         }
     }
 
@@ -172,12 +204,29 @@ public class AddUpdateJobOfferController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void cancel(ActionEvent event) throws IOException {
-        ((JobRouter)ROUTER).backToDashboard(event);
+        if(addUpdate == 0) {
+            ((JobRouter) ROUTER).backToDashboard(event);
+        }
+        if(addUpdate == 1){
+            ((JobRouter)ROUTER).viewJobs(event);
+
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(this.addUpdate == 1){
-
+            titleLabel.setText("Update job");
+            buttonSubmit.setText("Update");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.parse(job.getStart(), formatter);
+            titleTF.setText(job.getTitle());
+            locationTF.setText(job.getLocalisation());
+            roleTF.setText(job.getRole());
+            durationTF.setText(job.getDuration());
+            mailTF.setText(job.getContactMail());
+            phoneTF.setText(job.getContactPhone());
+            dateTF.setValue(localDate);
+            descriptionTA.setText(job.getDescription());
         }
     }
 }

@@ -183,8 +183,10 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
                 Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
                         resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(7),
                         currentUser, category, resultSet.getInt(8), dateCreation);
+
                 Feedback feedback = new Feedback(resultSet.getInt(10),resultSet.getString(13),
                         resultSet.getString(15),resultSet.getDate(16),resultSet.getInt(12));
+
                 CommandOfService command = new CommandOfService(feedback,currentUser,service,
                         resultSet.getInt(17),resultSet.getDate(16));
 

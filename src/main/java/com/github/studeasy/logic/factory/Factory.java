@@ -1,6 +1,7 @@
 package com.github.studeasy.logic.factory;
 
 import com.github.studeasy.dao.categoryDAO.CategoryDAO;
+import com.github.studeasy.dao.couponDAO.CouponDAO;
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
 import com.github.studeasy.dao.jobDAO.JobDAO;
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
@@ -71,4 +72,10 @@ public abstract class Factory {
      * @return the Service DAO
      */
     public abstract ServiceDAO createServiceDAO();
+
+    /**
+     * Method that will create a CouponDAO
+     * @return the Coupon DAO
+     */
+    public abstract CouponDAO createCouponDAO();
 }

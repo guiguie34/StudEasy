@@ -4,6 +4,8 @@ import com.github.studeasy.dao.categoryDAO.CategoryDAO;
 import com.github.studeasy.dao.categoryDAO.MySQLCategoryDAO;
 import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.commandOfServiceDAO.MySQLCommandOfServiceDAO;
+import com.github.studeasy.dao.couponDAO.CouponDAO;
+import com.github.studeasy.dao.couponDAO.MySQLCouponDAO;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
 import com.github.studeasy.dao.serviceDAO.MySQLServiceDAO;
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
@@ -106,5 +108,14 @@ public class MySQLFactory extends Factory {
     @Override
     public ServiceDAO createServiceDAO() {
         return new MySQLServiceDAO();
+    }
+
+    /**
+     * Method which will create a MySQLCouponDAO
+     * @return the MySQLCouponDAO
+     */
+    @Override
+    public CouponDAO createCouponDAO() {
+        return new MySQLCouponDAO();
     }
 }

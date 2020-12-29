@@ -2,7 +2,6 @@ package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.Session;
-import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
@@ -87,6 +86,18 @@ public class HomeAdminController extends HomeAbstractController implements Initi
     public void seeAllServices(ActionEvent event){
         try {
             ((ServiceRouter)SERVICE_ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the admin wants to see the services online
+     * @param event the event triggered
+     */
+    public void manageCoupons(ActionEvent event){
+        try {
+            ROUTER.adminRestricted(CouponRouter.COUPON_FXML_PATH,event);
         } catch (IOException e) {
             e.printStackTrace();
         }

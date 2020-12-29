@@ -1,10 +1,13 @@
 package com.github.studeasy.gui.controller.home;
 
+import com.github.studeasy.gui.controller.notifications.ButtonNotificationController;
 import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +32,9 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      * The job router used by the controller
      */
     private final AbstractRouter JOB_ROUTER;
+
+    @FXML
+    private ButtonNotificationController clocheController;
 
     public HomeAdminController(){
         super();
@@ -99,6 +105,15 @@ public class HomeAdminController extends HomeAbstractController implements Initi
     }
 
     /**
+     * Handle the click
+     * @param event
+     */
+    @FXML
+    public void clickNotif(MouseEvent event){
+        clocheController.clickNotif(event);
+    }
+
+    /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before
      * the view appears on the client side
@@ -106,5 +121,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }

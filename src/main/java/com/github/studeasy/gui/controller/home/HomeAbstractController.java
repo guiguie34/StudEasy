@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller.home;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Session;
+import com.github.studeasy.logic.facades.FacadeNotification;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ public abstract class HomeAbstractController  {
      * The facade used by the controller
      */
     protected final FacadeUser FACADE;
+
 
     public HomeAbstractController() {
         this.ROUTER = UserRouter.getInstance();

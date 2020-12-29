@@ -1,5 +1,6 @@
 package com.github.studeasy.gui.controller.home;
 
+import com.github.studeasy.gui.controller.notifications.ButtonNotificationController;
 import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 
 import java.io.IOException;
@@ -28,6 +30,9 @@ public class HomeStudentController extends HomeAbstractController implements Ini
      * The service router used by the controller
      */
     private final AbstractRouter JOB_ROUTER;
+
+    @FXML
+    private ButtonNotificationController clocheController;
 
     public HomeStudentController(){
         super();
@@ -107,6 +112,16 @@ public class HomeStudentController extends HomeAbstractController implements Ini
      */
     public void seeJobs(ActionEvent event) throws IOException {
         ((JobRouter)JOB_ROUTER).viewJobs(event);
+    }
+
+
+    /**
+     * Handle the click
+     * @param event
+     */
+    @FXML
+    public void clickNotif(MouseEvent event){
+        clocheController.clickNotif(event);
     }
 
     /**

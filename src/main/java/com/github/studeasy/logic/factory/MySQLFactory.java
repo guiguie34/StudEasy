@@ -5,6 +5,8 @@ import com.github.studeasy.dao.categoryDAO.MySQLCategoryDAO;
 import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.commandOfServiceDAO.MySQLCommandOfServiceDAO;
 import com.github.studeasy.dao.db.MySQLConnectionUtil;
+import com.github.studeasy.dao.notificationDAO.MySQLNotificationDAO;
+import com.github.studeasy.dao.notificationDAO.NotificationDAO;
 import com.github.studeasy.dao.serviceDAO.MySQLServiceDAO;
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
 import com.github.studeasy.dao.jobDAO.JobDAO;
@@ -30,20 +32,21 @@ public class MySQLFactory extends Factory {
     /**
      * Default constructor of a MySQLFactory
      */
-    public MySQLFactory(){
+    public MySQLFactory() {
         this.openConnection();
     }
 
     /**
      * Create the connection to the database
      */
-    private void openConnection(){
+    private void openConnection() {
         MySQLConnectionUtil connection = MySQLConnectionUtil.getInstance();
         this.db = connection.getDb();
     }
 
     /**
      * Close the connection
+     *
      * @throws SQLException if an error occur
      */
     private void closeConnection() throws SQLException {
@@ -52,6 +55,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * To get the connection to the database
+     *
      * @return the connection to the database
      */
     public Connection getDb() {
@@ -60,6 +64,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * Method which will create a MySQLUserDAO
+     *
      * @return the MySQLUserDAO
      */
     @Override
@@ -74,6 +79,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * Method which will create a MySQLJobDAO
+     *
      * @return the MySQLJobDAO
      */
     @Override
@@ -92,6 +98,7 @@ public class MySQLFactory extends Factory {
 
     /**
      * Method which will create a MySQLCategoryDAO
+     *
      * @return the MySQLCategoryDAO
      */
     @Override
@@ -101,10 +108,22 @@ public class MySQLFactory extends Factory {
 
     /**
      * Method which will create a MySQLServiceDAO
+     *
      * @return the MySQLServiceDAO
      */
     @Override
     public ServiceDAO createServiceDAO() {
         return new MySQLServiceDAO();
     }
+
+    /**
+     * Method that will create a NotificationDAO
+     *
+     * @return the NotificationDAO
+     */
+    @Override
+    public NotificationDAO createNotificationDAO() {
+        return new MySQLNotificationDAO();
+    }
 }
+

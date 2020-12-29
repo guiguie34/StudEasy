@@ -1,11 +1,14 @@
 package com.github.studeasy.gui.controller.home;
 
+import com.github.studeasy.gui.controller.notifications.ButtonNotificationController;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.JobRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +21,9 @@ public class HomePartnerController extends HomeAbstractController implements Ini
 
 
     private final AbstractRouter JOB_ROUTER;
+
+    @FXML
+    private ButtonNotificationController clocheController;
 
     public HomePartnerController(){
         super();
@@ -35,6 +41,15 @@ public class HomePartnerController extends HomeAbstractController implements Ini
 
     public void addJob(ActionEvent event) throws IOException {
         ((JobRouter)JOB_ROUTER).addOrUpdateJob(event,0,null);
+    }
+
+    /**
+     * Handle the click
+     * @param event
+     */
+    @FXML
+    public void clickNotif(MouseEvent event){
+        clocheController.clickNotif(event);
     }
 
     /**

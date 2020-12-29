@@ -1,7 +1,10 @@
 package com.github.studeasy.dao.couponDAO;
 
+import com.github.studeasy.logic.common.Coupon;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
+
+import java.util.ArrayList;
 
 /**
  * Abstract class for the coupon DAO
@@ -36,4 +39,10 @@ public abstract class CouponDAO {
      * @param costCoupon the price in points of the coupon
      */
     public abstract void addCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon);
+
+    /**
+     * Retrieve all the coupons from the database
+     * @return all the coupons
+     */
+    public abstract ArrayList<Coupon> getCoupons();
 }

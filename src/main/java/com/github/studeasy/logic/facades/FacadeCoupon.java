@@ -1,8 +1,11 @@
 package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.couponDAO.CouponDAO;
+import com.github.studeasy.logic.common.Coupon;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
+
+import java.util.ArrayList;
 
 /**
  * The coupon facade
@@ -59,5 +62,14 @@ public class FacadeCoupon {
             // We tell the user what's wrong
             throw new BadInformationException("The title and description do not have a correct length");
         }
+    }
+
+    /**
+     * Retrieve all the coupons from the database
+     * @return all the coupons
+     */
+    public ArrayList<Coupon> getCoupons() {
+        // We ask the DAO to retrieve the coupons
+        return DAO.getCoupons();
     }
 }

@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.coupon.AddUpdateCouponController;
+import com.github.studeasy.gui.controller.coupon.SeeCouponController;
 import com.github.studeasy.logic.common.Coupon;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -65,6 +66,25 @@ public class CouponRouter extends AbstractRouter{
         AddUpdateCouponController addUpdateCouponController = new AddUpdateCouponController(coupon, addUpdate);
         // We link this controller with the FXML
         loader.setController(addUpdateCouponController);
+        Parent root = loader.load();
+        // And we change the view
+        this.changeView(event,root);
+    }
+
+    /**
+     * Load the view to display a coupon
+     * @param pathFXML the path to the fxml file
+     * @param event the action triggering the change of view
+     * @param coupon the coupon to display
+     * @throws IOException if an error occurs
+     */
+    public void seeCoupon(String pathFXML, Event event, Coupon coupon) throws IOException {
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // We create the controller with the service
+        SeeCouponController seeCouponController = new SeeCouponController(coupon);
+        // We link this controller with the FXML
+        loader.setController(seeCouponController);
         Parent root = loader.load();
         // And we change the view
         this.changeView(event,root);

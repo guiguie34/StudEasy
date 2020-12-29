@@ -40,19 +40,19 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="pendingAllServicesL" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" text="All the Coupons" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
                   <TableView fx:id="couponsTV" layoutX="71.0" layoutY="71.0" prefHeight="372.0" prefWidth="1026.0">
                     <columns>
-                      <TableColumn maxWidth="250.0" prefWidth="250.0" resizable="false" text="Title of the Service" />
-                      <TableColumn editable="false" maxWidth="60.0" prefWidth="60.0" resizable="false" text="Cost" />
-                        <TableColumn editable="false" maxWidth="250.0" prefWidth="250.0" resizable="false" text="Name Category" />
-                        <TableColumn editable="false" maxWidth="154.0" prefWidth="154.0" resizable="false" text="Date of Creation" />
-                        <TableColumn editable="false" maxWidth="100.0" prefWidth="100.0" resizable="false" text="Type" />
-                        <TableColumn editable="false" maxWidth="212.0" minWidth="0.0" prefWidth="212.0" resizable="false" style="-fx-alignment: CENTER;" text="Owner" />
+                      <TableColumn fx:id="titleC" maxWidth="250.0" prefWidth="250.0" resizable="false" text="Title of the Coupon" />
+                      <TableColumn fx:id="costC" editable="false" maxWidth="60.0" prefWidth="60.0" resizable="false" text="Cost" />
+                        <TableColumn fx:id="quantityC" editable="false" maxWidth="60.0" prefWidth="60.0" resizable="false" text="Quantity" />
+                        <TableColumn fx:id="companyC" editable="false" maxWidth="250.0" minWidth="0.0" prefWidth="250.0" resizable="false" style="-fx-alignment: CENTER;" text="Company" />
+                        <TableColumn fx:id="availabilityC" editable="false" maxWidth="212.0" minWidth="0.0" prefWidth="212.0" resizable="false" style="-fx-alignment: CENTER;" text="Availability" />
+                        <TableColumn fx:id="availabilityImageC" editable="false" maxWidth="194.0" minWidth="0.0" prefWidth="194.0" resizable="false" style="-fx-alignment: CENTER;" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -69,7 +69,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button id="positiveButton" fx:id="addB" layoutX="932.0" layoutY="471.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="182.0" text="Add New Coupon" visible="false">
+                  <Button id="positiveButton" fx:id="addCouponB" layoutX="932.0" layoutY="471.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="182.0" text="Add New Coupon" visible="false">
                      <font>
                         <Font size="15.0" />
                      </font>

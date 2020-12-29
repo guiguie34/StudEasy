@@ -2,6 +2,7 @@ package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
+import com.github.studeasy.gui.routers.ServiceRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
@@ -21,8 +22,14 @@ import java.util.ResourceBundle;
  */
 public class HomeStudentController extends HomeAbstractController implements Initializable {
 
+    /**
+     * The service router used by the controller
+     */
+    private final AbstractRouter SERVICE_ROUTER;
+
     public HomeStudentController(){
         super();
+        this.SERVICE_ROUTER = ServiceRouter.getInstance();
     }
 
     /**
@@ -42,7 +49,53 @@ public class HomeStudentController extends HomeAbstractController implements Ini
         }
     }
 
+    /**
+     * Triggered when the user wants to propose a service
+     * @param event the event triggered
+     */
+    public void proposeService(ActionEvent event){
+        try {
+            ((ServiceRouter) SERVICE_ROUTER).proposeOrRequestService(ServiceRouter.PROPOSE_ASK_SERVICE_FXML_PATH,event,0,2,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Triggered when the user wants to request a service
+     * @param event the event triggered
+     */
+    public void requestService(ActionEvent event){
+        try {
+            ((ServiceRouter) SERVICE_ROUTER).proposeOrRequestService(ServiceRouter.PROPOSE_ASK_SERVICE_FXML_PATH,event,1,2,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the user wants to see his services
+     * @param event the event triggered
+     */
+    public void myServices(ActionEvent event){
+        try {
+            ((ServiceRouter) SERVICE_ROUTER).viewAllServices(ServiceRouter.MY_SERVICES_FXML_PATH,event,0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the user wants to see all the services
+     * @param event the event triggered
+     */
+    public void seeAllServices(ActionEvent event){
+        try {
+            ((ServiceRouter) SERVICE_ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Function from the interface Initializable

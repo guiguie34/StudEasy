@@ -129,4 +129,12 @@ public class User {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+
+	public String toString(){
+		String res = this.lastname + " " + this.firstname;
+		if(role instanceof RolePartner){
+			res += " ("+((RolePartner) role).getCompany()+")";
+		}
+		return res;
+	}
 }

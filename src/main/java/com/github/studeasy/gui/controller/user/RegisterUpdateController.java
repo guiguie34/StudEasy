@@ -4,7 +4,6 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
-import com.github.studeasy.logic.common.role.RoleAdmin;
 import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
@@ -140,9 +139,8 @@ public class RegisterUpdateController implements Initializable {
             try {
                 String key = FACADE.registerUpdate(firstName,lastName,pseudo,email,confirmEmail,password,confirmPassword,0);
                 registerUpdateB.setVisible(false);
-                ((UserRouter)ROUTER).confirmUser(UserRouter.CONFIRM_USER_FXML_PATH,event,email);
                 FACADE.sendMail(email,key);
-
+                ((UserRouter)ROUTER).confirmUser(UserRouter.CONFIRM_USER_FXML_PATH,event,email);
 
             }catch (BadInformationException exception){
                 registerFailLabel.setAlignment(Pos.CENTER);

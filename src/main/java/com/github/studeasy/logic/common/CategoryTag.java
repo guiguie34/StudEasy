@@ -6,6 +6,11 @@ package com.github.studeasy.logic.common;
 public class CategoryTag {
 
 	/**
+	 * Id of the category
+	 */
+	private int idCat;
+
+	/**
 	 * Name of the category
 	 */
 	private String name;
@@ -15,9 +20,14 @@ public class CategoryTag {
 	 */
 	private String description;
 
-	public CategoryTag(String name, String description) {
+	public CategoryTag(int idCat, String name, String description) {
+		this.idCat = idCat;
 		this.name = name;
 		this.description = description;
+	}
+
+	public int getIdCat() {
+		return idCat;
 	}
 
 	public String getName() {

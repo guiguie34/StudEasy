@@ -1,9 +1,6 @@
 package com.github.studeasy.gui.controller.home;
 
-import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.JobRouter;
-import com.github.studeasy.gui.routers.FeedbackRouter;
-import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
@@ -18,9 +15,20 @@ import java.util.ResourceBundle;
  */
 public class HomeAdminController extends HomeAbstractController implements Initializable {
 
+    /**
+     * The service router used by the controller
+     */
+    private final AbstractRouter SERVICE_ROUTER;
+
+    /**
+     * The category router used by the controller
+     */
+    private final AbstractRouter CATEGORY_ROUTER;
 
     public HomeAdminController(){
         super();
+        this.SERVICE_ROUTER = ServiceRouter.getInstance();
+        this.CATEGORY_ROUTER = CategoryRouter.getInstance();
     }
 
     /**
@@ -34,11 +42,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
     }
-
-
 
     /**
      * Load the view to manage Partner account
@@ -56,6 +60,36 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      */
     public void manageJob(ActionEvent event) throws IOException {
         (JobRouter.getInstance()).viewJobs(event);
+    }
+
+    /**
+     * Triggered when the admin wants to go to the categories management page
+     * @param event the event triggered
+     * @throws IOException if an error occurs
+     */
+    public void manageCategory(ActionEvent event) throws IOException {
+        ROUTER.adminRestricted(CategoryRouter.MANAGE_CATEGORY_FXML_PATH,event);
+    }
+
+    /**
+     * Triggered when the admin wants to manage the pending services
+     * @param event the event triggered
+     * @throws IOException if an error occurs
+     */
+    public void managePendingServices(ActionEvent event) throws IOException {
+        ((ServiceRouter)SERVICE_ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,0);
+    }
+
+    /**
+     * Triggered when the admin wants to see the services online
+     * @param event the event triggered
+     */
+    public void seeAllServices(ActionEvent event){
+        try {
+            ((ServiceRouter)SERVICE_ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

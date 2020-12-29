@@ -138,7 +138,6 @@ public class MySQLFeedbackDAO extends FeedbackDAO{
         preparedStatement.setInt(3, rate);
         preparedStatement.setInt(4, Session.getInstance().getCurrentUser().getIdUser());
         preparedStatement.setInt(5, idService);
-        System.out.println(preparedStatement);
         // We execute the query
         preparedStatement.executeUpdate();
     }

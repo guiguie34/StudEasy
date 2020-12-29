@@ -2,7 +2,6 @@ package com.github.studeasy.dao.userDAO;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.logic.common.User;
-import com.github.studeasy.logic.facades.exceptions.BadKeyException;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.Connection;
@@ -222,7 +221,6 @@ public class MySQLUserDAO extends UserDAO{
             throw new BadCredentialsException("No user found");
         } else {
             //if the 2 keys corresponds
-            System.out.println("key "+ resultSet.getString(12));
             if(resultSet.getString(12).equals(key)){
                 //let's confirm the account
                 String request2 = "UPDATE user SET confirm = ?"+" WHERE emailAddress = ?";

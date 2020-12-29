@@ -2,8 +2,9 @@ package com.github.studeasy.gui.controller.feedback;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
-import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.gui.routers.ServiceRouter;
 import com.github.studeasy.logic.common.Feedback;
+import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeFeedback;
 import javafx.beans.value.ObservableValue;
@@ -36,6 +37,11 @@ public class SeeFeedbacksServiceController implements Initializable {
      * The router used by the controller
      */
     protected final AbstractRouter ROUTER;
+
+    /**
+     * The service router used by the controller
+     */
+    protected final AbstractRouter SERVICE_ROUTER;
 
     /**
      * The facade used by the controller
@@ -103,20 +109,28 @@ public class SeeFeedbacksServiceController implements Initializable {
     private TableColumn<Feedback, Void> actionColumn;
 
     /**
-     * the id of the service concerned
+     * Used to know from where the user comes from
+     * 0 manage pending services / my services
+     * 1 see all services online
      */
-    private final int idService;
+    private int origin;
+
+    /**
+     * Service concerned
+     */
+    private final Service service;
 
     /**
      * All the feedbacks displayed in the table
      */
     private ObservableList<Feedback> feedbackList;
 
-    public SeeFeedbacksServiceController(int idService) {
+    public SeeFeedbacksServiceController(Service service, int origin) {
         this.ROUTER = FeedbackRouter.getInstance();
+        this.SERVICE_ROUTER = ServiceRouter.getInstance();
         this.FACADE = FacadeFeedback.getInstance();
-        this.idService = idService;
-
+        this.origin = origin;
+        this.service = service;
     }
 
     /**
@@ -125,7 +139,7 @@ public class SeeFeedbacksServiceController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void loadAddFeedback(ActionEvent event) throws IOException {
-        ((FeedbackRouter)ROUTER).addFeedback(FeedbackRouter.ADD_FEEDBACK_FXML_PATH,event,idService);
+        ((FeedbackRouter)ROUTER).addFeedback(FeedbackRouter.ADD_FEEDBACK_FXML_PATH,event,service,origin);
     }
 
     /**
@@ -236,11 +250,12 @@ public class SeeFeedbacksServiceController implements Initializable {
      * @param event
      */
     public void cancel(ActionEvent event) {
-        /*try {
+        try {
             //Come back to the view of the service
+            ((ServiceRouter) SERVICE_ROUTER).viewService(ServiceRouter.VIEW_SERVICE_FXML_PATH,event,service,origin);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     /**
@@ -253,9 +268,9 @@ public class SeeFeedbacksServiceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // In case we don't have any feedback
-        feedbackManagement.setPlaceholder(new Label("There is currently no category to display"));
+        feedbackManagement.setPlaceholder(new Label("There is currently no feedback to display"));
         // We retrieve all the categories and put them in an observable list
-        feedbackList = FXCollections.observableArrayList(FACADE.seeAllFeedbacks(idService));
+        feedbackList = FXCollections.observableArrayList(FACADE.seeAllFeedbacks(service.getIdService()));
         // We put the names of the feedbacks on the right column
         titleColumn.setCellValueFactory(
                 new PropertyValueFactory<Feedback,String>("title")
@@ -294,7 +309,6 @@ public class SeeFeedbacksServiceController implements Initializable {
 
         titleLabel.setText("Feedbacks for the service");
 
-        addFeedbackButton.setVisible(FACADE.hasCommand(idService) && Session.getInstance().isStudent());
-
+        addFeedbackButton.setVisible(FACADE.hasCommand(service.getIdService()) && Session.getInstance().isStudent());
     }
 }

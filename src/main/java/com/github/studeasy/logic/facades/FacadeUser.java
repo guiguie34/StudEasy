@@ -9,15 +9,9 @@ import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
 import com.github.studeasy.logic.utils.regexUtils;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.KeyGen;
 import com.github.studeasy.logic.utils.Mail;
-import com.github.studeasy.logic.utils.PasswordUtils;
-import com.github.studeasy.logic.utils.regexUtils;
-
-import java.util.ArrayList;
 
 /**
  * The Facade User for the UserDAO
@@ -136,7 +130,7 @@ public class FacadeUser {
         return null;
     }
 
-    public void sendMail(String email, String key){
+    public void sendMail(String email, String key) throws Exception{
         Mail.sendMail("Stud'Easy Validation","Hi, Here is your key to confirm your account:\n"+ key,email);
     }
 

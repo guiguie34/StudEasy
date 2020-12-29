@@ -6,6 +6,11 @@ package com.github.studeasy.logic.common;
 public class Coupon {
 
 	/**
+	 * The id of the coupon
+	 */
+	private int id;
+
+	/**
 	 * Title of the coupon
 	 */
 	private String title;
@@ -18,12 +23,7 @@ public class Coupon {
 	/**
 	 * Value of the coupon in the partner store (in €)
 	 */
-	private double value;
-
-	/**
-	 * Cost of the coupon
-	 */
-	private int cost;
+	private int value;
 
 	/**
 	 * Quantity available the current coupon
@@ -35,13 +35,21 @@ public class Coupon {
 	 */
 	private User owner;
 
-	public Coupon(String title, String description, double value, int cost, int quantity, User owner) {
+	public Coupon(int id,String title, String description, int value, int quantity, User owner) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.value = value;
 		this.quantity = quantity;
 		this.owner = owner;
-		this.cost= cost;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -60,11 +68,11 @@ public class Coupon {
 		this.description = description;
 	}
 
-	public double getValue() {
+	public int getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 
@@ -82,13 +90,5 @@ public class Coupon {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
-	}
-
-	public int getCost() {
-		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
 	}
 }

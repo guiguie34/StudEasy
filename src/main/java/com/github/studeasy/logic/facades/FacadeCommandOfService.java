@@ -3,6 +3,11 @@ package com.github.studeasy.logic.facades;
 import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
 import com.github.studeasy.logic.common.CommandOfService;
+import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.User;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The Facade User for the CommandOfServiceDAO
@@ -41,11 +46,52 @@ public class FacadeCommandOfService {
     }
 
     /***
-     *
+     * Methode that allows to accept a command by asking DAO
      * @param c
+     * @throws Exception
      */
-    public void acceptTransaction(CommandOfService c){
-
+    public void acceptTransaction(CommandOfService c) throws Exception {
+        DAO.acceptTransaction(c);
     }
+
+    /***
+     *Methode that allows to delete a command by asking DAO
+     * @param c
+     * @throws Exception
+     */
+    public void declineTransaction(CommandOfService c) throws Exception {
+        DAO.declineTransaction(c);
+    }
+
+    /***
+     * Methode allows to buy a service and save the record
+     * @param s
+     * @throws Exception
+     */
+    public void buyService(Service s, User u) throws Exception{
+        DAO.buyService(s,u);
+    }
+
+    /***
+     * Methode allows to apply for a service and set the status to waiting 0
+     * @param s
+     * @param u
+     * @throws Exception
+     */
+    public void applyForService(Service s,User u) throws Exception{
+        DAO.applyForService(s,u);
+    }
+
+    /***
+     * Methode allows to add a feedback to a service
+     * @param c
+     * @throws Exception
+     */
+    public void addFeedback(CommandOfService c) throws Exception {
+        DAO.addFeedback(c);
+    }
+
+
+
 
 }

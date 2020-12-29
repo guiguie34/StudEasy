@@ -1,14 +1,13 @@
 package com.github.studeasy.dao.commandOfServiceDAO;
 
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
-import com.github.studeasy.logic.common.CommandOfService;
-import com.github.studeasy.logic.common.Service;
-import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -163,4 +162,41 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
             e.printStackTrace();
         }
     }
+
+    public ArrayList<CommandOfService> getServiceBought(User currentUser){
+        ArrayList<CommandOfService> servicebought  =new ArrayList<>();
+        try{
+            // We prepare the SQL request to retrieve the services of the user
+            PreparedStatement preparedStatement;
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM command,service WHERE fkUser = ? AND command.fkService=service.idService";
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1,currentUser.getIdUser());
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We retrieve all command
+            while(resultSet.next()){
+                CategoryTag category=new CategoryTag(resultSet.getString(19),resultSet.getString(20));
+                Timestamp dateCreation =resultSet.getTimestamp(6);
+
+                Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
+                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(7),
+                        currentUser, category, resultSet.getInt(8), dateCreation);
+                Feedback feedback = new Feedback(resultSet.getInt(10),resultSet.getString(13),
+                        resultSet.getString(15),resultSet.getDate(16),resultSet.getInt(12));
+                CommandOfService command = new CommandOfService(feedback,currentUser,service,
+                        resultSet.getInt(17),resultSet.getDate(16));
+
+                servicebought.add(command);
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return servicebought;
+    }
+
 }
+

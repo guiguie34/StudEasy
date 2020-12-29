@@ -25,14 +25,14 @@ public class CommandOfService {
 	/**
 	 * Status of the command (Pending,Validated,Declined)
 	 */
-	private String status;
+	private int status;
 
 	/**
 	 * Date of the creation of the command
 	 */
 	private Date creationDate;
 
-	public CommandOfService(Feedback feedback, User owner, Service service, String status, Date creationDate) {
+	public CommandOfService(Feedback feedback, User owner, Service service, int status, Date creationDate) {
 		this.feedback = feedback;
 		this.owner = owner;
 		this.service = service;
@@ -64,11 +64,11 @@ public class CommandOfService {
 		this.service = service;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

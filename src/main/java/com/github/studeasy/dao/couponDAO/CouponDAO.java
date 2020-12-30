@@ -52,6 +52,12 @@ public abstract class CouponDAO {
     public abstract void updateCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon, Coupon couponToUpdate);
 
     /**
+     * Delete the coupon
+     * @param couponToDelete the coupon to delete
+     */
+    public abstract void deleteCoupon(Coupon couponToDelete);
+
+    /**
      * Retrieve all the coupons from the database
      * @return all the coupons
      */

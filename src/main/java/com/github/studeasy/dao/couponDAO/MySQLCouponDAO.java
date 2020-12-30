@@ -90,6 +90,25 @@ public class MySQLCouponDAO extends CouponDAO{
         }
     }
 
+    /**
+     * Delete the coupon
+     * @param couponToDelete the coupon to delete
+     */
+    public void deleteCoupon(Coupon couponToDelete){
+        // We prepare the SQL request to delete a coupon
+        PreparedStatement preparedStatement;
+        String request = "DELETE FROM coupon WHERE idCoupon = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1, couponToDelete.getId());
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
 
     /**
      * Retrieve all the coupons from the database

@@ -118,7 +118,18 @@ public class SeeCouponController implements Initializable {
      * @param event the event triggered
      */
     public void deleteCoupon(ActionEvent event){
-
+        if(AbstractRouter.confirmationBox("Are you sure you want to delete this coupon ?",
+                "Confirmation: Deletion",
+                "Stud'Easy - Confirmation")) {
+            // We ask the facade to delete the coupon
+            FACADE.deleteCoupon(coupon);
+            // We redirect after the deletion
+            try {
+                ROUTER.changeView(CouponRouter.COUPON_FXML_PATH,event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

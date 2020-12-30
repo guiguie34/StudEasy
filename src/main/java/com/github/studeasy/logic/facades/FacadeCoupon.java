@@ -87,6 +87,15 @@ public class FacadeCoupon {
     }
 
     /**
+     * Delete the coupon
+     * @param couponToDelete the coupon to delete
+     */
+    public void deleteCoupon(Coupon couponToDelete){
+        // We ask the DAO to delete the coupon
+        DAO.deleteCoupon(couponToDelete);
+    }
+
+    /**
      * Retrieve all the coupons from the database
      * @return all the coupons
      */

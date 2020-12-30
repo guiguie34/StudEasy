@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="126.6666473388672" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="517.5999511718749" minHeight="10.0" prefHeight="517.5999511718749" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="164.53338623046875" minHeight="10.0" prefHeight="56.800048828125" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                    <children>
+                        <ImageView fitHeight="186.0" fitWidth="195.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/logo.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+                <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <TextArea fx:id="descriptionService" editable="false" layoutX="106.0" layoutY="252.0" prefHeight="174.0" prefWidth="355.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextArea>
+                        <Button id="negativeButton" layoutX="22.0" layoutY="474.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Back">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" text="Buy a service" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="614.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/category/categoryTag.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="34.0" fitWidth="29.0" layoutX="99.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/service/title.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="614.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/service/cost.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="addServiceFailedL" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="68.0" prefHeight="15.0" prefWidth="617.0" />
+                        <Text fx:id="serviceOwner" layoutX="154.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="23.786783694951055">
+                            <font>
+                                <Font name="System Bold" size="30.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="dateService" layoutX="676.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="16.404678410311078">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="costService" layoutX="673.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.510726846565206">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                        <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="615.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/service/calendar.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="29.0" layoutX="102.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/service/owner.png" />
+                            </image>
+                        </ImageView>
+                        <Text fx:id="balanceUser" layoutX="272.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="35.1365966796875">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="labelService" layoutX="684.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="58.23660835660445">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                        <ImageView fx:id="statusImage" fitHeight="29.0" fitWidth="29.0" layoutX="725.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text fx:id="serviceTitle" layoutX="167.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="184.29995727539062">
+                            <font>
+                                <Font name="System Bold" size="30.0" />
+                            </font>
+                        </Text>
+                  <Label layoutX="97.0" layoutY="67.0" text="Your Balance">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="614.0" layoutY="274.0" text="Status">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="statusCommand" layoutX="713.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                    </children>
+                </AnchorPane>
+            </children>
+        </GridPane>
+    </children>
+    <stylesheets>
+        <URL value="@../../css/app.css" />
+        <URL value="@../../css/buttons.css" />
+        <URL value="@../../css/choiceBox.css" />
+    </stylesheets>
+</AnchorPane>

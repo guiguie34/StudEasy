@@ -222,6 +222,16 @@ public class ViewServiceController implements Initializable {
         }
     }
 
+    /***
+     *
+     * @return
+     */
+    public CommandOfService purchasesServices(){
+        CommandOfService command = null;
+        return command;
+    }
+
+
     /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,10 +48,11 @@ public class ButtonNotificationController implements Initializable {
 
     /**
      * Handle the click
-     * @param event
+     * @param event the event triggering the method
      */
-    public void clickNotif(MouseEvent event){
-        System.out.println("Click");
+    public void clickNotif(MouseEvent event) throws IOException {
+
+        ((NotificationRouter)ROUTER).manageNotifications(event);
     }
 
     /**

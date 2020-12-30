@@ -22,8 +22,6 @@ public class HomePartnerController extends HomeAbstractController implements Ini
 
     private final AbstractRouter JOB_ROUTER;
 
-    @FXML
-    private ButtonNotificationController clocheController;
 
     public HomePartnerController(){
         super();
@@ -43,14 +41,6 @@ public class HomePartnerController extends HomeAbstractController implements Ini
         ((JobRouter)JOB_ROUTER).addOrUpdateJob(event,0,null);
     }
 
-    /**
-     * Handle the click
-     * @param event
-     */
-    @FXML
-    public void clickNotif(MouseEvent event){
-        clocheController.clickNotif(event);
-    }
 
     /**
      * Function from the interface Initializable

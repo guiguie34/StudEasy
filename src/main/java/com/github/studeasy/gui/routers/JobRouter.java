@@ -91,17 +91,6 @@ public class JobRouter extends AbstractRouter {
 
     }
 
-    /**
-     * Function loading dashboard for each kind of user
-     *
-     * @param event the action triggering this method
-     * @throws IOException if an error occurs
-     */
-    public void backToDashboard(ActionEvent event) throws IOException {
-        studentRestricted(HOME_STUDENT_FXML_PATH, event);
-        adminRestricted(HOME_ADMIN_FXML_PATH, event);
-        partnerRestricted(HOME_PARTNER_FXML_PATH, event);
-    }
 
 
     /**

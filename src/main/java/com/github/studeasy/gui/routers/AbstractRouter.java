@@ -94,7 +94,7 @@ public abstract class AbstractRouter {
      * @param event the action trigerring the change of view
      * @throws IOException if an error occurs
      */
-    public void changeView(String pathFXML, ActionEvent event) throws IOException {
+    public void changeView(String pathFXML, Event event) throws IOException {
         this.changeView(event,load(pathFXML));
     }
 

@@ -32,6 +32,11 @@ public class AddUpdateJobOfferController implements Initializable {
      */
     private final AbstractRouter ROUTER;
 
+    /**
+     * The router used by the controller
+     */
+    private final AbstractRouter ROUTER_USER;
+
 
     /**
      * The facade used by the controller
@@ -124,6 +129,7 @@ public class AddUpdateJobOfferController implements Initializable {
      */
     public AddUpdateJobOfferController(int addUpdate, Object jobToUpdate){
         this.ROUTER = JobRouter.getInstance();
+        this.ROUTER_USER = UserRouter.getInstance();
         this.FACADE = FacadeJob.getInstance();
         this.addUpdate = addUpdate;
         this.job = (Job)jobToUpdate;
@@ -205,7 +211,7 @@ public class AddUpdateJobOfferController implements Initializable {
      */
     public void cancel(ActionEvent event) throws IOException {
         if(addUpdate == 0) {
-            ((JobRouter) ROUTER).backToDashboard(event);
+            ((UserRouter) ROUTER_USER).backToDashboard(event);
         }
         if(addUpdate == 1){
             ((JobRouter)ROUTER).viewJobs(event);

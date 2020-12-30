@@ -2,6 +2,7 @@ package com.github.studeasy.gui.controller.job;
 
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.JobRouter;
+import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.Job;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.common.role.RoleAdmin;
@@ -51,6 +52,11 @@ public class JobOffersController implements Initializable {
     private final FacadeJob FACADE;
 
     /**
+     * The router used by the controller
+     */
+    private final AbstractRouter ROUTER_USER;
+
+    /**
      * User connected
      */
     private final User user;
@@ -88,6 +94,7 @@ public class JobOffersController implements Initializable {
      */
     public JobOffersController(Object user) {
         this.ROUTER = JobRouter.getInstance();
+        this.ROUTER_USER = UserRouter.getInstance();
         this.FACADE = FacadeJob.getInstance();
         this.user = (User)user;
     }
@@ -98,7 +105,7 @@ public class JobOffersController implements Initializable {
      * @throws IOException if an error occurs
      */
     public void cancel(ActionEvent event) throws IOException {
-        ((JobRouter)ROUTER).backToDashboard(event);
+        ((UserRouter)ROUTER_USER).backToDashboard(event);
     }
 
 
@@ -167,6 +174,9 @@ public class JobOffersController implements Initializable {
                 }
                 if(item.getStatus().equals("pending")) {
                     status.setImage(new Image("images/service/pending.png"));
+                }
+                if(item.getStatus().equals("refused")){
+                    status.setImage(new Image("images/service/refused.png"));
                 }
 
                 //Display

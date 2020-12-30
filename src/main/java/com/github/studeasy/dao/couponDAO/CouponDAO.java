@@ -41,6 +41,17 @@ public abstract class CouponDAO {
     public abstract void addCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon);
 
     /**
+     * Update the coupon in the DB
+     * @param titleCoupon the title of the coupon
+     * @param descriptionCoupon the description of the coupon
+     * @param owner the partner proposing the coupons
+     * @param quantityCoupons the number of coupons available
+     * @param costCoupon the price in points of the coupon
+     * @param couponToUpdate the coupon to update
+     */
+    public abstract void updateCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon, Coupon couponToUpdate);
+
+    /**
      * Retrieve all the coupons from the database
      * @return all the coupons
      */

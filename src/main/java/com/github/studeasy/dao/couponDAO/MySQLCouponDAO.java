@@ -59,6 +59,39 @@ public class MySQLCouponDAO extends CouponDAO{
     }
 
     /**
+     * Update the coupon in the DB
+     * @param titleCoupon the title of the coupon
+     * @param descriptionCoupon the description of the coupon
+     * @param owner the partner proposing the coupons
+     * @param quantityCoupons the number of coupons available
+     * @param costCoupon the price in points of the coupon
+     * @param couponToUpdate the coupon to update
+     */
+    public void updateCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon, Coupon couponToUpdate){
+        // We prepare the SQL request to update the service
+        PreparedStatement preparedStatement;
+        String request = "UPDATE coupon SET titleCoupon = ?,descriptionCoupon = ?, ownerCoupon = ?," +
+                "quantityCoupon = ?, valueCoupon = ? WHERE idCoupon = ?";
+        try {
+            preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setString(1, titleCoupon);
+            preparedStatement.setString(2, descriptionCoupon);
+            preparedStatement.setInt(3, owner.getIdUser());
+            preparedStatement.setInt(4, quantityCoupons);
+            preparedStatement.setInt(5, costCoupon);
+            preparedStatement.setInt(6, couponToUpdate.getId());
+
+            // We execute the query
+            preparedStatement.executeUpdate();
+        }
+        // Error with the database
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+
+    /**
      * Retrieve all the coupons from the database
      * @return all the coupons
      */

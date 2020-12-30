@@ -162,7 +162,27 @@ public class AddUpdateCouponController implements Initializable {
      * @param event the event triggered
      */
     public void updateCoupon(ActionEvent event){
-
+        String titleCoupon = this.titleCouponTF.getText();
+        String descriptionCoupon = this.descriptionCouponTF.getText();
+        User owner = this.ownerCouponCB.getValue();
+        int quantityCoupons = this.quantityCouponsS.getValue();
+        int costCoupon = this.costCouponS.getValue();
+        // We first check if the title and the description are not empty
+        if(!titleCoupon.isEmpty() && !descriptionCoupon.isEmpty()) {
+            try {
+                FACADE_COUPON.updateCoupon(titleCoupon,descriptionCoupon,owner,quantityCoupons,costCoupon,coupon);
+                ROUTER.adminRestricted(CouponRouter.COUPON_FXML_PATH,event);
+            } catch (BadInformationException err) {
+                addCouponFailedL.setTextFill(Paint.valueOf("red"));
+                addCouponFailedL.setText(err.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            addCouponFailedL.setTextFill(Paint.valueOf("red"));
+            addCouponFailedL.setText("All the fields must be completed");
+        }
     }
 
     /**
@@ -184,8 +204,13 @@ public class AddUpdateCouponController implements Initializable {
                     // We update
                     this.addUpdateL.setText("Update a Coupon");
                     this.addUpdateB.setText("Update");
-                    ownerCouponCB.setValue(coupon.getOwner());
                     this.addUpdateB.setOnAction(this::updateCoupon);
+                    // We put the coupon info in the fields
+                    ownerCouponCB.setValue(coupon.getOwner());
+                    titleCouponTF.setText(coupon.getTitle());
+                    descriptionCouponTF.setText(coupon.getDescription());
+                    quantityCouponsS.getValueFactory().setValue(coupon.getQuantity());
+                    costCouponS.getValueFactory().setValue(coupon.getValue());
                     break;
                 default:
                     // We add

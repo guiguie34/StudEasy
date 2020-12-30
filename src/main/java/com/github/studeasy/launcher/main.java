@@ -5,6 +5,7 @@ import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.logic.facades.FacadeNotification;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ public class main extends Application {
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.setOnCloseRequest( event -> FacadeNotification.getInstance().stopTimer());
+        stage.getIcons().add(new Image("images/logo.png"));
         stage.setScene(new Scene(AbstractRouter.load(AbstractRouter.LOGIN_FXML_PATH)));
         stage.show();
     }

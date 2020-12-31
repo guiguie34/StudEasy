@@ -41,7 +41,6 @@ public class HomeStudentController extends HomeAbstractController implements Ini
     /**
      * Triggered when the user wants to go to his profile page
      * @param event the event triggered
-     * @throws IOException if an error occurs
      */
     public void loadMyProfile(ActionEvent event){
         try {

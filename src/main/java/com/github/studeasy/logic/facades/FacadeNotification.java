@@ -112,7 +112,7 @@ public class FacadeNotification {
 
     /**
      * Call the DAO to mark as read the notification
-     * @param id id to mark as read
+     * @param idNotif id to mark as read
      * @throws Exception if an error occurs
      */
     public void markAsRead(int idNotif) throws Exception{

@@ -177,7 +177,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
             resultSet = preparedStatement.executeQuery();
             // We retrieve all command
             while(resultSet.next()){
-                CategoryTag category=new CategoryTag(resultSet.getString(19),resultSet.getString(20));
+                CategoryTag category=new CategoryTag(resultSet.getInt(18),resultSet.getString(19),resultSet.getString(20));
                 Timestamp dateCreation =resultSet.getTimestamp(6);
 
                 Service service = new Service(resultSet.getInt(9), resultSet.getString(11),

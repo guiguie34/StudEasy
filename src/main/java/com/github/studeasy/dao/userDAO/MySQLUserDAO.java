@@ -406,57 +406,42 @@ public class MySQLUserDAO extends UserDAO{
     }
 
     public void addPoints(int nbPoints,User user) throws Exception{
-        try{
-            PreparedStatement preparedStatement;
-            ResultSet resultSet;
-            String request = "UPDATE user SET points = points + ? where idUser = ?";
-            preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setInt(1, nbPoints);
-            preparedStatement.setInt(2,user.getIdUser());
-            // We execute the query
-            resultSet = preparedStatement.executeQuery();
-        }
-        catch(SQLException e){
-            throw e;
-        }
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        String request = "UPDATE user SET points = points + ? where idUser = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setInt(1, nbPoints);
+        preparedStatement.setInt(2,user.getIdUser());
+        // We execute the query
+        preparedStatement.executeUpdate();
     }
 
     public void removePoints(int nbPoints,User user) throws Exception{
-        try{
-            PreparedStatement preparedStatement;
-            ResultSet resultSet;
-            String request = "UPDATE user SET points = points - ? where idUser = ?";
-            preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setInt(1, nbPoints);
-            preparedStatement.setInt(2,user.getIdUser());
-            // We execute the query
-            resultSet = preparedStatement.executeQuery();
-        }
-        catch(SQLException e){
-            throw e;
-        }
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        String request = "UPDATE user SET points = points - ? where idUser = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setInt(1, nbPoints);
+        preparedStatement.setInt(2,user.getIdUser());
+        // We execute the query
+        preparedStatement.executeUpdate();
     }
 
     public int viewPoints(User user) throws Exception{
         int respoints = 0;
-        try{
-            PreparedStatement preparedStatement;
-            ResultSet resultSet;
-            String request = "SELECT points AS pointUser from user where idUser = ?";
-            preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setInt(1,user.getIdUser());
-            // We execute the query
-            resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                // No, we throw an error
-                throw new BadCredentialsException("No user found");
-            } else {
-                // stock the result of execution
-                respoints = resultSet.getInt("pointUser");
-            }
-        }
-        catch(SQLException e){
-            throw e;
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        String request = "SELECT points AS pointUser from user where idUser = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setInt(1,user.getIdUser());
+        // We execute the query
+        resultSet = preparedStatement.executeQuery();
+        if (!resultSet.next()) {
+            // No, we throw an error
+            throw new BadCredentialsException("No user found");
+        } else {
+            // stock the result of execution
+            respoints = resultSet.getInt("pointUser");
         }
         return respoints;
     }

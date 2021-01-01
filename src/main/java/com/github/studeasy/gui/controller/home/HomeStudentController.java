@@ -1,16 +1,9 @@
 package com.github.studeasy.gui.controller.home;
 
-import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.FeedbackRouter;
-import com.github.studeasy.gui.routers.ServiceRouter;
-import com.github.studeasy.gui.routers.UserRouter;
-import com.github.studeasy.logic.common.Session;
-import com.github.studeasy.logic.facades.FacadeUser;
+import com.github.studeasy.gui.routers.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 
 import java.io.IOException;
@@ -92,6 +85,18 @@ public class HomeStudentController extends HomeAbstractController implements Ini
     public void seeAllServices(ActionEvent event){
         try {
             ((ServiceRouter) SERVICE_ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Triggered when the user wants to see all the coupons
+     * @param event the event triggered
+     */
+    public void buyCoupons(ActionEvent event){
+        try {
+            ROUTER.changeView(CouponRouter.COUPON_FXML_PATH,event);
         } catch (IOException e) {
             e.printStackTrace();
         }

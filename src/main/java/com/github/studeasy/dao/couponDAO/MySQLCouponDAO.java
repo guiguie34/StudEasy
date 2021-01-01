@@ -68,7 +68,7 @@ public class MySQLCouponDAO extends CouponDAO{
      * @param couponToUpdate the coupon to update
      */
     public void updateCoupon(String titleCoupon, String descriptionCoupon, User owner, int quantityCoupons, int costCoupon, Coupon couponToUpdate){
-        // We prepare the SQL request to update the service
+        // We prepare the SQL request to update the coupon
         PreparedStatement preparedStatement;
         String request = "UPDATE coupon SET titleCoupon = ?,descriptionCoupon = ?, ownerCoupon = ?," +
                 "quantityCoupon = ?, valueCoupon = ? WHERE idCoupon = ?";
@@ -144,5 +144,37 @@ public class MySQLCouponDAO extends CouponDAO{
             err.printStackTrace();
         }
         return couponsList;
+    }
+
+    /**
+     * Decrease the quantity of 1
+     * @param coupon the coupon to update
+     * @throws Exception if an error occurs
+     */
+    public void decreaseQuantityCoupon(Coupon coupon) throws Exception{
+        // We prepare the SQL request to update the coupon
+        PreparedStatement preparedStatement;
+        String request = "UPDATE coupon SET quantityCoupon = quantityCoupon - 1 WHERE idCoupon = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setInt(1, coupon.getId());
+
+        // We execute the query
+        preparedStatement.executeUpdate();
+    }
+
+    /**
+     * Increase the quantity of 1
+     * @param coupon the coupon to update
+     * @throws Exception if an error occurs
+     */
+    public void increaseQuantityCoupon(Coupon coupon) throws Exception{
+        // We prepare the SQL request to update the coupon
+        PreparedStatement preparedStatement;
+        String request = "UPDATE coupon SET quantityCoupon = quantityCoupon + 1 WHERE idCoupon = ?";
+        preparedStatement = DB.prepareStatement(request);
+        preparedStatement.setInt(1, coupon.getId());
+
+        // We execute the query
+        preparedStatement.executeUpdate();
     }
 }

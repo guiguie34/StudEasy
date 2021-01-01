@@ -62,4 +62,18 @@ public abstract class CouponDAO {
      * @return all the coupons
      */
     public abstract ArrayList<Coupon> getCoupons();
+
+    /**
+     * Decrease the quantity of 1
+     * @param coupon the coupon to update
+     * @throws Exception if an error occurs
+     */
+    public abstract void decreaseQuantityCoupon(Coupon coupon) throws Exception;
+
+    /**
+     * Increase the quantity of 1
+     * @param coupon the coupon to update
+     * @throws Exception if an error occurs
+     */
+    public abstract void increaseQuantityCoupon(Coupon coupon) throws Exception;
 }

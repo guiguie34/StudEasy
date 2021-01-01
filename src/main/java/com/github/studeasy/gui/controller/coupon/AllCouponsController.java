@@ -5,6 +5,7 @@ import com.github.studeasy.gui.routers.CouponRouter;
 import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RolePartner;
+import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCoupon;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -88,6 +90,18 @@ public class AllCouponsController implements Initializable {
      */
     @FXML
     private TableColumn<Coupon, Image> availabilityImageC;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
 
     /**
      * The text field used to filter the coupons
@@ -280,6 +294,14 @@ public class AllCouponsController implements Initializable {
         if(session.isAdmin()){
             // The admin can add coupons
             addCouponB.setVisible(true);
+        }
+        else{
+            // We retrieve the current user
+            User currentUser = session.getCurrentUser();
+            // To see how many points he has
+            int pointsUser = ((RoleStudent)currentUser.getRole()).getPoints();
+            this.pointsUserT.setText(Integer.toString(pointsUser));
+            this.yourPointsL.setVisible(true);
         }
 
         // Put a listener (double click) on each row to go to the information of a coupon

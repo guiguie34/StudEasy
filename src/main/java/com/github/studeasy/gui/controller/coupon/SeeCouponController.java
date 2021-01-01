@@ -6,14 +6,18 @@ import com.github.studeasy.logic.common.Coupon;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.common.role.RolePartner;
+import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCoupon;
+import com.github.studeasy.logic.facades.exceptions.ErrorBuyCoupon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -96,6 +100,29 @@ public class SeeCouponController implements Initializable {
     private Button deleteB;
 
     /**
+     * To display the error to the user
+     */
+    @FXML
+    private Label errL;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
+
+    /**
+     * The number of points of the user
+     */
+    private int pointsUser;
+
+    /**
      * Instantiate the attributes with
      * a router and a facade used for coupons
      */
@@ -110,7 +137,30 @@ public class SeeCouponController implements Initializable {
      * @param event the event triggered
      */
     public void buyCoupon(ActionEvent event){
-
+        // We check if he has enough points to buy this coupon
+        if(pointsUser >= coupon.getValue()){
+            if(AbstractRouter.confirmationBox("Are you sure you want to purchase this coupon ?",
+                    "Confirmation: Purchase",
+                    "Stud'Easy - Confirmation")){
+                try {
+                    // We ask the facade to buy the coupon
+                    FACADE.buyCoupon(coupon);
+                    // We redirect
+                    ROUTER.changeView(CouponRouter.COUPON_FXML_PATH,event);
+                } catch (ErrorBuyCoupon errorBuyCoupon) {
+                    // An error occurred while buying the coupon
+                    errL.setTextFill(Paint.valueOf("red"));
+                    errL.setText(errorBuyCoupon.getMessage());
+                } catch (Exception e) {
+                    errL.setTextFill(Paint.valueOf("red"));
+                    errL.setText("An error occured, please try again later");
+                }
+            }
+        }
+        else{
+            errL.setTextFill(Paint.valueOf("red"));
+            errL.setText("You don't have enough points to buy this coupon");
+        }
     }
 
     /**
@@ -189,8 +239,17 @@ public class SeeCouponController implements Initializable {
             updateB.setVisible(true);
             deleteB.setVisible(true);
         }
-        else if(coupon.getQuantity() > 0){
-            buyB.setVisible(true);
+        else {
+            // We retrieve the current user
+            User currentUser = session.getCurrentUser();
+            // To see how many points he has
+            int pointsUser = ((RoleStudent)currentUser.getRole()).getPoints();
+            this.pointsUserT.setText(Integer.toString(pointsUser));
+            this.pointsUser = pointsUser;
+            this.yourPointsL.setVisible(true);
+            if (coupon.getQuantity() > 0) {
+                buyB.setVisible(true);
+            }
         }
     }
 }

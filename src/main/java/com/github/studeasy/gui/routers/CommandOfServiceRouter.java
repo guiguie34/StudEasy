@@ -1,5 +1,6 @@
 package com.github.studeasy.gui.routers;
 
+import com.github.studeasy.gui.controller.commandofService.BuyOrApplyServiceController;
 import com.github.studeasy.gui.controller.service.*;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
@@ -47,30 +48,30 @@ public class CommandOfServiceRouter extends AbstractRouter{
         return coomandserviceRouter;
     }
 
-    /**
-     * Load the view and display the good label for proposing/requesting
-     * a service
-     * @param pathFXML the path to the fxml file
-     * @param event the action triggering the change of view
-     * @param proposeRequest 0 if we propose, 1 if we request, 2 if we update
-     * @param origin to know from where come from the student, 0 -> MyServices, 1 -> seeAllServices and 2 -> Home Student
-     * @throws IOException if an error occurs
+    /***
+     * Load the view and display the good label for buy or apply service
+     * @param pathFXML
+     * @param event
+     * @param commandRequest
+     * @param command
+     * @throws IOException
      */
-    public void proposeOrRequestService(String pathFXML, ActionEvent event, int proposeRequest, int origin, Service service) throws IOException {
+    public void buyOrApplyService(String pathFXML, ActionEvent event, int commandRequest, CommandOfService command) throws IOException{
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with proposeRequest telling if we propose or request
-        ProposeAskServiceController proposeAskServiceController = new ProposeAskServiceController(proposeRequest, origin, service);
+        BuyOrApplyServiceController buyorapplycontroller = new BuyOrApplyServiceController(commandRequest, command);
         // We link this controller with the FXML
-        loader.setController(proposeAskServiceController);
+        loader.setController(buyorapplycontroller);
         Parent root = loader.load();
         // And we change the view
-      //  this.changeView(event,root);
+        this.changeView(event,root);
     }
 
-    public void buyOrApplyService(String pathFXML, ActionEvent event, int commandRequest, int demandeuser, CommandOfService command) throws IOException{
+    public void historic(){
 
     }
+
 
 
 }

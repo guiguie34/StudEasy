@@ -76,11 +76,6 @@ public class BuyOrApplyServiceController implements Initializable  {
     private Text costServiceS;
 
     /**
-     * Indicates from where the user comes from
-     */
-    private int origin;
-
-    /**
      * The command to add
      */
     @FXML
@@ -89,11 +84,10 @@ public class BuyOrApplyServiceController implements Initializable  {
     /**
      * Create the controller with the router, the facades
      */
-    public BuyOrApplyServiceController(int commandRequest, int origin, CommandOfService command){
+    public BuyOrApplyServiceController(int commandRequest, CommandOfService command){
         this.ROUTER = CommandOfServiceRouter.getInstance();
         this.FACADE_COMMANDOFSERVICE = FacadeCommandOfService.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
-        this.origin = origin;
         this.commandRequest = commandRequest;
         this.command = command;
     }

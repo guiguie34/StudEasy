@@ -1,9 +1,6 @@
 package com.github.studeasy.gui.controller.commandofService;
 
-import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.CommandOfServiceRouter;
-import com.github.studeasy.gui.routers.ServiceRouter;
-import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
@@ -27,7 +24,7 @@ public class BuyOrApplyServiceController implements Initializable  {
     /**
      * The router used by the controller
      */
-    private final AbstractRouter ROUTER;
+    private final AbstractRouter COMMAND_ROUTER;
 
     /**
      * The facade CommandOfService used by the controller
@@ -38,12 +35,6 @@ public class BuyOrApplyServiceController implements Initializable  {
      * The facade service used by the controller
      */
     private final FacadeService FACADE_SERVICE;
-
-    /**
-     * Tells if the user wants to buy or apply a service
-     * 0 if he tries to buy, 1 if he tries to apply
-     */
-    private int commandRequest;
 
     /**
      * The label displaying apply or buy a service
@@ -84,12 +75,32 @@ public class BuyOrApplyServiceController implements Initializable  {
     /**
      * Create the controller with the router, the facades
      */
-    public BuyOrApplyServiceController(int commandRequest, CommandOfService command){
-        this.ROUTER = CommandOfServiceRouter.getInstance();
+    public BuyOrApplyServiceController(CommandOfService command){
+        this.COMMAND_ROUTER = CommandOfServiceRouter.getInstance();
         this.FACADE_COMMANDOFSERVICE = FacadeCommandOfService.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
-        this.commandRequest = commandRequest;
         this.command = command;
+    }
+
+    /***
+     *
+     * @param event
+     */
+    public void purchaseCommand(ActionEvent event){
+        try {
+            //FACADE_COMMANDOFSERVICE.buyService();
+            ((CommandOfServiceRouter)COMMAND_ROUTER).buyOrApplyService(CommandOfServiceRouter.BUY_SERVICE_FXML_PATH,event,command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void applyCommand(ActionEvent event){
+
+    }
+
+    public void viewHistoric(ActionEvent event){
+
     }
 
 
@@ -103,17 +114,14 @@ public class BuyOrApplyServiceController implements Initializable  {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // We check if the user tries to buy or apply a service
-        if(commandRequest == 1){
-            // The student wants to by a service
+        // We check if the user buy or apply service
+        if(command.getService().getTypeService() == 0){
+            // The student wants to buy a service
             commandRequestL.setText("Buy a service");
-            //addUpdateB.setText("Post");
-            //addUpdateB.setOnAction(this::submitService);
         }
         else{
             // The student wants to apply
             commandRequestL.setText("Update a service");
-
         }
 
     }

@@ -1,6 +1,7 @@
 package com.github.studeasy.gui.routers;
 
 import com.github.studeasy.gui.controller.commandofService.BuyOrApplyServiceController;
+import com.github.studeasy.gui.controller.commandofService.HistoricController;
 import com.github.studeasy.gui.controller.service.*;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
@@ -9,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import org.w3c.dom.html.HTMLDOMImplementation;
 
 import java.io.IOException;
 
@@ -52,15 +54,14 @@ public class CommandOfServiceRouter extends AbstractRouter{
      * Load the view and display the good label for buy or apply service
      * @param pathFXML
      * @param event
-     * @param commandRequest
      * @param command
      * @throws IOException
      */
-    public void buyOrApplyService(String pathFXML, ActionEvent event, int commandRequest, CommandOfService command) throws IOException{
+    public void buyOrApplyService(String pathFXML, ActionEvent event, CommandOfService command) throws IOException{
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
-        // We create the controller with proposeRequest telling if we propose or request
-        BuyOrApplyServiceController buyorapplycontroller = new BuyOrApplyServiceController(commandRequest, command);
+        // We create the controller with proposeRequest telling if we buy or apply a service
+        BuyOrApplyServiceController buyorapplycontroller = new BuyOrApplyServiceController(command);
         // We link this controller with the FXML
         loader.setController(buyorapplycontroller);
         Parent root = loader.load();
@@ -68,8 +69,16 @@ public class CommandOfServiceRouter extends AbstractRouter{
         this.changeView(event,root);
     }
 
-    public void historic(){
-
+    public void historic(String pathFXML, Event event) throws IOException{
+        // We load the right FXML
+        FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
+        // Creat controller for the historic
+        HistoricController historicController = new HistoricController();
+        // We link this controller with the FXML
+        loader.setController(historicController);
+        Parent root = loader.load();
+        // And we change the view
+        this.changeView(event,root);
     }
 
 

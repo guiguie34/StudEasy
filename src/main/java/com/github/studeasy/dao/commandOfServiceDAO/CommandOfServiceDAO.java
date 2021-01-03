@@ -3,7 +3,10 @@ package com.github.studeasy.dao.commandOfServiceDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.factory.Factory;
+
+import java.util.ArrayList;
 
 /**
  * Abstract class for the Command Of Service DAO
@@ -69,7 +72,13 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract void addFeedback(CommandOfService c) throws Exception;
 
-
+    /***
+     * Static method which allows to return the list of the command for a user
+     * @param currentUser
+     * @return List of the command
+     * @throws Exception
+     */
+    public abstract ArrayList<CommandOfService> getServiceBought(User currentUser) throws Exception;
 
 
 }

@@ -4,6 +4,7 @@ import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 
 import java.sql.SQLException;
@@ -43,6 +44,18 @@ public class FacadeCommandOfService {
             facadeCommandOfService = new FacadeCommandOfService();
         }
         return facadeCommandOfService;
+    }
+
+    /**
+     * Retrieve the command of the current user
+     * @return the command of the user
+     */
+    public ArrayList<CommandOfService> getMyCommand() throws Exception {
+        // We retrieve the current user
+        Session sessionUser = Session.getInstance();
+        User currentUser = sessionUser.getCurrentUser();
+        // We ask the DAO to retrieve the services of the user
+        return DAO.getServiceBought(currentUser);
     }
 
     /***

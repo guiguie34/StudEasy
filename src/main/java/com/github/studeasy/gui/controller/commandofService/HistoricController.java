@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -52,19 +53,19 @@ public class HistoricController implements Initializable {
      * Table column of the title
      */
     @FXML
-    protected TableColumn titleColumn;
+    protected TableColumn<CommandOfService,String> titleColumn;
 
     /***
      * Table column of the owner
      */
     @FXML
-    protected TableColumn ownerColumn;
+    protected TableColumn<CommandOfService,String> ownerColumn;
 
     /***
      * Table column of the owner
      */
     @FXML
-    protected TableColumn costColumn;
+    protected TableColumn<CommandOfService,Integer> costColumn;
 
     /***
      * Table column of the date of command
@@ -106,6 +107,10 @@ public class HistoricController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Pending
+        final String pending = "Pending";
+        // Validated
+        final String validated = "Validated";
         // We get the current user
         Session session = Session.getInstance();
         try {
@@ -114,16 +119,27 @@ public class HistoricController implements Initializable {
             e.printStackTrace();
         }
         // set column title
-        titleColumn.setCellValueFactory(
-                new PropertyValueFactory<CommandOfService,String>("title")
+        titleColumn.setCellValueFactory( c -> {
+            CommandOfService command = c.getValue();
+            Service serv = command.getService();
+            return new SimpleObjectProperty<>(serv.getTitle());
+        }
         );
         // set column owner
         ownerColumn.setCellValueFactory(
-                new PropertyValueFactory<CommandOfService,String>("owner")
+                c -> {
+                    CommandOfService command = c.getValue();
+                    Service serv = command.getService();
+                    User owner = serv.getOwner();
+                    return new SimpleObjectProperty<>(owner.getFirstname());
+                }
         );
         // set cost column
-        costColumn.setCellValueFactory(
-                new PropertyValueFactory<CommandOfService,String>("cost")
+        costColumn.setCellValueFactory( c -> {
+                CommandOfService command = c.getValue();
+                Service serv = command.getService();
+                return new SimpleObjectProperty<>(serv.getCost());
+        }
         );
         // set the date
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
@@ -135,5 +151,23 @@ public class HistoricController implements Initializable {
                     Date dateCreation = command.getCreationDate();
                     return new SimpleObjectProperty<String>(shortDateFormat.format(dateCreation));
                 });
+        // get status of the command
+        statusColumn.setCellValueFactory(
+                c ->{
+                    CommandOfService command = c.getValue();
+                    if(command.getStatus()==0){
+                        // Pending
+                        return new SimpleObjectProperty<>(pending);
+                    }
+                    else{
+                        return new SimpleObjectProperty<>(validated);
+                    }
+                }
+        );
+
+        // Add data to the table
+        commandList.setItems(allcommandList);
+
+
     }
 }

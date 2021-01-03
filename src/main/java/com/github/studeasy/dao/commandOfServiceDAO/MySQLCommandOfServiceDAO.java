@@ -170,7 +170,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT * FROM command,service WHERE fkUser = ? AND command.fkService=service.idService";
+            String request = "SELECT * FROM command,service,categorytag WHERE fkUser = ? AND command.fkService=service.idService AND service.fkCategory=categorytag.idCategory";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1,currentUser.getIdUser());
             // We execute the query
@@ -178,17 +178,17 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
             // We retrieve all command
             while(resultSet.next()){
                 CategoryTag category=new CategoryTag(resultSet.getInt(18),resultSet.getString(19),resultSet.getString(20));
-                Timestamp dateCreation =resultSet.getTimestamp(6);
+                Timestamp dateCreation =resultSet.getTimestamp(7);
 
                 Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
-                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(7),
-                        currentUser, category, resultSet.getInt(8), dateCreation);
+                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(15),
+                        currentUser, category, resultSet.getInt(16), dateCreation);
 
-                Feedback feedback = new Feedback(resultSet.getInt(10),resultSet.getString(13),
-                        resultSet.getString(15),resultSet.getDate(16),resultSet.getInt(12));
+                Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
+                        resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
 
                 CommandOfService command = new CommandOfService(feedback,currentUser,service,
-                        resultSet.getInt(17),resultSet.getDate(16));
+                        resultSet.getInt(8),resultSet.getDate(7));
 
                 servicebought.add(command);
             }

@@ -1,9 +1,7 @@
 package com.github.studeasy.gui.controller.commandofService;
 
 import com.github.studeasy.gui.routers.*;
-import com.github.studeasy.logic.common.CategoryTag;
-import com.github.studeasy.logic.common.CommandOfService;
-import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.facades.FacadeCategory;
 import com.github.studeasy.logic.facades.FacadeCommandOfService;
 import com.github.studeasy.logic.facades.FacadeService;
@@ -67,6 +65,11 @@ public class BuyOrApplyServiceController implements Initializable  {
     private Text costServiceS;
 
     /**
+     * Service concerned
+     */
+    private final Service service;
+
+    /**
      * The command to add
      */
     @FXML
@@ -75,31 +78,30 @@ public class BuyOrApplyServiceController implements Initializable  {
     /**
      * Create the controller with the router, the facades
      */
-    public BuyOrApplyServiceController(CommandOfService command){
+    public BuyOrApplyServiceController(CommandOfService command,Service service){
         this.COMMAND_ROUTER = CommandOfServiceRouter.getInstance();
         this.FACADE_COMMANDOFSERVICE = FacadeCommandOfService.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
         this.command = command;
+        this.service=service;
     }
 
     /***
      *
      * @param event
      */
-    public void purchaseCommand(ActionEvent event){
-        try {
-            //FACADE_COMMANDOFSERVICE.buyService();
-            ((CommandOfServiceRouter)COMMAND_ROUTER).buyOrApplyService(CommandOfServiceRouter.BUY_SERVICE_FXML_PATH,event,command);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void buyOrApplyController(ActionEvent event) throws Exception {
+        // We get the current user
+        Session session = Session.getInstance();
+        User user = session.getCurrentUser();
+        if(service.getTypeService()==1){
+            FACADE_COMMANDOFSERVICE.buyService(service,user);
         }
-    }
+        else{
+            FACADE_COMMANDOFSERVICE.applyForService(service,user);
+        }
+        ((CommandOfServiceRouter)COMMAND_ROUTER).buyOrApplyService(CommandOfServiceRouter.BUY_SERVICE_FXML_PATH,event,command,service);
 
-    public void applyCommand(ActionEvent event){
-
-    }
-
-    public void viewHistoric(ActionEvent event){
 
     }
 

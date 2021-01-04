@@ -57,11 +57,11 @@ public class CommandOfServiceRouter extends AbstractRouter{
      * @param command
      * @throws IOException
      */
-    public void buyOrApplyService(String pathFXML, ActionEvent event, CommandOfService command) throws IOException{
+    public void buyOrApplyService(String pathFXML, ActionEvent event, CommandOfService command,Service service) throws IOException{
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with proposeRequest telling if we buy or apply a service
-        BuyOrApplyServiceController buyorapplycontroller = new BuyOrApplyServiceController(command);
+        BuyOrApplyServiceController buyorapplycontroller = new BuyOrApplyServiceController(command,service);
         // We link this controller with the FXML
         loader.setController(buyorapplycontroller);
         Parent root = loader.load();

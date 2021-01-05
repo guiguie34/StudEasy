@@ -3,6 +3,7 @@ package com.github.studeasy.gui.controller;
 import com.github.studeasy.dao.exceptions.BadCredentialsException;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.UserRouter;
+import com.github.studeasy.logic.facades.FacadeNotification;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,6 +35,11 @@ public class LoginController implements Initializable {
     private final FacadeUser FACADE;
 
     /**
+     * Facade for notifications used by the controller
+     */
+    private final FacadeNotification FACADE_NOTIF;
+
+    /**
      * The field to enter the email
      */
     @FXML
@@ -58,6 +64,7 @@ public class LoginController implements Initializable {
     public LoginController(){
         this.ROUTER = UserRouter.getInstance();
         this.FACADE = FacadeUser.getInstance();
+        this.FACADE_NOTIF = FacadeNotification.getInstance();
     }
 
     /**
@@ -75,6 +82,7 @@ public class LoginController implements Initializable {
             if(FACADE.isConfirmed(email)){
                 // We ask the facade to check
                 FACADE.login(email, password);
+                FACADE_NOTIF.launchTimer();
                 // If it's alright, we're redirected to the right page by the router
                 ((UserRouter)ROUTER).login(event);
             }else{

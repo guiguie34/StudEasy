@@ -1,9 +1,12 @@
 package com.github.studeasy.gui.controller.home;
 
+import com.github.studeasy.gui.controller.notifications.ButtonNotificationController;
 import com.github.studeasy.gui.routers.*;
 import com.github.studeasy.logic.common.Session;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,10 +27,18 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      */
     private final AbstractRouter CATEGORY_ROUTER;
 
+    /**
+     * The job router used by the controller
+     */
+    private final AbstractRouter JOB_ROUTER;
+
+
+
     public HomeAdminController(){
         super();
         this.SERVICE_ROUTER = ServiceRouter.getInstance();
         this.CATEGORY_ROUTER = CategoryRouter.getInstance();
+        this.JOB_ROUTER = JobRouter.getInstance();
     }
 
     /**
@@ -58,7 +69,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      * @throws IOException if an error occurs
      */
     public void manageJob(ActionEvent event) throws IOException {
-        (JobRouter.getInstance()).viewJobs(event);
+        ((JobRouter)JOB_ROUTER).viewJobs(event);
     }
 
     /**
@@ -91,6 +102,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
         }
     }
 
+
     /**
      * Triggered when the admin wants to see the services online
      * @param event the event triggered
@@ -111,5 +123,7 @@ public class HomeAdminController extends HomeAbstractController implements Initi
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }

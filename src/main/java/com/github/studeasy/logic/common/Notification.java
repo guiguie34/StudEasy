@@ -5,6 +5,12 @@ package com.github.studeasy.logic.common;
  */
 public class Notification {
 
+
+	/**
+	 * Id of notification
+	 */
+	private int id;
+
 	/**
 	 * Title of the notification
 	 */
@@ -25,11 +31,12 @@ public class Notification {
 	 */
 	private User user;
 
-	public Notification(String title, String description, boolean read, User user) {
+	public Notification(int id, String title, String description, boolean read, User user) {
 		this.title = title;
 		this.description = description;
 		this.read = read;
 		this.user = user;
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -62,5 +69,13 @@ public class Notification {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

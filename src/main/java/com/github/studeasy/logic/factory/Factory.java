@@ -2,6 +2,7 @@ package com.github.studeasy.logic.factory;
 
 import com.github.studeasy.dao.categoryDAO.CategoryDAO;
 import com.github.studeasy.dao.couponDAO.CouponDAO;
+import com.github.studeasy.dao.notificationDAO.NotificationDAO;
 import com.github.studeasy.dao.serviceDAO.ServiceDAO;
 import com.github.studeasy.dao.jobDAO.JobDAO;
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
@@ -78,4 +79,11 @@ public abstract class Factory {
      * @return the Coupon DAO
      */
     public abstract CouponDAO createCouponDAO();
+
+
+    /**
+     * Method that will create a NotificationDAO
+     * @return the NotificationDAO
+     */
+    public abstract NotificationDAO createNotificationDAO();
 }

@@ -258,7 +258,7 @@ public class MySQLUserDAO extends UserDAO{
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             int resultSet;
-            String request = "INSERT INTO user(firstName,lastName,role,password,emailAddress,company,salt) VALUES(?,?,?,?,?,?,?)";
+            String request = "INSERT INTO user(firstName,lastName,role,password,emailAddress,company,salt,confirm) VALUES(?,?,?,?,?,?,?,?)";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setString(1, firstname);
             preparedStatement.setString(2, lastname);
@@ -267,6 +267,7 @@ public class MySQLUserDAO extends UserDAO{
             preparedStatement.setString(5, email);
             preparedStatement.setString(6, company);
             preparedStatement.setString(7, salt);
+            preparedStatement.setInt(8,1);
             // We execute the query
             resultSet = preparedStatement.executeUpdate();
             //currentUser = searchUser(email);

@@ -55,7 +55,14 @@ public class Job {
 	 */
 	 private User owner;
 
-	public Job(int id, String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner) {
+	/**
+	 * Status of the job
+	 */
+	private String status;
+
+
+
+	public Job(int id, String title, String localisation, String role, String start, String duration, String description, String contactMail, String contactPhone, User owner, String status) {
 		this.idJob=id;
 		this.title = title;
 		this.localisation = localisation;
@@ -66,6 +73,7 @@ public class Job {
 		this.contactMail = contactMail;
 		this.contactPhone = contactPhone;
 		this.owner = owner;
+		this.status = status;
 	}
 
 	public int getIdJob() {return idJob;}
@@ -142,5 +150,13 @@ public class Job {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

@@ -81,7 +81,7 @@ public class JobRouter extends AbstractRouter {
             // We load the right FXML
             FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(ADD_UPDATE_JOB_FXML_PATH));
             // We create the controller with addUpdate telling if we add or update
-            AddUpdateJobOfferController addUpdateJobController = new AddUpdateJobOfferController(addUpdate, jobToUpdate);
+            AddUpdateJobOfferController addUpdateJobController = new AddUpdateJobOfferController(addUpdate, (Job)jobToUpdate);
             // We link this controller with the FXML
             loader.setController(addUpdateJobController);
             Parent root = loader.load();
@@ -91,17 +91,6 @@ public class JobRouter extends AbstractRouter {
 
     }
 
-    /**
-     * Function loading dashboard for each kind of user
-     *
-     * @param event the action triggering this method
-     * @throws IOException if an error occurs
-     */
-    public void backToDashboard(ActionEvent event) throws IOException {
-        studentRestricted(HOME_STUDENT_FXML_PATH, event);
-        adminRestricted(HOME_ADMIN_FXML_PATH, event);
-        partnerRestricted(HOME_PARTNER_FXML_PATH, event);
-    }
 
 
     /**
@@ -111,7 +100,7 @@ public class JobRouter extends AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void viewJobs(ActionEvent event) throws IOException {
-        if (SESSION.isAdmin()) {
+
             // We load the right FXML
             FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(SEE_ALL_JOB_FXML_PATH));
             // We create the controller
@@ -121,7 +110,7 @@ public class JobRouter extends AbstractRouter {
             Parent root = loader.load();
             // And we change the view
             this.changeView(event, root);
-        }
+
 
     }
 
@@ -131,7 +120,7 @@ public class JobRouter extends AbstractRouter {
      * @throws IOException if an error occurs
      */
     public void seeJob(ActionEvent event,Object job) throws IOException {
-        if (SESSION.isAdmin()) {
+
             // We load the right FXML
             FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(SEE_JOB_FXML_PATH));
             // We create the controller
@@ -141,7 +130,7 @@ public class JobRouter extends AbstractRouter {
             Parent root = loader.load();
             // And we change the view
             this.changeView(event, root);
-        }
+
     }
 
 

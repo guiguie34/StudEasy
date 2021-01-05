@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,11 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomeAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomeAdminController">
     <children>
         <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -55,6 +50,7 @@
                   <Button id="neutralButton" layoutX="160.0" layoutY="197.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
                   <Button id="negativeButton" layoutX="327.0" layoutY="372.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
                   <Button id="neutralButton" layoutX="166.0" layoutY="327.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
+                  <Button id="neutralButton" layoutX="169.0" layoutY="360.0" mnemonicParsing="false" onAction="#manageCoupons" text="Manage Coupons" />
                     </children>
                 </AnchorPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

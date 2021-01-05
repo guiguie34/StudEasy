@@ -110,29 +110,16 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         try {
             // We prepare the SQL request
             PreparedStatement preparedStatement;
-            PreparedStatement preparedStatement1;
             // Will contain the result of the query
             ResultSet resultSet;
-            ResultSet resultSet1 = null;
-            String request1 = "SELECT points from user where emailAddress=?";
             String request = "INSERT INTO command(fkUser, fkService, date, state)"+"VALUES (?,?,?,?)";
             preparedStatement = DB.prepareStatement(request);
-            preparedStatement1 = DB.prepareStatement(request1);
-            preparedStatement1.setString(1,((User)currentUser).getEmailAddress());
             preparedStatement.setInt(1,((User)currentUser).getIdUser() );
             preparedStatement.setInt(2, s.getIdService());
             preparedStatement.setDate(3, date);
             preparedStatement.setInt(4,0);
             // We execute the query
-            resultSet1= preparedStatement1.executeQuery();
-            ResultSetMetaData resultMeta = resultSet1.getMetaData();
-            int pointUser = Integer.parseInt(resultMeta.toString());
-            if(pointUser>s.getCost()){
-                resultSet = preparedStatement.executeQuery();
-            }
-            else{
-                Exception e = new Exception("No enough points");
-            }
+            resultSet = preparedStatement.executeQuery();
 
         }
         catch(SQLException e){

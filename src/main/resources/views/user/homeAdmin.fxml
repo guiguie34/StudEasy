@@ -12,13 +12,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomeAdminController">
     <children>
         <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1200.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
@@ -43,14 +44,29 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="neutralButton" layoutX="148.0" layoutY="123.0" mnemonicParsing="false" onAction="#manageCategory" text="Manage Categories" />
-                  <Button id="neutralButton" layoutX="163.0" layoutY="286.0" mnemonicParsing="false" onAction="#managePartner" text="Manage Partner" />
-                  <Button id="neutralButton" layoutX="129.0" layoutY="158.0" mnemonicParsing="false" onAction="#managePendingServices" text="Manage Pending Services" />
-                  <Button id="neutralButton" layoutX="168.0" layoutY="242.0" mnemonicParsing="false" onAction="#searchUsers" text="Search Users" />
-                  <Button id="neutralButton" layoutX="160.0" layoutY="197.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
-                  <Button id="negativeButton" layoutX="327.0" layoutY="372.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="166.0" layoutY="327.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
-                  <Button id="neutralButton" layoutX="169.0" layoutY="360.0" mnemonicParsing="false" onAction="#manageCoupons" text="Manage Coupons" />
+                  <Button id="neutralButton" layoutX="218.0" layoutY="274.0" mnemonicParsing="false" onAction="#manageCategory" text="Manage Categories" />
+                  <Button id="neutralButton" layoutX="560.0" layoutY="231.0" mnemonicParsing="false" onAction="#managePartner" text="Manage Partner" />
+                  <Button id="neutralButton" layoutX="202.0" layoutY="182.0" mnemonicParsing="false" onAction="#managePendingServices" text="Manage Pending Services" />
+                  <Button id="neutralButton" layoutX="565.0" layoutY="182.0" mnemonicParsing="false" onAction="#searchUsers" text="Search Users" />
+                  <Button id="neutralButton" layoutX="226.0" layoutY="228.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
+                  <Button id="negativeButton" layoutX="894.0" layoutY="369.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
+                  <Button id="neutralButton" layoutX="892.0" layoutY="229.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
+                  <Button id="neutralButton" layoutX="876.0" layoutY="178.0" mnemonicParsing="false" onAction="#manageCoupons" text="Manage Coupons" />
+                  <Text layoutX="174.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management of the Services">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="510.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management of the Users">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="856.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupons and Jobs">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

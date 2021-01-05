@@ -101,6 +101,16 @@ public class FacadeService {
     public void validateService(Service service){
         // We ask the DAO to validate the service
         this.DAO.validateService(service);
+        // We send a notification to the user
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Service online !";
+        String desc = "Congratulations,\nYour service : "+service.getTitle()+" has been validated by an administrator !\n"
+                + "You can now find it online with all the services.";
+        try {
+            facadeNotification.createNotification(service.getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

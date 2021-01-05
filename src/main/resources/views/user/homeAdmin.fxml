@@ -40,19 +40,19 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="37.0" prefHeight="53.0" prefWidth="427.0" text="Home Admin" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="37.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="39.0" prefHeight="53.0" prefWidth="427.0" text="Home Admin" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="neutralButton" layoutX="185.0" layoutY="265.0" mnemonicParsing="false" onAction="#manageCategory" text="Manage Categories" />
-                  <Button id="neutralButton" layoutX="527.0" layoutY="222.0" mnemonicParsing="false" onAction="#managePartner" text="Manage Partner" />
-                  <Button id="neutralButton" layoutX="169.0" layoutY="173.0" mnemonicParsing="false" onAction="#managePendingServices" text="Manage Pending Services" />
-                  <Button id="neutralButton" layoutX="532.0" layoutY="173.0" mnemonicParsing="false" onAction="#searchUsers" text="Search Users" />
-                  <Button id="neutralButton" layoutX="193.0" layoutY="219.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
+                  <Button id="neutralButton" layoutX="134.0" layoutY="267.0" mnemonicParsing="false" onAction="#manageCategory" prefHeight="30.0" prefWidth="266.0" text="Manage Categories" />
+                  <Button id="neutralButton" layoutX="453.0" layoutY="216.0" mnemonicParsing="false" onAction="#managePartner" prefHeight="30.0" prefWidth="266.0" text="Manage Partner" />
+                  <Button id="neutralButton" layoutX="134.0" layoutY="169.0" mnemonicParsing="false" onAction="#managePendingServices" prefHeight="30.0" prefWidth="266.0" text="Manage Pending Services" />
+                  <Button id="neutralButton" layoutX="453.0" layoutY="169.0" mnemonicParsing="false" onAction="#searchUsers" prefHeight="30.0" prefWidth="266.0" text="Search Users" />
+                  <Button id="neutralButton" layoutX="134.0" layoutY="216.0" mnemonicParsing="false" onAction="#seeAllServices" prefHeight="30.0" prefWidth="266.0" text="See All Services" />
                   <Button id="negativeButton" layoutX="894.0" layoutY="369.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="851.0" layoutY="220.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
-                  <Button id="neutralButton" layoutX="835.0" layoutY="169.0" mnemonicParsing="false" onAction="#manageCoupons" text="Manage Coupons" />
+                  <Button id="neutralButton" layoutX="776.0" layoutY="216.0" mnemonicParsing="false" onAction="#manageJob" prefHeight="30.0" prefWidth="266.0" text="Manage Job" />
+                  <Button id="neutralButton" layoutX="776.0" layoutY="169.0" mnemonicParsing="false" onAction="#manageCoupons" prefHeight="30.0" prefWidth="266.0" text="Manage Coupons" />
                   <Text layoutX="140.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management of the Services">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -63,13 +63,13 @@
                         <Font name="System Italic" size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="815.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupons and Jobs">
+                  <Text layoutX="828.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupons and Jobs">
                      <font>
                         <Font name="System Italic" size="18.0" />
                      </font>
                   </Text>
                   <Separator layoutX="424.0" layoutY="127.0" orientation="VERTICAL" prefHeight="200.0" />
-                  <Separator layoutX="756.0" layoutY="127.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Separator layoutX="751.0" layoutY="127.0" orientation="VERTICAL" prefHeight="200.0" />
                     </children>
                 </AnchorPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

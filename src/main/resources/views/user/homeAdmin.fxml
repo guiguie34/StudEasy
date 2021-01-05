@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -48,9 +49,15 @@
                   <Button id="neutralButton" layoutX="168.0" layoutY="242.0" mnemonicParsing="false" onAction="#searchUsers" text="Search Users" />
                   <Button id="neutralButton" layoutX="160.0" layoutY="197.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
                   <Button id="negativeButton" layoutX="327.0" layoutY="372.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="160.0" layoutY="325.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
+                  <Button id="neutralButton" layoutX="166.0" layoutY="327.0" mnemonicParsing="false" onAction="#manageJob" text="Manage Job" />
+                  <Button id="neutralButton" layoutX="169.0" layoutY="360.0" mnemonicParsing="false" onAction="#manageCoupons" text="Manage Coupons" />
                     </children>
                 </AnchorPane>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                       <fx:include fx:id="cloche" source="../notifications/notificationComponent.fxml" />
+               </children>
+            </HBox>
             </children>
         </GridPane>
     </children>

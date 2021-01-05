@@ -33,7 +33,7 @@ public abstract class JobDAO {
     }
 
     /**
-     * Add Job to the DB
+     * Add/update Job to the DB
      * @throws Exception
      */
     public abstract void addJob(String title, String location, String role, String duration, String mail, String phone, LocalDate localDate, String description, Object currentUser) throws Exception;
@@ -43,4 +43,51 @@ public abstract class JobDAO {
      * @return
      */
     public abstract ArrayList<Job> getPendingJob() throws Exception;
+
+
+    /**
+     * Submit admin choice for selected job
+     * @param job
+     * @param choice
+     * @throws Exception
+     */
+    public abstract void choiceForJob(Object job,int choice) throws Exception;
+
+
+    /**
+     * Get all jobs from the DB
+     * @return Arraylist of all jobs
+     * @throws Exception if an error occurs
+     */
+    public abstract ArrayList<Job> getAllJobs() throws Exception;
+
+    /**
+     * Get all jobs from one user
+     * @param user the user
+     * @return arraylist of user's job
+     * @throws Exception if an error occurs
+     */
+    public abstract ArrayList<Job> getMyJobs(Object user) throws Exception;
+
+    /**
+     * Delete job from DB
+     * @param job Job to delete
+     * @throws Exception if an error occurs
+     */
+    public abstract void deleteJob(Object job) throws Exception;
+
+    /**
+     * Update job
+     * @param title
+     * @param location
+     * @param role
+     * @param duration
+     * @param mail
+     * @param phone
+     * @param localDate
+     * @param description
+     * @param idJob
+     * @throws Exception
+     */
+    public abstract void updateJob(String title, String location, String role, String duration, String mail, String phone, LocalDate localDate, String description, int idJob) throws Exception;
 }

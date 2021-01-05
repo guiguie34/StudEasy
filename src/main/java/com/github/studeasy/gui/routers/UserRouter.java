@@ -82,7 +82,6 @@ public class UserRouter extends AbstractRouter {
      *  Load the page of a specific user
      * @param pathFXML the path to the fxml file
      * @param event the action triggering the change of view
-     * @param user the user to confirm
      * @throws IOException
      */
     public void confirmUser(String pathFXML, Event event, String email) throws IOException {

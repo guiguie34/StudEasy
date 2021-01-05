@@ -53,6 +53,11 @@
                   <Button id="neutralButton" layoutX="181.0" layoutY="208.0" mnemonicParsing="false" onAction="#handleJob" text="See My Jobs" />
                     </children>
                 </AnchorPane>
+                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                    <children>
+                        <fx:include fx:id="cloche" source="../notifications/notificationComponent.fxml" />
+                    </children>
+                </HBox>
             </children>
         </GridPane>
     </children>

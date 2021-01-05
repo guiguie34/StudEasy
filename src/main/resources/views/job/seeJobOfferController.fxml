@@ -117,6 +117,7 @@
                             <children>
                                 <Button id="positiveButton" fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="39.0" mnemonicParsing="false" onAction="#option2" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
                         <Button id="negativeButton" fx:id="button1" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#option1" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../css/buttons.css" text="Text" visible="false" />
+                        <Label fx:id="labelText" alignment="CENTER" layoutX="-1.0" layoutY="4.0" prefHeight="27.0" prefWidth="780.0" />
                             </children>
                         </AnchorPane>
                     </children>

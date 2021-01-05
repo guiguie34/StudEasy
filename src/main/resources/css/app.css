@@ -1,7 +1,9 @@
 .root{
-    -fx-background-color:  white;
+    /*-fx-background-color:  white;*/
+    -fx-background-image:url('../images/v5Back.jpg');
 }
 
 .root *{
     -fx-font-family: "Arial";
 }
+

@@ -19,7 +19,7 @@
         <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1200.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
@@ -44,12 +44,12 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="negativeButton" layoutX="338.0" layoutY="356.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="174.0" layoutY="198.0" mnemonicParsing="false" onAction="#addJob" text="Add a Job" />
-                  <Button id="neutralButton" layoutX="167.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleJob" text="See My Jobs" />
-                  <Text layoutX="137.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jobs Management">
+                  <Button id="negativeButton" layoutX="1049.0" layoutY="363.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="30.0" prefWidth="89.0" text="Logout" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="169.0" mnemonicParsing="false" onAction="#addJob" prefHeight="30.0" prefWidth="266.0" text="Add a Job" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleJob" prefHeight="30.0" prefWidth="266.0" text="See My Jobs" />
+                  <Text layoutX="505.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jobs Management">
                      <font>
-                        <Font name="System Italic" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Text>
                     </children>

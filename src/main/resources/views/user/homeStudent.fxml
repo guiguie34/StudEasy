@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,26 +45,26 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="neutralButton" layoutX="236.0" layoutY="170.0" mnemonicParsing="false" onAction="#proposeService" text="Propose a Service" />
-                  <Button id="neutralButton" layoutX="237.0" layoutY="208.0" mnemonicParsing="false" onAction="#requestService" text="Request a Service" />
-                  <Button id="neutralButton" layoutX="844.0" layoutY="165.0" mnemonicParsing="false" onAction="#myServices" text="My Services" />
-                  <Button id="neutralButton" layoutX="832.0" layoutY="205.0" mnemonicParsing="false" onAction="#seeAllServices" text="See All Services" />
-                  <Button id="neutralButton" layoutX="806.0" layoutY="243.0" mnemonicParsing="false" onAction="#seeHistoric" text="Historic Services Bought" />
-                  <Button id="neutralButton" layoutX="528.0" layoutY="170.0" mnemonicParsing="false" onAction="#loadMyProfile" text="View My Profile" />
-                  <Button id="negativeButton" layoutX="894.0" layoutY="369.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="536.0" layoutY="327.0" mnemonicParsing="false" onAction="#seeJobs" text="See All Jobs" />
-                  <Button id="neutralButton" layoutX="533.0" layoutY="290.0" mnemonicParsing="false" onAction="#buyCoupons" text="Buy Coupons" />
-                  <Text layoutX="182.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Propose or request a Service">
+                  <Button id="neutralButton" layoutX="135.0" layoutY="169.0" mnemonicParsing="false" onAction="#proposeService" prefHeight="30.0" prefWidth="266.0" text="Propose a Service" />
+                  <Button id="neutralButton" layoutX="135.0" layoutY="216.0" mnemonicParsing="false" onAction="#requestService" prefHeight="30.0" prefWidth="266.0" text="Request a Service" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="169.0" mnemonicParsing="false" onAction="#myServices" prefHeight="30.0" prefWidth="266.0" text="My Services" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="216.0" mnemonicParsing="false" onAction="#seeAllServices" prefHeight="30.0" prefWidth="266.0" text="See All Services" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="265.0" mnemonicParsing="false" onAction="#seeHistoric" prefHeight="30.0" prefWidth="266.0" text="Historic Services Bought" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="169.0" mnemonicParsing="false" onAction="#loadMyProfile" prefHeight="30.0" prefWidth="266.0" text="View My Profile" />
+                  <Button id="negativeButton" layoutX="1049.0" layoutY="363.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="30.0" prefWidth="89.0" text="Logout" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="363.0" mnemonicParsing="false" onAction="#seeJobs" prefHeight="30.0" prefWidth="266.0" text="See All Jobs" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="314.0" mnemonicParsing="false" onAction="#buyCoupons" prefHeight="30.0" prefWidth="266.0" text="Buy Coupons" />
+                  <Text layoutX="151.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Propose or request a Service">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="465.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="See and change your profile">
                      <font>
                         <Font name="System Italic" size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="476.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="See and change your profile">
-                     <font>
-                        <Font name="System Italic" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="505.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupons and Jobs">
+                  <Text layoutX="502.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupons and Jobs">
                      <font>
                         <Font name="System Italic" size="18.0" />
                      </font>
@@ -73,6 +74,8 @@
                         <Font name="System Italic" size="18.0" />
                      </font>
                   </Text>
+                  <Separator layoutX="424.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
+                  <Separator layoutX="736.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
                     </children>
                 </AnchorPane>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

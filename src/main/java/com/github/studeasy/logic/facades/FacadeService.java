@@ -82,6 +82,15 @@ public class FacadeService {
     public void deleteService(Service service) {
         // We ask the DAO to delete it
         this.DAO.deleteService(service);
+        // We send a notification to the user
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Service deleted!";
+        String desc = "Your service: "+service.getTitle()+" has been deleted.";
+        try {
+            facadeNotification.createNotification(service.getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -103,8 +112,8 @@ public class FacadeService {
         this.DAO.validateService(service);
         // We send a notification to the user
         FacadeNotification facadeNotification = FacadeNotification.getInstance();
-        String title = "Service online !";
-        String desc = "Congratulations,\nYour service : "+service.getTitle()+" has been validated by an administrator !\n"
+        String title = "Service online!";
+        String desc = "Congratulations,\nYour service: "+service.getTitle()+" has been validated by an administrator!\n"
                 + "You can now find it online with all the services.";
         try {
             facadeNotification.createNotification(service.getOwner().getIdUser(),title,desc);
@@ -130,6 +139,15 @@ public class FacadeService {
             User currentUser = sessionUser.getCurrentUser();
             // We ask the DAO to create the service
             DAO.submitService(titleS,descriptionS,category,cost,typeS,currentUser);
+            // We send a notification to the user
+            FacadeNotification facadeNotification = FacadeNotification.getInstance();
+            String title = "Service pending!";
+            String desc = "Your service: "+titleS+" is now waiting for an administrator validation.\n";
+            try {
+                facadeNotification.createNotification(currentUser.getIdUser(),title,desc);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         else{
             // We tell the user what's wrong

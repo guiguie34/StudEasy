@@ -1,24 +1,32 @@
 package com.github.studeasy.gui.controller.service;
 
+import com.github.studeasy.gui.controller.categoryTag.CategoryManagementController;
 import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.CommandOfServiceRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
 import com.github.studeasy.gui.routers.ServiceRouter;
 import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RoleStudent;
-import com.github.studeasy.logic.facades.FacadeFeedback;
+import com.github.studeasy.logic.facades.FacadeCommandOfService;
 import com.github.studeasy.logic.facades.FacadeService;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -40,6 +48,16 @@ public class ViewServiceController implements Initializable {
      * The feedback router used by the controller
      */
     private final AbstractRouter FEEDBACK_ROUTER;
+
+    /**
+     * The router used by the controller
+     */
+    private final AbstractRouter COMMAND_ROUTER;
+
+    /**
+     * The facade CommandOfService used by the controller
+     */
+    private final FacadeCommandOfService FACADE_COMMANDOFSERVICE;
 
     /**
      * The title of the service
@@ -119,6 +137,12 @@ public class ViewServiceController implements Initializable {
     @FXML
     private Button viewFeedbacksB;
 
+    /***
+     * The button to see all the demande
+     */
+    @FXML
+    private Button listCommandButtom;
+
     /**
      * The service to display
      */
@@ -132,12 +156,73 @@ public class ViewServiceController implements Initializable {
     private int pendingAllServices;
 
     /**
+     * The command to add
+     */
+    private CommandOfService command;
+
+    /**
+     * To display the error to the user
+     */
+    @FXML
+    private Label errL;
+
+    /***
+     * List of all the command for a user
+     */
+    protected ObservableList<CommandOfService> allcommandtoServiceList;
+
+    /***
+     * Table view of the commands
+     */
+    @FXML
+    protected TableView commandtoServiceList;
+
+    /***
+     * Table column of the title
+     */
+    @FXML
+    protected TableColumn<CommandOfService,String> titleColumn;
+
+    /***
+     * Table column of the demander
+     */
+    @FXML
+    protected TableColumn<CommandOfService,String> demanderColumn;
+
+
+    /***
+     * Table column of the date of command
+     */
+    @FXML
+    protected TableColumn<CommandOfService,String> datecommandColumn;
+
+    /**
+     * Table column of the status
+     */
+    @FXML
+    private TableColumn<CommandOfService,String> statusDemandeColumn;
+
+    /**
+     * The column containing the buttons to accept a command
+     */
+    @FXML
+    private TableColumn acceptColumn;
+
+    /**
+     * The column containing the buttons to decline a command
+     */
+    @FXML
+    private TableColumn declineColumn;
+
+    /**
      * Create the controller with the router, the facade
      */
     public ViewServiceController(Service service, int pendingAllServices){
+        this.FACADE_COMMANDOFSERVICE = FacadeCommandOfService.getInstance();
         this.ROUTER = ServiceRouter.getInstance();
         this.FACADE_SERVICE = FacadeService.getInstance();
         this.FEEDBACK_ROUTER = FeedbackRouter.getInstance();
+        this.COMMAND_ROUTER = CommandOfServiceRouter.getInstance();
         this.service = service;
         this.pendingAllServices = pendingAllServices;
     }
@@ -198,6 +283,20 @@ public class ViewServiceController implements Initializable {
         }
     }
 
+    /***
+     *
+     */
+    public void validService(ActionEvent event){
+        try {
+            ((CommandOfServiceRouter) COMMAND_ROUTER).viewAllDemande(CommandOfServiceRouter.VIEW_ALL_DEMANDE_SERVICE_FXML_PATH,event,0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     /**
      * Triggered when the user wants to go back
      * @param event the event triggered
@@ -222,6 +321,35 @@ public class ViewServiceController implements Initializable {
         }
     }
 
+
+    /***
+     *
+     * @param event
+     */
+    public void buyOrApplyController(ActionEvent event) {
+        // We get the current user
+        Session session = Session.getInstance();
+        User user = session.getCurrentUser();
+        int pointsUser = ((RoleStudent)user.getRole()).getPoints();
+        try{
+
+            if((service.getTypeService()==0 && pointsUser>=service.getCost())||service.getTypeService()==1){
+                //((CommandOfServiceRouter)COMMAND_ROUTER).buyOrApplyService(CommandOfServiceRouter.BUY_SERVICE_FXML_PATH,event,command,service);
+                FACADE_COMMANDOFSERVICE.buyorapplyService(service,user);
+            }
+            else{
+                errL.setTextFill(Paint.valueOf("red"));
+                errL.setText("You don't have enough points to buy this service");
+            }
+        }
+        catch (Exception e){
+            errL.setTextFill(Paint.valueOf("red"));
+            errL.setText("Service not available");
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before
@@ -231,6 +359,7 @@ public class ViewServiceController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         // We fulfill all the fields
         this.titleService.setText(this.service.getTitle());
         // We give a better format to the date

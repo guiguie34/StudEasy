@@ -53,16 +53,8 @@ public abstract class CommandOfServiceDAO {
      * @param currentUser
      * @throws Exception
      */
-    public abstract void applyForService(Service s,Object currentUser) throws Exception;
+    public abstract void applyorbuyForService(Service s,Object currentUser) throws Exception;
 
-    /***
-     * Static method which allows user to buy a service
-     * Record will be saved if it's approved
-     * @param s
-     * @param currentUser
-     * @throws Exception
-     */
-    public abstract void buyService(Service s,Object currentUser) throws Exception;
 
     /***
      * Static method which allows user to add a feedback to a service
@@ -80,5 +72,12 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract ArrayList<CommandOfService> getServiceBought(User currentUser) throws Exception;
 
+    /***
+     * Static method which allows to return the list of the command pending for a user
+     * @param currentUser
+     * @return
+     * @throws Exception
+     */
+    public abstract ArrayList<CommandOfService> getMyServicePending(User currentUser) throws Exception;
 
 }

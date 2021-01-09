@@ -59,6 +59,14 @@ public class FacadeCommandOfService {
         return DAO.getServiceBought(currentUser);
     }
 
+    public ArrayList<CommandOfService> getMyCommandPending() throws Exception {
+        // We retrieve the current user
+        Session sessionUser = Session.getInstance();
+        User currentUser = sessionUser.getCurrentUser();
+        // We ask the DAO to retrieve the services of the user
+        return DAO.getMyServicePending(currentUser);
+    }
+
     /***
      * Methode that allows to accept a command by asking DAO
      * @param c
@@ -82,19 +90,10 @@ public class FacadeCommandOfService {
      * @param s
      * @throws Exception
      */
-    public void buyService(Service s, User u) throws Exception{
-        DAO.buyService(s,u);
+    public void buyorapplyService(Service s, User u) throws Exception{
+        DAO.applyorbuyForService(s,u);
     }
 
-    /***
-     * Methode allows to apply for a service and set the status to waiting 0
-     * @param s
-     * @param u
-     * @throws Exception
-     */
-    public void applyForService(Service s,User u) throws Exception{
-        DAO.applyForService(s,u);
-    }
 
     /***
      * Methode allows to add a feedback to a service

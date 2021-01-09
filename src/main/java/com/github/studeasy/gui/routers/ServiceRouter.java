@@ -93,7 +93,7 @@ public class ServiceRouter extends AbstractRouter{
         // We load the right FXML
         FXMLLoader loader = new FXMLLoader(AbstractRouter.class.getClassLoader().getResource(pathFXML));
         // We create the controller with the service
-        ViewServiceController viewServiceController = new ViewServiceController(service, pendingAllServices);
+        ViewServiceController viewServiceController = new ViewServiceController( service, pendingAllServices);
         // We link this controller with the FXML
         loader.setController(viewServiceController);
         Parent root = loader.load();

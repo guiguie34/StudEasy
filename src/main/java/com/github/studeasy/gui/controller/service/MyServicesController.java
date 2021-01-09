@@ -1,7 +1,15 @@
 package com.github.studeasy.gui.controller.service;
 
+import com.github.studeasy.gui.routers.AbstractRouter;
+import com.github.studeasy.gui.routers.CommandOfServiceRouter;
+import com.github.studeasy.gui.routers.ServiceRouter;
+import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
+import com.github.studeasy.logic.common.Session;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,13 +63,6 @@ public class MyServicesController extends AbstractViewServicesController impleme
         statusColumn.setCellFactory(cellFactory);
     }
 
-    /**
-     * Function from the interface Initializable
-     * Make changes to the controller and its view before
-     * the view appears on the client side
-     * @param location
-     * @param resources
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Validated image

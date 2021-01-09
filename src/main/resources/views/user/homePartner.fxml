@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,16 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomePartnerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.home.HomePartnerController">
     <children>
         <GridPane layoutX="452.0" layoutY="272.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1200.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
@@ -48,9 +44,14 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                  <Button id="negativeButton" layoutX="338.0" layoutY="356.0" mnemonicParsing="false" onAction="#disconnect" text="Logout" />
-                  <Button id="neutralButton" layoutX="188.0" layoutY="164.0" mnemonicParsing="false" onAction="#addJob" text="Add a Job" />
-                  <Button id="neutralButton" layoutX="181.0" layoutY="208.0" mnemonicParsing="false" onAction="#handleJob" text="See My Jobs" />
+                  <Button id="negativeButton" layoutX="1049.0" layoutY="363.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="30.0" prefWidth="89.0" text="Logout" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="169.0" mnemonicParsing="false" onAction="#addJob" prefHeight="30.0" prefWidth="266.0" text="Add a Job" />
+                  <Button id="neutralButton" layoutX="447.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleJob" prefHeight="30.0" prefWidth="266.0" text="See My Jobs" />
+                  <Text layoutX="505.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jobs Management">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

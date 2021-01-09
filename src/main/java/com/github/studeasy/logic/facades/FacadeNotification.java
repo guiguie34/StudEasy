@@ -85,7 +85,10 @@ public class FacadeNotification {
     }
 
     public void stopTimer(){
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
+
     }
     public void launchTimer(){
         timer = new Timer();

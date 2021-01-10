@@ -210,7 +210,7 @@ public class AcceptOrDeclineController implements Initializable {
 
     /**
      * Triggered when user decline a command
-     * @param event
+     * @param event the event triggered
      * @throws Exception
      */
     public void declineCommande(ActionEvent event,CommandOfService command) throws Exception {

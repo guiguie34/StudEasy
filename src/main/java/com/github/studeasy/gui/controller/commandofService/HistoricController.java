@@ -42,7 +42,7 @@ public class HistoricController implements Initializable {
     protected ObservableList<CommandOfService> allcommandList;
 
     /***
-     * Table view of the commands
+     * Table view of the list of commands
      */
     @FXML
     protected TableView commandList;
@@ -60,7 +60,7 @@ public class HistoricController implements Initializable {
     protected TableColumn<CommandOfService,String> ownerColumn;
 
     /***
-     * Table column of the owner
+     * Table column of the cost
      */
     @FXML
     protected TableColumn<CommandOfService,Integer> costColumn;

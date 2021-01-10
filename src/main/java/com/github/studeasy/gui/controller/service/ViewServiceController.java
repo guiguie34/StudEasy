@@ -315,8 +315,8 @@ public class ViewServiceController implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     *  Triggered when user clic to the buttom buy or apply in a service
+     * @param event the event triggered
      */
     public void buyOrApplyController(ActionEvent event) {
         // We get the current user

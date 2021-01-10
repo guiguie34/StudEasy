@@ -25,6 +25,11 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         this.DB = connection.getDb();
     }
 
+    /***
+     * Function that allows to accept a transaction and update the state of the command
+     * @param c The command of the service
+     * @throws Exception
+     */
     @Override
     public void acceptTransaction(CommandOfService c) throws Exception {
         try {
@@ -43,6 +48,11 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         }
     }
 
+    /***
+     * Function that allows the user decline a transaction and delete the command from the database
+     * @param c the command to delete
+     * @throws Exception
+     */
     @Override
     public void declineTransaction(CommandOfService c) throws Exception {
         try {
@@ -61,6 +71,12 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         }
     }
 
+    /***
+     * Function that allows a user to apply or buy a service and insert to the database
+     * @param s the service that the user want to apply or buy
+     * @param currentUser get the current user of this demand
+     * @throws Exception
+     */
     @Override
     public void applyorbuyForService(Service s,Object currentUser) throws Exception {
             // We prepare the SQL request
@@ -75,7 +91,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
 
     /**
      * Get the pending commands of one service
-     * @param service
+     * @param service the service concern
      * @return all the pending commands of the service
      */
     public ArrayList<CommandOfService> getPendingCommandsOfOneService(Service service){
@@ -165,7 +181,11 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         return retrievedCommand;
     }
 
-
+    /***
+     * Function that allows a user to add a feedback to a command that he purchase or apply
+     * @param c the command concerned
+     * @throws Exception
+     */
     @Override
     public void addFeedback(CommandOfService c) throws Exception {
         try {
@@ -191,7 +211,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
 
     /**
      * Get list of service bought
-     * @param currentUser
+     * @param currentUser the user of the command
      * @return ArrayList of CommandOfService
      */
     public ArrayList<CommandOfService> getServiceBought(User currentUser){
@@ -241,7 +261,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
 
     /***
      * Get list of pending service
-     * @param currentUser
+     * @param currentUser the owner of the service
      * @return
      */
     public ArrayList<CommandOfService> getMyServicePending(User currentUser){

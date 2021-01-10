@@ -54,7 +54,7 @@ public class FacadeCommandOfService {
 
     /**
      * Retrieve the command of the current user
-     * @return the command of the user
+     * @return ArrayList of CommandOfService the list of command from the user
      */
     public ArrayList<CommandOfService> getMyCommand() throws Exception {
         // We retrieve the current user
@@ -64,6 +64,11 @@ public class FacadeCommandOfService {
         return DAO.getServiceBought(currentUser);
     }
 
+    /***
+     * Function that allows to get all the command pending of a service
+     * @return ArrayList of command in status pending
+     * @throws Exception
+     */
     public ArrayList<CommandOfService> getMyCommandPending() throws Exception {
         // We retrieve the current user
         Session sessionUser = Session.getInstance();
@@ -74,7 +79,7 @@ public class FacadeCommandOfService {
 
     /**
      * Methode that allows to accept a command by asking DAO
-     * @param c
+     * @param c the command to accept
      * @throws Exception
      */
     public void acceptTransaction(CommandOfService c) throws Exception {
@@ -106,7 +111,7 @@ public class FacadeCommandOfService {
 
     /**
      * Method that allows to delete a command by asking DAO
-     * @param c
+     * @param c the command to decline
      * @throws Exception
      */
     public void declineTransaction(CommandOfService c) throws Exception {
@@ -129,7 +134,8 @@ public class FacadeCommandOfService {
 
     /***
      * Methode allows to buy a service and save the record
-     * @param s
+     * @param s the service user want to buy or apply
+     * @param u the user that buy or apply the service
      * @throws Exception
      */
     public void buyorapplyService(Service s, User u) throws Exception{

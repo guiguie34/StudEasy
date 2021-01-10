@@ -2,6 +2,8 @@ package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
 import com.github.studeasy.logic.common.Feedback;
+import com.github.studeasy.logic.common.Notification;
+import com.github.studeasy.logic.common.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -70,10 +72,21 @@ public class FacadeFeedback {
      * @param title the title of the feedback
      * @param comment the comment of the feedback
      * @param rate the rate of the feedback
-     * @param idService the id of the service concerned
+     * @param service the service concerned
      * @throws Exception if an error occur
      */
-    public void leaveFeedback(String title, String comment, int rate, int idService) throws Exception {
-        DAO.leaveFeedback(title,  comment, rate, idService);
+    public void leaveFeedback(String title, String comment, int rate, Service service) throws Exception {
+        DAO.leaveFeedback(title,  comment, rate, service.getIdService());
+        // We send a notification to the user
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+
+        String titleN = "New feedback on your service "+service.getTitle();
+        String desc = "Someone just left a feedback on your service: "+service.getTitle();
+        try {
+            facadeNotification.createNotification(service.getOwner().getIdUser(),titleN,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

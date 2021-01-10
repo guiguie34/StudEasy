@@ -51,6 +51,8 @@ public abstract class FeedbackDAO {
      */
     public abstract boolean hasCommand(int idService);
 
+
+
     /**
      * add the feedback in database
      * @param title the title of the feedback

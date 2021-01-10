@@ -85,7 +85,7 @@ public class LeaveFeedbacksController implements Initializable {
         if(!title.isEmpty() && !comment.isEmpty()){
             try {
                 if(AbstractRouter.confirmationBox("You will leave this feedback","Confirm your action","Stud'Easy confirmation")) {
-                    FACADE.leaveFeedback(title, comment, rate, service.getIdService());
+                    FACADE.leaveFeedback(title, comment, rate, service);
                     ((FeedbackRouter) ROUTER).viewFeedbacks(FeedbackRouter.FEEDBACKS_SERVICE_FXML_PATH, event, service,origin);
                 }
 

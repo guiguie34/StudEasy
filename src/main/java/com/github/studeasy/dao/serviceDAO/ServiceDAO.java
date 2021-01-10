@@ -85,4 +85,6 @@ public abstract class ServiceDAO {
      */
     public abstract void submitService(String titleS, String descriptionS, CategoryTag category,
                                        int cost, int typeS, User user);
+
+
 }

@@ -158,10 +158,11 @@ public class MySQLServiceDAO extends ServiceDAO {
     public void deleteService(Service service){
         // We prepare the SQL request to delete a service
         PreparedStatement preparedStatement;
-        String request = "DELETE FROM service WHERE idService = ?";
+        String request = "UPDATE service SET stateService = ? WHERE idService = ?";
         try {
             preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setInt(1, service.getIdService());
+            preparedStatement.setInt(1, -1);
+            preparedStatement.setInt(2, service.getIdService());
             // We execute the query
             preparedStatement.executeUpdate();
         }

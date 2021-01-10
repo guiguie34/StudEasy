@@ -8,6 +8,11 @@ import java.util.*;
 public class CommandOfService {
 
 	/**
+	 * The id of the command
+	 */
+	private int idCommand;
+
+	/**
 	 * Feedback related to the command
 	 */
 	private Feedback feedback;
@@ -32,12 +37,21 @@ public class CommandOfService {
 	 */
 	private Date creationDate;
 
-	public CommandOfService(Feedback feedback, User owner, Service service, int status, Date creationDate) {
+	public CommandOfService(int idCommand, Feedback feedback, User owner, Service service, int status, Date creationDate) {
+		this.idCommand = idCommand;
 		this.feedback = feedback;
 		this.owner = owner;
 		this.service = service;
 		this.status = status;
 		this.creationDate = creationDate;
+	}
+
+	public int getIdCommand() {
+		return idCommand;
+	}
+
+	public void setIdCommand(int idCommand) {
+		this.idCommand = idCommand;
 	}
 
 	public Feedback getFeedback() {

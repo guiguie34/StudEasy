@@ -1,6 +1,5 @@
 package com.github.studeasy.gui.controller.service;
 
-import com.github.studeasy.gui.controller.categoryTag.CategoryManagementController;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.gui.routers.CommandOfServiceRouter;
 import com.github.studeasy.gui.routers.FeedbackRouter;
@@ -9,11 +8,9 @@ import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCommandOfService;
 import com.github.studeasy.logic.facades.FacadeService;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
+import com.github.studeasy.logic.facades.exceptions.ErrorCommand;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,12 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -136,12 +131,6 @@ public class ViewServiceController implements Initializable {
      */
     @FXML
     private Button viewFeedbacksB;
-
-    /***
-     * The button to see all the demande
-     */
-    @FXML
-    private Button listCommandButtom;
 
     /**
      * The service to display
@@ -283,20 +272,6 @@ public class ViewServiceController implements Initializable {
         }
     }
 
-    /***
-     *
-     */
-    public void validService(ActionEvent event){
-        try {
-            ((CommandOfServiceRouter) COMMAND_ROUTER).viewAllDemande(CommandOfServiceRouter.VIEW_ALL_DEMANDE_SERVICE_FXML_PATH,event,0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
     /**
      * Triggered when the user wants to go back
      * @param event the event triggered
@@ -321,8 +296,7 @@ public class ViewServiceController implements Initializable {
         }
     }
 
-
-    /***
+    /**
      *
      * @param event
      */
@@ -331,23 +305,37 @@ public class ViewServiceController implements Initializable {
         Session session = Session.getInstance();
         User user = session.getCurrentUser();
         int pointsUser = ((RoleStudent)user.getRole()).getPoints();
+        String infoMessage = "Are you sure you want to";
+        switch(service.getTypeService()){
+            case 0:
+                infoMessage+=" buy this service ?";
+                break;
+            default:
+                infoMessage+=" apply for this service ?";
+        }
         try{
-
-            if((service.getTypeService()==0 && pointsUser>=service.getCost())||service.getTypeService()==1){
-                //((CommandOfServiceRouter)COMMAND_ROUTER).buyOrApplyService(CommandOfServiceRouter.BUY_SERVICE_FXML_PATH,event,command,service);
-                FACADE_COMMANDOFSERVICE.buyorapplyService(service,user);
+            if((service.getTypeService() == 0 && pointsUser>=service.getCost()) || service.getTypeService()==1){
+                if(AbstractRouter.confirmationBox(infoMessage,
+                        "Confirmation of the purchase: "+this.service.getTitle(),
+                        "Stud'Easy - Confirmation")) {
+                    FACADE_COMMANDOFSERVICE.buyorapplyService(service,user);
+                    errL.setTextFill(Paint.valueOf("green"));
+                    errL.setText("Your command is now pending !");
+                }
             }
             else{
                 errL.setTextFill(Paint.valueOf("red"));
                 errL.setText("You don't have enough points to buy this service");
             }
         }
+        catch (ErrorCommand errorCommand){
+            errL.setTextFill(Paint.valueOf("red"));
+            errL.setText(errorCommand.getMessage());
+        }
         catch (Exception e){
             errL.setTextFill(Paint.valueOf("red"));
             errL.setText("Service not available");
-            e.printStackTrace();
         }
-
     }
 
     /**

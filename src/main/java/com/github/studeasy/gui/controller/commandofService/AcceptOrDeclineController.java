@@ -1,9 +1,8 @@
 package com.github.studeasy.gui.controller.commandofService;
 
-import com.github.studeasy.gui.controller.service.ViewServiceController;
 import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.CommandOfServiceRouter;
 import com.github.studeasy.gui.routers.ServiceRouter;
+import com.github.studeasy.gui.routers.UserRouter;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
@@ -13,7 +12,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -31,30 +28,34 @@ import java.util.ResourceBundle;
 
 public class AcceptOrDeclineController implements Initializable {
 
+    /**
+     * The router used by the controller
+     */
     private final AbstractRouter ROUTER ;
+
     /**
      * The facade CommandOfService used by the controller
      */
     private final FacadeCommandOfService FACADE_COMMANDOFSERVICE;
 
-    /***
+    /**
      * List of all the command for a user
      */
     protected ObservableList<CommandOfService> allcommandtoServiceList;
 
-    /***
+    /**
      * Table view of the commands
      */
     @FXML
     protected TableView commandtoServiceList;
 
-    /***
+    /**
      * Table column of the title
      */
     @FXML
     protected TableColumn<CommandOfService,String> titleColumnCommand;
 
-    /***
+    /**
      * Table column of the demander
      */
     @FXML
@@ -65,7 +66,8 @@ public class AcceptOrDeclineController implements Initializable {
      */
     @FXML
     private Label acceptdeclineLabel;
-    /***
+
+    /**
      * Table column of the date of command
      */
     @FXML
@@ -75,7 +77,7 @@ public class AcceptOrDeclineController implements Initializable {
      * Table column of the status
      */
     @FXML
-    private TableColumn<CommandOfService,String> statusDemandeColumn;
+    private TableColumn<CommandOfService,String> typeServiceColumn;
 
     /**
      * The column containing the buttons to accept a command
@@ -90,37 +92,19 @@ public class AcceptOrDeclineController implements Initializable {
     private TableColumn declineColumn;
 
     /**
-     * The service to display
+     * Instantiate the controller with the facade and the router
      */
-    private Service service;
-
-    /**
-     * The command to valide
-     */
-    private CommandOfService command;
-
-    /***
-     * pending all services
-     */
-    private int pendingAllServices;
-
-
-
-    public AcceptOrDeclineController(int pendingAllServices){
+    public AcceptOrDeclineController(){
         this.FACADE_COMMANDOFSERVICE=FacadeCommandOfService.getInstance();
-        this.pendingAllServices=pendingAllServices;
         this.ROUTER=ServiceRouter.getInstance();
     }
 
-
-
     /**
-     * Function used at the initialization, to create and associate the update/delete buttons to the data
+     * Function used at the initialization, to create and associate the accept/decline buttons to the data
      * @param currentController the controller associated, to trigger the events with the buttons
-     * @param tabC the column where we add the buttons (update or delete column)
+     * @param tabC the column where we add the buttons (accept or decline column)
      */
     private void addButtonsToTable(AcceptOrDeclineController currentController, TableColumn<CommandOfService,Void> tabC) {
-
         // cellFactory will contain our buttons
         Callback<TableColumn<CommandOfService, Void>, TableCell<CommandOfService, Void>> cellFactory = new Callback<>() {
             // For each row of the table view, we want to create the buttons
@@ -133,7 +117,6 @@ public class AcceptOrDeclineController implements Initializable {
                     final ImageView iv;
                     // We create the button
                     private final Button btn = new Button();
-
                     {
                         // We want it transparent, so we only see the image
                         btn.setStyle("-fx-background-color: transparent;");
@@ -141,7 +124,7 @@ public class AcceptOrDeclineController implements Initializable {
                         switch (tabC.getId()) {
                             // accept column
                             case ("acceptColumn"):
-                                img = new Image("images/common/update.png");
+                                img = new Image("images/coupon/available.png");
                                 btn.setOnAction(event -> {
                                     try {
                                         currentController.acceptCommande(event, getTableView().getItems().get(getIndex()));
@@ -152,18 +135,18 @@ public class AcceptOrDeclineController implements Initializable {
                                 break;
                             // Decline column
                             case ("declineColumn"):
-                                img = new Image("images/common/trash.png");
+                                img = new Image("images/coupon/notAvailable.png");
                                 btn.setOnAction(event -> {
                                     try {
                                         currentController.declineCommande(event, getTableView().getItems().get(getIndex()));
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
-                                });                }
+                                });
+                        }
                         iv = new ImageView(img);
                         btn.setGraphic(iv);
                     }
-
                     // We only want to print the buttons on the rows containing data
                     @Override
                     public void updateItem(Void item, boolean empty) {
@@ -182,33 +165,39 @@ public class AcceptOrDeclineController implements Initializable {
         tabC.setCellFactory(cellFactory);
     }
 
-    /***
+    /**
      * Triggered when user accept a command
      * @param event
      * @throws Exception
      */
-    public void acceptCommande(ActionEvent event,CommandOfService command) throws Exception {
+    public void acceptCommande(ActionEvent event,CommandOfService command) {
         // Display a message to confirm the selected command
         if(AbstractRouter.confirmationBox("Are you sure you want to accept this command ?",
                 "Confirmation: ",
                 "Stud'Easy - Confirmation")){
-            // We ask the facade to accept the command
-            FACADE_COMMANDOFSERVICE.acceptTransaction(command);
-            // We remove this command from the table
-            allcommandtoServiceList.removeAll(command);
-            acceptdeclineLabel.setTextFill(Paint.valueOf("green"));
-            acceptdeclineLabel.setText("Command accepted with success");
+            try{
+                // We ask the facade to accept the command
+                FACADE_COMMANDOFSERVICE.acceptTransaction(command);
+                // We remove this command from the table
+                allcommandtoServiceList.removeAll(command);
+                acceptdeclineLabel.setTextFill(Paint.valueOf("green"));
+                acceptdeclineLabel.setText("Command accepted with success");
+            }
+            catch(Exception err){
+                acceptdeclineLabel.setTextFill(Paint.valueOf("red"));
+                acceptdeclineLabel.setText("An error occured, you may not have enough points");
+            }
         }
     }
 
-    /***
+    /**
      * Triggered when user decline a command
      * @param event
      * @throws Exception
      */
     public void declineCommande(ActionEvent event,CommandOfService command) throws Exception {
         // Display a message to confirm the deletion of the selected command
-        if(AbstractRouter.confirmationBox("Are you sure you want to delete this command ?",
+        if(AbstractRouter.confirmationBox("Are you sure you want to decline this command ?",
                 "Confirmation of the deletion: ",
                 "Stud'Easy - Confirmation")){
             // We ask the facade to delete the command
@@ -218,8 +207,6 @@ public class AcceptOrDeclineController implements Initializable {
             acceptdeclineLabel.setTextFill(Paint.valueOf("green"));
             acceptdeclineLabel.setText("Command deleted with success");
         }
-
-
     }
 
     /**
@@ -227,27 +214,22 @@ public class AcceptOrDeclineController implements Initializable {
      * @param event the event triggered
      */
     public void cancel(ActionEvent event) {
-
-        try {
-
-            if(pendingAllServices == 0){
-                ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.MY_SERVICES_FXML_PATH,event,pendingAllServices);
-            }
-            else{
-                ((ServiceRouter)ROUTER).viewAllServices(ServiceRouter.ALL_SERVICES_FXML_PATH,event,pendingAllServices);
-            }
+        try{
+            ROUTER.studentRestricted(UserRouter.HOME_STUDENT_FXML_PATH,event);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /***
+    /**
      * Initialize view function to the view
      * @param location
      * @param resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // In case we don't have any commands
+        commandtoServiceList.setPlaceholder(new Label("There is currently no commands to display"));
         // Pending
         final String pending = "Pending";
         // Validated
@@ -255,7 +237,7 @@ public class AcceptOrDeclineController implements Initializable {
         // We get the current user
         Session session = Session.getInstance();
         try {
-            allcommandtoServiceList = FXCollections.observableArrayList(FACADE_COMMANDOFSERVICE.getMyCommand());
+            allcommandtoServiceList = FXCollections.observableArrayList(FACADE_COMMANDOFSERVICE.getMyCommandPending());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,8 +252,7 @@ public class AcceptOrDeclineController implements Initializable {
         demanderColumn.setCellValueFactory(
                 c -> {
                     CommandOfService command = c.getValue();
-                    Service serv = command.getService();
-                    User owner = serv.getOwner();
+                    User owner = command.getOwner();
                     return new SimpleObjectProperty<>(owner.getFirstname());
                 }
         );
@@ -280,22 +261,27 @@ public class AcceptOrDeclineController implements Initializable {
         DateFormat shortDateFormatCommande = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
                 DateFormat.SHORT);
-        dateDemandeColumn.setCellValueFactory(
-                c -> {
+        dateDemandeColumn.setCellValueFactory(c -> {
                     CommandOfService command = c.getValue();
                     Date dateCreation = command.getCreationDate();
                     return new SimpleObjectProperty<String>(shortDateFormatCommande.format(dateCreation));
                 });
-        // get status of the command
-        statusDemandeColumn.setCellValueFactory(
+
+        // get type of the service
+        typeServiceColumn.setCellValueFactory(
                 c ->{
                     CommandOfService command = c.getValue();
-                    if(command.getStatus()==0){
-                        // Pending
-                        return new SimpleObjectProperty<>(pending);
-                    }
-                    else{
-                        return new SimpleObjectProperty<>(validated);
+                    // We retrieve the service
+                    Service serv = command.getService();
+                    switch(serv.getTypeService()){
+                        case 0:
+                            // Service proposed
+                            return new SimpleObjectProperty<>("Proposed");
+                        case 1:
+                            // Service requested
+                            return new SimpleObjectProperty<>("Requested");
+                        default:
+                            return new SimpleObjectProperty<>("Unknown");
                     }
                 }
         );

@@ -47,9 +47,9 @@
                         </Label>
                   <Button id="neutralButton" layoutX="135.0" layoutY="169.0" mnemonicParsing="false" onAction="#proposeService" prefHeight="30.0" prefWidth="266.0" text="Propose a Service" />
                   <Button id="neutralButton" layoutX="135.0" layoutY="216.0" mnemonicParsing="false" onAction="#requestService" prefHeight="30.0" prefWidth="266.0" text="Request a Service" />
-                  <Button id="neutralButton" layoutX="759.0" layoutY="169.0" mnemonicParsing="false" onAction="#myServices" prefHeight="30.0" prefWidth="266.0" text="My Services" />
-                  <Button id="neutralButton" layoutX="759.0" layoutY="216.0" mnemonicParsing="false" onAction="#seeAllServices" prefHeight="30.0" prefWidth="266.0" text="See All Services" />
-                  <Button id="neutralButton" layoutX="759.0" layoutY="265.0" mnemonicParsing="false" onAction="#seeHistoric" prefHeight="30.0" prefWidth="266.0" text="Historic Services Bought" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="267.0" mnemonicParsing="false" onAction="#myServices" prefHeight="30.0" prefWidth="266.0" text="My Services" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="169.0" mnemonicParsing="false" onAction="#seeAllServices" prefHeight="30.0" prefWidth="266.0" text="See All Services" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="216.0" mnemonicParsing="false" onAction="#seeHistoric" prefHeight="30.0" prefWidth="266.0" text="Historic Services Bought" />
                   <Button id="neutralButton" layoutX="447.0" layoutY="169.0" mnemonicParsing="false" onAction="#loadMyProfile" prefHeight="30.0" prefWidth="266.0" text="View My Profile" />
                   <Button id="negativeButton" layoutX="1049.0" layoutY="363.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="30.0" prefWidth="89.0" text="Logout" />
                   <Button id="neutralButton" layoutX="447.0" layoutY="363.0" mnemonicParsing="false" onAction="#seeJobs" prefHeight="30.0" prefWidth="266.0" text="See All Jobs" />
@@ -76,6 +76,7 @@
                   </Text>
                   <Separator layoutX="424.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
                   <Separator layoutX="736.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
+                  <Button id="neutralButton" layoutX="759.0" layoutY="314.0" mnemonicParsing="false" onAction="#seePendingCommands" prefHeight="30.0" prefWidth="266.0" text="Commands Pending" />
                     </children>
                 </AnchorPane>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

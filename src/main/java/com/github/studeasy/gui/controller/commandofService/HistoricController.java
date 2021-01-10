@@ -8,18 +8,16 @@ import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeCommandOfService;
-import com.github.studeasy.logic.facades.FacadeService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -97,7 +95,6 @@ public class HistoricController implements Initializable {
         COMMAND_ROUTER.changeView(UserRouter.HOME_STUDENT_FXML_PATH,event);
     }
 
-
     /**
      * Function from the interface Initializable
      * Make changes to the controller and its view before
@@ -107,6 +104,8 @@ public class HistoricController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // In case we don't have any commands
+        commandList.setPlaceholder(new Label("There is currently no commands to display"));
         // Pending
         final String pending = "Pending";
         // Validated
@@ -167,7 +166,5 @@ public class HistoricController implements Initializable {
 
         // Add data to the table
         commandList.setItems(allcommandList);
-
-
     }
 }

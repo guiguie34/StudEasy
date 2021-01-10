@@ -1,15 +1,10 @@
 package com.github.studeasy.dao.commandOfServiceDAO;
 
-import com.github.studeasy.dao.exceptions.BadCredentialsException;
-import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.factory.Factory;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * The Command of Service DAO using a MySQL database
@@ -36,10 +31,11 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
             // We prepare the SQL request
             PreparedStatement preparedStatement;
 
-            String request = "UPDATE command SET state = 1 where fkUser = ? and fkService = ?";
+            String request = "UPDATE command SET state = 1 where fkUser = ? AND fkService = ? AND idCommand = ?";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1, c.getOwner().getIdUser());
             preparedStatement.setInt(2, c.getService().getIdService());
+            preparedStatement.setInt(3, c.getIdCommand());
             preparedStatement.executeUpdate();
         }
         catch(SQLException e){
@@ -52,17 +48,12 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         try {
             // We prepare the SQL request
             PreparedStatement preparedStatement;
-            String request = "DELETE from command where fkUser = ? and fkService = ?";
+            String request = "DELETE from command where fkUser = ? AND fkService = ? AND idCommand = ?";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1, c.getOwner().getIdUser());
             preparedStatement.setInt(2, c.getService().getIdService());
+            preparedStatement.setInt(3, c.getIdCommand());
             // We execute the query
-            Service s = c.getService();
-            User u = c.getOwner();
-            if(s.getTypeService()==0){
-                UserDAO userdao = UserDAO.getInstance();
-                userdao.addPoints(s.getCost(),u);
-            }
             preparedStatement.executeUpdate();
         }
         catch(SQLException e){
@@ -74,21 +65,63 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
     public void applyorbuyForService(Service s,Object currentUser) throws Exception {
             // We prepare the SQL request
             PreparedStatement preparedStatement;
-            // Will contain the result of the query
-            ResultSet resultSet;
-
-            String request = "INSERT INTO command(fkUser, fkService, state)"+"VALUES (?,?,?)";
-            if(s.getTypeService()==0){
-                UserDAO userdao = UserDAO.getInstance();
-                userdao.removePoints(s.getCost(),((User)currentUser));
-            }
+            String request = "INSERT INTO command(fkUser, fkService, state)"+"VALUES (?,?,0)";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1,((User)currentUser).getIdUser() );
             preparedStatement.setInt(2, s.getIdService());
-            preparedStatement.setInt(3,0);
             // We execute the query
             preparedStatement.executeUpdate();
+    }
 
+    /**
+     * Retrieve the command of the user if it exists
+     * @param s the service
+     * @param u the user
+     * @return the command or null if it doesn't exist
+     */
+    public CommandOfService commandPending(Service s, User u){
+        CommandOfService retrievedCommand = null;
+        try{
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM command,service,categorytag,user WHERE fkUser = ? " +
+                    "AND command.fkService=service.idService " +
+                    "AND service.fkCategory=categorytag.idCategory " +
+                    "AND user.idUser=service.ownerService " +
+                    "AND service.idService = ? " +
+                    "AND state = 0";
+            // We prepare the SQL request to retrieve the services of the user
+            PreparedStatement preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1,u.getIdUser());
+            preparedStatement.setInt(2,s.getIdService());
+
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We retrieve all command
+            if(resultSet.next()){
+                CategoryTag category=new CategoryTag(resultSet.getInt(18),resultSet.getString(19),resultSet.getString(20));
+                Timestamp dateCreation =resultSet.getTimestamp(7);
+
+                User owner = new User(resultSet.getInt(21),resultSet.getString(23),resultSet.getString(22),
+                        resultSet.getString(26),resultSet.getString(25),resultSet.getInt(24),resultSet.getString(28),
+                        resultSet.getString(27),resultSet.getInt(29),resultSet.getString(30));
+
+                Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
+                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(15),
+                        owner, category, resultSet.getInt(16), dateCreation);
+
+                Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
+                        resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
+
+                retrievedCommand = new CommandOfService(resultSet.getInt(1),feedback,u,service,
+                        resultSet.getInt(8),resultSet.getTimestamp(7));
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return retrievedCommand;
     }
 
 
@@ -115,65 +148,23 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         }
     }
 
-    /***
-     * Get list of pending service
-     * @param currentUser
-     * @return
-     */
-    public ArrayList<CommandOfService> getServiceBought(User currentUser){
-        ArrayList<CommandOfService> servicebought  =new ArrayList<>();
-        try{
-            // We prepare the SQL request to retrieve the services of the user
-            PreparedStatement preparedStatement;
-            // Will contain the result of the query
-            ResultSet resultSet;
-            String request = "SELECT * FROM command,service,categorytag,user WHERE fkUser = ?" +
-                    "AND command.fkService=service.idService " +
-                    "AND service.fkCategory=categorytag.idCategory " +
-                    "AND user.idUser=service.ownerService ";
-            preparedStatement = DB.prepareStatement(request);
-            preparedStatement.setInt(1,currentUser.getIdUser());
-            // We execute the query
-            resultSet = preparedStatement.executeQuery();
-            // We retrieve all command
-            while(resultSet.next()){
-                CategoryTag category=new CategoryTag(resultSet.getInt(18),resultSet.getString(19),resultSet.getString(20));
-                Timestamp dateCreation =resultSet.getTimestamp(7);
-
-                Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
-                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(15),
-                        currentUser, category, resultSet.getInt(16), dateCreation);
-
-                Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
-                        resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
-
-                CommandOfService command = new CommandOfService(feedback,currentUser,service,
-                        resultSet.getInt(8),resultSet.getDate(7));
-
-                servicebought.add(command);
-            }
-
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-        return servicebought;
-    }
-
-    /***
+    /**
      * Get list of service bought
      * @param currentUser
      * @return ArrayList of CommandOfService
      */
-    public ArrayList<CommandOfService> getMyServicePending(User currentUser){
+    public ArrayList<CommandOfService> getServiceBought(User currentUser){
         ArrayList<CommandOfService> servicebought  =new ArrayList<>();
         try{
-            // We prepare the SQL request to retrieve the services of the user
-            PreparedStatement preparedStatement;
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT * FROM command,service,categorytag,user WHERE command.fkService=service.idService AND service.fkCategory=categorytag.idCategory AND user.idUser=service.ownerService AND ownerService = ?";
-            preparedStatement = DB.prepareStatement(request);
+            String request = "SELECT * FROM command,service,categorytag,user WHERE fkUser = ? " +
+                    "AND command.fkService=service.idService " +
+                    "AND service.fkCategory=categorytag.idCategory " +
+                    "AND user.idUser=service.ownerService " +
+                    "ORDER BY date DESC";
+            // We prepare the SQL request to retrieve the services of the user
+            PreparedStatement preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1,currentUser.getIdUser());
             // We execute the query
             resultSet = preparedStatement.executeQuery();
@@ -193,8 +184,8 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
                 Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
                         resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
 
-                CommandOfService command = new CommandOfService(feedback,currentUser,service,
-                        resultSet.getInt(8),resultSet.getDate(7));
+                CommandOfService command = new CommandOfService(resultSet.getInt(1),feedback,currentUser,service,
+                        resultSet.getInt(8),resultSet.getTimestamp(7));
 
                 servicebought.add(command);
             }
@@ -207,6 +198,53 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
     }
 
 
+    /***
+     * Get list of pending service
+     * @param currentUser
+     * @return
+     */
+    public ArrayList<CommandOfService> getMyServicePending(User currentUser){
+        ArrayList<CommandOfService> servicebought  =new ArrayList<>();
+        try{
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM command,service,categorytag,user WHERE command.fkService=service.idService " +
+                    "AND service.fkCategory=categorytag.idCategory " +
+                    "AND user.idUser=command.fkUser " +
+                    "AND ownerService = ? " +
+                    "AND state = 0 " +
+                    "ORDER BY dateCreationService DESC";
+            // We prepare the SQL request to retrieve the services of the user
+            PreparedStatement preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1,currentUser.getIdUser());
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We retrieve all command
+            while(resultSet.next()){
+                CategoryTag category=new CategoryTag(resultSet.getInt(18),resultSet.getString(19),resultSet.getString(20));
+                Timestamp dateCreation =resultSet.getTimestamp(7);
 
+                User buyer = new User(resultSet.getInt(21),resultSet.getString(23),resultSet.getString(22),
+                        resultSet.getString(26),resultSet.getString(25),resultSet.getInt(24),resultSet.getString(28),
+                        resultSet.getString(27),resultSet.getInt(29),resultSet.getString(30));
+
+                Service service = new Service(resultSet.getInt(9), resultSet.getString(11),
+                        resultSet.getString(12), resultSet.getInt(13), resultSet.getInt(15),
+                        currentUser, category, resultSet.getInt(16), dateCreation);
+
+                Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
+                        resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
+
+                CommandOfService command = new CommandOfService(resultSet.getInt(1),feedback,buyer,service,
+                        resultSet.getInt(8),resultSet.getTimestamp(7));
+
+                servicebought.add(command);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return servicebought;
+    }
 }
 

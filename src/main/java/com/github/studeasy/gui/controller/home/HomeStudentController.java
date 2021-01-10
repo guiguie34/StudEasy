@@ -1,16 +1,10 @@
 package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.*;
-import com.github.studeasy.gui.controller.notifications.ButtonNotificationController;
-import com.github.studeasy.gui.routers.*;
-import com.github.studeasy.gui.routers.*;
-import com.github.studeasy.logic.common.Session;
-import com.github.studeasy.logic.facades.FacadeUser;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 
 import java.io.IOException;
@@ -32,13 +26,9 @@ public class HomeStudentController extends HomeAbstractController implements Ini
      */
     private final AbstractRouter JOB_ROUTER;
 
-
-    private final AbstractRouter COMMAND_ROUTER;
-
     public HomeStudentController(){
         super();
         this.SERVICE_ROUTER = ServiceRouter.getInstance();
-        this.COMMAND_ROUTER = CommandOfServiceRouter.getInstance();
         this.JOB_ROUTER = JobRouter.getInstance();
     }
 
@@ -106,14 +96,25 @@ public class HomeStudentController extends HomeAbstractController implements Ini
         }
     }
 
+    /**
+     * Triggered when the user wants to see all the services
+     * @param event the event triggered
+     */
+    public void seePendingCommands(ActionEvent event){
+        try {
+            ROUTER.studentRestricted(CommandOfServiceRouter.VIEW_ALL_DEMANDE_SERVICE_FXML_PATH,event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    /***
+    /**
      * Triggered when the user wants to see all the historic of the command
      * @param event
      */
     public void seeHistoric(ActionEvent event){
         try{
-            ((CommandOfServiceRouter)COMMAND_ROUTER).historic(CommandOfServiceRouter.SERVICES_BOUGHT_FXML_PATH,event);
+            ROUTER.studentRestricted(CommandOfServiceRouter.SERVICES_BOUGHT_FXML_PATH,event);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,8 +139,6 @@ public class HomeStudentController extends HomeAbstractController implements Ini
     public void seeJobs(ActionEvent event) throws IOException {
         ((JobRouter)JOB_ROUTER).viewJobs(event);
     }
-
-
 
     /**
      * Function from the interface Initializable

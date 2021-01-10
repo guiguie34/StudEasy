@@ -1,6 +1,5 @@
 package com.github.studeasy.dao.commandOfServiceDAO;
 
-import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.User;
@@ -31,7 +30,7 @@ public abstract class CommandOfServiceDAO {
         return csDAO;
     }
 
-    /***
+    /**
      * Static method which allows to accept the transaction of a command
      * command will save to the database
      * @param c
@@ -39,14 +38,14 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract void acceptTransaction(CommandOfService c) throws Exception;
 
-    /***
+    /**
      * Static method which allows to decline the transaction of a command
      * @param c
      * @throws Exception
      */
     public abstract void declineTransaction(CommandOfService c) throws Exception;
 
-    /***
+    /**
      * Static method which allows user apply for a service
      * Record will be saved to the database if it's approved
      * @param s
@@ -55,8 +54,7 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract void applyorbuyForService(Service s,Object currentUser) throws Exception;
 
-
-    /***
+    /**
      * Static method which allows user to add a feedback to a service
      * Feedback will be saved to the database
      * @param c
@@ -64,7 +62,7 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract void addFeedback(CommandOfService c) throws Exception;
 
-    /***
+    /**
      * Static method which allows to return the list of the command for a user
      * @param currentUser
      * @return List of the command
@@ -72,7 +70,7 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract ArrayList<CommandOfService> getServiceBought(User currentUser) throws Exception;
 
-    /***
+    /**
      * Static method which allows to return the list of the command pending for a user
      * @param currentUser
      * @return
@@ -80,4 +78,11 @@ public abstract class CommandOfServiceDAO {
      */
     public abstract ArrayList<CommandOfService> getMyServicePending(User currentUser) throws Exception;
 
+    /**
+     * Retrieve the command of the user if it exists
+     * @param s the service
+     * @param u the user
+     * @return the command or null if it doesn't exist
+     */
+    public abstract CommandOfService commandPending(Service s, User u);
 }

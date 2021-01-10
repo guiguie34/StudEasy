@@ -2,10 +2,12 @@ package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
 import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
+import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.facades.exceptions.ErrorCommand;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +28,10 @@ public class FacadeCommandOfService {
      */
     private final CommandOfServiceDAO DAO;
 
+    /**
+     * The DAO connected to the database
+     */
+    private final UserDAO userDAO;
 
     /**
      * Constructor of singleton FacadeCommandOfService
@@ -34,6 +40,7 @@ public class FacadeCommandOfService {
     private FacadeCommandOfService() {
         // We retrieve the UserDao
         this.DAO = CommandOfServiceDAO.getInstance();
+        this.userDAO = UserDAO.getInstance();
     }
 
     /**
@@ -67,21 +74,41 @@ public class FacadeCommandOfService {
         return DAO.getMyServicePending(currentUser);
     }
 
-    /***
+    /**
      * Methode that allows to accept a command by asking DAO
      * @param c
      * @throws Exception
      */
     public void acceptTransaction(CommandOfService c) throws Exception {
+        Session session = Session.getInstance();
+        User currentUser = session.getCurrentUser();
+        // We pay with the points
+        Service s = c.getService();
+        User u = c.getOwner();
+        if(s.getTypeService() == 1){
+            // We pay the user helping
+            userDAO.removePoints(s.getCost(),currentUser);
+            userDAO.addPoints(s.getCost(),u);
+        }
+        else{
+            // We pay the owner of the service
+            userDAO.addPoints(s.getCost(),s.getOwner());
+        }
         DAO.acceptTransaction(c);
     }
 
-    /***
-     *Methode that allows to delete a command by asking DAO
+    /**
+     * Method that allows to delete a command by asking DAO
      * @param c
      * @throws Exception
      */
     public void declineTransaction(CommandOfService c) throws Exception {
+        // We give back the points to the user
+        Service s = c.getService();
+        User u = c.getOwner();
+        if(s.getTypeService() == 0){
+            userDAO.addPoints(s.getCost(),u);
+        }
         DAO.declineTransaction(c);
     }
 
@@ -91,20 +118,25 @@ public class FacadeCommandOfService {
      * @throws Exception
      */
     public void buyorapplyService(Service s, User u) throws Exception{
-        DAO.applyorbuyForService(s,u);
+        // We check if there is already an existing command
+        if(DAO.commandPending(s,u) == null){
+            // We retrieve the points if it's a proposed service
+            if(s.getTypeService() == 0){
+                userDAO.removePoints(s.getCost(),u);
+            }
+            DAO.applyorbuyForService(s,u);
+        }
+        else{
+            throw new ErrorCommand("You already have a pending command for this service.");
+        }
     }
 
-
-    /***
-     * Methode allows to add a feedback to a service
+    /**
+     * Method allows to add a feedback to a service
      * @param c
      * @throws Exception
      */
     public void addFeedback(CommandOfService c) throws Exception {
         DAO.addFeedback(c);
     }
-
-
-
-
 }

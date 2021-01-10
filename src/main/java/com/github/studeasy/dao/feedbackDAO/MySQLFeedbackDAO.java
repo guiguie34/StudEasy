@@ -39,7 +39,7 @@ public class MySQLFeedbackDAO extends FeedbackDAO{
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT idCommand,titleFeedback,commentFeedback,date,rateFeedback FROM command WHERE fkService = ?";
+            String request = "SELECT idCommand,titleFeedback,commentFeedback,date,rateFeedback FROM command WHERE fkService = ? AND titleFeedback IS NOT NULL";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1, idService);
             // We execute the query

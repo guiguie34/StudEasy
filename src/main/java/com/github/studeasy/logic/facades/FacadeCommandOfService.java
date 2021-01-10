@@ -139,4 +139,16 @@ public class FacadeCommandOfService {
     public void addFeedback(CommandOfService c) throws Exception {
         DAO.addFeedback(c);
     }
+
+    /**
+     * Decline all the commands linked to a service
+     * @param service the service concerned
+     */
+    public void deleteAllCommands(Service service) throws Exception {
+        ArrayList<CommandOfService> allCommands = DAO.getPendingCommandsOfOneService(service);
+        for(CommandOfService command : allCommands) {
+            this.declineTransaction(command);
+        }
+
+    }
 }

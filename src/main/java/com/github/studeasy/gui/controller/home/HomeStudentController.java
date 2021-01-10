@@ -2,6 +2,9 @@ package com.github.studeasy.gui.controller.home;
 
 import com.github.studeasy.gui.routers.*;
 
+import com.github.studeasy.logic.common.Session;
+import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;

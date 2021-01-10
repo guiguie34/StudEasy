@@ -83,7 +83,7 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
         try{
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT * FROM command,user WHERE command.fkService = ?" +
+            String request = "SELECT * FROM command,user WHERE command.fkService = ? " +
                     "AND state = 0 " +
                     "AND user.idUser = command.fkUser";
             // We prepare the SQL request to retrieve the services of the user

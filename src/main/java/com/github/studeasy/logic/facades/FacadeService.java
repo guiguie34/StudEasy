@@ -79,11 +79,16 @@ public class FacadeService {
      * Delete the service
      * @param service the service to delete
      */
-    public void deleteService(Service service) {
+    public void deleteService(Service service) throws Exception {
+        //get the facade to decline all the commands pending
+        FacadeCommandOfService facadeCommandOfService = FacadeCommandOfService.getInstance();
+        facadeCommandOfService.deleteAllCommands(service);
+
         // We ask the DAO to delete it
         this.DAO.deleteService(service);
         // We send a notification to the user
         FacadeNotification facadeNotification = FacadeNotification.getInstance();
+
         String title = "Service deleted!";
         String desc = "Your service: "+service.getTitle()+" has been deleted.";
         try {

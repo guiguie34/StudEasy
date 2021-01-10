@@ -130,6 +130,8 @@ public class User {
 		this.salt = salt;
 	}
 
+
+
 	public String toString(){
 		String res = this.lastname + " " + this.firstname;
 		if(role instanceof RolePartner){

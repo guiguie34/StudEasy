@@ -226,7 +226,12 @@ public class ViewServiceController implements Initializable {
                 "Confirmation of the deletion: "+this.service.getTitle(),
                 "Stud'Easy - Confirmation")){
             // We ask the facade to delete the service
-            FACADE_SERVICE.deleteService(this.service);
+            try{
+                FACADE_SERVICE.deleteService(this.service);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
             // We redirect
                 this.cancel(event);
         }

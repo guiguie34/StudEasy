@@ -106,6 +106,15 @@ public class FacadeService {
     public void updateCategoryService(CategoryTag categoryS, Service service) {
         // We ask the DAO to update the service
         this.DAO.updateCategoryService(categoryS,service);
+        // We send a notification to the user
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Service updated!";
+        String desc = "Your service: "+service.getTitle()+" has been updated with success!";
+        try {
+            facadeNotification.createNotification(service.getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -1,17 +1,10 @@
 package com.github.studeasy.gui.controller.notifications;
 
-import com.github.studeasy.gui.controller.job.JobOffersController;
 import com.github.studeasy.gui.routers.AbstractRouter;
-import com.github.studeasy.gui.routers.JobRouter;
 import com.github.studeasy.gui.routers.NotificationRouter;
 import com.github.studeasy.gui.routers.UserRouter;
-import com.github.studeasy.logic.common.Job;
 import com.github.studeasy.logic.common.Notification;
-import com.github.studeasy.logic.common.Session;
-import com.github.studeasy.logic.common.User;
-import com.github.studeasy.logic.facades.FacadeJob;
 import com.github.studeasy.logic.facades.FacadeNotification;
-import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,12 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +59,6 @@ public class NotificationManagementController implements Initializable {
 
     @FXML
     private Label labelError;
-
 
     /**
      * Instantiates the variables
@@ -110,13 +100,10 @@ public class NotificationManagementController implements Initializable {
             buttonSee.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //System.out.println("Action: "+getItem().getIdJob());
                     try {
                         ((FacadeNotification) FACADE).markAsRead(getItem().getId());
                         getItem().setRead(true);
                         updateItem(getItem(),false);
-//                        status.setVisible(false);
-//                        buttonSee.setVisible(false);
 
                     } catch (Exception e) {
                         labelError.setTextFill(Color.RED);
@@ -205,7 +192,6 @@ public class NotificationManagementController implements Initializable {
                 buttonDelete.setVisible(false);
                 setVisible(false);
                 status.setVisible(false);
-                //setStyle("-fx-background-color: #F1F3F2;");
                 setGraphic(content);
 
             }

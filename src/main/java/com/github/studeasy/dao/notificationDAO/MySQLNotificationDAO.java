@@ -70,7 +70,7 @@ public class MySQLNotificationDAO extends NotificationDAO{
         PreparedStatement preparedStatement;
         // Will contain the result of the query
         ResultSet resultSet;
-        String request = "SELECT * FROM notification WHERE ownerNotification = ?";
+        String request = "SELECT * FROM notification WHERE ownerNotification = ? ORDER BY idNotification desc";
         preparedStatement = DB.prepareStatement(request);
         preparedStatement.setInt(1, ((User)currentUser).getIdUser());
         // We execute the query

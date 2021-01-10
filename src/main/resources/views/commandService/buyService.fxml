@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.studeasy.gui.controller.commandofService.AcceptOrDeclineController">
     <children>
@@ -63,6 +64,16 @@
                             </font>
                         </Button>
                   <Label fx:id="acceptdeclineLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="455.0" prefHeight="15.0" prefWidth="887.0" />
+                  <Text fx:id="yourPointsL" layoutX="39.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your points:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pointsUserT" fill="#1b08d4" layoutX="136.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
             </children>

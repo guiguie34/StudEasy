@@ -6,9 +6,11 @@ import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +25,18 @@ public class HomeStudentController extends HomeAbstractController implements Ini
      * The service router used by the controller
      */
     private final AbstractRouter SERVICE_ROUTER;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
 
     /**
      * The service router used by the controller
@@ -151,5 +165,10 @@ public class HomeStudentController extends HomeAbstractController implements Ini
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        FacadeUser facadeUser = FacadeUser.getInstance();
+        // To see how many points he has
+        int pointsUser = facadeUser.viewPoints();
+        this.pointsUserT.setText(Integer.toString(pointsUser));
+    }
 }

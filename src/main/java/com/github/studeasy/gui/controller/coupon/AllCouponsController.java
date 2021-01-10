@@ -7,6 +7,7 @@ import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RolePartner;
 import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCoupon;
+import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -296,10 +297,9 @@ public class AllCouponsController implements Initializable {
             addCouponB.setVisible(true);
         }
         else{
-            // We retrieve the current user
-            User currentUser = session.getCurrentUser();
+            FacadeUser facadeUser = FacadeUser.getInstance();
             // To see how many points he has
-            int pointsUser = ((RoleStudent)currentUser.getRole()).getPoints();
+            int pointsUser = facadeUser.viewPoints();
             this.pointsUserT.setText(Integer.toString(pointsUser));
             this.yourPointsL.setVisible(true);
         }

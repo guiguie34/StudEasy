@@ -40,7 +40,7 @@
                 </VBox>
                 <AnchorPane prefHeight="411.0" prefWidth="427.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="37.0" prefHeight="53.0" prefWidth="427.0" text="Home Student" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="37.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="39.0" prefHeight="53.0" prefWidth="427.0" text="Home Student" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="39.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -77,6 +77,16 @@
                   <Separator layoutX="424.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
                   <Separator layoutX="736.0" layoutY="127.0" orientation="VERTICAL" prefHeight="285.0" />
                   <Button id="neutralButton" layoutX="759.0" layoutY="314.0" mnemonicParsing="false" onAction="#seePendingCommands" prefHeight="30.0" prefWidth="266.0" text="Commands Pending" />
+                  <Text fx:id="yourPointsL" layoutX="20.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your points:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pointsUserT" fill="#1b08d4" layoutX="110.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

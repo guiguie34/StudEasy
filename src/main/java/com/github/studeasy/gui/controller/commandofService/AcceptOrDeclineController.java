@@ -8,6 +8,7 @@ import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.FacadeCommandOfService;
+import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -37,6 +39,18 @@ public class AcceptOrDeclineController implements Initializable {
      * The facade CommandOfService used by the controller
      */
     private final FacadeCommandOfService FACADE_COMMANDOFSERVICE;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
 
     /**
      * List of all the command for a user
@@ -182,6 +196,10 @@ public class AcceptOrDeclineController implements Initializable {
                 allcommandtoServiceList.removeAll(command);
                 acceptdeclineLabel.setTextFill(Paint.valueOf("green"));
                 acceptdeclineLabel.setText("Command accepted with success");
+                FacadeUser facadeUser = FacadeUser.getInstance();
+                // To see how many points he has
+                int pointsUser = facadeUser.viewPoints();
+                this.pointsUserT.setText(Integer.toString(pointsUser));
             }
             catch(Exception err){
                 acceptdeclineLabel.setTextFill(Paint.valueOf("red"));
@@ -228,6 +246,10 @@ public class AcceptOrDeclineController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FacadeUser facadeUser = FacadeUser.getInstance();
+        // To see how many points he has
+        int pointsUser = facadeUser.viewPoints();
+        this.pointsUserT.setText(Integer.toString(pointsUser));
         // In case we don't have any commands
         commandtoServiceList.setPlaceholder(new Label("There is currently no commands to display"));
         // Pending

@@ -65,8 +65,8 @@
                      </font>
                   </Label>
                   <Label fx:id="emailTF" layoutX="407.0" layoutY="214.0" prefHeight="15.0" prefWidth="298.0" />
-                  <Button id="negativeButton" layoutX="705.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteMyAccount" prefHeight="38.0" prefWidth="150.0" text="Delete my account" />
-                  <Button id="positiveButton" layoutX="323.0" layoutY="316.0" mnemonicParsing="false" onAction="#loadUpdate" prefHeight="38.0" prefWidth="150.0" text="Modify my account" />
+                  <Button id="negativeButton" layoutX="635.0" layoutY="320.0" mnemonicParsing="false" onAction="#deleteMyAccount" prefHeight="30.0" prefWidth="151.0" text="Delete Account" />
+                  <Button id="positiveButton" layoutX="424.0" layoutY="320.0" mnemonicParsing="false" onAction="#loadUpdate" prefHeight="30.0" prefWidth="150.0" text="Update Account" />
                   <Label fx:id="deleteFailLabel" layoutX="419.0" layoutY="74.0" prefHeight="15.0" prefWidth="372.0" />
                     </children>
                 </AnchorPane>

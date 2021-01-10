@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -73,6 +74,16 @@
                   <CheckBox fx:id="requestedCB" layoutX="116.0" layoutY="28.0" mnemonicParsing="false" selected="true" text="Requested" />
                   <TextField fx:id="filterTitleTF" layoutX="844.0" layoutY="25.0" promptText="Filter title ..." />
                   <TextField fx:id="filterCategoryTF" layoutX="1004.0" layoutY="25.0" promptText="Filter category ..." />
+                  <Text fx:id="yourPointsL" layoutX="209.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your points:" visible="false">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pointsUserT" fill="#1b08d4" layoutX="306.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
             </children>

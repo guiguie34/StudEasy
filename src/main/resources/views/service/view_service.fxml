@@ -48,7 +48,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="-6.0" prefHeight="50.0" prefWidth="694.0" text="View a Service" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-11.0" prefHeight="50.0" prefWidth="694.0" text="View a Service" AnchorPane.bottomAnchor="479.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-11.0">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -121,6 +121,16 @@
                   <Button id="positiveButton" fx:id="validateB" layoutX="892.0" layoutY="418.0" mnemonicParsing="false" onAction="#validateService" prefHeight="27.0" prefWidth="85.0" text="Validate" visible="false" />
                   <Button id="positiveButton" fx:id="updateB" layoutX="402.0" layoutY="451.0" mnemonicParsing="false" onAction="#updateService" prefHeight="27.0" prefWidth="85.0" text="Update" visible="false" />
                   <Label fx:id="errL" alignment="CENTER" contentDisplay="CENTER" layoutX="316.0" layoutY="60.0" prefHeight="15.0" prefWidth="526.0" />
+                  <Text fx:id="yourPointsL" layoutX="29.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your points:" visible="false">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pointsUserT" fill="#1b08d4" layoutX="126.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                     </children>
                 </AnchorPane>
             </children>

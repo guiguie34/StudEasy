@@ -7,6 +7,7 @@ import com.github.studeasy.logic.common.CategoryTag;
 import com.github.studeasy.logic.common.Service;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.facades.FacadeService;
+import com.github.studeasy.logic.facades.FacadeUser;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -105,6 +107,18 @@ public abstract class AbstractViewServicesController {
      */
     @FXML
     protected CheckBox requestedCB;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
 
     /**
      * The list of the services displayed in the table
@@ -325,6 +339,13 @@ public abstract class AbstractViewServicesController {
             this.pendingAllServicesL.setText("All Services Online");
             // We retrieve all the services
             servicesList = FXCollections.observableArrayList(FACADE_SERVICE.getOnlineServices());
+        }
+        if(session.isStudent()){
+            FacadeUser facadeUser = FacadeUser.getInstance();
+            // To see how many points he has
+            int pointsUser = facadeUser.viewPoints();
+            this.pointsUserT.setText(Integer.toString(pointsUser));
+            this.yourPointsL.setVisible(true);
         }
         // We put the titles of the services on the right column
         titleColumn.setCellValueFactory(

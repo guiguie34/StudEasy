@@ -8,6 +8,7 @@ import com.github.studeasy.logic.common.*;
 import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCommandOfService;
 import com.github.studeasy.logic.facades.FacadeService;
+import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.ErrorCommand;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +54,18 @@ public class ViewServiceController implements Initializable {
      * The facade CommandOfService used by the controller
      */
     private final FacadeCommandOfService FACADE_COMMANDOFSERVICE;
+
+    /**
+     * The points of the user
+     */
+    @FXML
+    private Text pointsUserT;
+
+    /**
+     * Your points label
+     */
+    @FXML
+    private Text yourPointsL;
 
     /**
      * The title of the service
@@ -326,6 +339,10 @@ public class ViewServiceController implements Initializable {
                     FACADE_COMMANDOFSERVICE.buyorapplyService(service,user);
                     errL.setTextFill(Paint.valueOf("green"));
                     errL.setText("Your command is now pending !");
+                    FacadeUser facadeUser = FacadeUser.getInstance();
+                    // To see how many points he has
+                    pointsUser = facadeUser.viewPoints();
+                    this.pointsUserT.setText(Integer.toString(pointsUser));
                 }
             }
             else{
@@ -416,6 +433,13 @@ public class ViewServiceController implements Initializable {
         // Only the admin can validate a service, if it's pending
         if(session.isAdmin() && service.getStatus() == 0){
             validateB.setVisible(true);
+        }
+        if(session.isStudent()){
+            FacadeUser facadeUser = FacadeUser.getInstance();
+            // To see how many points he has
+            int pointsUser = facadeUser.viewPoints();
+            this.pointsUserT.setText(Integer.toString(pointsUser));
+            this.yourPointsL.setVisible(true);
         }
     }
 }

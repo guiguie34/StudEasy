@@ -8,6 +8,7 @@ import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.common.role.RolePartner;
 import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.FacadeCoupon;
+import com.github.studeasy.logic.facades.FacadeUser;
 import com.github.studeasy.logic.facades.exceptions.ErrorBuyCoupon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -240,10 +241,9 @@ public class SeeCouponController implements Initializable {
             deleteB.setVisible(true);
         }
         else {
-            // We retrieve the current user
-            User currentUser = session.getCurrentUser();
+            FacadeUser facadeUser = FacadeUser.getInstance();
             // To see how many points he has
-            int pointsUser = ((RoleStudent)currentUser.getRole()).getPoints();
+            int pointsUser = facadeUser.viewPoints();
             this.pointsUserT.setText(Integer.toString(pointsUser));
             this.pointsUser = pointsUser;
             this.yourPointsL.setVisible(true);

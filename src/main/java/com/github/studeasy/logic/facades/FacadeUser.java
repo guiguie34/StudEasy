@@ -5,6 +5,7 @@ import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.gui.routers.AbstractRouter;
 import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
+import com.github.studeasy.logic.common.role.RoleStudent;
 import com.github.studeasy.logic.facades.exceptions.BadInformationException;
 import com.github.studeasy.logic.utils.PasswordUtils;
 import com.github.studeasy.logic.utils.regexUtils;
@@ -293,18 +294,20 @@ public class FacadeUser {
 
     /***
      * View number of points for a user
-     * @param user
      * @return points
      * @throws Exception
      */
-    public int viewPoints(User user) throws Exception{
+    public int viewPoints() {
         Session sessionUser = Session.getInstance();
-        int points = 0;
-        if(user.equals(sessionUser.getCurrentUser())){
-            points=DAO.viewPoints(user);
+        User currentUser = sessionUser.getCurrentUser();
+        int points= 0;
+        try {
+            points = DAO.viewPoints(currentUser);
+            ((RoleStudent)currentUser.getRole()).setPoints(points);
+            sessionUser.setCurrentUser(currentUser);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else throw new Exception("Permission deny");
         return points;
     }
-
 }

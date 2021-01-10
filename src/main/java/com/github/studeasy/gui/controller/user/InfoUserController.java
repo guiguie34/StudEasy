@@ -91,15 +91,6 @@ public class InfoUserController implements Initializable {
     }
 
     /**
-     * Triggered when the user wants to display all the services created by an user
-     * @param event
-     */
-    public void seeHisServices(ActionEvent event){
-
-    }
-
-
-    /**
      * Triggered when the user pushed the cancel button
      * Cancel the action and redirect to the login page
      * @param event

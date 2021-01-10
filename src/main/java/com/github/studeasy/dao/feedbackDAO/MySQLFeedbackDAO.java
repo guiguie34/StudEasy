@@ -39,7 +39,7 @@ public class MySQLFeedbackDAO extends FeedbackDAO{
             PreparedStatement preparedStatement;
             // Will contain the result of the query
             ResultSet resultSet;
-            String request = "SELECT idCommand,titleFeedback,commentFeedback,date,rateFeedback FROM command WHERE fkService = ? AND titleFeedback IS NOT NULL";
+            String request = "SELECT DISTINCT idCommand,titleFeedback,commentFeedback,date,rateFeedback FROM command WHERE fkService = ? AND titleFeedback IS NOT NULL";
             preparedStatement = DB.prepareStatement(request);
             preparedStatement.setInt(1, idService);
             // We execute the query
@@ -118,20 +118,16 @@ public class MySQLFeedbackDAO extends FeedbackDAO{
      * @throws Exception if an error occur
      */
     public void leaveFeedback(String title, String comment, int rate, int idService) throws Exception{
-        // We prepare the SQL request to insert a user
+        // We prepare the SQL request to insert a feedback
         PreparedStatement preparedStatement;
-        String request2 = "UPDATE user SET firstName= ?, "
-                +" lastName = ? ,"
-                +" role = ?, "
-                + "password = ?, "
-                + "emailAddress = ?,"
-                + "pseudo = ?,"
-                + "salt = ?"
-                + "WHERE emailAddress = ?";
-        String request = "UPDATE command SET titleFeedback = ? ," +
+
+        String request = "UPDATE command " +
+                "SET titleFeedback = ? ," +
                 "commentFeedback = ? ," +
                 "rateFeedback = ? " +
-                "WHERE fkUser = ? AND fkService  = ?";
+                "WHERE fkUser = ? AND fkService  = ? " +
+                "ORDER BY idCommand " +
+                "LIMIT 1";
         preparedStatement = DB.prepareStatement(request);
         preparedStatement.setString(1, title);
         preparedStatement.setString(2, comment);

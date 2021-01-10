@@ -65,6 +65,14 @@ public class FacadeJob {
         if(regexUtils.matches_mail(mail)) {
             if(regexUtils.matches_phone(phone)) {
                 DAO.addJob(title, location, role, duration, mail, phone, localDate, description, currentUser);
+                FacadeNotification facadeNotification = FacadeNotification.getInstance();
+                String titleN = "Job pending!";
+                String desc = "Your job offer: "+title+" is now waiting for an administrator validation.\n";
+                try {
+                    facadeNotification.createNotification(currentUser.getIdUser(),titleN,desc);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else{
                 throw new BadInformationException("Phone number is not valid, please retry");
@@ -92,6 +100,27 @@ public class FacadeJob {
      */
     public void choiceForJob(Object job,int choice) throws Exception{
         DAO.choiceForJob((Job)job,choice);
+        String title = "";
+        String desc = "";
+        switch(choice){
+            case 1:
+                // We reject
+                title = "Job rejected!";
+                desc = "Your job: "+((Job) job).getTitle()+" has been rejected.";
+                break;
+            case 2:
+                // We accept
+                title = "Job online!";
+                desc = "Your job: "+((Job) job).getTitle()+" has been validated and can be seen online !";
+                break;
+        }
+
+        try {
+            FacadeNotification facadeNotification = FacadeNotification.getInstance();
+            facadeNotification.createNotification(((Job) job).getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -119,6 +148,14 @@ public class FacadeJob {
      */
     public void deleteJob(Object job) throws Exception {
         DAO.deleteJob((Job)job);
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Job deleted!";
+        String desc = "Your job offer: "+((Job) job).getTitle()+" has been deleted.";
+        try {
+            facadeNotification.createNotification(((Job) job).getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateJob(String title, String location, String role, String duration, String mail, String phone, LocalDate localDate, String description, int idJob) throws Exception{

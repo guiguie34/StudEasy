@@ -1,7 +1,6 @@
 package com.github.studeasy.logic.facades;
 
 import com.github.studeasy.dao.commandOfServiceDAO.CommandOfServiceDAO;
-import com.github.studeasy.dao.feedbackDAO.FeedbackDAO;
 import com.github.studeasy.dao.userDAO.UserDAO;
 import com.github.studeasy.logic.common.CommandOfService;
 import com.github.studeasy.logic.common.Service;
@@ -9,7 +8,6 @@ import com.github.studeasy.logic.common.Session;
 import com.github.studeasy.logic.common.User;
 import com.github.studeasy.logic.facades.exceptions.ErrorCommand;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -95,6 +93,15 @@ public class FacadeCommandOfService {
             userDAO.addPoints(s.getCost(),s.getOwner());
         }
         DAO.acceptTransaction(c);
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Transaction accepted!";
+        String desc = "Your command for: "+s.getTitle()+" has been accepted.\n" +
+                "The points have been exchanged";
+        try {
+            facadeNotification.createNotification(c.getOwner().getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -110,6 +117,14 @@ public class FacadeCommandOfService {
             userDAO.addPoints(s.getCost(),u);
         }
         DAO.declineTransaction(c);
+        FacadeNotification facadeNotification = FacadeNotification.getInstance();
+        String title = "Transaction declined!";
+        String desc = "Your command for: "+s.getTitle()+" has been declined.\n";
+        try {
+            facadeNotification.createNotification(u.getIdUser(),title,desc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /***
@@ -125,6 +140,21 @@ public class FacadeCommandOfService {
                 userDAO.removePoints(s.getCost(),u);
             }
             DAO.applyorbuyForService(s,u);
+            FacadeNotification facadeNotification = FacadeNotification.getInstance();
+            String title = "Command pending!";
+            String desc = "Your command for: "+s.getTitle()+" is now pending.\n" +
+                    "You will receive a notification telling you if the owner accepted " +
+                    "or not the transaction.";
+            try {
+                facadeNotification.createNotification(u.getIdUser(),title,desc);
+                title = "You have a command pending to check!";
+                desc = "A command for: "+s.getTitle()+" is now pending.\n" +
+                        "You can accept or decline it.";
+                facadeNotification.createNotification(s.getOwner().getIdUser(),title,desc);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         else{
             throw new ErrorCommand("You already have a pending command for this service.");

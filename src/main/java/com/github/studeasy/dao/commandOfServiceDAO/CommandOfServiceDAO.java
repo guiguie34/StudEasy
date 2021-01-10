@@ -63,6 +63,13 @@ public abstract class CommandOfServiceDAO {
     public abstract void addFeedback(CommandOfService c) throws Exception;
 
     /**
+     * Get the pending commands of one service
+     * @param service
+     * @return all the pending commands of the service
+     */
+    public abstract ArrayList<CommandOfService> getPendingCommandsOfOneService(Service service);
+
+    /**
      * Static method which allows to return the list of the command for a user
      * @param currentUser
      * @return List of the command

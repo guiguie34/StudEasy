@@ -74,6 +74,47 @@ public class MySQLCommandOfServiceDAO extends CommandOfServiceDAO{
     }
 
     /**
+     * Get the pending commands of one service
+     * @param service
+     * @return all the pending commands of the service
+     */
+    public ArrayList<CommandOfService> getPendingCommandsOfOneService(Service service){
+        ArrayList<CommandOfService> commandsOfService  =new ArrayList<>();
+        try{
+            // Will contain the result of the query
+            ResultSet resultSet;
+            String request = "SELECT * FROM command,user WHERE command.fkService = ?" +
+                    "AND state = 0 " +
+                    "AND user.idUser = command.fkUser";
+            // We prepare the SQL request to retrieve the services of the user
+            PreparedStatement preparedStatement = DB.prepareStatement(request);
+            preparedStatement.setInt(1,service.getIdService());
+            // We execute the query
+            resultSet = preparedStatement.executeQuery();
+            // We retrieve all command
+            while(resultSet.next()){
+                Timestamp dateCreation = resultSet.getTimestamp(7);
+
+                User buyer = new User(resultSet.getInt(9),resultSet.getString(11),resultSet.getString(10),
+                        resultSet.getString(14),resultSet.getString(13),resultSet.getInt(12),resultSet.getString(16),
+                        resultSet.getString(15),resultSet.getInt(17),resultSet.getString(18));
+
+                Feedback feedback = new Feedback(resultSet.getInt(5),resultSet.getString(4),
+                        resultSet.getString(6),resultSet.getDate(7),resultSet.getInt(3));
+
+                CommandOfService command = new CommandOfService(resultSet.getInt(1),feedback,buyer,service,
+                        resultSet.getInt(8),resultSet.getTimestamp(7));
+
+                commandsOfService.add(command);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return commandsOfService;
+    }
+
+    /**
      * Retrieve the command of the user if it exists
      * @param s the service
      * @param u the user

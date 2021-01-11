@@ -295,7 +295,6 @@ public class FacadeUser {
     /***
      * View number of points for a user
      * @return points
-     * @throws Exception
      */
     public int viewPoints() {
         Session sessionUser = Session.getInstance();

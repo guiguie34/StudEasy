@@ -182,7 +182,6 @@ public class AcceptOrDeclineController implements Initializable {
     /**
      * Triggered when user accept a command
      * @param event
-     * @throws Exception
      */
     public void acceptCommande(ActionEvent event,CommandOfService command) {
         // Display a message to confirm the selected command
